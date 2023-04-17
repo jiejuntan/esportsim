@@ -1,8 +1,10 @@
 package main;
 
-public class TrainingEquipment {
+import main.GameEnvironment.Difficulty;
 
-    private TrainingItems item;
+public class TrainingEquipment extends Equipment {
+
+	private TrainingItems item;
 	
 	public enum TrainingItems {
 		GAMING_CHAIR,
@@ -11,5 +13,29 @@ public class TrainingEquipment {
 		GAMING_HEADSET,
 		HIGH_PERFORMANCE_MONITOR
 	}
+	
+    public TrainingEquipment() {
+    	
+	}
+	
+
+	@Override
+	public void applyEffect(Athlete athlete) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void setPurchasePrice(Difficulty difficulty) {
+		// TODO Auto-generated method stub
+	}
+
+
+	@Override
+	public void setDescription() {
+		// TODO Auto-generated method stub
+	}
+
 
 }
