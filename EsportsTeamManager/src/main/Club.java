@@ -9,6 +9,6 @@ public class Club {
 
     public void viewTeamProperties() {}
 
-    public void useItem(Purchasable item, Athlete athlete) {}
+    public void useItem() {}
 
 }
