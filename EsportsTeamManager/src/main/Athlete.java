@@ -10,6 +10,20 @@ public class Athlete extends Purchasable {
    
 	private String name;
 	private int reactionTime;
+import java.io.IOException;
+import java.util.Random;
+
+import main.GameEnvironment.Difficulty;
+
+/**
+ * 
+ * testing cdafgvwfwrommit after pull
+ *
+ */
+public class Athlete extends Purchasable {
+   
+	private String name;
+	private int reactionTime;
     private int eyeSight;
     private int intelligence;
     
@@ -23,7 +37,8 @@ public class Athlete extends Purchasable {
     	DPS,
     	TANK,
     	HEALER,
-    	NONE
+    	NONE,
+    	Blank
     }
     
     /**
@@ -41,8 +56,7 @@ public class Athlete extends Purchasable {
     	generateAthleteStats(3);
     	
     	setDescription();
-    	//test change
-    	System.out.println("");
+
     }
     
     /**
