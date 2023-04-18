@@ -41,6 +41,8 @@ public class Athlete extends Purchasable {
     	generateAthleteStats(3);
     	
     	setDescription();
+    	//test change
+    	System.out.println("");
     }
     
     /**
