@@ -5,7 +5,11 @@ import java.util.Random;
 
 import main.GameEnvironment.Difficulty;
 
-
+/**
+ * 
+ * testing commit after pull
+ *
+ */
 public class Athlete extends Purchasable {
    
 	private String name;
