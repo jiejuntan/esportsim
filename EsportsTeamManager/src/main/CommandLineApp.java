@@ -68,14 +68,15 @@ public final class CommandLineApp {
     
     private void startMenu() {
     	while (true) {
+    		String prompt = game.readyToDraft() ? "\n" : " (finish selecting options)\n";
+    		
     		System.out.printf(LINE 
     				+ "NEW GAME\n" + LINE 
     				+ "1. Difficulty: %s\n"
     				+ "2. Team name: %s\n"
     				+ "3. Season duration: %s\n"
-    				+ "4. Draft players: %s\n\n"
-    				+ "5. Begin game\n" + LINE, 
-    				game.getDifficultyString(), game.getTeamName(), game.getSeasonDurationString(), game.getTeam());
+    				+ "\n4. Begin game" + prompt + LINE, 
+    				game.getDifficultyString(), game.getTeamName(), game.getSeasonDurationString());
     		
     		String option = readConsoleAndClear();
     		switch (option) {
@@ -89,10 +90,9 @@ public final class CommandLineApp {
     			seasonDurationMenu();
     			break;
     		case "4":
-    			startingDraftMenu();
-    			break;
-    		case "5":
-    			overviewMenu();
+    			if (game.readyToDraft()){
+    				startingDraftMenu();
+    			}    			
     			break;
     		}
     	}

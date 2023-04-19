@@ -15,9 +15,8 @@ public class Market {
     	availableAthletes.clear();
     	availableEquipment.clear();
     	
-    	for (int athleteCount = 20; athleteCount > 0; athleteCount--) {
-    		Athlete athlete = new Athlete(false);
-    		
+    	for (Athlete.AthleteRole role : Athlete.AthleteRole.values()) {
+    		Athlete athlete = new Athlete(role);
     		availableAthletes.add(athlete);
     	}
     	

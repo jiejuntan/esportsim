@@ -49,6 +49,16 @@ public class Athlete extends Purchasable {
 
     }
     
+    public Athlete(AthleteRole role) {
+    	setRole(role);
+    	setName(getRandomName());
+    	
+    	//Generates the athelets stats around the inputed value
+    	generateAthleteStats(3);
+    	
+    	setDescription();
+    }
+    
     /**
      * Contructor for creating Athlete with a define skill level
      * 
@@ -184,6 +194,10 @@ public class Athlete extends Purchasable {
 		return name;
 	}
 	
+	private void setName(String name) {
+		this.name = name;
+	}
+	
 	public int getReactionTime() {
 		return reactionTime;
 	}
@@ -198,6 +212,10 @@ public class Athlete extends Purchasable {
 	
 	public AthleteRole getRole() {
 		return role;
+	}
+	
+	private void setRole(AthleteRole role) {
+		this.role = role;
 	}
 	
 	public boolean isReserve() {

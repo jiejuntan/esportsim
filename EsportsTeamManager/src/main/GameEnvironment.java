@@ -4,41 +4,41 @@ package main;
  * Stores state of the game and methods to play it
  */
 public final class GameEnvironment {
-    /**
-     * 
-     */
-    private int seasonDuration;
-    /**
-     * 
-     */
-    private int currentWeek;
-    /**
-     * 
+	/**
+     * Difficulty setting
      */
     private Difficulty difficulty;
     /**
-     * 
+     * Season duration setting
+     */
+    private int seasonDuration;
+    /**
+     * Current week of season
+     */
+    private int currentWeek;
+    /**
+     * Amount of money available
      */
     private int money;
     /**
-     * 
+     * Team instance
      */
     private Team team;
     /**
-     * 
+     * Club instance
      */
     private Club club;
     /**
-     * 
+     * Stadium instance
      */
     private Stadium stadium;
     /**
-     * 
+     * Market instance
      */
     private Market market;
     
     /**
-     * 
+     * Enum for difficulty setting
      */
     public enum Difficulty {
     	EASY,
@@ -51,7 +51,7 @@ public final class GameEnvironment {
      */
     public String getDifficultyString() {
     	try {
-	    	switch (this.difficulty) {
+	    	switch (getDifficulty()) {
 	    	case EASY:
 	    		return "Easy";
 	    	case HARD:
@@ -85,11 +85,9 @@ public final class GameEnvironment {
      * @return team name as string or "-"
      */
     public String getTeamName() {
-    	if (this.team == null) {
-    		return "-";
-    	} else {
-    		return this.team.getName();
-    	}
+    	Team team = getTeam();
+    	
+    	return team == null ? "-" : team.getName();
     }
     
     /**
@@ -111,7 +109,8 @@ public final class GameEnvironment {
      * @return season duration as formatted string
      */
     public String getSeasonDurationString() {
-    	return this.seasonDuration == 0 ? "-" : String.valueOf(this.seasonDuration) + " weeks";
+    	int duration = getSeasonDuration();
+    	return duration == 0 ? "-" : String.valueOf(duration) + " weeks";
 	}
     
     /**
@@ -122,6 +121,11 @@ public final class GameEnvironment {
 		return seasonDuration;
 	}
     
+    /**
+     * Sets season duration
+     * @param duration	duration of season
+     * @return			<CODE>true</CODE> if successful
+     */
 	public boolean setSeasonDuration(int duration) {
 		if (isValidDuration(duration)) {
 			this.seasonDuration = duration;
@@ -131,10 +135,27 @@ public final class GameEnvironment {
 		}
 	}
 	
+	/**
+	 * Checks if duration is valid
+	 * @param duration	duration of season
+	 * @return			<CODE>true</CODE> if valid
+	 */
 	private boolean isValidDuration(int duration) {
 		return duration >= 5 && duration <= 15;
 	}
-
+	
+	public boolean readyToDraft() {
+		return getDifficulty() != null && getTeam() != null && getSeasonDuration() != 0;
+	}
+	
+	public void assignStartingMoney() {
+		setMoney(500);
+	}
+	
+	public void purchasePlayers() {
+		
+	}
+	
     public void setupGame() {}
     
     
