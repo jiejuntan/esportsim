@@ -4,10 +4,12 @@ import java.util.List;
 
 public class Market {
 	
+	int money;
     private List<Athlete> availableAthletes;
     private List<Equipment> availableEquipment;
     
-    public Market() {
+    public Market(int money) {
+    	this.money = money;
     	updateMarket();
     }
 
