@@ -11,7 +11,8 @@ public class TrainingEquipment extends Equipment {
 		GAMING_KEYBOARD,
 		GAMING_MOUSE,
 		GAMING_HEADSET,
-		HIGH_PERFORMANCE_MONITOR
+		HIGH_PERFORMANCE_MONITOR,
+		NEW_GEAR
 	}
 	
     public TrainingEquipment() {
