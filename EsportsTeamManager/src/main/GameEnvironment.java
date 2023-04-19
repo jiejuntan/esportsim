@@ -2,30 +2,17 @@ package main;
 
 import java.util.List;
 
+import main.GameData.Difficulty;
+
 /**
- * Stores state of the game and methods to play it
+ * Stores game state and UI methods
  */
 public final class GameEnvironment {
+	
 	/**
-     * Difficulty setting
-     */
-    private Difficulty difficulty;
-    /**
-     * Season duration setting
-     */
-    private int seasonDuration;
-    /**
-     * Current week of season
-     */
-    private int currentWeek;
-    /**
-     * Amount of money available
-     */
-    private int money;
-    /**
-     * Team instance
-     */
-    private Team team;
+	 * GameData instance
+	 */
+	private GameData data;
     /**
      * Club instance
      */
@@ -37,167 +24,111 @@ public final class GameEnvironment {
     /**
      * Market instance
      */
-    private Market market;
+    private Market market;   
+    
     
     /**
-     * Enum for difficulty setting
+     * Constructor method to initialize data
      */
-    public enum Difficulty {
-    	EASY,
-    	HARD
-    }    
+    public GameEnvironment() {
+    	this.data = new GameData();
+//    	this.club = new Club(data);
+//    	this.stadium = new Stadium(data);
+    	this.market = new Market(data);
+    }
+    
+    /********** UI Methods **********/
+    
+	public List<Athlete> purchasePlayers() {
+		return getMarket().viewStoresAthlete();	
+	}
+	/********** UI Methods **********/
+	
+	
+    /********** Simple Getters & Setters **********/
     
     /** 
      * Gets difficulty
-     * @return difficulty as string or "-"
+     * 
+     * @return difficulty as string
      */
     public String getDifficultyString() {
-    	try {
-	    	switch (getDifficulty()) {
-	    	case EASY:
-	    		return "Easy";
-	    	case HARD:
-	    		return "Not easy";
-	    	default:
-	    		return "-";
-	    	} 
-    	} catch (NullPointerException e) {
-    		return "-";
-    	}
+    	return this.data.getDifficulty().asString;
     }
     
     /**
-     * Gets difficulty
-     * @return	difficulty as enum Difficulty
-     */
-    public Difficulty getDifficulty() {
-		return difficulty;
-	}
-    
-    /**
-     * Sets difficulty property
-     * @param difficulty	enum for difficulty
+     * Wrapper for GameData method setDifficulty
+     * 
+     * @param difficulty	difficulty setting
      */
     public void setDifficulty(Difficulty difficulty) {
-    	this.difficulty = difficulty;
+    	this.data.setDifficulty(difficulty);
     }
     
     /**
-     * Gets team name
-     * @return team name as string or "-"
-     */
-    public String getTeamName() {
-    	Team team = getTeam();
-    	
-    	return team == null ? "-" : team.getName();
-    }
-    
-    /**
-     * Creates a team with proposed name and hand
-     * @param name	proposed name of team
-     * @return		<CODE>true</CODE> if team creation was successful
-     */
-    public boolean createTeam(String name) {
-    	try {
-    		setTeam(new Team(name));
-    		return true;
-    	} catch (IllegalArgumentException e) {
-    		return false;
-    	}
-    }
-    
-    /**
-     * Gets season duration
-     * @return season duration as formatted string
-     */
-    public String getSeasonDurationString() {
-    	int duration = getSeasonDuration();
-    	return duration == 0 ? "-" : String.valueOf(duration) + " weeks";
-	}
-    
-    /**
-     * Gets season duration
-     * @return season duration as int
+     * Wrapper for GameData method getSeasonDuration
+     * 
+     * @return season duration
      */
     public int getSeasonDuration() {
-		return seasonDuration;
+    	return this.data.getSeasonDuration();
 	}
     
     /**
-     * Sets season duration
-     * @param duration	duration of season
-     * @return			<CODE>true</CODE> if successful
+     * Wrapper for GameData method setSeasonDuration
+     * 
+     * @param duration					season duration to set
+     * @throws IllegalArgumentException	if duration is invalid
      */
-	public boolean setSeasonDuration(int duration) {
-		if (isValidDuration(duration)) {
-			this.seasonDuration = duration;
-			return true;
-		} else {
-			return false;
+	public void setSeasonDuration(int duration) throws IllegalArgumentException{
+		try {
+			this.data.setSeasonDuration(duration);
+		} catch (IllegalArgumentException e) {
+			throw e;
 		}
+	}
+    /**
+     * Wrapper for GameData method getCurrentWeek
+     * 
+     * @return current week
+     */
+	public int getCurrentWeek() {
+		return this.data.getCurrentWeek();
 	}
 	
 	/**
-	 * Checks if duration is valid
-	 * @param duration	duration of season
-	 * @return			<CODE>true</CODE> if valid
+	 * Wrapper for GameData method getMoney
+	 * 
+	 * @return money available
 	 */
-	private boolean isValidDuration(int duration) {
-		return duration >= 5 && duration <= 15;
-	}
-	
-	public boolean readyToDraft() {
-		return getDifficulty() != null && getTeam() != null && getSeasonDuration() != 0;
-	}
-	
-	public void assignStartingMoney() {
-		setMoney(500);
-	}
-	
-	public List<Athlete> purchasePlayers() {
-		setMarket(new Market(getMoney()));
-		return getMarket().viewStoresAthlete();	
-	}
-	
-    public void setupGame() {}
-    
-    
-	public void playGame() {}
-	
-
-    public void finishGame() {}
-    
-    
-    /********** Simple Getters & Setters **********/
-	public int getCurrentWeek() {
-		return currentWeek;
-	}
-
-
-	public void setCurrentWeek(int currentWeek) {
-		this.currentWeek = currentWeek;
-	}
-
 	public int getMoney() {
-		return money;
+		return this.data.getMoney();
 	}
 
-
-	public void setMoney(int money) {
-		this.money = money;
-	}
-
-
-	public Team getTeam() {
-		return team;
-	}
-
-
-	public void setTeam(Team team) {
-		this.team = team;
-	}
-
-
+    /**
+     * Wrapper for Team method getName
+     * 
+     * @return team name
+     */
+    public String getTeamName() {
+    	return this.data.getTeam().getName();
+    }
+    
+    /**
+     * Wrapper for Team method setTeamName
+     * 
+     * @param name						name to set
+     * @throws IllegalArgumentException	if name is invalid
+     */
+    
+    public void setTeamName(String name) throws IllegalArgumentException {
+    	try {
+    		this.data.getTeam().setTeamName(name);
+    	} catch (IllegalArgumentException e) {
+    		throw e;
+    	}
+    }
+    
 	public Club getClub() {
 		return club;
 	}

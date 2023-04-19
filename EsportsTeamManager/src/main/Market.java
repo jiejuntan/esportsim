@@ -5,12 +5,15 @@ import java.util.List;
 
 public class Market {
 	
-    private List<Athlete> availableAthletes = new ArrayList<Athlete>();
-    private List<Equipment> availableEquipment = new ArrayList<Equipment>();
-	int money;
+	private GameData data;
+	
+    private List<Athlete> availableAthletes;
+    private List<Equipment> availableEquipment;
     
-    public Market(int money) {
-    	this.money = money;
+    public Market(GameData data) {
+    	this.data = data;
+    	this.availableAthletes = new ArrayList<Athlete>();
+    	this.availableEquipment = new ArrayList<Equipment>();
     	updateMarket();
     }
 
@@ -19,11 +22,11 @@ public class Market {
      */
     public void updateMarket() {
     	
-//    	clearMarket();
+    	clearMarket();
     	
-    	for (Athlete.AthleteRole role : Athlete.AthleteRole.values()) {
+    	for (int count=0; count < 5; count++) {
     		Athlete athlete = new Athlete(0);
-    		availableAthletes.add(athlete);
+    		this.availableAthletes.add(athlete);
     	}
     	
     	//Adds equipmentCount of Equipment to the equipmentCount list

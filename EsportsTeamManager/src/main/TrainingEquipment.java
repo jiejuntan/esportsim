@@ -2,7 +2,7 @@ package main;
 
 import java.util.Random;
 
-import main.GameEnvironment.Difficulty;
+import main.GameData.Difficulty;
 import main.Ingestible.IngestibleItem;
 
 public class TrainingEquipment extends Equipment {

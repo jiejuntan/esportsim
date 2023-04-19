@@ -2,7 +2,7 @@ package main;
 
 import java.util.Scanner;
 
-import main.GameEnvironment.Difficulty;
+import main.GameData.Difficulty;
 
 /**
  * Command line interface to play the game
@@ -67,16 +67,14 @@ public final class CommandLineApp {
     }
     
     private void startMenu() {
-    	while (true) {
-    		String prompt = game.readyToDraft() ? "\n" : " (finish selecting options)\n";
-    		
+    	while (true) {   		
     		System.out.printf(LINE 
     				+ "NEW GAME\n" + LINE 
     				+ "1. Difficulty: %s\n"
     				+ "2. Team name: %s\n"
     				+ "3. Season duration: %s\n"
-    				+ "\n4. Begin game" + prompt + LINE, 
-    				game.getDifficultyString(), game.getTeamName(), game.getSeasonDurationString());
+    				+ "\n4. Begin game\n" + LINE, 
+    				game.getDifficultyString(), game.getTeamName(), game.getSeasonDuration());
     		
     		String option = readConsoleAndClear();
     		switch (option) {
@@ -90,10 +88,7 @@ public final class CommandLineApp {
     			seasonDurationMenu();
     			break;
     		case "4":
-    			if (game.readyToDraft()){
-    				game.assignStartingMoney();
-    				startingDraftMenu();
-    			}    			
+    			startingDraftMenu();  			
     			break;
     		}
     	}
@@ -104,7 +99,7 @@ public final class CommandLineApp {
     		System.out.printf(LINE 
     				+ "SELECT DIFFICULTY\n" + LINE 
     				+ "1. Easy\n"
-    				+ "2. Not easy\n"
+    				+ "2. Hard\n"
     				+ "\n0. Return\n" + LINE);
     		
     		String option = readConsoleAndClear();
@@ -135,9 +130,10 @@ public final class CommandLineApp {
     		case "0":
     			break menu;
     		default:
-    			if (game.createTeam(option)) {
+    			try {
+    				game.setTeamName(option);
     				break menu;
-    			} else {
+    			} catch (IllegalArgumentException e) {
     				prompt = "Team name must be between 3-15 characters, no special characters.\n\n";
     				break;
     			}
@@ -161,11 +157,9 @@ public final class CommandLineApp {
     		default:
     			try {
     				int duration = Integer.parseInt(option);
-    				if (game.setSeasonDuration(duration)) {
-    					break menu;
-    				}
-    			} catch (NumberFormatException e) {
-    			} finally {
+    				game.setSeasonDuration(duration);
+    				break menu;
+    			} catch (IllegalArgumentException e) {
     				prompt = "Please enter a valid duration\n\n";
     			}
     		}
@@ -176,7 +170,7 @@ public final class CommandLineApp {
     	menu: while (true) {
     		System.out.printf(LINE 
     				+ "DRAFT STARTING PLAYERS\n" + LINE 
-    				+ "Draft your starting team (4 starters and 4 reserves minimum)\n"
+    				+ "Draft your starting team (5 athletes minimum)\n"
     				+ "%s\n"
     				+ "\n0. Return\n" + LINE,
     				game.purchasePlayers());

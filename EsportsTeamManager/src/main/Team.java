@@ -16,7 +16,7 @@ public class Team {
 	/**
 	 * Regex pattern for team name validation
 	 */
-	private static final String VALID_TEAMNAME_PATTERN = "[ a-zA-Z0-9]{3,15}";
+	private static final String VALID_NAME_PATTERN = "[ a-zA-Z0-9]{3,15}";
 	
     /**
      * Constructor for the players Team
@@ -24,10 +24,8 @@ public class Team {
      * @param name
      * @param difficulty
      */
-    public Team(String name) throws IllegalArgumentException {
-    	if (!setTeamName(name)) {
-    		throw new IllegalArgumentException();
-    	}
+    public Team() {
+    	this.name = getRandomTeamName();
     	this.wins = 0;
     	this.losses = 0;
     	this.teamMembers = new ArrayList<Athlete>();
@@ -39,37 +37,36 @@ public class Team {
 	 * 
 	 * @param difficulty
 	 */
-	public Team() {
-    	this.name = getRandomTeamName();
-    	this.wins = 0;
-    	this.losses = 0;
-    	this.teamMembers = generateTeam(false);
-    	this.reserveMembers = generateTeam(true);
-    }
+//	public Team() {
+//    	this.name = getRandomTeamName();
+//    	this.wins = 0;
+//    	this.losses = 0;
+//    	this.teamMembers = generateTeam(false);
+//    	this.reserveMembers = generateTeam(true);
+//    }
 
     /**
-     * Checks a string entered and sets it as the team name if valid
+     * Sets team name if valid
      * 
-     * @param name	team name to set
-     * @return		<CODE>true</CODE> if team name was set successfully
+     * @param name						name to set
+     * @throws IllegalArgumentException	if name is invalid
      */
-    public boolean setTeamName(String name) {
+    public void setTeamName(String name) throws IllegalArgumentException {
     	if (isValidTeamName(name)) {
     		this.name = name;
-    		return true;
     	} else {
-    		return false;
+    		throw new IllegalArgumentException();
     	}
     }
     
     /**
-     * Checks if team name is between 3-15 characters with no special characters.
+     * Checks if team name matches pattern
      * 
-     * @param name	team name to be validated
-     * @return 			<CODE>true</CODE> if team name is valid
+     * @param name	team name to validate
+     * @return 		<CODE>true</CODE> if team name is valid
      */
     private boolean isValidTeamName(String name) {
-    	return name.matches(Team.VALID_TEAMNAME_PATTERN);
+    	return name.matches(Team.VALID_NAME_PATTERN);
     }
     
     /**

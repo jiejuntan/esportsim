@@ -2,7 +2,7 @@ package main;
 
 import java.util.List;
 
-import main.GameEnvironment.Difficulty;
+import main.GameData.Difficulty;
 
 public class Stadium {
 	

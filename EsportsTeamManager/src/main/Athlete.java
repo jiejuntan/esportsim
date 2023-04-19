@@ -3,7 +3,7 @@ package main;
 import java.io.IOException;
 import java.util.Random;
 
-import main.GameEnvironment.Difficulty;
+import main.GameData.Difficulty;
 
 /**
  * Athlete manangers the players of this game.

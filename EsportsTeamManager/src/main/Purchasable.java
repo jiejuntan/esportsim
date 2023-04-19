@@ -1,6 +1,6 @@
 package main;
 
-import main.GameEnvironment.Difficulty;
+import main.GameData.Difficulty;
 
 public abstract class Purchasable {
 	
