@@ -22,6 +22,7 @@ public final class GameEnvironment {
      * 
      */
     private int currentWeek;
+<<<<<<< HEAD
     /**
      * 
      */
@@ -29,6 +30,9 @@ public final class GameEnvironment {
     /**
      * 
      */
+=======
+    private Difficulty difficulty;
+>>>>>>> branch 'main' of https://eng-git.canterbury.ac.nz/bsm79/esportsteammananger.git
     private int money;
     /**
      * 
@@ -52,8 +56,27 @@ public final class GameEnvironment {
      */
     public enum Difficulty {
     	EASY,
+<<<<<<< HEAD
     	NOT_EASY
+=======
+    	MEDIUM,
+    	HARD
+    }    
+    
+    public GameEnvironment(Difficulty difficulty, String teamName) {
+    	this.teamName = teamName;
+        this.difficulty = difficulty;
+        this.seasonDuration = 8;
+        this.currentWeek = 1;
+        this.money = 0;
+        
+        this.team = new Team();
+    	this.club = new Club();
+    	this.stadium = new Stadium();
+    	this.market = new Market();
+>>>>>>> branch 'main' of https://eng-git.canterbury.ac.nz/bsm79/esportsteammananger.git
     }
+<<<<<<< HEAD
     
     /** 
      * Gets difficulty as a string
@@ -143,6 +166,12 @@ public final class GameEnvironment {
 	private boolean isValidDuration(int duration) {
 		return duration >= 5 && duration <= 15;
 	}
+=======
+
+
+    public void setupGame() {}
+    
+>>>>>>> branch 'main' of https://eng-git.canterbury.ac.nz/bsm79/esportsteammananger.git
     
 	public void playGame() {}
 	
@@ -151,6 +180,7 @@ public final class GameEnvironment {
     
     
     /********** Simple Getters & Setters **********/
+<<<<<<< HEAD
 	public int getCurrentWeek() {
 		return currentWeek;
 	}
@@ -161,6 +191,49 @@ public final class GameEnvironment {
 	}
 
 	
+=======
+
+    public String getTeamName() {
+		return teamName;
+	}
+
+
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
+
+
+	public int getSeasonDuration() {
+		return seasonDuration;
+	}
+
+
+	public void setSeasonDuration(int seasonDuration) {
+		this.seasonDuration = seasonDuration;
+	}
+
+
+	public int getCurrentWeek() {
+		return currentWeek;
+	}
+
+
+	public void setCurrentWeek(int currentWeek) {
+		this.currentWeek = currentWeek;
+	}
+
+
+	public Difficulty getDifficulty() {
+		return difficulty;
+	}
+
+
+	public void setDifficulty(Difficulty difficulty) {
+		this.difficulty = difficulty;
+	}
+
+
+>>>>>>> branch 'main' of https://eng-git.canterbury.ac.nz/bsm79/esportsteammananger.git
 	public int getMoney() {
 		return money;
 	}

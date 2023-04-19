@@ -8,6 +8,21 @@ import main.GameEnvironment.Difficulty;
 /**
  * 
  * testing commit after pull
+=======
+
+public class Athlete extends Purchasable {
+   
+	private String name;
+	private int reactionTime;
+import java.io.IOException;
+import java.util.Random;
+
+import main.GameEnvironment.Difficulty;
+
+/**
+ * 
+ * testing cdafgvwfwrommit after pull
+>>>>>>> branch 'main' of https://eng-git.canterbury.ac.nz/bsm79/esportsteammananger.git
  *
  */
 public class Athlete extends Purchasable {
