@@ -48,12 +48,14 @@ public class Market {
     	
     }
     
-    public void sellAthlete() {}
+    public void sellAthlete(Athlete athlete) {
+    	int price = athlete.getSellBackPrice();
+    }
     
-    public List<Athlete> viewStoreAthlete() {
+    public List<Athlete> viewStoresAthlete() {
 		return availableAthletes;}
     
-    public List<Equipment> viewStoreItems() {
+    public List<Equipment> viewStoresItems() {
 		return availableEquipment;}
 
     public void purchaseItem(Equipment item) {}

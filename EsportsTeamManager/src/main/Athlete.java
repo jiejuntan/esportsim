@@ -30,12 +30,12 @@ public class Athlete extends Purchasable {
      * Holds the variuous roles of the Athletes
      */
     public enum AthleteRole {
+    	TOP,
+    	JUNGLER,
+    	MID,
+    	ADC,
     	SUPPORT,
-    	DPS,
-    	TANK,
-    	HEALER,
-    	NONE,
-    	Blank
+    	NONE
     }
     
     /**
