@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Random;
+
 import main.GameEnvironment.Difficulty;
 
 public class Ingestible extends Equipment {
@@ -15,7 +17,22 @@ public class Ingestible extends Equipment {
     }
     
     public Ingestible() {
+    	setitem();
 
+    }
+    
+    public void setitem() {
+        Random random = new Random();
+
+        // Get the values of the IngestibleItem enum
+        IngestibleItem[] ingestibleItems = IngestibleItem.values();
+
+        // Generate a random index within the range of values in IngestibleItems
+        int randomItemIndex = random.nextInt(ingestibleItems.length);
+
+        // Set the item to the random enum value
+        this.item = ingestibleItems[randomItemIndex];
+    	
     }
 
 	@Override
