@@ -150,9 +150,9 @@ public class Athlete extends Purchasable {
         case EASY:
         	price = 100;
             break;
-        case MEDIUM:
-        	price = 500;
-            break;
+//        case MEDIUM:
+//        	price = 500;
+//            break;
         case HARD:
         	price = 1000;
             break;

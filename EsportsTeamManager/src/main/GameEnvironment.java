@@ -52,7 +52,7 @@ public final class GameEnvironment {
      */
     public enum Difficulty {
     	EASY,
-    	NOT_EASY
+    	HARD
     }    
     
     /** 
@@ -64,7 +64,7 @@ public final class GameEnvironment {
 	    	switch (this.difficulty) {
 	    	case EASY:
 	    		return "Easy";
-	    	case NOT_EASY:
+	    	case HARD:
 	    		return "Not easy";
 	    	default:
 	    		return "-";

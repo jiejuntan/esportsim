@@ -114,7 +114,7 @@ public final class CommandLineApp {
     			game.setDifficulty(Difficulty.EASY);
     			break menu;
     		case "2":
-    			game.setDifficulty(Difficulty.NOT_EASY);
+    			game.setDifficulty(Difficulty.HARD);
     			break menu;
     		}
     	}
