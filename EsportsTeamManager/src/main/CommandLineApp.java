@@ -167,18 +167,30 @@ public final class CommandLineApp {
     }
     
     private void startingDraftMenu() {
+    	String prompt = "";
     	menu: while (true) {
     		System.out.printf(LINE 
     				+ "DRAFT STARTING PLAYERS\n" + LINE 
-    				+ "Draft your starting team (5 athletes minimum)\n"
+    				+ "Draft your starting team (5 athletes minimum)\n\n"
+    				+ prompt
+    				+ "Current team:\n"
     				+ "%s\n"
-    				+ "\n0. Return\n" + LINE,
-    				game.purchasePlayers());
+    				+ "Available athletes:\n"
+    				+ "%s\n"
+    				+ "0. Return\n" + LINE,
+    				game.currentAthletes(), game.purchasableAthletes());
     		
     		String option = readConsoleAndClear();
     		switch (option) {
     		case "0":
     			break menu;
+    		default:
+    			try {
+    				int i = Integer.parseInt(option) - 1;
+    				game.purchaseAthlete(i);
+    			} catch (IllegalArgumentException e) {
+    				prompt = "Please enter a valid selection\n\n";
+    			}
     		}
     	}
     }

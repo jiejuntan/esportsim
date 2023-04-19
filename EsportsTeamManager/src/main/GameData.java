@@ -45,8 +45,17 @@ public class GameData {
     	this.difficulty = Difficulty.EASY;
     	this.seasonDuration = 10;
     	this.currentWeek = 0;
-    	this.money = Difficulty.EASY.startingMoney;
+    	setStartingMoney(Difficulty.EASY);
     	this.team = new Team();
+    }
+    
+    /**
+     * Checks if season has started
+     * 
+     * @return	<CODE>true</CODE> if season has started
+     */
+    private boolean seasonHasStarted() {
+    	return getCurrentWeek() != 0;
     }
     
     /**
@@ -65,6 +74,10 @@ public class GameData {
      */
     public void setDifficulty(Difficulty difficulty) {
     	this.difficulty = difficulty;
+    	
+    	if (!seasonHasStarted()) {
+    		setStartingMoney(difficulty);
+    	}
     }
 
     /**
@@ -116,6 +129,15 @@ public class GameData {
 	 */
 	public int getMoney() {
 		return this.money;
+	}
+	
+	/**
+	 * Sets starting money based on difficulty
+	 * 
+	 * @param difficulty	difficulty setting
+	 */
+	public void setStartingMoney(Difficulty difficulty) {
+		this.money = difficulty.startingMoney;
 	}
 	
     /**

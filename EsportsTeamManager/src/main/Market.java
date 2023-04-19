@@ -43,8 +43,15 @@ public class Market {
     	
     }
 
-    public void draftAthlete(Athlete athlete) {
+    public void draftAthlete(int i) throws IllegalArgumentException {
+    	List<Athlete> athletes = viewStoresAthlete();
     	
+    	if (i < athletes.size()) {
+    		this.data.getTeam().addAthlete(athletes.get(i));
+        	athletes.remove(i);
+    	} else {
+    		throw new IllegalArgumentException();
+    	}
     	
     }
     
@@ -63,8 +70,8 @@ public class Market {
     public void sellItem(Purchasable item) {}
     
     public void clearMarket() {
-    	availableAthletes.clear();
-    	availableEquipment.clear();
+    	this.availableAthletes.clear();
+    	this.availableEquipment.clear();
     }
     
     

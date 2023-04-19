@@ -39,8 +39,40 @@ public final class GameEnvironment {
     
     /********** UI Methods **********/
     
-	public List<Athlete> purchasePlayers() {
-		return getMarket().viewStoresAthlete();	
+    /** 
+     * Formats a list of athletes into a string
+     * 
+     * @param athletes	list of athletes
+     * @return			string formatted list of athletes
+     */
+    public String formatAthleteList(List<Athlete> athletes) {
+    	String result = "";
+    	for (int i=0; i < athletes.size(); i++) {
+    		result += String.format("%s. %s\n", i + 1, athletes.get(i));
+    	}
+    	return result;
+    }
+    
+    /**
+     * Formats list of purchasable athletes into a string
+     * 
+     * @return	string formatted list of purchasable athletes
+     */
+	public String purchasableAthletes() {
+		return formatAthleteList(getMarket().viewStoresAthlete());	
+	}
+	
+	public String currentAthletes() {
+		String result = formatAthleteList(data.getTeam().getTeamMembers());
+		return result == "" ? "Your team is empty!\n" : result;
+	}
+	
+	public void purchaseAthlete(int i) throws IllegalArgumentException {
+		try {
+			getMarket().draftAthlete(i);
+		} catch (IllegalArgumentException e) {
+			throw e;
+		}
 	}
 	/********** UI Methods **********/
 	
