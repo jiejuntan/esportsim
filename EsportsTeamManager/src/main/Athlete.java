@@ -5,19 +5,31 @@ import java.util.Random;
 
 import main.GameEnvironment.Difficulty;
 
+/**
+ * Athlete manangers the players of this game.
+ * This class hold player stats and handles there stat generation
+ * 
+ * 
+ * @author Blake & Jun
+ *
+ */
 public class Athlete extends Purchasable {
-   
+
 	private String name;
+	
 	private int reactionTime;
     private int eyeSight;
     private int intelligence;
+    private int stamina;
     
     private AthleteRole role;
     private boolean isReserve;
     
     
+    /**
+     * Holds the variuous roles of the Athletes
+     */
     public enum AthleteRole {
-    	AthleteRole,
     	SUPPORT,
     	DPS,
     	TANK,
@@ -58,6 +70,8 @@ public class Athlete extends Purchasable {
     	//Generates the athelets stats around the inputed value
     	generateAthleteStats(skillLevel);
     	
+    	setPurchasePrice(Difficulty.HARD);
+    	
     	setDescription();
     }
     
@@ -94,6 +108,9 @@ public class Athlete extends Purchasable {
     	
     	Random random = new Random();
     	
+    	//Average amount of skill level added to special skill
+    	int specialSkillNumber = 2;
+    	
     	//Adds some more randomness
     	double skillDeviation = random.nextInt(2);
     	
@@ -101,20 +118,24 @@ public class Athlete extends Purchasable {
     	this.reactionTime = (int) random.nextGaussian(defaultSkillNumber, skillDeviation);
     	this.eyeSight = (int) random.nextGaussian(defaultSkillNumber, skillDeviation);
     	this.intelligence = (int) random.nextGaussian(defaultSkillNumber, skillDeviation);
+    	this.stamina = (int) random.nextGaussian(defaultSkillNumber, skillDeviation);
     	
     	//Picks a skill to be the athletes special skill
-    	int specialSkill = random.nextInt(3);
+    	int specialSkill = random.nextInt(4);
     	
     	//Adds 2-4 skill points to the special skill
     	switch (specialSkill) {
 	        case 0:
-	        	this.reactionTime += (int) random.nextGaussian(3, 1);
+	        	this.reactionTime += (int) random.nextGaussian(specialSkillNumber, 1);
 	            break;
 	        case 1:
-	        	this.eyeSight += (int) random.nextGaussian(3, 1);
+	        	this.eyeSight += (int) random.nextGaussian(specialSkillNumber, 1);
 	            break;
 	        case 2:
-	        	this.intelligence += (int) random.nextGaussian(3, 1);
+	        	this.intelligence += (int) random.nextGaussian(specialSkillNumber, 1);
+	            break;
+	        case 3:
+	        	this.stamina += (int) random.nextGaussian(specialSkillNumber, 1);
 	            break;
             }
     }
@@ -127,7 +148,7 @@ public class Athlete extends Purchasable {
      */
     public int calculateSkillLevel() {
     	//Still needs improvment
-        return getEyeSight() + getIntelligence() + getReactionTime();
+        return getEyeSight() + getIntelligence() + getReactionTime() + getStamina();
     }
     
     
@@ -163,7 +184,7 @@ public class Athlete extends Purchasable {
      * @return 
      */
     public void setDescription() {
-    	 super.description = String.format("Name: %s \nReaction Time: %d \nEye Sight: %d \nIntelligence: %d \n", name, reactionTime, eyeSight, intelligence);
+    	 super.description = String.format("Name: %s \nReaction Time: %d \nEye Sight: %d \nIntelligence: %d \n Stamina: %d \n", name, reactionTime, eyeSight, intelligence, stamina  );
     }
 
     
@@ -191,6 +212,10 @@ public class Athlete extends Purchasable {
 		return intelligence;
 	}
 	
+	public int getStamina() {
+		return stamina;
+	}
+
 	public AthleteRole getRole() {
 		return role;
 	}
@@ -204,5 +229,24 @@ public class Athlete extends Purchasable {
 	}
 
 	/********** Simple Getters & Setters **********/
-
-}
+    
+    public static void  main(String[] args) {
+    	
+    	int num = 0;
+    	int counter = 0;
+    	float price = 0;
+    	
+    	
+    	for (int i = 100000; i>0; i--) {
+    		counter++;
+    		Athlete guy = new Athlete(false,3);
+    		num += guy.calculateSkillLevel();
+    		price += guy.getPurchasePrice();
+    	}
+    	System.out.println(String.format("Count = %d num = %d price = %f",counter,num/counter,price/counter));
+    	
+    	
+    	
+    }
+    
+ }
