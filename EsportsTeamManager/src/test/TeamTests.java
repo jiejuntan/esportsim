@@ -34,23 +34,6 @@ class TeamTests {
     }
 
     @Test
-    void swapAthletesTest() {
-        Athlete mainAthlete = new Athlete(false);
-        Athlete reserveAthlete = new Athlete(true);
-
-        team.addAthlete(mainAthlete);
-        team.addAthlete(reserveAthlete);
-
-        int mainAthleteIndex = team.getTeamMembers().indexOf(mainAthlete);
-        int reserveAthleteIndex = team.getReserveMembers().indexOf(reserveAthlete);
-
-        team.swapAthletes(mainAthleteIndex, reserveAthleteIndex);
-
-        assertEquals(team.getTeamMembers().get(mainAthleteIndex), reserveAthlete);
-        assertEquals(team.getReserveMembers().get(reserveAthleteIndex), mainAthlete);
-    }
-
-    @Test
     void getRandomTeamNameTest() {
         assertNotNull(team.getRandomTeamName());
     }

@@ -103,22 +103,6 @@ public class Team {
     	
     }
 
-    /**
-     * Swaps Athletes between teamMembers & reserveMembers
-     * 
-     * @param teamIndex
-     * @param reserveIndex
-     */
-    public void swapAthletes(int teamIndex, int reserveIndex) {
-    	 // Get the Athletes to be swapped
-        Athlete teamSwap = teamMembers.get(teamIndex);
-        Athlete reserveSwap = reserveMembers.get(reserveIndex);
-
-        // Swap the Athletes
-        teamMembers.set(teamIndex, reserveSwap);
-        reserveMembers.set(reserveIndex, teamSwap);
-    	
-    }
     
     /**
      * Picks a random Team name from an inputed name list
@@ -163,31 +147,73 @@ public class Team {
     
     /********** Simple Getters & Setters **********/
     
+    /**
+     * Gets the Team Wins
+     * @return
+     */
     public int getWins() {
 		return wins;
 	}
 
+	/**
+	 * Adds a single Win to the Team
+	 * @param wins
+	 */
 	public void addWin(int wins) {
 		this.wins++;
 	}
 
+	/**
+	 * Gets the Team Losses
+	 * @return
+	 */
 	public int getLosses() {
 		return losses;
 	}
 
+	/**
+	 * @param losses
+	 */
 	public void addLoss(int losses) {
 		this.losses++;
 	}
 
+	/**
+	 * Gets the Team main Athletes
+	 * @return
+	 */
 	public List<Athlete> getTeamMembers() {
 		return teamMembers;
 	}
 
+	/**
+	 * Gets the Team reserve Athletes
+	 * @return
+	 */
 	public List<Athlete> getReserveMembers() {
 		return reserveMembers;
 	}
 
+	/**
+	 * Sets the main Team members
+	 * @param teamMembers
+	 */
+	public void setTeamMembers(List<Athlete> teamMembers) {
+		this.teamMembers = teamMembers;
+	}
 
+	/**
+	 * Sets the Team reserve members
+	 * @param reserveMembers
+	 */
+	public void setReserveMembers(List<Athlete> reserveMembers) {
+		this.reserveMembers = reserveMembers;
+	}
+
+	/**
+	 * Gets the name of the Team
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}
