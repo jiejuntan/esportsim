@@ -4,9 +4,9 @@ import main.GameEnvironment.Difficulty;
 
 public class TrainingEquipment extends Equipment {
 
-	private TrainingItems item;
+	private TrainingItem item2;
 	
-	public enum TrainingItems {
+	public enum TrainingItem {
 		GAMING_CHAIR,
 		GAMING_KEYBOARD,
 		GAMING_MOUSE,
