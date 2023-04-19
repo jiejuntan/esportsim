@@ -184,7 +184,7 @@ public class Athlete extends Purchasable {
      * @return 
      */
     public void setDescription() {
-    	 super.description = String.format("Name: %s \nReaction Time: %d \nEye Sight: %d \nIntelligence: %d \n Stamina: %d \n", name, reactionTime, eyeSight, intelligence, stamina  );
+    	 super.description = String.format("Name: %s \nReserve: %b \nReaction Time: %d \nEye Sight: %d \nIntelligence: %d \nStamina: %d \n", name, isReserve, reactionTime, eyeSight, intelligence, stamina  );
     }
 
     
