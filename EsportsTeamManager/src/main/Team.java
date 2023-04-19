@@ -154,8 +154,8 @@ public class Team {
     	
     	for (int teamRosterLimit = 5; teamRosterLimit > 0; teamRosterLimit--) {
     		
-    		Athlete randomAthlete = new Athlete(isReserve);
-    		generatedTeam.add(randomAthlete);
+//    		Athlete randomAthlete = new Athlete(isReserve);
+//    		generatedTeam.add(randomAthlete);
     	}
     	
     	return generatedTeam;

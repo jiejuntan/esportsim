@@ -1,26 +1,31 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Market {
 	
-    private List<Athlete> availableAthletes;
-    private List<Equipment> availableEquipment;
+    private List<Athlete> availableAthletes = new ArrayList<Athlete>();
+    private List<Equipment> availableEquipment = new ArrayList<Equipment>();
+    
+    public Market() {
+    	updateMarket();
+    }
 
     /**
      * Clears the list: (availableAthletes, availableEquipment) and adds new Equipment and Athletes
      */
     public void updateMarket() {
     	
-    	availableAthletes.clear();
-    	availableEquipment.clear();
+//    	clearMarket();
     	
     	for (Athlete.AthleteRole role : Athlete.AthleteRole.values()) {
-    		Athlete athlete = new Athlete(role);
+    		Athlete athlete = new Athlete(0);
     		availableAthletes.add(athlete);
     	}
     	
-    	for (int itemCount = 20; itemCount > 0; itemCount--) {
+    	//Adds equipmentCount of Equipment to the equipmentCount list
+    	for (int equipmentCount = 20; equipmentCount > 0; equipmentCount--) {
     		
     		
     		Ingestible ingestible = new Ingestible();
@@ -35,19 +40,27 @@ public class Market {
 
     public void draftAthlete(Athlete athlete) {
     	
+    	
     }
     
-    public void sellAthlete() {}
+    public void sellAthlete(Athlete athlete) {
+    	int price = athlete.getSellBackPrice();
+    }
     
-    public List<Athlete> viewStoreAthlete() {
+    public List<Athlete> viewStoresAthlete() {
 		return availableAthletes;}
     
-    public List<Equipment> viewStoreItems() {
+    public List<Equipment> viewStoresItems() {
 		return availableEquipment;}
 
     public void purchaseItem(Equipment item) {}
 
     public void sellItem(Purchasable item) {}
+    
+    public void clearMarket() {
+    	availableAthletes.clear();
+    	availableEquipment.clear();
+    }
     
     
 

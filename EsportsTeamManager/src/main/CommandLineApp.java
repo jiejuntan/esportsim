@@ -91,6 +91,7 @@ public final class CommandLineApp {
     			break;
     		case "4":
     			if (game.readyToDraft()){
+    				game.assignStartingMoney();
     				startingDraftMenu();
     			}    			
     			break;
@@ -176,7 +177,9 @@ public final class CommandLineApp {
     		System.out.printf(LINE 
     				+ "DRAFT STARTING PLAYERS\n" + LINE 
     				+ "Draft your starting team (4 starters and 4 reserves minimum)\n"
-    				+ "\n0. Return\n" + LINE);
+    				+ "%s\n"
+    				+ "\n0. Return\n" + LINE,
+    				game.purchasePlayers());
     		
     		String option = readConsoleAndClear();
     		switch (option) {

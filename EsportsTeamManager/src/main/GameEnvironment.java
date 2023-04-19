@@ -1,5 +1,7 @@
 package main;
 
+import java.util.List;
+
 /**
  * Stores state of the game and methods to play it
  */
@@ -152,8 +154,9 @@ public final class GameEnvironment {
 		setMoney(500);
 	}
 	
-	public void purchasePlayers() {
-		
+	public List<Athlete> purchasePlayers() {
+		setMarket(new Market());
+		return getMarket().viewStoresAthlete();	
 	}
 	
     public void setupGame() {}
