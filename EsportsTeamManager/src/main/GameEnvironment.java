@@ -4,16 +4,6 @@ package main;
  * Stores state of the game and methods to play it
  */
 public final class GameEnvironment {
-	/**
-	 * Regex pattern for team name validation
-	 */
-	private static final String VALID_TEAMNAME_PATTERN = "[ a-zA-Z0-9]{3,15}";
-	
-    /**
-     * Name of team
-     */
-    private String teamName;
-    
     /**
      * 
      */
@@ -56,8 +46,8 @@ public final class GameEnvironment {
     }    
     
     /** 
-     * Gets difficulty as a string
-     * @return selected difficulty or "-"
+     * Gets difficulty
+     * @return difficulty as string or "-"
      */
     public String getDifficultyString() {
     	try {
@@ -74,6 +64,10 @@ public final class GameEnvironment {
     	}
     }
     
+    /**
+     * Gets difficulty
+     * @return	difficulty as enum Difficulty
+     */
     public Difficulty getDifficulty() {
 		return difficulty;
 	}
@@ -91,42 +85,39 @@ public final class GameEnvironment {
      * @return team name as string or "-"
      */
     public String getTeamName() {
-    	return this.teamName == null ? "-" : this.teamName;
+    	if (this.team == null) {
+    		return "-";
+    	} else {
+    		return this.team.getName();
+    	}
     }
     
     /**
-     * Checks a string entered and sets it as the team name if valid
-     * 
-     * @param name	team name to set
-     * @return		<CODE>true</CODE> if team name was set successfully
+     * Creates a team with proposed name and hand
+     * @param name	proposed name of team
+     * @return		<CODE>true</CODE> if team creation was successful
      */
-    public boolean setTeamName(String name) {
-    	if (isValidTeamName(name)) {
-    		this.teamName = name;
+    public boolean createTeam(String name) {
+    	try {
+    		setTeam(new Team(name));
     		return true;
-    	} else {
+    	} catch (IllegalArgumentException e) {
     		return false;
     	}
     }
     
     /**
-     * Checks if team name is between 3-15 characters with no special characters.
-     * 
-     * @param name	team name to be validated
-     * @return 			<CODE>true</CODE> if team name is valid
-     */
-    private boolean isValidTeamName(String name) {
-    	return name.matches(GameEnvironment.VALID_TEAMNAME_PATTERN);
-    }
-    
-    /**
      * Gets season duration
-     * @return season duration as string
+     * @return season duration as formatted string
      */
     public String getSeasonDurationString() {
     	return this.seasonDuration == 0 ? "-" : String.valueOf(this.seasonDuration) + " weeks";
 	}
     
+    /**
+     * Gets season duration
+     * @return season duration as int
+     */
     public int getSeasonDuration() {
 		return seasonDuration;
 	}

@@ -134,7 +134,7 @@ public final class CommandLineApp {
     		case "0":
     			break menu;
     		default:
-    			if (game.setTeamName(option)) {
+    			if (game.createTeam(option)) {
     				break menu;
     			} else {
     				prompt = "Team name must be between 3-15 characters, no special characters.\n\n";
