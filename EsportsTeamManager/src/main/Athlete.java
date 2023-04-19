@@ -7,7 +7,7 @@ import main.GameEnvironment.Difficulty;
 
 /**
  * 
- * testing cdafgvwfwrommit after pull
+ * testing commit to local branch
  *
  */
 public class Athlete extends Purchasable {
