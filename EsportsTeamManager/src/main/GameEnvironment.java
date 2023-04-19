@@ -155,7 +155,7 @@ public final class GameEnvironment {
 	}
 	
 	public List<Athlete> purchasePlayers() {
-		setMarket(new Market());
+		setMarket(new Market(getMoney()));
 		return getMarket().viewStoresAthlete();	
 	}
 	

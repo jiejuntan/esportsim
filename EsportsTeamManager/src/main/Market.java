@@ -7,8 +7,10 @@ public class Market {
 	
     private List<Athlete> availableAthletes = new ArrayList<Athlete>();
     private List<Equipment> availableEquipment = new ArrayList<Equipment>();
+	int money;
     
-    public Market() {
+    public Market(int money) {
+    	this.money = money;
     	updateMarket();
     }
 
