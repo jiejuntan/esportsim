@@ -5,11 +5,6 @@ import java.util.Random;
 
 import main.GameEnvironment.Difficulty;
 
-/**
- * 
- * testing commit to local branch
- *
- */
 public class Athlete extends Purchasable {
    
 	private String name;
@@ -168,7 +163,7 @@ public class Athlete extends Purchasable {
      * @return 
      */
     public void setDescription() {
-    	 super.description = String.format("Name: %s \nReaction Time: %d \nEye Sight: %d \nIntelligence", name, reactionTime, intelligence);
+    	 super.description = String.format("Name: %s \nReaction Time: %d \nEye Sight: %d \nIntelligence: %d \n", name, reactionTime, eyeSight, intelligence);
     }
 
     

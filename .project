@@ -3,6 +3,7 @@
 	<name>esportsteammananger</name>
 	<comment></comment>
 	<projects>
+		<project>JUnitTesting</project>
 	</projects>
 	<buildSpec>
 	</buildSpec>
