@@ -13,14 +13,21 @@ public class Team {
     private int wins;
     private int losses;
     
+	/**
+	 * Regex pattern for team name validation
+	 */
+	private static final String VALID_TEAMNAME_PATTERN = "[ a-zA-Z0-9]{3,15}";
+	
     /**
-     * Contructor for the players Team
+     * Constructor for the players Team
      * 
      * @param name
      * @param difficulty
      */
-    public Team(String name) {
-    	this.name = name;
+    public Team(String name) throws IllegalArgumentException {
+    	if (!setTeamName(name)) {
+    		throw new IllegalArgumentException();
+    	}
     	this.wins = 0;
     	this.losses = 0;
     	this.teamMembers = new ArrayList<Athlete>();
@@ -28,7 +35,7 @@ public class Team {
     }
 
 	/**
-	 * Contructor for Opponent Team Generation
+	 * Constructor for Opponent Team Generation
 	 * 
 	 * @param difficulty
 	 */
@@ -40,6 +47,31 @@ public class Team {
     	this.reserveMembers = generateTeam(true);
     }
 
+    /**
+     * Checks a string entered and sets it as the team name if valid
+     * 
+     * @param name	team name to set
+     * @return		<CODE>true</CODE> if team name was set successfully
+     */
+    public boolean setTeamName(String name) {
+    	if (isValidTeamName(name)) {
+    		this.name = name;
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
+    
+    /**
+     * Checks if team name is between 3-15 characters with no special characters.
+     * 
+     * @param name	team name to be validated
+     * @return 			<CODE>true</CODE> if team name is valid
+     */
+    private boolean isValidTeamName(String name) {
+    	return name.matches(Team.VALID_TEAMNAME_PATTERN);
+    }
+    
     /**
      * Adds the inputed Athlete to the Team
      * 
