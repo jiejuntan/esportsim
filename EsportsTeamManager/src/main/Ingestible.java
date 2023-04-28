@@ -2,8 +2,6 @@ package main;
 
 import java.util.Random;
 
-import main.GameData.Difficulty;
-
 public class Ingestible extends Equipment {
 
 	private IngestibleItem item;
@@ -41,7 +39,7 @@ public class Ingestible extends Equipment {
 	}
 
 	@Override
-	public void setPurchasePrice(Difficulty difficulty) {
+	public void getBasePrice() {
 		// TODO Auto-generated method stub
 	}
 

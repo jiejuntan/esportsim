@@ -4,8 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import main.Athlete;
-import main.GameEnvironment;
-
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,11 +36,11 @@ class AthleteTest {
 
     @Test
     void setPurchasePriceTest() {
-        athlete.setPurchasePrice(GameEnvironment.Difficulty.EASY);
-        assertEquals(athlete.getPurchasePrice(), 100 * athlete.calculateSkillLevel());
+        athlete.getBasePrice();
+        assertEquals(athlete.getBasePrice(), 100 * athlete.calculateSkillLevel());
 
-        athlete.setPurchasePrice(GameEnvironment.Difficulty.HARD);
-        assertEquals(athlete.getPurchasePrice(), 1000 * athlete.calculateSkillLevel());
+        athlete.getBasePrice();
+        assertEquals(athlete.getBasePrice(), 1000 * athlete.calculateSkillLevel());
     }
 
     @Test

@@ -48,10 +48,12 @@ public final class GameEnvironment {
     public String formatAthleteList(List<Athlete> athletes) {
     	String result = "";
     	for (int i=0; i < athletes.size(); i++) {
-    		result += String.format("%s. %s\n", i + 1, athletes.get(i));
+    		Athlete athlete = athletes.get(i);
+    		result += String.format("%s. %s\nContract price: $%s\n\n", i + 1, athlete, this.getMarket().calculatePurchasePrice(athlete));
     	}
     	return result;
     }
+    
     
     /**
      * Formats list of purchasable athletes into a string
@@ -59,21 +61,37 @@ public final class GameEnvironment {
      * @return	string formatted list of purchasable athletes
      */
 	public String purchasableAthletes() {
-		return formatAthleteList(getMarket().viewStoresAthlete());	
+		return formatAthleteList(getMarket().viewAvailableAthletes());	
 	}
 	
+	
+	/**
+	 * Gets current team members as a string
+	 * 
+	 * @return	string formatted list of current team members
+	 */
 	public String currentAthletes() {
 		String result = formatAthleteList(data.getTeam().getTeamMembers());
 		return result == "" ? "Your team is empty!\n" : result;
 	}
 	
-	public void purchaseAthlete(int i) throws IllegalArgumentException {
+	
+	/**
+	 * Wrapper for Market method purchaseAthlete for drafting starting team
+	 * 
+	 * @param i								index of Athlete to purchase
+	 * @throws IndexOutOfBoundsException	if index is out of range
+	 * @throws IllegalArgumentException 	if insufficient money to purchase
+	 * @throws TeamMemberLimitException 	if team has reached the member limit
+	 */
+	public void draftAthlete(int i) throws IndexOutOfBoundsException, IllegalArgumentException, TeamMemberLimitException {
 		try {
-			getMarket().draftAthlete(i);
-		} catch (IllegalArgumentException e) {
+			getMarket().purchaseAthlete(i, true);
+		} catch (IndexOutOfBoundsException | IllegalArgumentException | TeamMemberLimitException e) {
 			throw e;
 		}
 	}
+	
 	/********** UI Methods **********/
 	
 	

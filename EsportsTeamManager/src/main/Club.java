@@ -30,7 +30,7 @@ public class Club {
     }
     
     /**
-     * Swaps Athletes between teamMembers & reserveMembers
+     * Swaps Athletes between teamMembers and reserveMembers
      * 
      * @param teamIndex
      * @param reserveIndex

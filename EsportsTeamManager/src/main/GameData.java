@@ -1,19 +1,22 @@
 package main;
 
 public class GameData {
+	
 	/**
      * Enum for difficulty setting
      */
     public enum Difficulty {
-    	EASY("Easy", 1000),
-    	HARD("Hard", 500);
+    	EASY("Easy", 1000, 1),
+    	HARD("Hard", 500, 2);
     	
     	public final String asString;
     	public final int startingMoney;
+    	public final int modifier;
     	
-    	private Difficulty(String asString, int startingMoney) {
+    	private Difficulty(String asString, int startingMoney, int modifier) {
     		this.asString = asString;
     		this.startingMoney = startingMoney;
+    		this.modifier = modifier;
     	}
     } 
     
@@ -38,6 +41,7 @@ public class GameData {
      */
     private Team team;
     
+    
     /**
      * Constructor for GameData
      */
@@ -49,6 +53,7 @@ public class GameData {
     	this.team = new Team();
     }
     
+    
     /**
      * Checks if season has started
      * 
@@ -58,6 +63,7 @@ public class GameData {
     	return getCurrentWeek() != 0;
     }
     
+    
     /**
      * Gets difficulty
      * 
@@ -66,6 +72,7 @@ public class GameData {
     public Difficulty getDifficulty() {
 		return this.difficulty;
 	}
+    
     
     /**
      * Sets difficulty
@@ -80,6 +87,7 @@ public class GameData {
     	}
     }
 
+    
     /**
      * Gets season duration
      * 
@@ -88,6 +96,7 @@ public class GameData {
     public int getSeasonDuration() {
     	return this.seasonDuration;
 	}
+    
     
     /**
      * Sets season duration if valid
@@ -103,6 +112,7 @@ public class GameData {
 		}
 	}
 	
+	
 	/**
 	 * Checks if duration is valid
 	 * 
@@ -113,6 +123,7 @@ public class GameData {
 		return duration >= 5 && duration <= 15;
 	}
 	
+	
 	/**
      * Gets current week
      * 
@@ -121,6 +132,7 @@ public class GameData {
 	public int getCurrentWeek() {
 		return this.currentWeek;
 	}
+	
 	
 	/**
 	 * Gets money available
@@ -131,6 +143,7 @@ public class GameData {
 		return this.money;
 	}
 	
+	
 	/**
 	 * Sets starting money based on difficulty
 	 * 
@@ -139,6 +152,37 @@ public class GameData {
 	public void setStartingMoney(Difficulty difficulty) {
 		this.money = difficulty.startingMoney;
 	}
+	
+	
+	/**
+	 * Increases money
+	 * 
+	 * @param amount					amount to increase
+	 * @throws IllegalArgumentException	if amount is negative
+	 */
+	public void incrementMoney(int amount) throws IllegalArgumentException {
+		if (amount > 0) {
+			this.money += amount;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+	
+	
+	/**
+	 * Deducts money
+	 * 
+	 * @param amount					amount to deduct
+	 * @throws IllegalArgumentException	if amount is negative or player has insufficient money
+	 */
+	public void deductMoney(int amount) throws IllegalArgumentException {
+		if (amount > 0 && amount <= this.money) {
+			this.money -= amount;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+	
 	
     /**
      * Gets team

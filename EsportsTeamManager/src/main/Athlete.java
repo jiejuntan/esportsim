@@ -3,14 +3,12 @@ package main;
 import java.io.IOException;
 import java.util.Random;
 
-import main.GameData.Difficulty;
-
 /**
  * Athlete manangers the players of this game.
  * This class hold player stats and handles there stat generation
  * 
  * 
- * @author Blake & Jun
+ * @author Blake and Jun
  *
  */
 public class Athlete extends Purchasable {
@@ -38,6 +36,7 @@ public class Athlete extends Purchasable {
     	NONE
     }
     
+    
     /**
      * Constructor for creating Athlete with scaling skill level
      * 
@@ -49,10 +48,11 @@ public class Athlete extends Purchasable {
     	
     	generateAthleteStats(skillLevel);
     	
-    	setPurchasePrice(Difficulty.HARD);
+    	getBasePrice();
     	
     	setDescription();
     }
+    
     
     /**
      * Constructor for creating opponent Athletes with set role and scaling skill level  
@@ -66,10 +66,11 @@ public class Athlete extends Purchasable {
     	
     	generateAthleteStats(skillLevel);
     	
-    	setPurchasePrice(Difficulty.HARD);
+    	getBasePrice();
     	
     	setDescription();
     }
+    
     
     /**
      * Picks a random name from an inputed name list
@@ -98,7 +99,7 @@ public class Athlete extends Purchasable {
     /**
      * Generates the athelets skills and also gives an athlete one special skill
      * 
-     * @param Int which sill numbers are generated around
+     * @param defaultSkillNumber int which sill numbers are generated around
      */
     public void generateAthleteStats(int defaultSkillNumber) {
     	
@@ -143,41 +144,26 @@ public class Athlete extends Purchasable {
      * @return Athletes Skill Level
      */
     public int calculateSkillLevel() {
-    	//Still needs improvment
+    	// Still needs improvement ?
+    	
         return getEyeSight() + getIntelligence() + getReactionTime() + getStamina();
     }
     
     
     /**
-     * Calculates contract price based on the GameEnvironments difficulty level
+     * Calculates base purchase price before difficulty scaling
      * 
-     * @param Game Settings
-     * @return Athlete Contract Price
+     * @return Athlete contract price
      */
-    public void setPurchasePrice(Difficulty difficulty) {
+    public int getBasePrice() {
+    	// implement some value calculation based on stats
     	
-    	int price = 0;
-    	
-    	switch(difficulty) {
-        case EASY:
-        	price = 100;
-            break;
-//        case MEDIUM:
-//        	price = 500;
-//            break;
-        case HARD:
-        	price = 1000;
-            break;
-        }
-    	
-    	super.purchasePrice = price * calculateSkillLevel();
+    	return calculateSkillLevel() * 5;
     }
-    
     
     
     /**
      * Sets the athletes description
-     * @return 
      */
     public void setDescription() {
     	 super.description = String.format("Name: %s \nReserve: %b \nReaction Time: %d \nEye Sight: %d \nIntelligence: %d \nStamina: %d \n", name, isReserve, reactionTime, eyeSight, intelligence, stamina  );
@@ -186,10 +172,10 @@ public class Athlete extends Purchasable {
     
     @Override
     public String toString() {
-    	return super.description;
+    	return super.getDescription();
     }
     
-    /********** Simple Getters & Setters **********/
+    /********** Simple Getters and Setters **********/
     
 	
 	public String getName() {
@@ -232,25 +218,5 @@ public class Athlete extends Purchasable {
 		this.isReserve = isReserve;
 	}
 
-	/********** Simple Getters & Setters **********/
-    
-//    public static void  main(String[] args) {
-//    	
-//    	int num = 0;
-//    	int counter = 0;
-//    	float price = 0;
-//    	
-//    	
-//    	for (int i = 100000; i>0; i--) {
-//    		counter++;
-//    		Athlete guy = new Athlete(false,3);
-//    		num += guy.calculateSkillLevel();
-//    		price += guy.getPurchasePrice();
-//    	}
-//    	System.out.println(String.format("Count = %d num = %d price = %f",counter,num/counter,price/counter));
-//    	
-//    	
-//    	
-//    }
-    
+	/********** Simple Getters & Setters **********/    
  }

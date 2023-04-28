@@ -17,12 +17,10 @@ public class Team {
 	 * Regex pattern for team name validation
 	 */
 	private static final String VALID_NAME_PATTERN = "[ a-zA-Z0-9]{3,15}";
+	private static final int TEAM_LIMIT = 10;
 	
     /**
      * Constructor for the players Team
-     * 
-     * @param name
-     * @param difficulty
      */
     public Team() {
     	this.name = getRandomTeamName();
@@ -74,7 +72,11 @@ public class Team {
      * 
      * @param athlete
      */
-    public void addAthlete(Athlete athlete) {
+    public void addAthlete(Athlete athlete) throws TeamMemberLimitException {
+    	if (this.teamMembers.size() + this.reserveMembers.size() >= this.TEAM_LIMIT) {
+    		throw new TeamMemberLimitException();
+    	}
+    	
     	if (athlete.isReserve()) {
     		reserveMembers.add(athlete);
     	}
@@ -215,7 +217,7 @@ public class Team {
 		return name;
 	}
     
-	/********** Simple Getters & Setters **********/
+	/********** Simple Getters and Setters **********/
 	
     @Override
     public String toString() {

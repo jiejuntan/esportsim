@@ -9,11 +9,11 @@ public class IO {
 	
 	
 	/**
-	 * Reads a text that contains comma seperated data from a file and returns it as a String Array
+	 * Reads a text that contains comma separated data from a file and returns it as a String Array
 	 * 
-	 * @param File Path
-	 * @return String Array of text
-	 * @throws IOException
+	 * @param filename		file path
+	 * @return 				String Array of text
+	 * @throws IOException	TODO
 	 */
 	public static String[] getTextFromFile(String filename) throws IOException {
 		
