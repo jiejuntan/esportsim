@@ -9,7 +9,6 @@ public abstract class Equipment extends Purchasable{
         return effectDuration;
     }
 
-    public abstract void applyEffect(Athlete athlete);
     
     
 	

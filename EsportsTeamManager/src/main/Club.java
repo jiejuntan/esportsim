@@ -53,11 +53,34 @@ public class Club {
     }
     
     /**
+     * Takes in an item and athlete and applies that items effect to the athlete
      * 
+     * @param item
+     * @param athlete
      */
-    public void useEqupment() {
-    	    }
-    
+    public void useEqupment(TrainingEquipment item, Athlete athlete) {
+    	
+    	String AffectedStat = item.getItem().getAffectedStat();
+    	int itemStatValue = item.getItem().getValue();
+    	
+    	 switch (AffectedStat) {
+         case "reactionTime":
+        	 athlete.setReactionTime(athlete.getReactionTime() + itemStatValue);
+             break;
+         case "eyeSight":
+        	 athlete.setEyeSight(athlete.getEyeSight() + itemStatValue);
+             break;
+         case "intelligence":
+        	 athlete.setIntelligence(athlete.getIntelligence() + itemStatValue);
+             break;
+         case "stamina":
+        	 athlete.setStamina(athlete.getStamina() + itemStatValue);
+             break;
+         default:
+             break;
+    	 }
+    	
+    }
     
     /**
      * Gets the Club inventory

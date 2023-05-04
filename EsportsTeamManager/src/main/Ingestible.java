@@ -62,11 +62,6 @@ public class Ingestible extends Equipment {
     	
     }
 
-	@Override
-	public void applyEffect(Athlete athlete) {
-		
-	}
-
 	/**
 	 * Calculates Base Price
 	 * Price = Item Stat * 50

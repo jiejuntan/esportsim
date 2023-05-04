@@ -59,12 +59,10 @@ public class TrainingEquipment extends Equipment {
         this.item = trainingItems[randomItemIndex];
     	
     }
-
-	@Override
-	public void applyEffect(Athlete athlete) {
-		// TODO Auto-generated method stub
-		
-	}
+    
+    public TrainingItem getItem() {
+    	return this.item;
+    }
 
 	/**
 	 * Calculates Base Price

@@ -202,6 +202,38 @@ public class Athlete extends Purchasable {
 		return stamina;
 	}
 
+	/**
+	 * @param reactionTime the reactionTime to set
+	 */
+	public void setReactionTime(int reactionTime) {
+		this.reactionTime = reactionTime;
+	}
+
+
+	/**
+	 * @param eyeSight the eyeSight to set
+	 */
+	public void setEyeSight(int eyeSight) {
+		this.eyeSight = eyeSight;
+	}
+
+
+	/**
+	 * @param intelligence the intelligence to set
+	 */
+	public void setIntelligence(int intelligence) {
+		this.intelligence = intelligence;
+	}
+
+
+	/**
+	 * @param stamina the stamina to set
+	 */
+	public void setStamina(int stamina) {
+		this.stamina = stamina;
+	}
+
+
 	public AthleteRole getRole() {
 		return role;
 	}
