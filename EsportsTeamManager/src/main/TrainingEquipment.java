@@ -2,24 +2,50 @@ package main;
 
 import java.util.Random;
 
-import main.Ingestible.IngestibleItem;
-
 public class TrainingEquipment extends Equipment {
 
 	private TrainingItem item;
 	
-	public enum TrainingItem {
-		GAMING_CHAIR,
-		GAMING_KEYBOARD,
-		GAMING_MOUSE,
-		GAMING_HEADSET,
-		HIGH_PERFORMANCE_MONITOR
-	}
-	
     public TrainingEquipment() {
     	setitem();
 	}
-    
+	
+	/**
+	 * This holds the data of the training items
+	 * Item value and the state the items affects
+	 */
+	public enum TrainingItem {
+	    GAMING_CHAIR(1, "stamina", "Gaming Chair"),
+	    GAMING_KEYBOARD(1, "reactionTime", "Gaming Keyboard"),
+	    GAMING_MOUSE(1, "intelligence", "Gaming Mouse"),
+	    GAMING_HEADSET(1, "eyeSight", "Gaming Headset"),
+	    HIGH_PERFORMANCE_MONITOR(1, "reactionTime", "High Refresh Rate Monitor");
+
+	    private final int value;
+	    private final String affectedStat;
+	    private final String name;
+
+	    TrainingItem(int value, String affectedStat, String name) {
+	        this.value = value;
+	        this.affectedStat = affectedStat;
+	        this.name = name;
+	    }
+
+	    /**
+	     * @return Ingestible stat value
+	     */
+	    public int getValue() {
+	        return value;
+	    }
+	    
+	    /**
+	     * @return Stat which the item affects
+	     */
+	    public String getAffectedStat() {
+	        return affectedStat;
+	    }
+	}
+	
     public void setitem() {
         Random random = new Random();
 
@@ -33,7 +59,6 @@ public class TrainingEquipment extends Equipment {
         this.item = trainingItems[randomItemIndex];
     	
     }
-	
 
 	@Override
 	public void applyEffect(Athlete athlete) {
@@ -41,16 +66,21 @@ public class TrainingEquipment extends Equipment {
 		
 	}
 
-
+	/**
+	 * Calculates Base Price
+	 * Price = Item Stat * 50
+	 */
 	@Override
-	public void getBasePrice() {
-		// TODO Auto-generated method stub
+	public int getBasePrice() {
+		return item.value * 50;
 	}
 
-
+	/**
+	 * Sets the Equipments Description
+	 */
 	@Override
 	public void setDescription() {
-		// TODO Auto-generated method stub
+		super.description = String.format("The %s training equipment increases your athletes %s by %d points}", item.name, item.affectedStat, item.value );
 	}
 
 
