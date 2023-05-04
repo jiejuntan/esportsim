@@ -8,6 +8,8 @@ public class Match {
     private int rewardPoints;
     private Team homeTeam;
     private Team awayTeam;
+    
+    private Match() {};
 
     public void play() {}
 	

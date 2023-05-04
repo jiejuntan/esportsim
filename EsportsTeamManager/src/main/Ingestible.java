@@ -5,19 +5,48 @@ import java.util.Random;
 public class Ingestible extends Equipment {
 
 	private IngestibleItem item;
-
-    public enum IngestibleItem {
-        ENERGY_DRINK,
-        FOCUS_BOOSTER,
-        VITAMIN_SUPPLEMENT,
-        HEALTHY_SNACK,
-        RECOVERY_SHAKE
-    }
-    
+	
     public Ingestible() {
     	setitem();
 
     }
+
+	/**
+	 * This holds the data of the training items
+	 * Item value and the state the items affects
+	 */
+	public enum IngestibleItem {
+	    ENERGY_DRINK(1, "stamina", "Energy Drink"),
+	    FOCUS_BOOSTER(1, "intelligence", "Focus Booster"),
+	    VITAMIN_SUPPLEMENT(1, "eyeSight", "Vitamin Supplement"),
+	    HEALTHY_SNACK(1, "stamina", "Healthy Snack"),
+	    RECOVERY_SHAKE(1, "reactionTime", "Recovery Snack");
+
+	    private final int value;
+	    private final String affectedStat;
+	    private final String name;
+
+
+	    IngestibleItem(int value, String affectedStat, String name) {
+	        this.value = value;
+	        this.affectedStat = affectedStat;
+	        this.name = name;
+	    }
+
+	    /**
+	     * @return Ingestible stat value
+	     */
+	    public int getValue() {
+	        return value;
+	    }
+
+	    /**
+	     * @return Stat which the item affects
+	     */
+	    public String getAffectedStat() {
+	        return affectedStat;
+	    }
+	}
     
     public void setitem() {
         Random random = new Random();
@@ -38,14 +67,22 @@ public class Ingestible extends Equipment {
 		
 	}
 
+	/**
+	 * Calculates Base Price
+	 * Price = Item Stat * 50
+	 */
 	@Override
-	public void getBasePrice() {
-		// TODO Auto-generated method stub
+	public int getBasePrice() {
+		return item.value * 50;
 	}
 
+
+	/**
+	 * Sets the Equipments Description
+	 */
 	@Override
 	public void setDescription() {
-		// TODO Auto-generated method stub
+		super.description = String.format("The %s ingestible increases your athletes %s by %d points}", item.name, item.affectedStat, item.value );
 	}
 
 
