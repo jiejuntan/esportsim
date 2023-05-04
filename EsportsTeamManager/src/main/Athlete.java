@@ -4,15 +4,18 @@ import java.io.IOException;
 import java.util.Random;
 
 /**
- * Athlete manangers the players of this game.
- * This class hold player stats and handles there stat generation
- * 
+ * Represents the characters in the game.
  * 
  * @author Blake and Jun
  *
  */
 public class Athlete extends Purchasable {
-
+	
+	/**
+	 * Regex pattern for athlete name validation
+	 */
+	private static final String VALID_NAME_PATTERN = "[ a-zA-Z0-9]{3,15}";
+	
 	private String name;
 	
 	private int reactionTime;
@@ -20,21 +23,21 @@ public class Athlete extends Purchasable {
     private int intelligence;
     private int stamina;
     
-    private AthleteRole role;
-    private boolean isReserve;
+//    private AthleteRole role;
+//    private boolean isReserve;
     
     
-    /**
-     * Holds the variuous roles of the Athletes
-     */
-    public enum AthleteRole {
-    	TOP,
-    	JUNGLER,
-    	MID,
-    	ADC,
-    	SUPPORT,
-    	NONE
-    }
+//    /**
+//     * Holds the variuous roles of the Athletes
+//     */
+//    public enum AthleteRole {
+//    	TOP,
+//    	JUNGLER,
+//    	MID,
+//    	ADC,
+//    	SUPPORT,
+//    	NONE
+//    }
     
     
     /**
@@ -43,33 +46,31 @@ public class Athlete extends Purchasable {
      * @param skillLevel	skill level of athlete
      */
     public Athlete(int skillLevel) {
-    	setRole(AthleteRole.NONE);
+//    	setRole(AthleteRole.NONE);
     	setName(getRandomName());
     	
     	generateAthleteStats(skillLevel);
-    	
-    	getBasePrice();
     	
     	setDescription();
     }
     
     
-    /**
-     * Constructor for creating opponent Athletes with set role and scaling skill level  
-     *    
-     * @param role			position of athlete
-     * @param skillLevel	skill level of athlete
-     */
-    public Athlete(AthleteRole role, int skillLevel) {
-    	setRole(role);
-    	setName(getRandomName());
-    	
-    	generateAthleteStats(skillLevel);
-    	
-    	getBasePrice();
-    	
-    	setDescription();
-    }
+//    /**
+//     * Constructor for creating opponent Athletes with set role and scaling skill level  
+//     *    
+//     * @param role			position of athlete
+//     * @param skillLevel	skill level of athlete
+//     */
+//    public Athlete(AthleteRole role, int skillLevel) {
+//    	setRole(role);
+//    	setName(getRandomName());
+//    	
+//    	generateAthleteStats(skillLevel);
+//    	
+//    	getBasePrice();
+//    	
+//    	setDescription();
+//    }
     
     
     /**
@@ -163,10 +164,38 @@ public class Athlete extends Purchasable {
     
     
     /**
+     * Sets team name if valid
+     * 
+     * @param name						name to set
+     * @throws IllegalArgumentException	if name is invalid
+     */
+    public void changeName(String name) throws IllegalArgumentException {
+    	if (isValidName(name)) {
+    		this.name = name;
+    	} else {
+    		throw new IllegalArgumentException();
+    	}
+    }
+    
+    
+    /**
+     * Checks if athlete name matches pattern
+     * 
+     * @param name	name to validate
+     * @return 		<CODE>true</CODE> if name is valid
+     */
+    private boolean isValidName(String name) {
+    	return name.matches(VALID_NAME_PATTERN);
+    }
+    
+    
+    /**
      * Sets the athletes description
      */
     public void setDescription() {
-    	 super.description = String.format("Name: %s \nReserve: %b \nReaction Time: %d \nEye Sight: %d \nIntelligence: %d \nStamina: %d \n", name, isReserve, reactionTime, eyeSight, intelligence, stamina  );
+    	super.description = String.format("Name: %s \nReaction Time: %d \nEye Sight: %d \nIntelligence: %d \nStamina: %d \n", name, reactionTime, eyeSight, intelligence, stamina  );
+
+//    	 super.description = String.format("Name: %s \nReserve: %b \nReaction Time: %d \nEye Sight: %d \nIntelligence: %d \nStamina: %d \n", name, isReserve, reactionTime, eyeSight, intelligence, stamina  );
     }
 
     
@@ -202,21 +231,21 @@ public class Athlete extends Purchasable {
 		return stamina;
 	}
 
-	public AthleteRole getRole() {
-		return role;
-	}
+//	public AthleteRole getRole() {
+//		return role;
+//	}
+//	
+//	private void setRole(AthleteRole role) {
+//		this.role = role;
+//	}
 	
-	private void setRole(AthleteRole role) {
-		this.role = role;
-	}
-	
-	public boolean isReserve() {
-		return isReserve;
-	}
-	
-    public void setReserve(boolean isReserve) {
-		this.isReserve = isReserve;
-	}
+//	public boolean isReserve() {
+//		return isReserve;
+//	}
+//	
+//    public void setReserve(boolean isReserve) {
+//		this.isReserve = isReserve;
+//	}
 
 	/********** Simple Getters & Setters **********/    
  }

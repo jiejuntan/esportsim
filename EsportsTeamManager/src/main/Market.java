@@ -44,7 +44,7 @@ public class Market {
     		Athlete athlete = new Athlete(3);
     		// implement difficulty + weekly scalings for athlete stats
     		
-    		this.availableAthletes.add(athlete);
+    		availableAthletes.add(athlete);
     	}
     	
     	for (int equipmentCount = 20; equipmentCount > 0; equipmentCount--) {
@@ -69,21 +69,19 @@ public class Market {
      * @throws TeamMemberLimitException		if team has reached the member limit
      */
     public void purchaseAthlete(int atIndex, boolean withUpdate) throws IndexOutOfBoundsException, IllegalArgumentException, TeamMemberLimitException {
-    	List<Athlete> athletes = viewAvailableAthletes();
-    	
-    	if (atIndex < athletes.size()) {
-    		Athlete athlete = athletes.get(atIndex);
+    	if (atIndex < availableAthletes.size()) {
+    		Athlete athlete = availableAthletes.get(atIndex);
     		
     		int price = calculatePurchasePrice(athlete);
     		
     		try {
-    			this.data.deductMoney(price);
-    			this.data.getTeam().addAthlete(athlete);
-            	athletes.remove(atIndex);
+    			data.deductMoney(price);
+    			data.getTeam().addAthlete(athlete);
+            	availableAthletes.remove(atIndex);
     		} catch (IllegalArgumentException e) {
     			throw e;
     		} catch (TeamMemberLimitException e) {
-    			this.data.incrementMoney(price); // recovers lost money when unable to purchase due to member limit
+    			data.incrementMoney(price); // recovers lost money when unable to purchase due to member limit
     			throw e;
     		}
     	} else {
@@ -96,9 +94,20 @@ public class Market {
     }
     
     
+    /**
+     * Sells an athlete from the player's team
+     * 
+     * @param athlete	Athlete to sell
+     */
     public void sellAthlete(Athlete athlete) {
 		int price = calculateSalePrice(athlete);
-		// money methods
+		
+		try {
+			data.incrementMoney(price);
+			data.getTeam().removeAthlete(athlete);
+		} catch (IllegalArgumentException e) {
+			throw e;
+		}
 	}
     
     
@@ -109,7 +118,7 @@ public class Market {
      * @return			purchase price
      */
     public int calculatePurchasePrice(Purchasable purchase) {
-    	return purchase.getBasePrice() * this.data.getDifficulty().modifier;
+    	return purchase.getBasePrice() * data.getDifficulty().modifier;
     }
     
     
@@ -120,7 +129,7 @@ public class Market {
      * @return		sale price
      */
     public int calculateSalePrice(Purchasable sale) {
-    	return sale.getBasePrice() / this.data.getDifficulty().modifier;
+    	return sale.getBasePrice() / data.getDifficulty().modifier;
     }
     
     
@@ -145,8 +154,8 @@ public class Market {
      * Clears list of available athletes and equipment in market
      */
     public void clearMarket() {
-    	this.availableAthletes.clear();
-    	this.availableEquipment.clear();
+    	availableAthletes.clear();
+    	availableEquipment.clear();
     }
     
 }
