@@ -10,7 +10,7 @@ public class TrainingEquipment extends Equipment {
     	setitem();
 	}
 	
-	/**
+	/**m,
 	 * This holds the data of the training items
 	 * Item value and the state the items affects
 	 */
@@ -61,8 +61,10 @@ public class TrainingEquipment extends Equipment {
     }
     
     public TrainingItem getItem() {
-    	return this.item;
+    	return item;
     }
+    
+    
 
 	/**
 	 * Calculates Base Price

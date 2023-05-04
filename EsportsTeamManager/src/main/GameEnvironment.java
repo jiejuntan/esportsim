@@ -1,8 +1,10 @@
 package main;
 
+import java.util.HashMap;
 import java.util.List;
 
 import main.GameData.Difficulty;
+import main.Team.Role;
 
 /**
  * Stores game state and UI methods
@@ -61,7 +63,14 @@ public final class GameEnvironment {
      * @return	string formatted list of purchasable athletes
      */
 	public String purchasableAthletes() {
-		return formatAthleteList(getMarket().viewAvailableAthletes());	
+		List<Athlete> athletes = market.viewAvailableAthletes();
+		
+		String result = "";
+    	for (int i=0; i < athletes.size(); i++) {
+    		Athlete athlete = athletes.get(i);
+    		result += String.format("%s. %s\nContract price: $%s\n\n", i + 1, athlete, market.calculatePurchasePrice(athlete));
+    	}
+    	return result;
 	}
 	
 	
@@ -71,8 +80,19 @@ public final class GameEnvironment {
 	 * @return	string formatted list of current team members
 	 */
 	public String currentAthletes() {
-		String result = formatAthleteList(data.getTeam().getTeamMembers());
-		return result == "" ? "Your team is empty!\n" : result;
+//		HashMap<Role, Athlete> starting = data.getTeam().getTeamMembers();
+//		
+//		String result = "";
+//    	for (int i=0; i < starting.size(); i++) {
+//    		Athlete athlete = starting.get(i);
+//    		result += String.format("%s. %s\nContract price: $%s\n\n", i + 1, athlete, market.calculatePurchasePrice(athlete));
+//    	}
+//		
+//		String result = formatAthleteList(data.getTeam().getTeamMembers());
+		
+//		return result == "" ? "Your team is empty!\n" : result;
+		
+		return String.valueOf(data.getTeam());
 	}
 	
 	
