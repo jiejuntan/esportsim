@@ -12,12 +12,19 @@ public class GameData {
     	public final String asString;
     	public final int startingMoney;
     	public final int modifier;
-    	
-    	private Difficulty(String asString, int startingMoney, int modifier) {
+
+		private Difficulty(String asString, int startingMoney, int modifier) {
     		this.asString = asString;
     		this.startingMoney = startingMoney;
     		this.modifier = modifier;
     	}
+		
+    	/**
+		 * @return the Difficulty modifier
+		 */
+		public int getModifier() {
+			return modifier;
+		}
     } 
     
 	/**

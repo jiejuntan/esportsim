@@ -23,21 +23,56 @@ public class Athlete extends Purchasable {
     private int intelligence;
     private int stamina;
     
-//    private AthleteRole role;
-//    private boolean isReserve;
+    
+    private AthleteRole role;
+    private boolean isReserve;
     
     
-//    /**
-//     * Holds the variuous roles of the Athletes
-//     */
-//    public enum AthleteRole {
-//    	TOP,
-//    	JUNGLER,
-//    	MID,
-//    	ADC,
-//    	SUPPORT,
-//    	NONE
-//    }
+    /**
+     * Holds the variuous roles of the Athletes
+     */
+    public enum AthleteRole {
+    	
+    	//Role(Health, Damage, Shield)
+    	ATTACK(50, 100, 50),
+    	DEFENSE(60, 40, 100),
+    	SUPPORT(70, 30, 100),
+    	TANK(100, 50, 50);
+    	
+    	private final int health;
+		private final int damage;
+    	private final int shield;
+
+
+		AthleteRole(int health, int damage,int shield) {
+			this.health = health;
+			this.damage = damage;
+			this.shield = shield;
+		}
+		
+    	/**
+		 * @return the health
+		 */
+		public int getHealth() {
+			return health;
+		}
+
+
+		/**
+		 * @return the damage
+		 */
+		public int getDamage() {
+			return damage;
+		}
+
+
+		/**
+		 * @return the shield
+		 */
+		public int getShield() {
+			return shield;
+		}
+    }
     
     
     /**
@@ -46,7 +81,6 @@ public class Athlete extends Purchasable {
      * @param skillLevel	skill level of athlete
      */
     public Athlete(int skillLevel) {
-//    	setRole(AthleteRole.NONE);
     	setName(getRandomName());
     	
     	generateAthleteStats(skillLevel);
@@ -55,22 +89,22 @@ public class Athlete extends Purchasable {
     }
     
     
-//    /**
-//     * Constructor for creating opponent Athletes with set role and scaling skill level  
-//     *    
-//     * @param role			position of athlete
-//     * @param skillLevel	skill level of athlete
-//     */
-//    public Athlete(AthleteRole role, int skillLevel) {
-//    	setRole(role);
-//    	setName(getRandomName());
-//    	
-//    	generateAthleteStats(skillLevel);
-//    	
-//    	getBasePrice();
-//    	
-//    	setDescription();
-//    }
+    /**
+     * Constructor for creating opponent Athletes with set role and scaling skill level  
+     *    
+     * @param role			position of athlete
+     * @param skillLevel	skill level of athlete
+     */
+    public Athlete(AthleteRole role, int skillLevel) {
+    	setRole(role);
+    	setName(getRandomName());
+    	
+    	generateAthleteStats(skillLevel);
+    	
+    	getBasePrice();
+    	
+    	setDescription();
+    }
     
     
     /**
@@ -263,12 +297,14 @@ public class Athlete extends Purchasable {
 	}
 
 
-//	public AthleteRole getRole() {
-//		return role;
-//	}
-//	
-//	private void setRole(AthleteRole role) {
-//		this.role = role;
+	public AthleteRole getRole() {
+		return role;
+	}
+	
+	private void setRole(AthleteRole role) {
+		this.role = role;
+	}
+	
 	
 //	public boolean isReserve() {
 //		return isReserve;
