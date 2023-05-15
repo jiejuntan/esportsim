@@ -77,6 +77,11 @@ public class Match {
     
     private void action() {}
     
+    private void checkAggros(Team team) {
+    	for(Athlete athlete: team.getTeamMembers())
+    }
+    
+    
 
     
     
@@ -89,7 +94,7 @@ public class Match {
             // Iterate over each athlete in the home team and have them perform an action
             for (Athlete athlete : homeTeam.getTeamMembers()) {
                 // The target is determined by the aggro levels of the opposing team
-                Athlete target = ?;  // You need to implement getAggro() method in Team class
+                Athlete target = ?;  
                 action(target);
                 decreaseStamina();
             }
@@ -102,7 +107,7 @@ public class Match {
             }
 
             // Check if all athletes on a team are out of health. If so, the other team wins
-            if (hometeamheath)) {  // You need to implement isDefeated() method in Team class
+            if (hometeamheath)) {  
                 return;
             } else if (awayTeamhealth) {
                 return;

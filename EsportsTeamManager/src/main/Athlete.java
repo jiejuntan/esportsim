@@ -23,9 +23,15 @@ public class Athlete extends Purchasable {
     private int intelligence;
     private int stamina;
     
+    //Ingame Character Stats
+    private int health;
+    private int damage;
+    private int shield;
+    private int aggroLevel;
+    
     
     private AthleteRole role;
-    private boolean isReserve;
+    //private boolean isReserve;
     
     
     /**
@@ -33,21 +39,22 @@ public class Athlete extends Purchasable {
      */
     public enum AthleteRole {
     	
-    	//Role(Health, Damage, Shield)
-    	ATTACK(50, 100, 50),
-    	DEFENSE(60, 40, 100),
-    	SUPPORT(70, 30, 100),
-    	TANK(100, 50, 50);
+    	//Role(Health, Damage, Shield, Aggro Priority)
+    	ATTACK(50, 100, 50, 2),
+    	DEFENSE(60, 40, 100, 3),
+    	SUPPORT(70, 30, 100, 4),
+    	TANK(100, 50, 50, 1);
     	
     	private final int health;
 		private final int damage;
     	private final int shield;
+    	private final int aggro;
 
-
-		AthleteRole(int health, int damage,int shield) {
+		AthleteRole(int health, int damage,int shield, int aggro) {
 			this.health = health;
 			this.damage = damage;
 			this.shield = shield;
+			this.aggro = aggro;
 		}
 		
     	/**
@@ -71,6 +78,13 @@ public class Athlete extends Purchasable {
 		 */
 		public int getShield() {
 			return shield;
+		}
+		
+		/**
+		 * @return the aggro
+		 */
+		public int getAggro() {
+			return aggro;
 		}
     }
     
@@ -222,6 +236,16 @@ public class Athlete extends Purchasable {
     	return name.matches(VALID_NAME_PATTERN);
     }
     
+    /**
+     * Sets the ingame character stats based on the athletes role
+     */
+    public void setIngameCharacterStats() {
+		this.health = role.getHealth();
+		this.damage = role.getHealth();
+		this.shield = role.getHealth();
+		this.aggroLevel = role.getAggro();
+    }
+    
     
     /**
      * Sets the athletes description
@@ -304,6 +328,63 @@ public class Athlete extends Purchasable {
 	private void setRole(AthleteRole role) {
 		this.role = role;
 	}
+
+
+	/**
+	 * @return the health
+	 */
+	public int getHealth() {
+		return health;
+	}
+
+
+	/**
+	 * @param health the health to set
+	 */
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+
+	/**
+	 * @return the damage
+	 */
+	public int getDamage() {
+		return damage;
+	}
+
+
+	/**
+	 * @param damage the damage to set
+	 */
+	public void setDamage(int damage) {
+		this.damage = damage;
+	}
+
+
+	/**
+	 * @return the shield
+	 */
+	public int getShield() {
+		return shield;
+	}
+
+
+	/**
+	 * @param shield the shield to set
+	 */
+	public void setShield(int shield) {
+		this.shield = shield;
+	}
+
+
+	/**
+	 * @return the aggroLevel
+	 */
+	public int getAggroLevel() {
+		return aggroLevel;
+	}
+	
 	
 	
 //	public boolean isReserve() {
