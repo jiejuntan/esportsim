@@ -49,7 +49,12 @@ public class Team {
 	/**
 	 * Maximum number of reserves
 	 */
-	private static final int TEAM_LIMIT = 5;
+	private static final int RESERVE_LIMIT = 5;
+	
+	/**
+	 * Number of starting athletes required
+	 */
+	public static final int MIN_TEAM_SIZE = 4;
 	
 	/**
      * Roles for starting team members
@@ -98,7 +103,7 @@ public class Team {
      * @throws TeamMemberLimitException if reserves are full
      */
     public void addAthlete(Athlete athlete) throws TeamMemberLimitException {
-    	if (reserveMembers.size() < TEAM_LIMIT) {
+    	if (reserveMembers.size() < RESERVE_LIMIT) {
     		reserveMembers.add(athlete);
     	} else {
     		throw new TeamMemberLimitException();

@@ -30,17 +30,18 @@ public class Market {
     	this.data = data;
     	this.availableAthletes = new ArrayList<Athlete>();
     	this.availableEquipment = new ArrayList<Equipment>();
-    	updateMarket();
+    	updateMarket(8);
     }
 
     
     /**
      * Clears the list: (availableAthletes, availableEquipment) and adds new Equipment and Athletes
+     * @param maxCount maximum number of athlete/items to list
      */
-    public void updateMarket() {
+    public void updateMarket(int maxCount) {
     	clearMarket();
     	
-    	for (int count=0; count < 5; count++) {
+    	for (int count=0; count < maxCount; count++) {
     		Athlete athlete = new Athlete(3);
     		// implement difficulty + weekly scalings for athlete stats
     		
@@ -72,7 +73,7 @@ public class Market {
     	if (atIndex < availableAthletes.size()) {
     		Athlete athlete = availableAthletes.get(atIndex);
     		
-    		int price = calculatePurchasePrice(athlete);
+    		int price = calculatePurchasePriceAt(atIndex);
     		
     		try {
     			data.deductMoney(price);
@@ -89,7 +90,7 @@ public class Market {
     	}
     	
     	if (withUpdate) {
-    		updateMarket();
+    		updateMarket(5);
     	}
     }
     
@@ -110,15 +111,28 @@ public class Market {
 		}
 	}
     
-    
+    /**
+     * Format a purchasable athlete into a string
+     * 
+     * @param 	index 	index of athlete in market
+     * 
+     * @return			string description of athlete
+     */
+	public String athleteDescriptionAt(int index) {
+		Athlete athlete = getAvailableAthletes().get(index);
+		return String.format("<html>%s<br><br>Contract: $%s</html>", athlete, calculatePurchasePriceAt(index));
+	}
+	
     /**
      * Calculates purchase price
      * 
-     * @param purchase	Purchasable object
+     * @param 	index	index of athlete in market
+     * 
      * @return			purchase price
      */
-    public int calculatePurchasePrice(Purchasable purchase) {
-    	return purchase.getBasePrice() * data.getDifficulty().modifier;
+    public int calculatePurchasePriceAt(int index) {
+    	Athlete athlete = getAvailableAthletes().get(index);
+    	return athlete.getBasePrice() * data.getDifficulty().modifier;
     }
     
     
@@ -138,7 +152,7 @@ public class Market {
      * 
      * @return	available Athletes list
      */
-    public List<Athlete> viewAvailableAthletes() {
+    public List<Athlete> getAvailableAthletes() {
 		return availableAthletes;
 	}
     

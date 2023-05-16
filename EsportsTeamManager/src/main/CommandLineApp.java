@@ -179,7 +179,7 @@ public final class CommandLineApp {
     				+ "Available athletes:\n"
     				+ "%s\n"
     				+ "0. Return\n" + LINE,
-    				game.getMoney(), game.currentAthletes(), game.purchasableAthletes());
+    				game.getMoney(), game.currentAthletes(), game.athleteDescriptionAt(null));
     		
     		String option = readConsoleAndClear();
     		switch (option) {
@@ -367,10 +367,10 @@ public final class CommandLineApp {
 	 * 
 	 * @param args	command line arguments
 	 */
-	public static void main(String[] args) {
-		GameEnvironment game = new GameEnvironment();
-		CommandLineApp app = new CommandLineApp(game);
-		app.launchGame();
-	}
+//	public static void main(String[] args) {
+//		GameEnvironment game = new GameEnvironment();
+//		CommandLineApp app = new CommandLineApp(game);
+//		app.launchGame();
+//	}
 	
 }

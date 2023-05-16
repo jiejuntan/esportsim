@@ -159,7 +159,7 @@ public class Athlete extends Purchasable {
     public int getBasePrice() {
     	// implement some value calculation based on stats
     	
-    	return calculateSkillLevel() * 5;
+    	return calculateSkillLevel() * 10;
     }
     
     
@@ -193,7 +193,12 @@ public class Athlete extends Purchasable {
      * Sets the athletes description
      */
     public void setDescription() {
-    	super.description = String.format("Name: %s \nReaction Time: %d \nEye Sight: %d \nIntelligence: %d \nStamina: %d \n", name, reactionTime, eyeSight, intelligence, stamina  );
+    	super.description = String.format("<center><span style=\"font-size: 20px\">%s</span></center>"
+    			+ "Reaction Time: %d<br>"
+    			+ "Eyesight: %d<br>"
+    			+ "Intelligence: %d<br>"
+    			+ "Stamina: %d", 
+    			name, reactionTime, eyeSight, intelligence, stamina);
 
 //    	 super.description = String.format("Name: %s \nReserve: %b \nReaction Time: %d \nEye Sight: %d \nIntelligence: %d \nStamina: %d \n", name, isReserve, reactionTime, eyeSight, intelligence, stamina  );
     }
