@@ -46,7 +46,7 @@ class GameEnvironmentTest {
 	}
 
 	/**
-	 * Test method for {@link main.GameEnvironment#setup()}.
+	 * Test method for {@link main.model.GameEnvironment#setup()}.
 	 */
 	@Test
 	void testSetup() {
@@ -54,7 +54,7 @@ class GameEnvironmentTest {
 	}
 
 	/**
-	 * Test method for {@link main.GameEnvironment#createTeam()}.
+	 * Test method for {@link main.model.GameEnvironment#createTeam()}.
 	 */
 	@Test
 	void testCreateTeam() {
@@ -62,7 +62,7 @@ class GameEnvironmentTest {
 	}
 
 	/**
-	 * Test method for {@link main.GameEnvironment#isValidTeamName(java.lang.String)}.
+	 * Test method for {@link main.model.GameEnvironment#isValidTeamName(java.lang.String)}.
 	 */
 	@Test
 	void testValidateTeam() {
@@ -70,7 +70,7 @@ class GameEnvironmentTest {
 	}
 
 	/**
-	 * Test method for {@link main.GameEnvironment#play()}.
+	 * Test method for {@link main.model.GameEnvironment#play()}.
 	 */
 	@Test
 	void testPlay() {
@@ -78,7 +78,7 @@ class GameEnvironmentTest {
 	}
 
 	/**
-	 * Test method for {@link main.GameEnvironment#finish()}.
+	 * Test method for {@link main.model.GameEnvironment#finish()}.
 	 */
 	@Test
 	void testFinish() {
