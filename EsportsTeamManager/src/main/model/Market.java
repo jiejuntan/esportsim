@@ -1,7 +1,12 @@
 package main.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class Market {
 	
@@ -61,36 +66,24 @@ public class Market {
     
     
     /**
-     * Removes athlete from market and adds to player's team with the option of updating market
+     * Purchases an athlete from market
      * 
-     * @param atIndex						index of Athlete to purchase
-     * @param withUpdate					option to update purchasable Athletes in Market
-     * @throws IndexOutOfBoundsException 	if index is out of range
-     * @throws IllegalArgumentException		if insufficient money to purchase
-     * @throws TeamMemberLimitException		if team has reached the member limit
+     * @param indexes	index of Athletes to purchase with name
      */
-    public void purchaseAthlete(int atIndex, boolean withUpdate) throws IndexOutOfBoundsException, IllegalArgumentException, TeamMemberLimitException {
-    	if (atIndex < availableAthletes.size()) {
-    		Athlete athlete = availableAthletes.get(atIndex);
-    		
-    		int price = calculatePurchasePriceAt(atIndex);
-    		
-    		try {
-    			data.deductMoney(price);
-    			data.getTeam().addAthlete(athlete);
-            	availableAthletes.remove(atIndex);
-    		} catch (IllegalArgumentException e) {
-    			throw e;
-    		} catch (TeamMemberLimitException e) {
-    			data.incrementMoney(price); // recovers lost money when unable to purchase due to member limit
-    			throw e;
-    		}
-    	} else {
-    		throw new IndexOutOfBoundsException();
-    	}
-    	
-    	if (withUpdate) {
-    		updateMarket(5);
+    public void purchaseAthletesAt(Map<Integer, String> indexes) {
+    	Map<Integer, String> reversed = new LinkedHashMap<Integer, String>();
+        indexes.entrySet()
+        		.stream()
+        		.sorted(Collections.reverseOrder(Map.Entry.comparingByKey()))
+        		.forEachOrdered(entry -> reversed.put(entry.getKey(), entry.getValue()));
+    	for (Map.Entry<Integer, String> entry: reversed.entrySet()) {
+    		int index = entry.getKey();
+    		int price = calculatePurchasePriceAt(index);
+    		Athlete athlete = availableAthletes.get(index);
+    		athlete.changeName(entry.getValue());
+    		data.deductMoney(price);
+    		data.getTeam().addAthlete(athlete);
+        	availableAthletes.remove(index);
     	}
     }
     

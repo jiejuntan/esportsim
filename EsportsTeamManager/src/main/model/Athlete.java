@@ -248,17 +248,15 @@ public class Athlete extends Purchasable {
     
     
     /**
-     * Sets the athletes description
+     * Sets the athlete's description
      */
     public void setDescription() {
-    	super.description = String.format("<center><span style=\"font-size: 20px\">%s</span></center>"
-    			+ "Reaction Time: %d<br>"
+    	super.description = String.format(
+    			"Reaction Time: %d<br>"
     			+ "Eyesight: %d<br>"
     			+ "Intelligence: %d<br>"
     			+ "Stamina: %d", 
-    			name, reactionTime, eyeSight, intelligence, stamina);
-
-//    	 super.description = String.format("Name: %s \nReserve: %b \nReaction Time: %d \nEye Sight: %d \nIntelligence: %d \nStamina: %d \n", name, isReserve, reactionTime, eyeSight, intelligence, stamina  );
+    			reactionTime, eyeSight, intelligence, stamina);
     }
 
     
