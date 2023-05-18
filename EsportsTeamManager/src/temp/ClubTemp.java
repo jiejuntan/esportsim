@@ -95,7 +95,7 @@ public class ClubTemp {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Unispace", Font.PLAIN, 50));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.fill = GridBagConstraints.BOTH;
+		gbc_lblNewLabel.fill = GridBagConstraints.VERTICAL;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridwidth = 3;
 		gbc_lblNewLabel.gridx = 3;
@@ -105,15 +105,15 @@ public class ClubTemp {
 		
 		toggleButtons = new ArrayList<JToggleButton>();
 		
-		JLabel lblStartingMembers = new JLabel("Starting Members:");
-		lblStartingMembers.setHorizontalAlignment(SwingConstants.CENTER);
-		lblStartingMembers.setFont(new Font("Unispace", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblStartingMembers = new GridBagConstraints();
-		gbc_lblStartingMembers.gridwidth = 3;
-		gbc_lblStartingMembers.insets = new Insets(0, 0, 5, 5);
-		gbc_lblStartingMembers.gridx = 3;
-		gbc_lblStartingMembers.gridy = 3;
-		panel.add(lblStartingMembers, gbc_lblStartingMembers);
+		JLabel startingMembersLabel = new JLabel("Starting Members:");
+		startingMembersLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		startingMembersLabel.setFont(new Font("Unispace", Font.PLAIN, 30));
+		GridBagConstraints gbc_startingMembersLabel = new GridBagConstraints();
+		gbc_startingMembersLabel.gridwidth = 3;
+		gbc_startingMembersLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_startingMembersLabel.gridx = 3;
+		gbc_startingMembersLabel.gridy = 3;
+		panel.add(startingMembersLabel, gbc_startingMembersLabel);
 		
 		JToggleButton athleteToggleButton_0 = new JToggleButton();
 		toggleButtons.add(athleteToggleButton_0);
@@ -171,15 +171,15 @@ public class ClubTemp {
 		gbc_athleteToggleButton_3.gridy = 5;
 		panel.add(athleteToggleButton_3, gbc_athleteToggleButton_3);
 		
-		JLabel lblReserves = new JLabel("Reserves:");
-		lblReserves.setHorizontalAlignment(SwingConstants.CENTER);
-		lblReserves.setFont(new Font("Unispace", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblReserves = new GridBagConstraints();
-		gbc_lblReserves.gridwidth = 3;
-		gbc_lblReserves.insets = new Insets(0, 0, 5, 5);
-		gbc_lblReserves.gridx = 3;
-		gbc_lblReserves.gridy = 8;
-		panel.add(lblReserves, gbc_lblReserves);
+		JLabel reservesLabel = new JLabel("Reserves:");
+		reservesLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		reservesLabel.setFont(new Font("Unispace", Font.PLAIN, 30));
+		GridBagConstraints gbc_reservesLabel = new GridBagConstraints();
+		gbc_reservesLabel.gridwidth = 3;
+		gbc_reservesLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_reservesLabel.gridx = 3;
+		gbc_reservesLabel.gridy = 8;
+		panel.add(reservesLabel, gbc_reservesLabel);
 		
 		JToggleButton athleteToggleButton_4 = new JToggleButton();
 		toggleButtons.add(athleteToggleButton_4);
@@ -237,6 +237,7 @@ public class ClubTemp {
 		comboBox.setFont(new Font("Unispace", Font.PLAIN, 20));
 		comboBox.setPreferredSize(new Dimension(150, 35));
 		comboBox.setModel(new DefaultComboBoxModel(Role.values()));
+		comboBox.setSelectedItem(Role.SUPPORT);
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.gridx = 1;
