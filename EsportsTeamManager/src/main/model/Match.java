@@ -7,6 +7,12 @@ import java.util.Map;
 import main.model.GameData.Difficulty;
 import main.model.Team.Role;
 
+/**
+ * Handles matches between the players team and opponents team
+ * 
+ * @author Blake and Jun
+ *
+ */
 public class Match {
 
     private Difficulty difficulty;
@@ -14,15 +20,19 @@ public class Match {
     private List<IngameCharacters> homeTeam;
     private List<IngameCharacters> opponentTeam;
     private GameData gameData;
+    private int outcome;
+    private List<String> roundResults;
     
-    private Match(GameData gameData, Team opponents) {
+    public Match(GameData gameData, Team opponents) {
     	
+    	this.outcome = 999;
     	this.gameData = gameData;
     	this.difficulty = gameData.getDifficulty();
     	calculateRewards(difficulty.getModifier());
     	
     	homeTeam = new ArrayList<IngameCharacters>();
     	opponentTeam = new ArrayList<IngameCharacters>();
+    	roundResults = new ArrayList<String>();
     	
     	createIngameCharacters(gameData.getTeam(), opponents);
     	
@@ -80,26 +90,61 @@ public class Match {
      * @param opponents
      */
     public void createIngameCharacters(Team home, Team opponents) {
+    	Role role = null;
+	    
     	
     	//Gets the players Team Members
-    	for (Map.Entry<Role, Athlete> entry : home.getTeamMembers().entrySet()) {
+    	for(int i = 0;i!=4 ; i++) {
     		//Gets the Athlete and Role from the team
-    	    Role role = entry.getKey();
-    	    Athlete athlete = entry.getValue();
+    	  
+    	    
+    	    switch (i) {
+    	    case 0:
+    	    	role = Team.Role.OFFENSE;
+    	    	break;
+    	    case 1:
+    	    	role = Team.Role.TANK;
+    	    	break;
+    	    case 2:
+    	    	role = Team.Role.SUPPORT;
+    	    	break;
+    	    case 3:
+    	    	role = Team.Role.OFFENSE;
+    	    	break;
+    	    }
+    	    
+    	    Athlete athlete = new Athlete(3);
     	    
     	    //Create a new ingame character for each Athlete and adds to the matches homeTeam list
     	    homeTeam.add(new IngameCharacters(athlete, role));
     	}
     	
     	//Gets the players Team Members
-    	for (Map.Entry<Role, Athlete> entry : opponents.getTeamMembers().entrySet()) {
+    	for(int i = 0;i !=4 ; i++) {
     		//Gets the Athlete and Role from the team
-    	    Role role = entry.getKey();
-    	    Athlete athlete = entry.getValue();
+    	    
+    	    switch (i) {
+    	    case 0:
+    	    	role = Team.Role.OFFENSE;
+    	    	break;
+    	    case 1:
+    	    	role = Team.Role.TANK;
+    	    	break;
+    	    case 2:
+    	    	role = Team.Role.SUPPORT;
+    	    	break;
+    	    case 3:
+    	    	role = Team.Role.OFFENSE;
+    	    	break;
+    	    }
+    	    
+    	    Athlete athlete = new Athlete(3);
     	    
     	    //Create a new ingame character for each Athlete and adds to the matches awayTeam list
     	    opponentTeam.add(new IngameCharacters(athlete, role));
     	}
+    	
+
  
     	
     }
@@ -107,7 +152,7 @@ public class Match {
     /**
      * Starts the match by determining who goes first based on reaction time
      */
-    public void startMatch() {
+    public int startMatch() {
 
         
         //Determines what team goes first
@@ -117,6 +162,8 @@ public class Match {
         	simulateMatch(opponentTeam, homeTeam);
         }
         
+        return this.outcome;
+        
 
     }
     
@@ -124,15 +171,14 @@ public class Match {
      * 
      * Simulates combat in a turn based style 
      * 
-     * @param fastTeam
-     * @param slowTeam
+     * @param fastTeam <CODE>List<IngameCharacters></CODE> IngameCharacters list which plays first
+     * @param slowTeam <CODE>List<IngameCharacters></CODE> IngameCharacters list which plays second
      */
-    public String simulateMatch(List<IngameCharacters> fastTeam, List<IngameCharacters> slowTeam) {
+    public void simulateMatch(List<IngameCharacters> fastTeam, List<IngameCharacters> slowTeam) {
     	
         // total number of turn based rounds in a match
         int totalRounds = 10;
         
-        String outcome = "";
     	
         // Loop over the turn based rounds
         for (int round = 0; round < totalRounds; round++) {
@@ -150,22 +196,35 @@ public class Match {
                 action(character, target);
             }
             
+            // Shows who won each round
+            if (getTeamHealth(homeTeam) > getTeamHealth(opponentTeam)) {  
+            	roundResults.add("HomeTeam Wins Round"+" HomeHealth: "+getTeamHealth(homeTeam)+" Opon Health: "+getTeamHealth(opponentTeam));
+            } else {
+            	roundResults.add("OpponentTeam Wins Round"+" HomeHealth: "+getTeamHealth(homeTeam)+" Opon Health: "+getTeamHealth(opponentTeam));
+            }
+            
+            
             // Check if all athletes on a team are out of health. If so, the other team wins
             if (getTeamHealth(homeTeam) <= 0) {  
-            	outcome = "Lose";
+            	this.outcome = 0;
             } else if (getTeamHealth(opponentTeam) <= 0) {
-            	outcome = "Win";
+            	outcome = 1;
             }
            
         }
-        
-        return outcome;
-    	
+            	
     }
     
     
     
     /**
+	 * @return the roundResults
+	 */
+	public List<String> getRoundResults() {
+		return roundResults;
+	}
+
+	/**
      * 
      *Athlete Actions
 	 *Each athlete will take an action depending on their role:
@@ -186,12 +245,15 @@ public class Match {
         switch (role) {
             case OFFENSE:
                 // Offense character attacks target
+            	System.out.println("Offense Activate");
                 damage = currentCharacter.getIntelligence()+ currentCharacter.getDamage();
-                if (damage > 0) {
-                    int newHealth = target.getHealth() - damage;
-                    //used the ternery operator hell yea
-                    target.setHealth(newHealth > 0 ? newHealth : 0);
+                if (target.getHealth() - damage < 0) {
+                	target.setHealth(0);
+                } else {
+                	target.setHealth(target.getHealth() - damage);
                 }
+                    
+                
                 break;
            
             case SUPPORT:
@@ -201,21 +263,23 @@ public class Match {
 //                        character.setHealth(character.getHealth() + currentCharacter.getIntelligence());
 //                    }
 //                }
-            	
+            	System.out.println("Support Activate");
                 damage = currentCharacter.getIntelligence()+ currentCharacter.getDamage();
-                if (damage > 0) {
-                    int newHealth = target.getHealth() - damage;
-                    //used the ternery operator hell yea
-                    target.setHealth(newHealth > 0 ? newHealth : 0);
+                if (target.getHealth() - damage < 0) {
+                	target.setHealth(0);
+                } else {
+                	target.setHealth(target.getHealth() - damage);
                 }
+            
                 break;
             case TANK:
-            	
+            	System.out.println("Tank Activate");
+
                 damage = currentCharacter.getIntelligence()+ currentCharacter.getDamage();
-                if (damage > 0) {
-                    int newHealth = target.getHealth() - damage;
-                    //used the ternery operator hell yea
-                    target.setHealth(newHealth > 0 ? newHealth : 0);
+                if (target.getHealth() - damage < 0) {
+                	target.setHealth(0);
+                } else {
+                	target.setHealth(target.getHealth() - damage);
                 }
                 
                 break;
@@ -236,14 +300,14 @@ public class Match {
      * @return Character with the highest Aggro that is still alive
      */
     public IngameCharacters getHighestSkillAthlete(List<IngameCharacters> characters, String skill) {
-        IngameCharacters highestSkillCharacter = null;
+        IngameCharacters highestSkillCharacter = characters.get(0);
         
         switch (skill) {
 	        case "Aggro":
 	        	//Finds the character with the highest Aggro in the team
 	            for (IngameCharacters character : characters) {
 	                if (character.getHealth() > 0) {
-	                    if (highestSkillCharacter == null || character.getAggroLevel() > highestSkillCharacter.getAggroLevel()) {
+	                    if (character.getAggroLevel() > highestSkillCharacter.getAggroLevel()) {
 	                    	highestSkillCharacter = character;
 	                    }
 	                }
@@ -254,7 +318,7 @@ public class Match {
 	        	//Finds the character with the highest Reaction Time in the team
 	            for (IngameCharacters character : characters) {
 	                if (character.getHealth() > 0) {
-	                    if (highestSkillCharacter == null || character.getReactionTime() > highestSkillCharacter.getReactionTime()) {
+	                    if (character.getReactionTime() > highestSkillCharacter.getReactionTime()) {
 	                    	highestSkillCharacter = character;
 	                    }
 	                }
@@ -275,13 +339,34 @@ public class Match {
      * @param IngameCharacters Team List
      * @return Total health of the team
      */
-    private int getTeamHealth(List<IngameCharacters> characters) {
+    public int getTeamHealth(List<IngameCharacters> characters) {
     	int totalHealth = 0;
     	for (IngameCharacters character : characters) {
     		totalHealth += character.getHealth();
     	}
     	return totalHealth;
     }
+
+	/**
+	 * @return the homeTeam
+	 */
+	public List<IngameCharacters> getHomeTeam() {
+		return homeTeam;
+	}
+
+	/**
+	 * @return the opponentTeam
+	 */
+	public List<IngameCharacters> getOpponentTeam() {
+		return opponentTeam;
+	}
+
+	/**
+	 * @return the outcome
+	 */
+	public int getOutcome() {
+		return outcome;
+	}
     
     
 
