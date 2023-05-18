@@ -52,10 +52,11 @@ public class Club {
      * @param item
      * @param athlete
      */
-    public void useEqupment(TrainingEquipment item, Athlete athlete) {
+    public void useEqupment(Equipment equipment, Athlete athlete) {
     	
-    	String AffectedStat = item.getItem().getAffectedStat();
-    	int itemStatValue = item.getItem().getValue();
+    	
+    	String AffectedStat = equipment.getEquipment().getAffectedStat();
+    	int itemStatValue = equipment.getEquipment().getValue();
     	
     	 switch (AffectedStat) {
          case "reactionTime":
@@ -75,6 +76,8 @@ public class Club {
     	 }
     	
     }
+    
+    
     
     /**
      * Gets the Club inventory

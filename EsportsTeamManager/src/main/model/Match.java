@@ -13,9 +13,11 @@ public class Match {
     private int rewardMoney;
     private List<IngameCharacters> homeTeam;
     private List<IngameCharacters> opponentTeam;
+    private GameData gameData;
     
     private Match(GameData gameData, Team opponents) {
     	
+    	this.gameData = gameData;
     	this.difficulty = gameData.getDifficulty();
     	calculateRewards(difficulty.getModifier());
     	
@@ -77,7 +79,7 @@ public class Match {
      * @param home
      * @param opponents
      */
-    private void createIngameCharacters(Team home, Team opponents) {
+    public void createIngameCharacters(Team home, Team opponents) {
     	
     	//Gets the players Team Members
     	for (Map.Entry<Role, Athlete> entry : home.getTeamMembers().entrySet()) {
@@ -114,7 +116,7 @@ public class Match {
         } else {
         	simulateMatch(opponentTeam, homeTeam);
         }
-
+        
 
     }
     
@@ -125,10 +127,12 @@ public class Match {
      * @param fastTeam
      * @param slowTeam
      */
-    private void simulateMatch(List<IngameCharacters> fastTeam, List<IngameCharacters> slowTeam) {
+    public String simulateMatch(List<IngameCharacters> fastTeam, List<IngameCharacters> slowTeam) {
     	
         // total number of turn based rounds in a match
         int totalRounds = 10;
+        
+        String outcome = "";
     	
         // Loop over the turn based rounds
         for (int round = 0; round < totalRounds; round++) {
@@ -148,11 +152,14 @@ public class Match {
             
             // Check if all athletes on a team are out of health. If so, the other team wins
             if (getTeamHealth(homeTeam) <= 0) {  
-                return;
+            	outcome = "Lose";
             } else if (getTeamHealth(opponentTeam) <= 0) {
-                return;
+            	outcome = "Win";
             }
+           
         }
+        
+        return outcome;
     	
     }
     
@@ -173,13 +180,13 @@ public class Match {
      * @param currentCharacter
      * @param Target
      */
-    private void action(IngameCharacters currentCharacter, IngameCharacters target) {
+    public void action(IngameCharacters currentCharacter, IngameCharacters target) {
         Role role = currentCharacter.getRole();
-        
+        int damage = 0;
         switch (role) {
             case OFFENSE:
                 // Offense character attacks target
-                int damage = currentCharacter.getIntelligence();
+                damage = currentCharacter.getIntelligence()+ currentCharacter.getDamage();
                 if (damage > 0) {
                     int newHealth = target.getHealth() - damage;
                     //used the ternery operator hell yea
@@ -189,13 +196,27 @@ public class Match {
            
             case SUPPORT:
                 // Support character heals a teammate, buffs an ally's stats, or debuffs an opponent's stats
-                for (IngameCharacters character : homeTeam) {
-                    if (character.getHealth() < character.getRole().getHealth()) {
-                        character.setHealth(character.getHealth() + currentCharacter.getIntelligence());
-                    }
+//                for (IngameCharacters character : homeTeam) {
+//                    if (character.getHealth() < character.getRole().getHealth()) {
+//                        character.setHealth(character.getHealth() + currentCharacter.getIntelligence());
+//                    }
+//                }
+            	
+                damage = currentCharacter.getIntelligence()+ currentCharacter.getDamage();
+                if (damage > 0) {
+                    int newHealth = target.getHealth() - damage;
+                    //used the ternery operator hell yea
+                    target.setHealth(newHealth > 0 ? newHealth : 0);
                 }
                 break;
             case TANK:
+            	
+                damage = currentCharacter.getIntelligence()+ currentCharacter.getDamage();
+                if (damage > 0) {
+                    int newHealth = target.getHealth() - damage;
+                    //used the ternery operator hell yea
+                    target.setHealth(newHealth > 0 ? newHealth : 0);
+                }
                 
                 break;
             default:
@@ -214,7 +235,7 @@ public class Match {
      * @param Lists of Characters
      * @return Character with the highest Aggro that is still alive
      */
-    private IngameCharacters getHighestSkillAthlete(List<IngameCharacters> characters, String skill) {
+    public IngameCharacters getHighestSkillAthlete(List<IngameCharacters> characters, String skill) {
         IngameCharacters highestSkillCharacter = null;
         
         switch (skill) {
@@ -261,6 +282,7 @@ public class Match {
     	}
     	return totalHealth;
     }
+    
     
 
     

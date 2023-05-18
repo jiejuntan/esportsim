@@ -11,8 +11,8 @@ public class IO {
 	/**
 	 * Reads a text that contains comma separated data from a file and returns it as a String Array
 	 * 
-	 * @param filename		file path
-	 * @return 				String Array of text
+	 * @param <CODE>String</CODE> filename file path
+	 * @return <CODE>String[]</CODE>String Array of text
 	 * @throws IOException	TODO
 	 */
 	public static String[] getTextFromFile(String filename) throws IOException {
