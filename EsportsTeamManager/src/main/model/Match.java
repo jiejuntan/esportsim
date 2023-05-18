@@ -215,8 +215,6 @@ public class Match {
                     //used the ternery operator hell yea
                     target.setHealth(newHealth > 0 ? newHealth : 0);
                 }
-            	
-          
                 
                 break;
             default:
