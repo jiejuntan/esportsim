@@ -54,10 +54,8 @@ public class Market {
     	for (int equipmentCount = 20; equipmentCount > 0; equipmentCount--) {
     		
     		
-    		Ingestible ingestible = new Ingestible();
-    		TrainingEquipment trainingEquipment = new TrainingEquipment();
+    		Equipment trainingEquipment = new Equipment();
     		
-    		availableEquipment.add(ingestible);
     		availableEquipment.add(trainingEquipment);
     	}
     }

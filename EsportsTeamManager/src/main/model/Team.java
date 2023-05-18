@@ -79,7 +79,7 @@ public class Team {
 		}
 		
     	/**
-		 * @return the health
+		 * @return <CODE>int</CODE> Role health
 		 */
 		public int getHealth() {
 			return health;
@@ -87,14 +87,15 @@ public class Team {
 
 
 		/**
-		 * @return the damage
+		 * @return <CODE>int</CODE> Role damage
 		 */
 		public int getDamage() {
 			return damage;
 		}
 
 		/**
-		 * @return the aggro
+		 * 
+		 * @return <CODE>int</CODE> Role Aggro
 		 */
 		public int getAggro() {
 			return aggro;
@@ -266,7 +267,7 @@ public class Team {
     
     /**
      * Gets the Team Wins
-     * @return
+     * @return <CODE>int</CODE> Wins
      */
     public int getWins() {
 		return wins;
@@ -274,7 +275,7 @@ public class Team {
 
 	/**
 	 * Adds a single Win to the Team
-	 * @param wins
+	 * @param <CODE>int</CODE> Wins
 	 */
 	public void addWin(int wins) {
 		this.wins++;
@@ -282,14 +283,16 @@ public class Team {
 
 	/**
 	 * Gets the Team Losses
-	 * @return
+	 * @return <CODE>int</CODE> Losses
 	 */
 	public int getLosses() {
 		return losses;
 	}
 
 	/**
-	 * @param losses
+	 * Adds a loss to the players team
+	 * 
+	 * @param <CODE>int</CODE> losses
 	 */
 	public void addLoss(int losses) {
 		this.losses++;
@@ -297,7 +300,7 @@ public class Team {
 
 	/**
 	 * Gets the Team main Athletes
-	 * @return
+	 * @return <CODE>HashMap<Role, Athlete></CODE> TeamMembers
 	 */
 	public HashMap<Role, Athlete> getTeamMembers() {
 		return members;
@@ -305,7 +308,7 @@ public class Team {
 
 	/**
 	 * Gets the Team reserve Athletes
-	 * @return
+	 * @return <CODE>List<Athlete></CODE> reserveMembers
 	 */
 	public List<Athlete> getReserveMembers() {
 		return reserveMembers;
@@ -329,7 +332,7 @@ public class Team {
 
 	/**
 	 * Gets the name of the Team
-	 * @return
+	 * @return <CODE>String</CODE> of Team Name
 	 */
 	public String getName() {
 		return name;

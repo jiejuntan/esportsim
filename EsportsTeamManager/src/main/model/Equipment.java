@@ -46,7 +46,7 @@ private TrainingItem equipment;
 	    /**
 	     * Returns the amount of skill value that the Training Item affects
 	     * 
-	     * @return Ingestible stat value
+	     * @return <CODE>int</CODE> Ingestible stat value
 	     */
 	    public int getValue() {
 	        return value;
@@ -55,7 +55,7 @@ private TrainingItem equipment;
 	    /**
 	     * Returns the skill which the Training Item affects
 	     * 
-	     * @return Stat which the item affects
+	     * @return <CODE>String</CODE> Stat which the item affects
 	     */
 	    public String getAffectedStat() {
 	        return affectedStat;
@@ -66,17 +66,17 @@ private TrainingItem equipment;
     /**
      * Returns the training equipment that is currently in the object
      * 
-     * @return training equipment
+     * @return <CODE>TrainingItem</CODE> training equipment
      */
     public TrainingItem getEquipment() {
     	return equipment;
     }
+        
     
-    
-
 	/**
 	 * Calculates Base Price of the equipment
 	 * Price = Item Stat * 50
+	 * @return <CODE>int</CODE> Equipment Price
 	 */
 	@Override
 	public int getBasePrice() {
