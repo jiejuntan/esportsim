@@ -49,7 +49,7 @@ public class Team {
 	/**
 	 * Maximum number of reserves
 	 */
-	private static final int RESERVE_LIMIT = 5;
+	private static final int TEAM_LIMIT = 5;
 	
 	/**
 	 * Number of total athletes required
@@ -57,18 +57,50 @@ public class Team {
 	 * 4 starting, 1 reserve minimum
 	 */
 	public static final int MIN_TEAM_SIZE = 5;
-	
-	/**
-     * Roles for starting team members
+
+	 /**
+     * Defines the Athletes Roles and the stats of each role
      */
     public enum Role {
-    	// potential to simplify?
-    	TOP,
-    	JUNGLER,
-    	MID,
-    	ADC,
-    	SUPPORT
+    	
+    	//Role(Health, Damage, Aggro Priority)
+    	OFFENSE(50, 100, 2),
+    	SUPPORT(25, 0, 3),
+    	TANK(100, 50, 1);
+    	
+    	private final int health;
+		private final int damage;
+    	private final int aggro;
+
+		Role(int health, int damage, int aggro) {
+			this.health = health;
+			this.damage = damage;
+			this.aggro = aggro;
+		}
+		
+    	/**
+		 * @return the health
+		 */
+		public int getHealth() {
+			return health;
+		}
+
+
+		/**
+		 * @return the damage
+		 */
+		public int getDamage() {
+			return damage;
+		}
+
+		/**
+		 * @return the aggro
+		 */
+		public int getAggro() {
+			return aggro;
+		}
     }
+    
     
     
     /**
@@ -102,10 +134,16 @@ public class Team {
      * Adds an Athlete to the team as a reserve
      * 
      * @param athlete					Athlete to add
+     * @throws TeamMemberLimitException if reserves are full
      */
-    public void addAthlete(Athlete athlete) {
-    	reserveMembers.add(athlete);
+    public void addAthlete(Athlete athlete) throws TeamMemberLimitException {
+    	if (reserveMembers.size() < TEAM_LIMIT) {
+    		reserveMembers.add(athlete);
+    	} else {
+    		throw new TeamMemberLimitException();
+    	}
     }
+
 
     
     /**

@@ -23,72 +23,7 @@ public class Athlete extends Purchasable {
     private int intelligence;
     private int stamina;
     
-    //Ingame Character Stats
-    private int health;
-    private int damage;
-    private int shield;
-    private int aggroLevel;
-    
-    
-    private AthleteRole role;
-    //private boolean isReserve;
-    
-    
-    /**
-     * Holds the variuous roles of the Athletes
-     */
-    public enum AthleteRole {
-    	
-    	//Role(Health, Damage, Shield, Aggro Priority)
-    	ATTACK(50, 100, 50, 2),
-    	DEFENSE(60, 40, 100, 3),
-    	SUPPORT(70, 30, 100, 4),
-    	TANK(100, 50, 50, 1);
-    	
-    	private final int health;
-		private final int damage;
-    	private final int shield;
-    	private final int aggro;
 
-		AthleteRole(int health, int damage,int shield, int aggro) {
-			this.health = health;
-			this.damage = damage;
-			this.shield = shield;
-			this.aggro = aggro;
-		}
-		
-    	/**
-		 * @return the health
-		 */
-		public int getHealth() {
-			return health;
-		}
-
-
-		/**
-		 * @return the damage
-		 */
-		public int getDamage() {
-			return damage;
-		}
-
-
-		/**
-		 * @return the shield
-		 */
-		public int getShield() {
-			return shield;
-		}
-		
-		/**
-		 * @return the aggro
-		 */
-		public int getAggro() {
-			return aggro;
-		}
-    }
-    
-    
     /**
      * Constructor for creating Athlete with scaling skill level
      * 
@@ -102,23 +37,6 @@ public class Athlete extends Purchasable {
     	setDescription();
     }
     
-    
-    /**
-     * Constructor for creating opponent Athletes with set role and scaling skill level  
-     *    
-     * @param role			position of athlete
-     * @param skillLevel	skill level of athlete
-     */
-    public Athlete(AthleteRole role, int skillLevel) {
-    	setRole(role);
-    	setName(getRandomName());
-    	
-    	generateAthleteStats(skillLevel);
-    	
-    	getBasePrice();
-    	
-    	setDescription();
-    }
     
     
     /**
@@ -207,7 +125,7 @@ public class Athlete extends Purchasable {
     public int getBasePrice() {
     	// implement some value calculation based on stats
     	
-    	return calculateSkillLevel() * 10;
+    	return calculateSkillLevel() * 5;
     }
     
     
@@ -237,17 +155,6 @@ public class Athlete extends Purchasable {
     }
     
     /**
-     * Sets the ingame character stats based on the athletes role
-     */
-    public void setIngameCharacterStats() {
-		this.health = role.getHealth();
-		this.damage = role.getHealth();
-		this.shield = role.getHealth();
-		this.aggroLevel = role.getAggro();
-    }
-    
-    
-    /**
      * Sets the athlete's description
      */
     public void setDescription() {
@@ -264,33 +171,35 @@ public class Athlete extends Purchasable {
     public String toString() {
     	return super.getDescription();
     }
-    
-    /********** Simple Getters and Setters **********/
-    
-	
+
+
+
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
-	
-	private void setName(String name) {
+
+
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+
+
+	/**
+	 * @return the reactionTime
+	 */
 	public int getReactionTime() {
 		return reactionTime;
 	}
-	
-	public int getEyeSight() {
-		return eyeSight;
-	}
-	
-	public int getIntelligence() {
-		return intelligence;
-	}
-	
-	public int getStamina() {
-		return stamina;
-	}
+
+
 
 	/**
 	 * @param reactionTime the reactionTime to set
@@ -298,6 +207,16 @@ public class Athlete extends Purchasable {
 	public void setReactionTime(int reactionTime) {
 		this.reactionTime = reactionTime;
 	}
+
+
+
+	/**
+	 * @return the eyeSight
+	 */
+	public int getEyeSight() {
+		return eyeSight;
+	}
+
 
 
 	/**
@@ -308,6 +227,16 @@ public class Athlete extends Purchasable {
 	}
 
 
+
+	/**
+	 * @return the intelligence
+	 */
+	public int getIntelligence() {
+		return intelligence;
+	}
+
+
+
 	/**
 	 * @param intelligence the intelligence to set
 	 */
@@ -316,87 +245,25 @@ public class Athlete extends Purchasable {
 	}
 
 
+
+	/**
+	 * @return the stamina
+	 */
+	public int getStamina() {
+		return stamina;
+	}
+
+
+
 	/**
 	 * @param stamina the stamina to set
 	 */
 	public void setStamina(int stamina) {
 		this.stamina = stamina;
 	}
+        
 
 
-	public AthleteRole getRole() {
-		return role;
-	}
+
 	
-	private void setRole(AthleteRole role) {
-		this.role = role;
-	}
-
-
-	/**
-	 * @return the health
-	 */
-	public int getHealth() {
-		return health;
-	}
-
-
-	/**
-	 * @param health the health to set
-	 */
-	public void setHealth(int health) {
-		this.health = health;
-	}
-
-
-	/**
-	 * @return the damage
-	 */
-	public int getDamage() {
-		return damage;
-	}
-
-
-	/**
-	 * @param damage the damage to set
-	 */
-	public void setDamage(int damage) {
-		this.damage = damage;
-	}
-
-
-	/**
-	 * @return the shield
-	 */
-	public int getShield() {
-		return shield;
-	}
-
-
-	/**
-	 * @param shield the shield to set
-	 */
-	public void setShield(int shield) {
-		this.shield = shield;
-	}
-
-
-	/**
-	 * @return the aggroLevel
-	 */
-	public int getAggroLevel() {
-		return aggroLevel;
-	}
-	
-	
-	
-//	public boolean isReserve() {
-//		return isReserve;
-//	}
-//	
-//    public void setReserve(boolean isReserve) {
-//		this.isReserve = isReserve;
-//	}
-
-	/********** Simple Getters & Setters **********/    
- }
+}
