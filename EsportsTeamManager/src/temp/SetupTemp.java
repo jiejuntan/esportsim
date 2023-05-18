@@ -93,7 +93,7 @@ public class SetupTemp {
 		
 		
 		JLabel lblTeamName = new JLabel("Team Name:");
-		lblTeamName.setFont(new Font("Unispace", Font.PLAIN, 30));
+		lblTeamName.setFont(new Font("Unispace", Font.PLAIN, 30));.setFont(new Font("Unispace", Font.PLAIN, 30));
 		GridBagConstraints gbc_lblTeamName = new GridBagConstraints();
 		gbc_lblTeamName.anchor = GridBagConstraints.WEST;
 		gbc_lblTeamName.insets = new Insets(0, 0, 5, 5);

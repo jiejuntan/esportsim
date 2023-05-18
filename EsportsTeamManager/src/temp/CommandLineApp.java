@@ -2,8 +2,8 @@ package temp;
 
 import java.util.Scanner;
 
+import main.exceptions.TeamMemberLimitException;
 import main.model.GameEnvironment;
-import main.model.TeamMemberLimitException;
 import main.model.GameData.Difficulty;
 
 /**

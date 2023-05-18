@@ -33,7 +33,7 @@ public class ClubController extends Controller {
 		List<JToggleButton> mainAthleteToggles = ((ClubPanel) panel).getMainAthleteToggles();
 		
 		int currentIndex = 0;
-		for (Role role: Role.values()) {
+		for (Role role : Role.values()) {
 			String description = frame.getGame().getClub().athleteDescriptionAt(role);
 			mainAthleteToggles.get(currentIndex).setText(description);
 			roleComboBoxes.get(currentIndex).setSelectedItem(role);

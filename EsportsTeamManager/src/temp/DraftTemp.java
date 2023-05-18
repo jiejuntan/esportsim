@@ -39,6 +39,8 @@ public class DraftTemp {
 	private JTextField athleteTextField_5;
 	private JTextField athleteTextField_6;
 	private JTextField athleteTextField_7;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -84,9 +86,9 @@ public class DraftTemp {
 		
 		JPanel panel = new JPanel();
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{10, 0, 10, 0, 10, 0, 10, 0, 10, 0};
+		gbl_panel.columnWidths = new int[]{10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0};
 		gbl_panel.rowHeights = new int[]{10, 0, 10, 0, 0, 10, 0, 0, 10, 0, 10, 0};
-		gbl_panel.columnWeights = new double[]{3.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 3.0, Double.MIN_VALUE};
+		gbl_panel.columnWeights = new double[]{3.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 3.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{2.0, 0.0, 2.0, 0.0, 0.0, 1.0, 0.0, 0.0, 2.0, 0.0, 3.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
@@ -97,8 +99,8 @@ public class DraftTemp {
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.fill = GridBagConstraints.BOTH;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridwidth = 3;
-		gbc_lblNewLabel.gridx = 3;
+		gbc_lblNewLabel.gridwidth = 11;
+		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 1;
 		panel.add(lblNewLabel, gbc_lblNewLabel);
 		
@@ -160,6 +162,19 @@ public class DraftTemp {
 		gbc_athleteTextField_3.gridx = 7;
 		gbc_athleteTextField_3.gridy = 3;
 		panel.add(athleteTextField_3, gbc_athleteTextField_3);
+		
+		textField = new JTextField();
+		textField.setPreferredSize(new Dimension(150, 35));
+		textField.setMargin(new Insets(5, 10, 2, 10));
+		textField.setFont(new Font("Unispace", Font.PLAIN, 30));
+		textField.setColumns(10);
+		textField.setBackground(Color.WHITE);
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.insets = new Insets(0, 0, 5, 5);
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.gridx = 9;
+		gbc_textField.gridy = 3;
+		panel.add(textField, gbc_textField);
 		
 		
 		tglbtnNewToggleButton.setOpaque(true);
@@ -227,6 +242,18 @@ public class DraftTemp {
 			}
 		});
 		
+		JToggleButton tglbtnNewToggleButton_3_1 = new JToggleButton("<html>\r\n<center>Athlete 4</center><br>\r\nAggression: 5<br>\r\nToughness: 5<br>\r\nEmpathy: 5<br>\r\nStamina: 5\r\n</html>");
+		tglbtnNewToggleButton_3_1.setPreferredSize(new Dimension(200, 200));
+		tglbtnNewToggleButton_3_1.setOpaque(true);
+		tglbtnNewToggleButton_3_1.setFont(new Font("Unispace", Font.PLAIN, 20));
+		tglbtnNewToggleButton_3_1.setFocusPainted(false);
+		tglbtnNewToggleButton_3_1.setBackground(Color.GRAY);
+		GridBagConstraints gbc_tglbtnNewToggleButton_3_1 = new GridBagConstraints();
+		gbc_tglbtnNewToggleButton_3_1.insets = new Insets(0, 0, 5, 5);
+		gbc_tglbtnNewToggleButton_3_1.gridx = 9;
+		gbc_tglbtnNewToggleButton_3_1.gridy = 4;
+		panel.add(tglbtnNewToggleButton_3_1, gbc_tglbtnNewToggleButton_3_1);
+		
 		
 		
 		athleteTextField_4 = new JTextField();
@@ -289,6 +316,19 @@ public class DraftTemp {
 		gbc_athleteTextField_7.gridx = 7;
 		gbc_athleteTextField_7.gridy = 6;
 		panel.add(athleteTextField_7, gbc_athleteTextField_7);
+		
+		textField_1 = new JTextField();
+		textField_1.setPreferredSize(new Dimension(150, 35));
+		textField_1.setMargin(new Insets(5, 10, 2, 10));
+		textField_1.setFont(new Font("Unispace", Font.PLAIN, 30));
+		textField_1.setColumns(10);
+		textField_1.setBackground(Color.WHITE);
+		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
+		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_1.gridx = 9;
+		gbc_textField_1.gridy = 6;
+		panel.add(textField_1, gbc_textField_1);
 		
 		
 		tglbtnNewToggleButton_4.setOpaque(true);
@@ -361,6 +401,18 @@ public class DraftTemp {
 			}
 		});
 		
+		JToggleButton tglbtnNewToggleButton_7_1 = new JToggleButton("<html>\r\n<center>Athlete 8</center><br>\r\nAggression: 5<br>\r\nToughness: 5<br>\r\nEmpathy: 5<br>\r\nStamina: 5\r\n</html>");
+		tglbtnNewToggleButton_7_1.setPreferredSize(new Dimension(200, 200));
+		tglbtnNewToggleButton_7_1.setOpaque(true);
+		tglbtnNewToggleButton_7_1.setFont(new Font("Unispace", Font.PLAIN, 20));
+		tglbtnNewToggleButton_7_1.setFocusPainted(false);
+		tglbtnNewToggleButton_7_1.setBackground(Color.GRAY);
+		GridBagConstraints gbc_tglbtnNewToggleButton_7_1 = new GridBagConstraints();
+		gbc_tglbtnNewToggleButton_7_1.insets = new Insets(0, 0, 5, 5);
+		gbc_tglbtnNewToggleButton_7_1.gridx = 9;
+		gbc_tglbtnNewToggleButton_7_1.gridy = 7;
+		panel.add(tglbtnNewToggleButton_7_1, gbc_tglbtnNewToggleButton_7_1);
+		
 		
 		JLabel lblNewLabel_1 = new JLabel("Money: $1000");
 		lblNewLabel_1.setFont(new Font("Unispace", Font.PLAIN, 30));
@@ -373,7 +425,6 @@ public class DraftTemp {
 		panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton.gridwidth = 3;
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton.gridx = 5;
 		gbc_btnNewButton.gridy = 9;

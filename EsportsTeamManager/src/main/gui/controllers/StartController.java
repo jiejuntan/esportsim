@@ -36,7 +36,7 @@ public class StartController extends Controller {
 	}
 	
 	private void toSetupScreen() {
-		close();
+//		close();
 		frame.toSetupScreen();
 	}
 	

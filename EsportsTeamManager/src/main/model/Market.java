@@ -6,6 +6,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import main.exceptions.IllegalFundsException;
+import main.exceptions.TeamMemberLimitException;
+import main.model.Team.Role;
+
 public class Market {
 	
 	/**
@@ -65,8 +69,9 @@ public class Market {
      * Purchases an athlete from market
      * 
      * @param indexes	index of Athletes to purchase with name
+     * @param isDrafting TODO
      */
-    public void purchaseAthletesAt(Map<Integer, String> indexes) {
+    public void purchaseAthletesAt(Map<Integer, String> indexes, boolean isDrafting) {
     	Map<Integer, String> reversed = new LinkedHashMap<Integer, String>();
         indexes.entrySet()
         		.stream()
@@ -79,7 +84,7 @@ public class Market {
     		athlete.changeName(entry.getValue());
     		data.deductMoney(price);
     		try {
-				data.getTeam().addAthlete(athlete);
+				data.getTeam().addAthlete(athlete, Role.RESERVE);
     			availableAthletes.remove(index);
 			} catch (TeamMemberLimitException e1) {
 				// TODO Auto-generated catch block
@@ -88,6 +93,20 @@ public class Market {
     	}
     }
     
+    
+    public void purchaseAthlete(int index, Role role, String newName) {
+    	int price = calculatePurchasePriceAt(index);
+    	Athlete athlete = availableAthletes.get(index);
+    	athlete.changeName(newName);
+    	try {
+    		data.deductMoney(price);
+			data.getTeam().addAthlete(athlete, Role.RESERVE);
+			availableAthletes.remove(index);
+		} catch (TeamMemberLimitException | IllegalFundsException e1) {
+			e1.printStackTrace();
+		}
+    	
+    }
     
     /**
      * Sells an athlete from the player's team

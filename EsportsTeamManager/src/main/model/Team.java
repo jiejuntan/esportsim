@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
+import main.exceptions.TeamMemberLimitException;
+
 /**
  * Represents the player's and opponents' teams.
  * 
@@ -24,12 +26,7 @@ public class Team {
 	/**
 	 * Starting team members and their roles
 	 */
-	private HashMap<Role, List<Athlete>> mainMembers;
-
-	/**
-	 * Reserve team members
-	 */
-	private List<Athlete> reserveMembers;
+	private HashMap<Role, List<Athlete>> members;
 
 	/**
 	 * Number of wins
@@ -62,14 +59,26 @@ public class Team {
 	 * 4 starting, 1 reserve minimum
 	 */
 	public static final int MIN_TEAM_SIZE = 5;
-
+	
+	/**
+	 * Default configuration of a team's roles.
+	 */
+	public static final List<Role> DEFAULT_SETUP = new ArrayList<Role>(List.of(
+			Role.OFFENSE,
+			Role.OFFENSE,
+			Role.SUPPORT,
+			Role.TANK));
+	
 	/**
 	 * Defines the Athletes Roles and the stats of each role
 	 */
 	public enum Role {
 
 		// Role(Health, Damage, Aggro Priority)
-		OFFENSE(50, 100, 2), SUPPORT(25, 0, 3), TANK(100, 50, 1), RESERVE(0, 0, 0);
+		OFFENSE(50, 100, 2), 
+		SUPPORT(25, 0, 3), 
+		TANK(100, 50, 1), 
+		RESERVE(0, 0, 0);
 
 		private final int health;
 		private final int damage;
@@ -109,9 +118,10 @@ public class Team {
 	 */
 	public Team() {
 		this.name = getRandomTeamName();
-		this.mainMembers = new HashMap<Role, List<Athlete>>();
-		this.reserveMembers = new ArrayList<Athlete>();
-
+		this.members = new HashMap<Role, List<Athlete>>();
+		for (Role role : Role.values()) {
+			members.put(role, new ArrayList<Athlete>());
+		}
 		this.wins = 0;
 		this.losses = 0;
 	}
@@ -130,35 +140,32 @@ public class Team {
 //    }
 
 	/**
-	 * Adds an Athlete to the team as a reserve
+	 * Adds an new Athlete in a main role or reserve
 	 * 
-	 * @param athlete Athlete to add
-	 * @throws TeamMemberLimitException if reserves are full
+	 * @param athlete 					Athlete to add
+	 * @param role 						Role to add Athlete in
+	 * @throws TeamMemberLimitException if main team and or reserve team is full
 	 */
-	public void addAthlete(Athlete athlete) throws TeamMemberLimitException {
-		if (reserveMembers.size() < MAIN_LIMIT + RESERVE_LIMIT) {
-			reserveMembers.add(athlete);
-		} else {
+	public void addAthlete(Athlete athlete, Role role) throws TeamMemberLimitException {
+		if (getMainTeamSize() + getReserveTeamSize() >= MAIN_LIMIT + RESERVE_LIMIT) {
 			throw new TeamMemberLimitException();
 		}
+		members.get(role).add(athlete);
 	}
-
+	
 	/**
-	 * Removes an Athlete from the Team
+	 * Removes an Athlete from the Team and returns the role it was in.
 	 * 
 	 * @param athlete Athlete to remove
-	 * @return TODO
+	 * 
+	 * @return role the athlete was in
 	 */
 	public Role removeAthlete(Athlete athlete) {
-		if (reserveMembers.contains(athlete)) {
-			reserveMembers.remove(athlete);
-			return Role.RESERVE;
-		} else {
-			for (Map.Entry<Role, List<Athlete>> entry : mainMembers.entrySet()) {
-				List<Athlete> athletesInRole = entry.getValue();
-				if (athletesInRole.contains(athlete)) {
-					athletesInRole.remove(athlete);
-				}
+		for (Map.Entry<Role, List<Athlete>> entry : members.entrySet()) {
+			List<Athlete> athletesInRole = entry.getValue();
+			if (athletesInRole.contains(athlete)) {
+				athletesInRole.remove(athlete);
+				return entry.getKey();
 			}
 		}
 		return null;
@@ -172,9 +179,13 @@ public class Team {
 	 * @param role    Role to assign to
 	 */
 	public void assignRole(Athlete athlete, Role role) {
-		removeAthlete(athlete);
+		Role previousRole = removeAthlete(athlete);
 		
+		if (previousRole == null) {
+			
+		}
 		switch (role) {
+			
 		case RESERVE:
 			if (getReserveTeamSize() >= RESERVE_LIMIT) {
 				
@@ -182,7 +193,7 @@ public class Team {
 			break;
 		default:
 			if (getMainTeamSize() >= MAIN_LIMIT) {
-				List<Athlete> athletesInRole = mainMembers.get(role);
+				List<Athlete> athletesInRole = members.get(role);
 				athletesInRole.add(athlete);
 				athletesInRole.remove(0);
 			}
@@ -222,7 +233,7 @@ public class Team {
 		int count = 0;
 		for (Role role: Role.values()) {
 			if (role != Role.RESERVE) {
-				List<Athlete> athletes = mainMembers.get(role);
+				List<Athlete> athletes = members.get(role);
 				count += athletes.size();
 			}
 		}
@@ -230,7 +241,7 @@ public class Team {
 	}
 	
 	public int getReserveTeamSize() {
-		return mainMembers.get(Role.RESERVE).size();
+		return members.get(Role.RESERVE).size();
 	}
 	
 	/**
@@ -342,33 +353,8 @@ public class Team {
 	 * @return <CODE>HashMap<Role, Athlete></CODE> TeamMembers
 	 */
 	public HashMap<Role, List<Athlete>> getTeamMembers() {
-		return mainMembers;
+		return members;
 	}
-
-	/**
-	 * Gets the Team reserve Athletes
-
-	 * @return <CODE>List<Athlete></CODE> reserveMembers
-	 */
-	public List<Athlete> getReserveMembers() {
-		return reserveMembers;
-	}
-
-//	/**
-//	 * Sets the main Team members
-//	 * @param teamMembers
-//	 */
-//	public void setTeamMembers(List<Athlete> teamMembers) {
-//		this.teamMembers = teamMembers;
-//	}
-//
-//	/**
-//	 * Sets the Team reserve members
-//	 * @param reserveMembers
-//	 */
-//	public void setReserveMembers(List<Athlete> reserveMembers) {
-//		this.reserveMembers = reserveMembers;
-//	}
 
 	/**
 	 * Gets the name of the Team

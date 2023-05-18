@@ -21,14 +21,14 @@ class TeamTests {
     @Test
     void addAthleteTest() {
         Athlete athlete = new Athlete(false);
-        team.addAthlete(athlete);
+        team.addAthlete(athlete, RESERVE);
         assertTrue(team.getTeamMembers().contains(athlete));
     }
 
     @Test
     void removeAthleteTest() {
         Athlete athlete = new Athlete(false);
-        team.addAthlete(athlete);
+        team.addAthlete(athlete, RESERVE);
         team.removeAthlete(athlete);
         assertFalse(team.getTeamMembers().contains(athlete));
     }

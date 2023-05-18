@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +50,7 @@ public class DraftController extends Controller {
 		
 		List<JToggleButton> toggleButtons = ((DraftPanel) panel).getToggleButtons();
 		List<JTextField> textFields = ((DraftPanel) panel).getTextFields();
-		for (JToggleButton athleteToggle: toggleButtons) {
+		for (JToggleButton athleteToggle : toggleButtons) {
 			int index = toggleButtons.indexOf(athleteToggle);
 			JTextField athleteTextField = textFields.get(index);
 			athleteTextField.setText(market.getAvailableAthletes().get(index).getName());
@@ -81,21 +83,34 @@ public class DraftController extends Controller {
 		JButton confirmButton = ((DraftPanel) panel).getConfirmButton();
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				List<Integer> indexes = new ArrayList<Integer>();
 				int teamCount = 0;
-				for (JToggleButton toggle: toggleButtons) {
+				
+				for (JToggleButton toggle : toggleButtons) {
 					if (toggle.isSelected()) {
+						indexes.add(toggleButtons.indexOf(toggle));
 						teamCount++;
 					}
 				}
 				if (teamCount >= Team.MIN_TEAM_SIZE) {
-					Map<Integer, String> indexes = new HashMap<Integer, String>();
-					for (JToggleButton toggle: toggleButtons) {
-						if (toggle.isSelected()) {
-							int index = toggleButtons.indexOf(toggle);
-							indexes.put(index, textFields.get(index).getText());
-						}
+					Collections.sort(indexes, Collections.reverseOrder());
+					for (int i : indexes) {
+						String newName = textFields.get(i).getText();
+						
 					}
-					market.purchaseAthletesAt(indexes);
+					
+					
+					
+					
+//					Map<Integer, String> indexes = new HashMap<Integer, String>();
+//					
+//					for (JToggleButton toggle: toggleButtons) {
+//						if (toggle.isSelected()) {
+//							int index = toggleButtons.indexOf(toggle);
+//							indexes.put(index, textFields.get(index).getText());
+//						}
+//					}
+					market.purchaseAthletesAt(indexes, true);
 					toHomeScreen();
 				} else {
 					JOptionPane.showMessageDialog(panel, 
