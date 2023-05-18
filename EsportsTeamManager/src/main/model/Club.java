@@ -58,7 +58,7 @@ public class Club {
      * @param item
      * @param athlete
      */
-    public void useEqupment(TrainingEquipment item, Athlete athlete) {
+    public void useEqupment(Equipment item, Athlete athlete) {
     	
     	String AffectedStat = item.getItem().getAffectedStat();
     	int itemStatValue = item.getItem().getValue();

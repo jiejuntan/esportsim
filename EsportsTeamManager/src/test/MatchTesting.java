@@ -17,8 +17,8 @@ class MatchTesting {
 	}
 
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void testMatch() {
+		
 	}
 
 }

@@ -13,9 +13,11 @@ public class Match {
     private int rewardMoney;
     private List<IngameCharacters> homeTeam;
     private List<IngameCharacters> opponentTeam;
+    private GameData gameData;
     
     private Match(GameData gameData, Team opponents) {
     	
+    	this.gameData = gameData;
     	this.difficulty = gameData.getDifficulty();
     	calculateRewards(difficulty.getModifier());
     	
@@ -77,7 +79,7 @@ public class Match {
      * @param home
      * @param opponents
      */
-    private void createIngameCharacters(Team home, Team opponents) {
+    public void createIngameCharacters(Team home, Team opponents) {
     	
     	//Gets the players Team Members
     	for (Map.Entry<Role, Athlete> entry : home.getTeamMembers().entrySet()) {
@@ -114,7 +116,7 @@ public class Match {
         } else {
         	simulateMatch(opponentTeam, homeTeam);
         }
-
+        
 
     }
     
@@ -125,7 +127,7 @@ public class Match {
      * @param fastTeam
      * @param slowTeam
      */
-    private String simulateMatch(List<IngameCharacters> fastTeam, List<IngameCharacters> slowTeam) {
+    public String simulateMatch(List<IngameCharacters> fastTeam, List<IngameCharacters> slowTeam) {
     	
         // total number of turn based rounds in a match
         int totalRounds = 10;
@@ -178,7 +180,7 @@ public class Match {
      * @param currentCharacter
      * @param Target
      */
-    private void action(IngameCharacters currentCharacter, IngameCharacters target) {
+    public void action(IngameCharacters currentCharacter, IngameCharacters target) {
         Role role = currentCharacter.getRole();
         int damage = 0;
         switch (role) {
@@ -233,7 +235,7 @@ public class Match {
      * @param Lists of Characters
      * @return Character with the highest Aggro that is still alive
      */
-    private IngameCharacters getHighestSkillAthlete(List<IngameCharacters> characters, String skill) {
+    public IngameCharacters getHighestSkillAthlete(List<IngameCharacters> characters, String skill) {
         IngameCharacters highestSkillCharacter = null;
         
         switch (skill) {
@@ -280,6 +282,7 @@ public class Match {
     	}
     	return totalHealth;
     }
+    
     
 
     
