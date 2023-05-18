@@ -51,6 +51,13 @@ public class Team {
 	 */
 	private static final int TEAM_LIMIT = 5;
 	
+	/**
+	 * Number of total athletes required
+	 * 
+	 * 4 starting, 1 reserve minimum
+	 */
+	public static final int MIN_TEAM_SIZE = 5;
+
 	 /**
      * Defines the Athletes Roles and the stats of each role
      */
@@ -136,6 +143,7 @@ public class Team {
     		throw new TeamMemberLimitException();
     	}
     }
+
 
     
     /**

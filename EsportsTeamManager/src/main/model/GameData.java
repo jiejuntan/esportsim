@@ -6,8 +6,8 @@ public class GameData {
      * Enum for difficulty setting
      */
     public enum Difficulty {
-    	EASY("Easy", 1000, 1),
-    	HARD("Hard", 500, 2);
+    	EASY("Easy", 2000, 2),
+    	HARD("Hard", 1000, 3);
     	
     	public final String asString;
     	public final int startingMoney;

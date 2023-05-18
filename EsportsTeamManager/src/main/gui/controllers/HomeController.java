@@ -25,7 +25,7 @@ public class HomeController extends Controller {
 				frame.getGame().getData().getSeasonDuration()));
 		
 		JLabel moneyLabel = ((HomePanel) panel).getMoneyLabel();
-		moneyLabel.setText(String.format("$%d", frame.getGame().getData().getMoney()));
+		moneyLabel.setText("Money: $" + frame.getGame().getData().getMoney());
 		
 		JButton clubButton = ((HomePanel) panel).getClubButton();
 		clubButton.addActionListener(new ActionListener() {
