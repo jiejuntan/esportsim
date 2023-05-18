@@ -7,6 +7,12 @@ import java.util.Map;
 import main.model.GameData.Difficulty;
 import main.model.Team.Role;
 
+/**
+ * Handles matches between the players team and opponents team
+ * 
+ * @author Blake and Jun
+ *
+ */
 public class Match {
 
     private Difficulty difficulty;
@@ -14,15 +20,19 @@ public class Match {
     private List<IngameCharacters> homeTeam;
     private List<IngameCharacters> opponentTeam;
     private GameData gameData;
+    private int outcome;
+    private List<String> roundResults;
     
-    private Match(GameData gameData, Team opponents) {
+    public Match(GameData gameData, Team opponents) {
     	
+    	this.outcome = 999;
     	this.gameData = gameData;
     	this.difficulty = gameData.getDifficulty();
     	calculateRewards(difficulty.getModifier());
     	
     	homeTeam = new ArrayList<IngameCharacters>();
     	opponentTeam = new ArrayList<IngameCharacters>();
+    	roundResults = new ArrayList<String>();
     	
     	createIngameCharacters(gameData.getTeam(), opponents);
     	
@@ -107,7 +117,7 @@ public class Match {
     /**
      * Starts the match by determining who goes first based on reaction time
      */
-    public void startMatch() {
+    public int startMatch() {
 
         
         //Determines what team goes first
@@ -117,6 +127,8 @@ public class Match {
         	simulateMatch(opponentTeam, homeTeam);
         }
         
+        return this.outcome;
+        
 
     }
     
@@ -124,15 +136,14 @@ public class Match {
      * 
      * Simulates combat in a turn based style 
      * 
-     * @param fastTeam
-     * @param slowTeam
+     * @param fastTeam <CODE>List<IngameCharacters></CODE> IngameCharacters list which plays first
+     * @param slowTeam <CODE>List<IngameCharacters></CODE> IngameCharacters list which plays second
      */
-    public String simulateMatch(List<IngameCharacters> fastTeam, List<IngameCharacters> slowTeam) {
+    public void simulateMatch(List<IngameCharacters> fastTeam, List<IngameCharacters> slowTeam) {
     	
         // total number of turn based rounds in a match
         int totalRounds = 10;
         
-        String outcome = "";
     	
         // Loop over the turn based rounds
         for (int round = 0; round < totalRounds; round++) {
@@ -150,22 +161,35 @@ public class Match {
                 action(character, target);
             }
             
+            // Shows who won each round
+            if (getTeamHealth(homeTeam) > getTeamHealth(opponentTeam)) {  
+            	roundResults.add("HomeTeam Wins Round");
+            } else {
+            	roundResults.add("OpponentTeam Wins Round");
+            }
+            
+            
             // Check if all athletes on a team are out of health. If so, the other team wins
             if (getTeamHealth(homeTeam) <= 0) {  
-            	outcome = "Lose";
+            	this.outcome = 0;
             } else if (getTeamHealth(opponentTeam) <= 0) {
-            	outcome = "Win";
+            	outcome = 1;
             }
            
         }
-        
-        return outcome;
-    	
+            	
     }
     
     
     
     /**
+	 * @return the roundResults
+	 */
+	public List<String> getRoundResults() {
+		return roundResults;
+	}
+
+	/**
      * 
      *Athlete Actions
 	 *Each athlete will take an action depending on their role:
@@ -275,13 +299,34 @@ public class Match {
      * @param IngameCharacters Team List
      * @return Total health of the team
      */
-    private int getTeamHealth(List<IngameCharacters> characters) {
+    public int getTeamHealth(List<IngameCharacters> characters) {
     	int totalHealth = 0;
     	for (IngameCharacters character : characters) {
     		totalHealth += character.getHealth();
     	}
     	return totalHealth;
     }
+
+	/**
+	 * @return the homeTeam
+	 */
+	public List<IngameCharacters> getHomeTeam() {
+		return homeTeam;
+	}
+
+	/**
+	 * @return the opponentTeam
+	 */
+	public List<IngameCharacters> getOpponentTeam() {
+		return opponentTeam;
+	}
+
+	/**
+	 * @return the outcome
+	 */
+	public int getOutcome() {
+		return outcome;
+	}
     
     
 

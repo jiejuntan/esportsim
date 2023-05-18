@@ -5,6 +5,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Holds Input/Output functions
+ * 
+ * @author Blake and Jun
+ *
+ */
 public class IO {
 	
 	

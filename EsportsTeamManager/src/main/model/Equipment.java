@@ -2,6 +2,12 @@ package main.model;
 
 import java.util.Random;
 
+/**
+ * Represents the characters in the game.
+ * 
+ * @author Blake and Jun
+ *
+ */
 public class Equipment extends Purchasable{ 
 
 private TrainingItem equipment;

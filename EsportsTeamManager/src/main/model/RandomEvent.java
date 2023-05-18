@@ -7,6 +7,12 @@ import java.util.Random;
 
 import main.model.Team.Role;
 
+/**
+ * Random events which can occur during the menu gameplay
+ * 
+ * @author Blake and Jun
+ *
+ */
 public class RandomEvent {
 	
 	private GameData gameData;
@@ -58,10 +64,10 @@ public class RandomEvent {
     	
     	Team team = gameData.getTeam();
     	
-        Athlete athlete = team.getTeamMembers().get(random);
+        //Athlete athlete = team.getTeamMembers().get();
         
         
-    	team.removeAthlete(athlete);
+    	//team.removeAthlete(athlete);
     	
     }
     

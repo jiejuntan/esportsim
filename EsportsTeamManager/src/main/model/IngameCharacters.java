@@ -2,6 +2,12 @@ package main.model;
 
 import main.model.Team.Role;
 
+/**
+ * Holds data for the Athletes ingame chracters druring a match
+ * 
+ * @author Blake and Jun
+ *
+ */
 public class IngameCharacters {
 	
     //Ingame Character Stats

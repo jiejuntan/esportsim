@@ -66,6 +66,7 @@ public class Team {
     	//Role(Health, Damage, Aggro Priority)
     	OFFENSE(50, 100, 2),
     	SUPPORT(25, 0, 3),
+    	SUPPORTT(25, 0, 3),
     	TANK(100, 50, 1);
     	
     	private final int health;
@@ -117,18 +118,22 @@ public class Team {
     }
 
     
+
 	/**
-	 * Constructor for Opponent Team Generation
+	 * Constructor for Opponent/Test Team Generation
 	 * 
-	 * @param difficulty
+	 * @param skillLevel
 	 */
-//	public Team() {
-//    	this.name = getRandomTeamName();
-//    	this.wins = 0;
-//    	this.losses = 0;
-//    	this.teamMembers = generateTeam(false);
-//    	this.reserveMembers = generateTeam(true);
-//    }
+	public Team(int skillLevel) {
+    	this.name = getRandomTeamName();
+    	this.wins = 0;
+    	this.losses = 0;
+    	this.members = new HashMap<Role, Athlete>();
+    	this.reserveMembers = new ArrayList<Athlete>();
+    	
+    	generateTeam(skillLevel);
+    	
+    }
     
     
     /**
@@ -250,17 +255,20 @@ public class Team {
      * 
      * @return Randomly Generated Team
      */
-    public ArrayList<Athlete> generateTeam(boolean isReserve) {
-    	
-    	ArrayList<Athlete> generatedTeam = new ArrayList<Athlete>();
-    	
-    	for (int teamRosterLimit = 5; teamRosterLimit > 0; teamRosterLimit--) {
+    public void generateTeam(int skillLevel) {
+    	    	
+    	for (int teamRosterLimit = 0; teamRosterLimit < 5; teamRosterLimit++) {
     		
-//    		Athlete randomAthlete = new Athlete(isReserve);
-//    		generatedTeam.add(randomAthlete);
-    	}
+   		Athlete randomAthlete = new Athlete(skillLevel);    		
+   		try {
+			addAthlete(randomAthlete);
+		} catch (TeamMemberLimitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+   		}
     	
-    	return generatedTeam;
+
     }
     
     /********** Simple Getters & Setters **********/
