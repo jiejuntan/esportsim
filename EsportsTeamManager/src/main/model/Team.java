@@ -80,15 +80,9 @@ public class Team {
 			this.damage = damage;
 			this.aggro = aggro;
 		}
-<<<<<<< HEAD
 
-		/**
-		 * @return the health
-=======
-		
     	/**
 		 * @return <CODE>int</CODE> Role health
->>>>>>> branch 'main' of https://eng-git.canterbury.ac.nz/bsm79/esportsteammananger.git
 		 */
 		public int getHealth() {
 			return health;
@@ -167,6 +161,7 @@ public class Team {
 				}
 			}
 		}
+		return null;
 	}
 
 	/**
@@ -298,45 +293,26 @@ public class Team {
 
 //    		Athlete randomAthlete = new Athlete(isReserve);
 //    		generatedTeam.add(randomAthlete);
-<<<<<<< HEAD
 		}
 
 		return generatedTeam;
 	}
 
-	/********** Simple Getters & Setters **********/
-
-	/**
-	 * Gets the Team Wins
-	 * 
-	 * @return
-	 */
-	public int getWins() {
-=======
-    	}
-    	
-    	return generatedTeam;
-    }
-    
     /********** Simple Getters & Setters **********/
     
     /**
      * Gets the Team Wins
+     * 
      * @return <CODE>int</CODE> Wins
      */
     public int getWins() {
->>>>>>> branch 'main' of https://eng-git.canterbury.ac.nz/bsm79/esportsteammananger.git
 		return wins;
 	}
 
 	/**
 	 * Adds a single Win to the Team
-<<<<<<< HEAD
 	 * 
-	 * @param wins
-=======
 	 * @param <CODE>int</CODE> Wins
->>>>>>> branch 'main' of https://eng-git.canterbury.ac.nz/bsm79/esportsteammananger.git
 	 */
 	public void addWin(int wins) {
 		this.wins++;
@@ -344,12 +320,8 @@ public class Team {
 
 	/**
 	 * Gets the Team Losses
-<<<<<<< HEAD
 	 * 
-	 * @return
-=======
 	 * @return <CODE>int</CODE> Losses
->>>>>>> branch 'main' of https://eng-git.canterbury.ac.nz/bsm79/esportsteammananger.git
 	 */
 	public int getLosses() {
 		return losses;
@@ -366,12 +338,8 @@ public class Team {
 
 	/**
 	 * Gets the Team main Athletes
-<<<<<<< HEAD
 	 * 
-	 * @return
-=======
 	 * @return <CODE>HashMap<Role, Athlete></CODE> TeamMembers
->>>>>>> branch 'main' of https://eng-git.canterbury.ac.nz/bsm79/esportsteammananger.git
 	 */
 	public HashMap<Role, List<Athlete>> getTeamMembers() {
 		return mainMembers;
@@ -379,12 +347,8 @@ public class Team {
 
 	/**
 	 * Gets the Team reserve Athletes
-<<<<<<< HEAD
-	 * 
-	 * @return
-=======
+
 	 * @return <CODE>List<Athlete></CODE> reserveMembers
->>>>>>> branch 'main' of https://eng-git.canterbury.ac.nz/bsm79/esportsteammananger.git
 	 */
 	public List<Athlete> getReserveMembers() {
 		return reserveMembers;
@@ -408,12 +372,8 @@ public class Team {
 
 	/**
 	 * Gets the name of the Team
-<<<<<<< HEAD
 	 * 
-	 * @return
-=======
 	 * @return <CODE>String</CODE> of Team Name
->>>>>>> branch 'main' of https://eng-git.canterbury.ac.nz/bsm79/esportsteammananger.git
 	 */
 	public String getName() {
 		return name;
