@@ -46,19 +46,19 @@ public class Team {
 	/**
 	 * Maximum number of reserves
 	 */
-	private static final int RESERVE_LIMIT = 4;
+	private static final int RESERVE_LIMIT = 5;
 
 	/**
 	 * Maximum number of main members
 	 */
-	private static final int MAIN_LIMIT = 4;
+	private static final int MAIN_LIMIT = 5;
 
 	/**
 	 * Number of total athletes required
 	 * 
-	 * 4 starting, 1 reserve minimum
+	 * 5 starting, 1 reserve minimum
 	 */
-	public static final int MIN_TEAM_SIZE = 5;
+	public static final int MIN_TEAM_SIZE = 6;
 	
 	/**
 	 * Default configuration of a team's roles.

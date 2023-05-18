@@ -20,27 +20,25 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatLightLaf;
+
+import main.gui.GUIConstants;
+
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.JTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DraftTemp {
-
+	
+	private List<JButton> athleteButtons;	
+	private JLabel moneyLabel;
+	private JButton confirmButton;
+	
 	private JFrame frame;
-	private JTextField athleteTextField;
-	private JTextField athleteTextField_0;
-	private JTextField athleteTextField_1;
-	private JTextField athleteTextField_2;
-	private JTextField athleteTextField_3;
-	private JTextField athleteTextField_4;
-	private JTextField athleteTextField_5;
-	private JTextField athleteTextField_6;
-	private JTextField athleteTextField_7;
-	private JTextField textField;
-	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -86,352 +84,200 @@ public class DraftTemp {
 		
 		JPanel panel = new JPanel();
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0};
-		gbl_panel.rowHeights = new int[]{10, 0, 10, 0, 0, 10, 0, 0, 10, 0, 10, 0};
-		gbl_panel.columnWeights = new double[]{3.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 3.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{2.0, 0.0, 2.0, 0.0, 0.0, 1.0, 0.0, 0.0, 2.0, 0.0, 3.0, Double.MIN_VALUE};
+		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 10, 0, 10, 0};
+		gbl_panel.columnWeights = new double[]{3.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 3.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{2.0, 0.0, 2.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 2.0, 0.0, 3.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
+
+
+		JLabel titleLabel = new JLabel("Draft Team");
+		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		titleLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.HEADING));
+		GridBagConstraints gbc_titleLabel = new GridBagConstraints();
+		gbc_titleLabel.fill = GridBagConstraints.BOTH;
+		gbc_titleLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_titleLabel.gridwidth = 11;
+		gbc_titleLabel.gridx = 0;
+		gbc_titleLabel.gridy = 1;
+		panel.add(titleLabel, gbc_titleLabel);
 		
 		
-		JLabel lblNewLabel = new JLabel("Draft Team");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Unispace", Font.PLAIN, 50));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.fill = GridBagConstraints.BOTH;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridwidth = 11;
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 1;
-		panel.add(lblNewLabel, gbc_lblNewLabel);
+		athleteButtons = new ArrayList<JButton>();
 		
+		JLabel removableSubtitleLabel1 = new JLabel("Placeholder");
+		removableSubtitleLabel1.setVisible(false);
+		removableSubtitleLabel1.setHorizontalAlignment(SwingConstants.CENTER);
+		removableSubtitleLabel1.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.SUBHEADING));
+		GridBagConstraints gbc_removableSubtitleLabel1 = new GridBagConstraints();
+		gbc_removableSubtitleLabel1.gridwidth = 11;
+		gbc_removableSubtitleLabel1.insets = new Insets(0, 0, 5, 0);
+		gbc_removableSubtitleLabel1.gridx = 0;
+		gbc_removableSubtitleLabel1.gridy = 3;
+		panel.add(removableSubtitleLabel1, gbc_removableSubtitleLabel1);
 		
-		JToggleButton tglbtnNewToggleButton = new JToggleButton("<html><center>Athlete 1</center><br>Aggression: 5<br>Toughness: 5<br>Empathy: 5<br>Stamina: 5</html>");
-		tglbtnNewToggleButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		JButton athleteButton0 = new JButton("Athlete");
+		athleteButtons.add(athleteButton0);
+		athleteButton0.setOpaque(true);
+		athleteButton0.setPreferredSize(new Dimension(250, 200));
+		athleteButton0.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
+		athleteButton0.setBackground(GUIConstants.COMPONENT);
+		athleteButton0.setFocusPainted(false);
+		GridBagConstraints gbc_athleteButton0 = new GridBagConstraints();
+		gbc_athleteButton0.insets = new Insets(0, 0, 5, 5);
+		gbc_athleteButton0.gridx = 1;
+		gbc_athleteButton0.gridy = 5;
+		panel.add(athleteButton0, gbc_athleteButton0);
 		
-		athleteTextField_0 = new JTextField();
-		athleteTextField_0.setPreferredSize(new Dimension(150, 35));
-		athleteTextField_0.setMargin(new Insets(5, 10, 2, 10));
-		athleteTextField_0.setFont(new Font("Unispace", Font.PLAIN, 30));
-		athleteTextField_0.setColumns(10);
-		athleteTextField_0.setBackground(Color.WHITE);
-		GridBagConstraints gbc_athleteTextField_0 = new GridBagConstraints();
-		gbc_athleteTextField_0.insets = new Insets(0, 0, 5, 5);
-		gbc_athleteTextField_0.fill = GridBagConstraints.HORIZONTAL;
-		gbc_athleteTextField_0.gridx = 1;
-		gbc_athleteTextField_0.gridy = 3;
-		panel.add(athleteTextField_0, gbc_athleteTextField_0);
+		JButton athleteButton1 = new JButton("Athlete");
+		athleteButtons.add(athleteButton1);
+		athleteButton1.setOpaque(true);
+		athleteButton1.setPreferredSize(new Dimension(250, 200));
+		athleteButton1.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
+		athleteButton1.setBackground(GUIConstants.COMPONENT);
+		athleteButton1.setFocusPainted(false);
+		GridBagConstraints gbc_athleteButton1 = new GridBagConstraints();
+		gbc_athleteButton1.insets = new Insets(0, 0, 5, 5);
+		gbc_athleteButton1.gridx = 3;
+		gbc_athleteButton1.gridy = 5;
+		panel.add(athleteButton1, gbc_athleteButton1);
 		
-		athleteTextField_1 = new JTextField();
-		athleteTextField_1.setPreferredSize(new Dimension(150, 35));
-		athleteTextField_1.setMargin(new Insets(5, 10, 2, 10));
-		athleteTextField_1.setFont(new Font("Unispace", Font.PLAIN, 30));
-		athleteTextField_1.setColumns(10);
-		athleteTextField_1.setBackground(Color.WHITE);
-		GridBagConstraints gbc_athleteTextField_1 = new GridBagConstraints();
-		gbc_athleteTextField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_athleteTextField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_athleteTextField_1.gridx = 3;
-		gbc_athleteTextField_1.gridy = 3;
-		panel.add(athleteTextField_1, gbc_athleteTextField_1);
+		JButton athleteButton2 = new JButton("Athlete");
+		athleteButtons.add(athleteButton2);
+		athleteButton2.setOpaque(true);
+		athleteButton2.setPreferredSize(new Dimension(250, 200));
+		athleteButton2.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
+		athleteButton2.setBackground(GUIConstants.COMPONENT);
+		athleteButton2.setFocusPainted(false);
+		GridBagConstraints gbc_athleteButton2 = new GridBagConstraints();
+		gbc_athleteButton2.insets = new Insets(0, 0, 5, 5);
+		gbc_athleteButton2.gridx = 5;
+		gbc_athleteButton2.gridy = 5;
+		panel.add(athleteButton2, gbc_athleteButton2);
 		
-		athleteTextField_2 = new JTextField();
-		athleteTextField_2.setPreferredSize(new Dimension(150, 35));
-		athleteTextField_2.setMargin(new Insets(5, 10, 2, 10));
-		athleteTextField_2.setFont(new Font("Unispace", Font.PLAIN, 30));
-		athleteTextField_2.setColumns(10);
-		athleteTextField_2.setBackground(Color.WHITE);
-		GridBagConstraints gbc_athleteTextField_2 = new GridBagConstraints();
-		gbc_athleteTextField_2.insets = new Insets(0, 0, 5, 5);
-		gbc_athleteTextField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_athleteTextField_2.gridx = 5;
-		gbc_athleteTextField_2.gridy = 3;
-		panel.add(athleteTextField_2, gbc_athleteTextField_2);
+		JButton athleteButton3 = new JButton("Athlete");
+		athleteButtons.add(athleteButton3);
+		athleteButton3.setOpaque(true);
+		athleteButton3.setPreferredSize(new Dimension(250, 200));
+		athleteButton3.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
+		athleteButton3.setBackground(GUIConstants.COMPONENT);
+		athleteButton3.setFocusPainted(false);
+		GridBagConstraints gbc_athleteButton3 = new GridBagConstraints();
+		gbc_athleteButton3.insets = new Insets(0, 0, 5, 5);
+		gbc_athleteButton3.gridx = 7;
+		gbc_athleteButton3.gridy = 5;
+		panel.add(athleteButton3, gbc_athleteButton3);
 		
-		athleteTextField_3 = new JTextField();
-		athleteTextField_3.setPreferredSize(new Dimension(150, 35));
-		athleteTextField_3.setMargin(new Insets(5, 10, 2, 10));
-		athleteTextField_3.setFont(new Font("Unispace", Font.PLAIN, 30));
-		athleteTextField_3.setColumns(10);
-		athleteTextField_3.setBackground(Color.WHITE);
-		GridBagConstraints gbc_athleteTextField_3 = new GridBagConstraints();
-		gbc_athleteTextField_3.insets = new Insets(0, 0, 5, 5);
-		gbc_athleteTextField_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_athleteTextField_3.gridx = 7;
-		gbc_athleteTextField_3.gridy = 3;
-		panel.add(athleteTextField_3, gbc_athleteTextField_3);
+		JButton athleteButton3_1 = new JButton("Athlete");
+		athleteButton3_1.setPreferredSize(new Dimension(250, 200));
+		athleteButton3_1.setOpaque(true);
+		athleteButton3_1.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
+		athleteButton3_1.setFocusPainted(false);
+		athleteButton3_1.setBackground(GUIConstants.COMPONENT);
+		GridBagConstraints gbc_athleteButton3_1 = new GridBagConstraints();
+		gbc_athleteButton3_1.insets = new Insets(0, 0, 5, 5);
+		gbc_athleteButton3_1.gridx = 9;
+		gbc_athleteButton3_1.gridy = 5;
+		panel.add(athleteButton3_1, gbc_athleteButton3_1);
 		
-		textField = new JTextField();
-		textField.setPreferredSize(new Dimension(150, 35));
-		textField.setMargin(new Insets(5, 10, 2, 10));
-		textField.setFont(new Font("Unispace", Font.PLAIN, 30));
-		textField.setColumns(10);
-		textField.setBackground(Color.WHITE);
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 9;
-		gbc_textField.gridy = 3;
-		panel.add(textField, gbc_textField);
+		JLabel removableSubtitleLabel2 = new JLabel("Placeholder");
+		removableSubtitleLabel2.setVisible(false);
+		removableSubtitleLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+		removableSubtitleLabel2.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.SUBHEADING));
+		GridBagConstraints gbc_removableSubtitleLabel2 = new GridBagConstraints();
+		gbc_removableSubtitleLabel2.gridwidth = 11;
+		gbc_removableSubtitleLabel2.insets = new Insets(0, 0, 5, 5);
+		gbc_removableSubtitleLabel2.gridx = 0;
+		gbc_removableSubtitleLabel2.gridy = 7;
+		panel.add(removableSubtitleLabel2, gbc_removableSubtitleLabel2);
 		
+		JButton athleteButton4 = new JButton("Athlete");
+		athleteButtons.add(athleteButton4);
+		athleteButton4.setOpaque(true);
+		athleteButton4.setPreferredSize(new Dimension(250, 200));
+		athleteButton4.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
+		athleteButton4.setBackground(GUIConstants.COMPONENT);
+		athleteButton4.setFocusPainted(false);
+		GridBagConstraints gbc_athleteButton4 = new GridBagConstraints();
+		gbc_athleteButton4.insets = new Insets(0, 0, 5, 5);
+		gbc_athleteButton4.gridx = 1;
+		gbc_athleteButton4.gridy = 9;
+		panel.add(athleteButton4, gbc_athleteButton4);
 		
-		tglbtnNewToggleButton.setOpaque(true);
-		tglbtnNewToggleButton.setPreferredSize(new Dimension(200, 200));
-		tglbtnNewToggleButton.setFont(new Font("Unispace", Font.PLAIN, 20));
-		tglbtnNewToggleButton.setBackground(Color.GRAY);
-		tglbtnNewToggleButton.setFocusPainted(false);
-		GridBagConstraints gbc_tglbtnNewToggleButton = new GridBagConstraints();
-		gbc_tglbtnNewToggleButton.insets = new Insets(0, 0, 5, 5);
-		gbc_tglbtnNewToggleButton.gridx = 1;
-		gbc_tglbtnNewToggleButton.gridy = 4;
-		panel.add(tglbtnNewToggleButton, gbc_tglbtnNewToggleButton);
+		JButton athleteButton5 = new JButton("Athlete");
+		athleteButtons.add(athleteButton5);
+		athleteButton5.setOpaque(true);
+		athleteButton5.setPreferredSize(new Dimension(250, 200));
+		athleteButton5.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
+		athleteButton5.setBackground(GUIConstants.COMPONENT);
+		athleteButton5.setFocusPainted(false);
+		GridBagConstraints gbc_athleteButton5 = new GridBagConstraints();
+		gbc_athleteButton5.insets = new Insets(0, 0, 5, 5);
+		gbc_athleteButton5.gridx = 3;
+		gbc_athleteButton5.gridy = 9;
+		panel.add(athleteButton5, gbc_athleteButton5);
 		
-		JToggleButton tglbtnNewToggleButton_1 = new JToggleButton("<html>\r\n<center>Athlete 2</center><br>\r\nAggression: 5<br>\r\nToughness: 5<br>\r\nEmpathy: 5<br>\r\nStamina: 5\r\n</html>");
-		tglbtnNewToggleButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		tglbtnNewToggleButton_1.setOpaque(true);
-		tglbtnNewToggleButton_1.setPreferredSize(new Dimension(200, 200));
-		tglbtnNewToggleButton_1.setFont(new Font("Unispace", Font.PLAIN, 20));
-		tglbtnNewToggleButton_1.setBackground(Color.GRAY);
-		tglbtnNewToggleButton_1.setFocusPainted(false);
-		GridBagConstraints gbc_tglbtnNewToggleButton_1 = new GridBagConstraints();
-		gbc_tglbtnNewToggleButton_1.insets = new Insets(0, 0, 5, 5);
-		gbc_tglbtnNewToggleButton_1.gridx = 3;
-		gbc_tglbtnNewToggleButton_1.gridy = 4;
-		panel.add(tglbtnNewToggleButton_1, gbc_tglbtnNewToggleButton_1);
-		
-		JToggleButton tglbtnNewToggleButton_2 = new JToggleButton("<html>\r\n<center>Athlete 3</center><br>\r\nAggression: 5<br>\r\nToughness: 5<br>\r\nEmpathy: 5<br>\r\nStamina: 5\r\n</html>");
-		tglbtnNewToggleButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		tglbtnNewToggleButton_2.setOpaque(true);
-		tglbtnNewToggleButton_2.setPreferredSize(new Dimension(200, 200));
-		tglbtnNewToggleButton_2.setFont(new Font("Unispace", Font.PLAIN, 20));
-		tglbtnNewToggleButton_2.setBackground(Color.GRAY);
-		tglbtnNewToggleButton_2.setFocusPainted(false);
-		GridBagConstraints gbc_tglbtnNewToggleButton_2 = new GridBagConstraints();
-		gbc_tglbtnNewToggleButton_2.insets = new Insets(0, 0, 5, 5);
-		gbc_tglbtnNewToggleButton_2.gridx = 5;
-		gbc_tglbtnNewToggleButton_2.gridy = 4;
-		panel.add(tglbtnNewToggleButton_2, gbc_tglbtnNewToggleButton_2);
-		
-		JToggleButton tglbtnNewToggleButton_3 = new JToggleButton("<html>\r\n<center>Athlete 4</center><br>\r\nAggression: 5<br>\r\nToughness: 5<br>\r\nEmpathy: 5<br>\r\nStamina: 5\r\n</html>");
-		tglbtnNewToggleButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		tglbtnNewToggleButton_3.setOpaque(true);
-		tglbtnNewToggleButton_3.setPreferredSize(new Dimension(200, 200));
-		tglbtnNewToggleButton_3.setFont(new Font("Unispace", Font.PLAIN, 20));
-		tglbtnNewToggleButton_3.setBackground(Color.GRAY);
-		tglbtnNewToggleButton_3.setFocusPainted(false);
-		GridBagConstraints gbc_tglbtnNewToggleButton_3 = new GridBagConstraints();
-		gbc_tglbtnNewToggleButton_3.insets = new Insets(0, 0, 5, 5);
-		gbc_tglbtnNewToggleButton_3.gridx = 7;
-		gbc_tglbtnNewToggleButton_3.gridy = 4;
-		panel.add(tglbtnNewToggleButton_3, gbc_tglbtnNewToggleButton_3);
-		
-		JToggleButton tglbtnNewToggleButton_4 = new JToggleButton("<html>\r\n<center>Athlete 5</center><br>\r\nAggression: 5<br>\r\nToughness: 5<br>\r\nEmpathy: 5<br>\r\nStamina: 5\r\n</html>");
-		tglbtnNewToggleButton_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		JToggleButton tglbtnNewToggleButton_3_1 = new JToggleButton("<html>\r\n<center>Athlete 4</center><br>\r\nAggression: 5<br>\r\nToughness: 5<br>\r\nEmpathy: 5<br>\r\nStamina: 5\r\n</html>");
-		tglbtnNewToggleButton_3_1.setPreferredSize(new Dimension(200, 200));
-		tglbtnNewToggleButton_3_1.setOpaque(true);
-		tglbtnNewToggleButton_3_1.setFont(new Font("Unispace", Font.PLAIN, 20));
-		tglbtnNewToggleButton_3_1.setFocusPainted(false);
-		tglbtnNewToggleButton_3_1.setBackground(Color.GRAY);
-		GridBagConstraints gbc_tglbtnNewToggleButton_3_1 = new GridBagConstraints();
-		gbc_tglbtnNewToggleButton_3_1.insets = new Insets(0, 0, 5, 5);
-		gbc_tglbtnNewToggleButton_3_1.gridx = 9;
-		gbc_tglbtnNewToggleButton_3_1.gridy = 4;
-		panel.add(tglbtnNewToggleButton_3_1, gbc_tglbtnNewToggleButton_3_1);
-		
-		
-		
-		athleteTextField_4 = new JTextField();
-		athleteTextField_4.setPreferredSize(new Dimension(150, 35));
-		athleteTextField_4.setMargin(new Insets(5, 10, 2, 10));
-		athleteTextField_4.setFont(new Font("Unispace", Font.PLAIN, 30));
-		athleteTextField_4.setColumns(10);
-		athleteTextField_4.setBackground(Color.WHITE);
-		GridBagConstraints gbc_athleteTextField_4 = new GridBagConstraints();
-		gbc_athleteTextField_4.fill = GridBagConstraints.HORIZONTAL;
-		gbc_athleteTextField_4.insets = new Insets(0, 0, 5, 5);
-		gbc_athleteTextField_4.gridx = 1;
-		gbc_athleteTextField_4.gridy = 6;
-		panel.add(athleteTextField_4, gbc_athleteTextField_4);
-		
-		athleteTextField_5 = new JTextField();
-		athleteTextField_5.setPreferredSize(new Dimension(150, 35));
-		athleteTextField_5.setMargin(new Insets(5, 10, 2, 10));
-		athleteTextField_5.setFont(new Font("Unispace", Font.PLAIN, 30));
-		athleteTextField_5.setColumns(10);
-		athleteTextField_5.setBackground(Color.WHITE);
-		GridBagConstraints gbc_athleteTextField_5 = new GridBagConstraints();
-		gbc_athleteTextField_5.insets = new Insets(0, 0, 5, 5);
-		gbc_athleteTextField_5.fill = GridBagConstraints.HORIZONTAL;
-		gbc_athleteTextField_5.gridx = 3;
-		gbc_athleteTextField_5.gridy = 6;
-		panel.add(athleteTextField_5, gbc_athleteTextField_5);
-		
-		athleteTextField_6 = new JTextField();
-		athleteTextField_6.setFocusable(false);
-		athleteTextField_6.setEditable(false);
-		athleteTextField_6.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-			}
-		});
-		athleteTextField_6.setText("dsa");
-		athleteTextField_6.setHorizontalAlignment(SwingConstants.CENTER);
-		athleteTextField_6.setPreferredSize(new Dimension(150, 35));
-		athleteTextField_6.setMargin(new Insets(5, 10, 2, 10));
-		athleteTextField_6.setFont(new Font("Unispace", Font.PLAIN, 30));
-		athleteTextField_6.setColumns(10);
-		athleteTextField_6.setBackground(Color.WHITE);
-		GridBagConstraints gbc_athleteTextField_6 = new GridBagConstraints();
-		gbc_athleteTextField_6.insets = new Insets(0, 0, 5, 5);
-		gbc_athleteTextField_6.fill = GridBagConstraints.HORIZONTAL;
-		gbc_athleteTextField_6.gridx = 5;
-		gbc_athleteTextField_6.gridy = 6;
-		panel.add(athleteTextField_6, gbc_athleteTextField_6);
-		
-		athleteTextField_7 = new JTextField();
-		athleteTextField_7.setPreferredSize(new Dimension(150, 35));
-		athleteTextField_7.setMargin(new Insets(5, 10, 2, 10));
-		athleteTextField_7.setFont(new Font("Unispace", Font.PLAIN, 30));
-		athleteTextField_7.setColumns(10);
-		athleteTextField_7.setBackground(Color.WHITE);
-		GridBagConstraints gbc_athleteTextField_7 = new GridBagConstraints();
-		gbc_athleteTextField_7.insets = new Insets(0, 0, 5, 5);
-		gbc_athleteTextField_7.fill = GridBagConstraints.HORIZONTAL;
-		gbc_athleteTextField_7.gridx = 7;
-		gbc_athleteTextField_7.gridy = 6;
-		panel.add(athleteTextField_7, gbc_athleteTextField_7);
-		
-		textField_1 = new JTextField();
-		textField_1.setPreferredSize(new Dimension(150, 35));
-		textField_1.setMargin(new Insets(5, 10, 2, 10));
-		textField_1.setFont(new Font("Unispace", Font.PLAIN, 30));
-		textField_1.setColumns(10);
-		textField_1.setBackground(Color.WHITE);
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 9;
-		gbc_textField_1.gridy = 6;
-		panel.add(textField_1, gbc_textField_1);
-		
-		
-		tglbtnNewToggleButton_4.setOpaque(true);
-		tglbtnNewToggleButton_4.setPreferredSize(new Dimension(200, 200));
-		tglbtnNewToggleButton_4.setFont(new Font("Unispace", Font.PLAIN, 20));
-		tglbtnNewToggleButton_4.setBackground(Color.GRAY);
-		tglbtnNewToggleButton_4.setFocusPainted(false);
-		GridBagConstraints gbc_tglbtnNewToggleButton_4 = new GridBagConstraints();
-		gbc_tglbtnNewToggleButton_4.insets = new Insets(0, 0, 5, 5);
-		gbc_tglbtnNewToggleButton_4.gridx = 1;
-		gbc_tglbtnNewToggleButton_4.gridy = 7;
-		panel.add(tglbtnNewToggleButton_4, gbc_tglbtnNewToggleButton_4);
-		
-		JToggleButton tglbtnNewToggleButton_5 = new JToggleButton("<html>\r\n<center>Athlete 6</center><br>\r\nAggression: 5<br>\r\nToughness: 5<br>\r\nEmpathy: 5<br>\r\nStamina: 5\r\n</html>");
-		tglbtnNewToggleButton_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		tglbtnNewToggleButton_5.setOpaque(true);
-		tglbtnNewToggleButton_5.setPreferredSize(new Dimension(200, 200));
-		tglbtnNewToggleButton_5.setFont(new Font("Unispace", Font.PLAIN, 20));
-		tglbtnNewToggleButton_5.setBackground(Color.GRAY);
-		tglbtnNewToggleButton_5.setFocusPainted(false);
-		GridBagConstraints gbc_tglbtnNewToggleButton_5 = new GridBagConstraints();
-		gbc_tglbtnNewToggleButton_5.insets = new Insets(0, 0, 5, 5);
-		gbc_tglbtnNewToggleButton_5.gridx = 3;
-		gbc_tglbtnNewToggleButton_5.gridy = 7;
-		panel.add(tglbtnNewToggleButton_5, gbc_tglbtnNewToggleButton_5);
-		
-		JToggleButton tglbtnNewToggleButton_6 = new JToggleButton("<html>\r\n<center>Athlete 7</center><br>\r\nAggression: 5<br>\r\nToughness: 5<br>\r\nEmpathy: 5<br>\r\nStamina: 5\r\n</html>");
-		tglbtnNewToggleButton_6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		tglbtnNewToggleButton_6.setOpaque(true);
-		tglbtnNewToggleButton_6.setPreferredSize(new Dimension(200, 200));
-		tglbtnNewToggleButton_6.setFont(new Font("Unispace", Font.PLAIN, 20));
-		tglbtnNewToggleButton_6.setBackground(Color.GRAY);
-		tglbtnNewToggleButton_6.setFocusPainted(false);
-		GridBagConstraints gbc_tglbtnNewToggleButton_6 = new GridBagConstraints();
-		gbc_tglbtnNewToggleButton_6.insets = new Insets(0, 0, 5, 5);
-		gbc_tglbtnNewToggleButton_6.gridx = 5;
-		gbc_tglbtnNewToggleButton_6.gridy = 7;
-		panel.add(tglbtnNewToggleButton_6, gbc_tglbtnNewToggleButton_6);
+		JButton athleteButton6 = new JButton("Athlete");
+		athleteButtons.add(athleteButton6);
+		athleteButton6.setOpaque(true);
+		athleteButton6.setPreferredSize(new Dimension(250, 200));
+		athleteButton6.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
+		athleteButton6.setBackground(GUIConstants.COMPONENT);
+		athleteButton6.setFocusPainted(false);
+		GridBagConstraints gbc_athleteButton6 = new GridBagConstraints();
+		gbc_athleteButton6.insets = new Insets(0, 0, 5, 5);
+		gbc_athleteButton6.gridx = 5;
+		gbc_athleteButton6.gridy = 9;
+		panel.add(athleteButton6, gbc_athleteButton6);
 			
-		JToggleButton tglbtnNewToggleButton_7 = new JToggleButton("<html>\r\n<center>Athlete 8</center><br>\r\nAggression: 5<br>\r\nToughness: 5<br>\r\nEmpathy: 5<br>\r\nStamina: 5\r\n</html>");
-		tglbtnNewToggleButton_7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		tglbtnNewToggleButton_7.setOpaque(true);
-		tglbtnNewToggleButton_7.setPreferredSize(new Dimension(200, 200));
-		tglbtnNewToggleButton_7.setFont(new Font("Unispace", Font.PLAIN, 20));
-		tglbtnNewToggleButton_7.setBackground(Color.GRAY);
-		tglbtnNewToggleButton_7.setFocusPainted(false);
-		GridBagConstraints gbc_tglbtnNewToggleButton_7 = new GridBagConstraints();
-		gbc_tglbtnNewToggleButton_7.insets = new Insets(0, 0, 5, 5);
-		gbc_tglbtnNewToggleButton_7.gridx = 7;
-		gbc_tglbtnNewToggleButton_7.gridy = 7;
-		panel.add(tglbtnNewToggleButton_7, gbc_tglbtnNewToggleButton_7);
+		JButton athleteButton7 = new JButton("Athlete");
+		athleteButtons.add(athleteButton7);
+		athleteButton7.setOpaque(true);
+		athleteButton7.setPreferredSize(new Dimension(250, 200));
+		athleteButton7.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
+		athleteButton7.setBackground(GUIConstants.COMPONENT);
+		athleteButton7.setFocusPainted(false);
+		GridBagConstraints gbc_athleteButton7 = new GridBagConstraints();
+		gbc_athleteButton7.insets = new Insets(0, 0, 5, 5);
+		gbc_athleteButton7.gridx = 7;
+		gbc_athleteButton7.gridy = 9;
+		panel.add(athleteButton7, gbc_athleteButton7);
+		
+		JButton athleteButton7_1 = new JButton("Athlete");
+		athleteButton7_1.setPreferredSize(new Dimension(250, 200));
+		athleteButton7_1.setOpaque(true);
+		athleteButton7_1.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
+		athleteButton7_1.setFocusPainted(false);
+		athleteButton7_1.setBackground(GUIConstants.COMPONENT);
+		GridBagConstraints gbc_athleteButton7_1 = new GridBagConstraints();
+		gbc_athleteButton7_1.insets = new Insets(0, 0, 5, 5);
+		gbc_athleteButton7_1.gridx = 9;
+		gbc_athleteButton7_1.gridy = 9;
+		panel.add(athleteButton7_1, gbc_athleteButton7_1);
+				
+		
+		moneyLabel = new JLabel("$9999");
+		moneyLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		GridBagConstraints gbc_moneyLabel = new GridBagConstraints();
+		gbc_moneyLabel.fill = GridBagConstraints.VERTICAL;
+		gbc_moneyLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_moneyLabel.gridx = 3;
+		gbc_moneyLabel.gridy = 11;
+		panel.add(moneyLabel, gbc_moneyLabel);
 		
 		
-		JButton confirmButton = new JButton("Confirm");
-		confirmButton.setPreferredSize(new Dimension(200, 50));
+		confirmButton = new JButton("Confirm");
+		confirmButton.setPreferredSize(new Dimension(250, 50));
 		confirmButton.setFocusPainted(false);
-		confirmButton.setBackground(Color.GRAY);
-		confirmButton.setFont(new Font("Unispace", Font.PLAIN, 30));
-		confirmButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		JToggleButton tglbtnNewToggleButton_7_1 = new JToggleButton("<html>\r\n<center>Athlete 8</center><br>\r\nAggression: 5<br>\r\nToughness: 5<br>\r\nEmpathy: 5<br>\r\nStamina: 5\r\n</html>");
-		tglbtnNewToggleButton_7_1.setPreferredSize(new Dimension(200, 200));
-		tglbtnNewToggleButton_7_1.setOpaque(true);
-		tglbtnNewToggleButton_7_1.setFont(new Font("Unispace", Font.PLAIN, 20));
-		tglbtnNewToggleButton_7_1.setFocusPainted(false);
-		tglbtnNewToggleButton_7_1.setBackground(Color.GRAY);
-		GridBagConstraints gbc_tglbtnNewToggleButton_7_1 = new GridBagConstraints();
-		gbc_tglbtnNewToggleButton_7_1.insets = new Insets(0, 0, 5, 5);
-		gbc_tglbtnNewToggleButton_7_1.gridx = 9;
-		gbc_tglbtnNewToggleButton_7_1.gridy = 7;
-		panel.add(tglbtnNewToggleButton_7_1, gbc_tglbtnNewToggleButton_7_1);
+		confirmButton.setBackground(GUIConstants.COMPONENT);
+		confirmButton.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		GridBagConstraints gbc_confirmButton = new GridBagConstraints();
+		gbc_confirmButton.insets = new Insets(0, 0, 5, 5);
+		gbc_confirmButton.gridx = 5;
+		gbc_confirmButton.gridy = 11;
+		panel.add(confirmButton, gbc_confirmButton);
 		
 		
-		JLabel lblNewLabel_1 = new JLabel("Money: $1000");
-		lblNewLabel_1.setFont(new Font("Unispace", Font.PLAIN, 30));
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.gridwidth = 3;
-		gbc_lblNewLabel_1.fill = GridBagConstraints.VERTICAL;
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.gridx = 1;
-		gbc_lblNewLabel_1.gridy = 9;
-		panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 5;
-		gbc_btnNewButton.gridy = 9;
-		panel.add(confirmButton, gbc_btnNewButton);
-		
-		
-		panel.setBackground(Color.LIGHT_GRAY);
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		frame.revalidate();
 	}

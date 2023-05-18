@@ -48,7 +48,7 @@ public class DraftController extends Controller {
 		moneyValueLabel.setText("Money: $" + visualMoney);
 		
 		
-		List<JToggleButton> toggleButtons = ((DraftPanel) panel).getToggleButtons();
+		List<JToggleButton> toggleButtons = ((DraftPanel) panel).getAthleteButtons();
 		List<JTextField> textFields = ((DraftPanel) panel).getTextFields();
 		for (JToggleButton athleteToggle : toggleButtons) {
 			int index = toggleButtons.indexOf(athleteToggle);
