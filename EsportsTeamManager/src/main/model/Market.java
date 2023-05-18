@@ -78,8 +78,13 @@ public class Market {
     		Athlete athlete = availableAthletes.get(index);
     		athlete.changeName(entry.getValue());
     		data.deductMoney(price);
-    		data.getTeam().addAthlete(athlete);
-        	availableAthletes.remove(index);
+    		try {
+				data.getTeam().addAthlete(athlete);
+    			availableAthletes.remove(index);
+			} catch (TeamMemberLimitException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
     	}
     }
     

@@ -82,6 +82,7 @@ private TrainingItem equipment;
 	/**
 	 * Calculates Base Price of the equipment
 	 * Price = Item Stat * 50
+	 * 
 	 * @return <CODE>int</CODE> Equipment Price
 	 */
 	@Override
@@ -100,14 +101,7 @@ private TrainingItem equipment;
 										equipment.value );
 	}
 	
-	
-//private IngestibleItem item;
-//	
-//    public Ingestible() {
-//    	setitem();
-//
-//    }
-//
+
 //	/**
 //	 * This holds the data of the training items
 //	 * Item value and the state the items affects
@@ -145,44 +139,5 @@ private TrainingItem equipment;
 //	    }
 //	}
 //    
-//    public void setitem() {
-//        Random random = new Random();
-//
-//        // Get the values of the IngestibleItem enum
-//        IngestibleItem[] ingestibleItems = IngestibleItem.values();
-//
-//        // Generate a random index within the range of values in IngestibleItems
-//        int randomItemIndex = random.nextInt(ingestibleItems.length);
-//
-//        // Set the item to the random enum value
-//        this.item = ingestibleItems[randomItemIndex];
-//    	
-//    }
-//
-//	/**
-//	 * Calculates Base Price
-//	 * Price = Item Stat * 50
-//	 */
-//	@Override
-//	public int getBasePrice() {
-//		return item.value * 50;
-//	}
-//
-//
-//	/**
-//	 * Sets the Equipments Description
-//	 */
-//	@Override
-//	public void setDescription() {
-//		super.description = String.format("The %s ingestible increases your athletes %s by %d points}", item.name, item.affectedStat, item.value );
-//	}
-
-	
-
-
-    
-    
-	
-
 
 }

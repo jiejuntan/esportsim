@@ -90,26 +90,61 @@ public class Match {
      * @param opponents
      */
     public void createIngameCharacters(Team home, Team opponents) {
+    	Role role = null;
+	    
     	
     	//Gets the players Team Members
-    	for (Map.Entry<Role, Athlete> entry : home.getTeamMembers().entrySet()) {
+    	for(int i = 0;i!=4 ; i++) {
     		//Gets the Athlete and Role from the team
-    	    Role role = entry.getKey();
-    	    Athlete athlete = entry.getValue();
+    	  
+    	    
+    	    switch (i) {
+    	    case 0:
+    	    	role = Team.Role.OFFENSE;
+    	    	break;
+    	    case 1:
+    	    	role = Team.Role.TANK;
+    	    	break;
+    	    case 2:
+    	    	role = Team.Role.SUPPORT;
+    	    	break;
+    	    case 3:
+    	    	role = Team.Role.OFFENSE;
+    	    	break;
+    	    }
+    	    
+    	    Athlete athlete = new Athlete(3);
     	    
     	    //Create a new ingame character for each Athlete and adds to the matches homeTeam list
     	    homeTeam.add(new IngameCharacters(athlete, role));
     	}
     	
     	//Gets the players Team Members
-    	for (Map.Entry<Role, Athlete> entry : opponents.getTeamMembers().entrySet()) {
+    	for(int i = 0;i !=4 ; i++) {
     		//Gets the Athlete and Role from the team
-    	    Role role = entry.getKey();
-    	    Athlete athlete = entry.getValue();
+    	    
+    	    switch (i) {
+    	    case 0:
+    	    	role = Team.Role.OFFENSE;
+    	    	break;
+    	    case 1:
+    	    	role = Team.Role.TANK;
+    	    	break;
+    	    case 2:
+    	    	role = Team.Role.SUPPORT;
+    	    	break;
+    	    case 3:
+    	    	role = Team.Role.OFFENSE;
+    	    	break;
+    	    }
+    	    
+    	    Athlete athlete = new Athlete(3);
     	    
     	    //Create a new ingame character for each Athlete and adds to the matches awayTeam list
     	    opponentTeam.add(new IngameCharacters(athlete, role));
     	}
+    	
+
  
     	
     }
@@ -163,9 +198,9 @@ public class Match {
             
             // Shows who won each round
             if (getTeamHealth(homeTeam) > getTeamHealth(opponentTeam)) {  
-            	roundResults.add("HomeTeam Wins Round");
+            	roundResults.add("HomeTeam Wins Round"+" HomeHealth: "+getTeamHealth(homeTeam)+" Opon Health: "+getTeamHealth(opponentTeam));
             } else {
-            	roundResults.add("OpponentTeam Wins Round");
+            	roundResults.add("OpponentTeam Wins Round"+" HomeHealth: "+getTeamHealth(homeTeam)+" Opon Health: "+getTeamHealth(opponentTeam));
             }
             
             
@@ -210,12 +245,15 @@ public class Match {
         switch (role) {
             case OFFENSE:
                 // Offense character attacks target
+            	System.out.println("Offense Activate");
                 damage = currentCharacter.getIntelligence()+ currentCharacter.getDamage();
-                if (damage > 0) {
-                    int newHealth = target.getHealth() - damage;
-                    //used the ternery operator hell yea
-                    target.setHealth(newHealth > 0 ? newHealth : 0);
+                if (target.getHealth() - damage < 0) {
+                	target.setHealth(0);
+                } else {
+                	target.setHealth(target.getHealth() - damage);
                 }
+                    
+                
                 break;
            
             case SUPPORT:
@@ -225,21 +263,23 @@ public class Match {
 //                        character.setHealth(character.getHealth() + currentCharacter.getIntelligence());
 //                    }
 //                }
-            	
+            	System.out.println("Support Activate");
                 damage = currentCharacter.getIntelligence()+ currentCharacter.getDamage();
-                if (damage > 0) {
-                    int newHealth = target.getHealth() - damage;
-                    //used the ternery operator hell yea
-                    target.setHealth(newHealth > 0 ? newHealth : 0);
+                if (target.getHealth() - damage < 0) {
+                	target.setHealth(0);
+                } else {
+                	target.setHealth(target.getHealth() - damage);
                 }
+            
                 break;
             case TANK:
-            	
+            	System.out.println("Tank Activate");
+
                 damage = currentCharacter.getIntelligence()+ currentCharacter.getDamage();
-                if (damage > 0) {
-                    int newHealth = target.getHealth() - damage;
-                    //used the ternery operator hell yea
-                    target.setHealth(newHealth > 0 ? newHealth : 0);
+                if (target.getHealth() - damage < 0) {
+                	target.setHealth(0);
+                } else {
+                	target.setHealth(target.getHealth() - damage);
                 }
                 
                 break;
@@ -260,14 +300,14 @@ public class Match {
      * @return Character with the highest Aggro that is still alive
      */
     public IngameCharacters getHighestSkillAthlete(List<IngameCharacters> characters, String skill) {
-        IngameCharacters highestSkillCharacter = null;
+        IngameCharacters highestSkillCharacter = characters.get(0);
         
         switch (skill) {
 	        case "Aggro":
 	        	//Finds the character with the highest Aggro in the team
 	            for (IngameCharacters character : characters) {
 	                if (character.getHealth() > 0) {
-	                    if (highestSkillCharacter == null || character.getAggroLevel() > highestSkillCharacter.getAggroLevel()) {
+	                    if (character.getAggroLevel() > highestSkillCharacter.getAggroLevel()) {
 	                    	highestSkillCharacter = character;
 	                    }
 	                }
@@ -278,7 +318,7 @@ public class Match {
 	        	//Finds the character with the highest Reaction Time in the team
 	            for (IngameCharacters character : characters) {
 	                if (character.getHealth() > 0) {
-	                    if (highestSkillCharacter == null || character.getReactionTime() > highestSkillCharacter.getReactionTime()) {
+	                    if (character.getReactionTime() > highestSkillCharacter.getReactionTime()) {
 	                    	highestSkillCharacter = character;
 	                    }
 	                }

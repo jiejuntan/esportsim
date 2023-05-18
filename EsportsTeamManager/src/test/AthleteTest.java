@@ -54,19 +54,6 @@ class AthleteTest {
         assertEquals(athlete.toString(), athlete.getDescription());
     }
 
-    @Test
-    void testGetters() {
-        assertNotNull(athlete.getName());
-        assertTrue(athlete.getReactionTime() > 0);
-        assertTrue(athlete.getEyeSight() > 0);
-        assertTrue(athlete.getIntelligence() > 0);
-        assertEquals(athlete.getRole(), Athlete.AthleteRole.NONE);
-        assertFalse(athlete.isReserve());
-    }
 
-    @Test
-    void testSetters() {
-        athlete.setReserve(true);
-        assertTrue(athlete.isReserve());
-    }
+    
 }

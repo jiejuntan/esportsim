@@ -28,7 +28,7 @@ public final class GameEnvironment {
      */
     public GameEnvironment() {
     	this.data = new GameData();
-//    	this.club = new Club(data);
+    	this.club = new Club(data);
 //    	this.stadium = new Stadium(data);
     	this.market = new Market(data);
     }

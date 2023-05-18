@@ -2,55 +2,49 @@ package main.model;
 
 import java.util.List;
 
+import main.model.Team.Role;
+
 public class Club {
 	
-	private Team team;
+	/**
+	 * Data transfer object
+	 */
+	private GameData data;
+	
     private List<Equipment> inventory;
     
-    public Club(Team team) {
-    	this.team = team;
-    }
-
-    /**
-     * Returns Team Properties in the form of a String ready for console
-     * 
-     * @param team
-     * @return
-     */
-    public String viewTeamProperties(Team team) {
-    	
-    	//Shows Team properties
-    	String teamProperties = team.toString() 
-    			+ "************* Athletes **********\n";
-    	//Adds in individual Ahtlete properties to Team Properties String
-    	for (Athlete athlete: team.getTeamMembers()) {
-    		teamProperties += athlete.toString();
-    	}
-    	return teamProperties;
+    public Club(GameData data) {
+    	this.data = data;
     }
     
-    /**
-     * Swaps Athletes between teamMembers and reserveMembers
-     * 
-     * @param teamIndex
-     * @param reserveIndex
-     */
-    public void swapAthletes(int teamIndex, int reserveIndex) {
-    	
-    	//Gets that Teams Current Players
-        List<Athlete> teamMembers = team.getTeamMembers();
-        List<Athlete> reserveMembers = team.getReserveMembers();
-    	
-    	
-    	 // Get the Athletes to be swapped
-        Athlete teamSwap = teamMembers.get(teamIndex);
-        Athlete reserveSwap = reserveMembers.get(reserveIndex);
-
-        // Swap the Athletes
-        teamMembers.set(teamIndex, reserveSwap);
-        reserveMembers.set(reserveIndex, teamSwap);
-    	
+    public String athleteDescriptionAt(Role role) {
+    	Athlete athlete = data.getTeam().getTeamMembers().get(role);
+    	return String.valueOf(athlete);
     }
+    
+    
+//    /**
+//     * Swaps Athletes between teamMembers and reserveMembers
+//     * 
+//     * @param teamIndex
+//     * @param reserveIndex
+//     */
+//    public void swapAthletes(int teamIndex, int reserveIndex) {
+//    	
+//    	//Gets that Teams Current Players
+//        List<Athlete> teamMembers = team.getTeamMembers();
+//        List<Athlete> reserveMembers = team.getReserveMembers();
+//    	
+//    	
+//    	 // Get the Athletes to be swapped
+//        Athlete teamSwap = teamMembers.get(teamIndex);
+//        Athlete reserveSwap = reserveMembers.get(reserveIndex);
+//
+//        // Swap the Athletes
+//        teamMembers.set(teamIndex, reserveSwap);
+//        reserveMembers.set(reserveIndex, teamSwap);
+//    	
+//    }
     
     /**
      * Takes in an item and athlete and applies that items effect to the athlete
