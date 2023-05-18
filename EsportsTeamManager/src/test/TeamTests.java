@@ -12,8 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TeamTests {
 
-<<<<<<< HEAD
-    @BeforeEach
+	@BeforeEach
     void setUp() {
         team = new Team("Test Team");
     }
@@ -61,6 +60,4 @@ class TeamTests {
     void testToString() {
         assertNotNull(team.toString());
     }
-=======
->>>>>>> branch 'main' of https://eng-git.canterbury.ac.nz/bsm79/esportsteammananger.git
 }
