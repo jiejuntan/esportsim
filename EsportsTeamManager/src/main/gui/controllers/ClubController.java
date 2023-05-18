@@ -19,6 +19,7 @@ public class ClubController extends Controller {
 
 	public ClubController(GameFrame frame) {
 		super(frame);
+		initialize();
 	}
 
 	@Override

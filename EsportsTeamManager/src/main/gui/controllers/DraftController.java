@@ -1,116 +1,125 @@
-/**
- * 
- */
 package main.gui.controllers;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Map;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JToggleButton;
 
+import main.gui.GUIConstants;
 import main.gui.GameFrame;
 import main.gui.panels.DraftPanel;
+import main.model.Athlete;
 import main.model.Market;
 import main.model.Team;
 
+/**
+ * Controls drafting screen
+ * 
+ * @author Jiejun Tan
+ *
+ */
 public class DraftController extends Controller {
-	
-	/**
-	 * Temporary property to calculate money
-	 */
-	private int visualMoney;
 	
 	/**
 	 * @param frame	game frame
 	 */
 	public DraftController(GameFrame frame) {
 		super(frame);
+		initialize();
 	}
 
+	/**
+	 * Initializes screen
+	 */
 	@Override
 	protected void initialize() {
 		panel = new DraftPanel();
-		visualMoney = frame.getGame().getData().getMoney();
-		Market market = frame.getGame().getMarket();
-
+		setMoney();
+		setDraftableAthletes();
+		initializeConfirmButton();
+		launch();
+	}
+	
+	/**
+	 * Visually sets the current money.
+	 */
+	private void setMoney() {
+		int money = frame.getGame().getData().getMoney();
 		JLabel moneyValueLabel = ((DraftPanel) panel).getMoneyLabel();
-		moneyValueLabel.setText("Money: $" + visualMoney);
+		moneyValueLabel.setText("Money: $" + money);
+	}
+	
+	/**
+	 * Gets draftable athletes and calls the format button method for each.
+	 */
+	private void setDraftableAthletes() {
+		Market market = frame.getGame().getMarket();
+		List<Athlete> athletes = market.getAvailableAthletes();
+		List<JButton> athleteButtons = ((DraftPanel) panel).getAthleteButtons();
 		
-		
-		List<JToggleButton> toggleButtons = ((DraftPanel) panel).getAthleteButtons();
-		List<JTextField> textFields = ((DraftPanel) panel).getTextFields();
-		for (JToggleButton athleteToggle : toggleButtons) {
-			int index = toggleButtons.indexOf(athleteToggle);
-			JTextField athleteTextField = textFields.get(index);
-			athleteTextField.setText(market.getAvailableAthletes().get(index).getName());
-			athleteTextField.addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyTyped(KeyEvent e) {
-					if (String.valueOf(e.getKeyChar()).matches("[ a-zA-Z]")
-							&& athleteTextField.getText().length() >= 10
-							|| String.valueOf(e.getKeyChar()).matches("[0-9!@#$%^&*()-_=+|\\\\:;\"',.<>?/{}\\[\\]]")) {
-						e.consume();
-						JOptionPane.showMessageDialog(panel, 
-								"Your desired name must be under 10 characters long and only contain letters.", 
-								"Error", JOptionPane.ERROR_MESSAGE);
-
+		for (int i = 0; i < athletes.size(); i++) {
+			Athlete athlete = athletes.get(i);
+			JButton button = athleteButtons.get(i);
+			String path = athlete.getPortraitPath();
+			
+			formatButtonIcon(button, path);
+			
+			if (!market.isPurchased(athlete)) {
+				button.setEnabled(true);
+				button.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						toAthleteScreen(athlete);
 					}
-				}
-			});
-			athleteToggle.setText(market.athleteDescriptionAt(index));
-			athleteToggle.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					athleteTextField.setEditable(athleteToggle.isSelected());
-					athleteTextField.setFocusable(athleteToggle.isSelected());
-					athleteTextField.requestFocus();
-					int amount = market.calculatePurchasePriceAt(index);
-					changeVisualMoney(amount, athleteToggle, moneyValueLabel);
-				}
-			});
+				});
+			}
 		}
+	}
+	
+	/**
+	 * Format button icons for available athletes.
+	 * 
+	 * @param button		button to format
+	 * @param portraitPath 	path of athlete portrait
+	 */
+	private void formatButtonIcon(JButton button, String portraitPath) {
+		button.setBorder(GUIConstants.PORTRAIT_BORDER_SMALL);
+		BufferedImage portraitImage = null;
+		try {
+			portraitImage = ImageIO.read(new File(getClass()
+					.getResource(portraitPath)
+					.toURI()));
+		} catch (IOException | URISyntaxException e) {
+			e.printStackTrace();
+		}
+		button.setIcon(new ImageIcon(portraitImage
+				.getScaledInstance(GUIConstants.PORTRAIT_SMALL, GUIConstants.PORTRAIT_SMALL, Image.SCALE_DEFAULT)));
+		button.setRolloverIcon(
+				new ImageIcon(GUIConstants
+						.tintImage(portraitImage, GUIConstants.PORTRAIT_BUTTON_ROLLOVER)
+						.getScaledInstance(GUIConstants.PORTRAIT_SMALL, GUIConstants.PORTRAIT_SMALL, Image.SCALE_DEFAULT)));
+	}
+	
+	/**
+	 * Initialize the confirm button used once drafting is finished.
+	 */
+	private void initializeConfirmButton() {
+		Team team = frame.getGame().getData().getTeam();	
 		
 		JButton confirmButton = ((DraftPanel) panel).getConfirmButton();
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				List<Integer> indexes = new ArrayList<Integer>();
-				int teamCount = 0;
-				
-				for (JToggleButton toggle : toggleButtons) {
-					if (toggle.isSelected()) {
-						indexes.add(toggleButtons.indexOf(toggle));
-						teamCount++;
-					}
-				}
+				int teamCount = team.getMainTeamSize() + team.getReserveTeamSize();
 				if (teamCount >= Team.MIN_TEAM_SIZE) {
-					Collections.sort(indexes, Collections.reverseOrder());
-					for (int i : indexes) {
-						String newName = textFields.get(i).getText();
-						
-					}
-					
-					
-					
-					
-//					Map<Integer, String> indexes = new HashMap<Integer, String>();
-//					
-//					for (JToggleButton toggle: toggleButtons) {
-//						if (toggle.isSelected()) {
-//							int index = toggleButtons.indexOf(toggle);
-//							indexes.put(index, textFields.get(index).getText());
-//						}
-//					}
-					market.purchaseAthletesAt(indexes, true);
 					toHomeScreen();
 				} else {
 					JOptionPane.showMessageDialog(panel, 
@@ -119,25 +128,22 @@ public class DraftController extends Controller {
 				}
 			}
 		});
-		launch();
 	}
-
+	
+	/**
+	 * Closes current screen and launches home screen.
+	 */
 	private void toHomeScreen() {
 		close();
 		frame.toHomeScreen();
 	}
 	
-	private void changeVisualMoney(int rawAmount, JToggleButton toggle, JLabel label) {
-		int finalAmount = rawAmount * (toggle.isSelected() ? -1 : 1);
-		
-		if (visualMoney + finalAmount >= 0) {
-			visualMoney += finalAmount;
-			label.setText("Money: $" + visualMoney);
-		} else {
-			toggle.setSelected(false);
-			JOptionPane.showMessageDialog(panel, 
-					"You don't have enough money! Select different athletes.", 
-					"Error", JOptionPane.ERROR_MESSAGE);
-		}
+	/**
+	 * Closes current screen and launches detailed view of selected athlete.
+	 */
+	private void toAthleteScreen(Athlete athlete) {
+		close();
+		frame.toAthleteScreen(athlete);
 	}
+	
 }

@@ -23,9 +23,19 @@ public class Market {
     private List<Athlete> availableAthletes;
     
     /**
+     * List of purchased athletes for bookkeeping
+     */
+    private List<Athlete> purchasedAthletes;
+    
+    /**
      * List of available equipment for purchase
      */
     private List<Equipment> availableEquipment;
+    
+    /**
+     * List of purchased equipment for bookkeeping
+     */
+    private List<Equipment> purchasedEquipment;
     
     
     /**
@@ -36,7 +46,10 @@ public class Market {
     public Market(GameData data) {
     	this.data = data;
     	this.availableAthletes = new ArrayList<Athlete>();
+    	this.purchasedAthletes = new ArrayList<Athlete>();
     	this.availableEquipment = new ArrayList<Equipment>();
+    	this.purchasedEquipment = new ArrayList<Equipment>();
+    	
     	updateMarket(8);
     }
 
@@ -85,7 +98,7 @@ public class Market {
     		data.deductMoney(price);
     		try {
 				data.getTeam().addAthlete(athlete, Role.RESERVE);
-    			availableAthletes.remove(index);
+    			purchasedAthletes.add(athlete);
 			} catch (TeamMemberLimitException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -106,6 +119,16 @@ public class Market {
 			e1.printStackTrace();
 		}
     	
+    }
+    
+    /**
+     * Checks if the selected Athlete has already been purchased.
+     * 
+     * @param athlete	Athlete to check
+     * @return			<code>true</code> if purchased
+     */
+    public boolean isPurchased(Athlete athlete) {
+    	return purchasedAthletes.contains(athlete);
     }
     
     /**

@@ -3,6 +3,8 @@ package main.model;
 import java.io.IOException;
 import java.util.Random;
 
+import main.gui.GUIConstants;
+
 /**
  * Represents the characters in the game.
  * 
@@ -23,6 +25,8 @@ public class Athlete extends Purchasable {
     private int intelligence;
     private int stamina;
     
+    private String portraitPath;
+    
 
     /**
      * Constructor for creating Athlete with scaling skill level
@@ -35,6 +39,7 @@ public class Athlete extends Purchasable {
     	generateAthleteStats(skillLevel);
     	
     	setDescription();
+    	this.portraitPath = GUIConstants.PORTRAIT_PLACEHOLDER;
     }
     
     
@@ -171,6 +176,15 @@ public class Athlete extends Purchasable {
     public String toString() {
     	return super.getDescription();
     }
+
+
+
+	/**
+	 * @return the portraitPath
+	 */
+	public String getPortraitPath() {
+		return portraitPath;
+	}
 
 
 

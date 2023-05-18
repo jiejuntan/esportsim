@@ -13,6 +13,7 @@ public class HomeController extends Controller {
 
 	public HomeController(GameFrame frame) {
 		super(frame);
+		initialize();
 	}
 
 	@Override

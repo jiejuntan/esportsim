@@ -17,6 +17,7 @@ public class SetupController extends Controller {
 
 	public SetupController(GameFrame frame) {
 		super(frame);
+		initialize();
 	}
 
 	@Override

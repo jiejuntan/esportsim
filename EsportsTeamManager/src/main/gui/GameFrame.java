@@ -12,6 +12,7 @@ import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
+import main.gui.controllers.AthleteController;
 import main.gui.controllers.ClubController;
 import main.gui.controllers.DraftController;
 import main.gui.controllers.HomeController;
@@ -22,10 +23,17 @@ import main.gui.panels.DraftPanel;
 import main.gui.panels.HomePanel;
 import main.gui.panels.SetupPanel;
 import main.gui.panels.StartPanel;
+import main.model.Athlete;
 import main.model.GameEnvironment;
 
 import javax.swing.JButton;
 
+/**
+ * Main access point of game, initializes frame and game environment, handles navigation
+ * 
+ * @author Jiejun Tan
+ *
+ */
 public class GameFrame {
 
 	/**
@@ -82,6 +90,14 @@ public class GameFrame {
 	 */
 	public void toDraftScreen() {
 		new DraftController(this);
+	}
+	
+	/**
+	 * Launch the specified Athlete's detail screen.
+	 * @param athlete	Athlete to view
+	 */
+	public void toAthleteScreen(Athlete athlete) {
+		new AthleteController(this, athlete);
 	}
 	
 	/**

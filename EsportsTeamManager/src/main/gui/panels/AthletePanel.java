@@ -1,19 +1,12 @@
 package main.gui.panels;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -22,17 +15,21 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import main.Resources.RoundClipBorder;
 import main.gui.GUIConstants;
 import main.model.Team.Role;
-import temp.AthleteTemp;
 
+/**
+ * Modular layout for athlete detail screen.
+ * 
+ * @author Jiejun Tan
+ *
+ */
 public class AthletePanel extends JPanel {
 	
 	private JFrame frame;
 	private JTextField nameTextField;
 	private JButton changeNameButton;
-	private String portraitPath;
+	private JLabel portraitLabel;
 	private JLabel reactionValueLabel;
 	private JLabel eyesightValueLabel;
 	private JLabel intelligenceValueLabel;
@@ -43,6 +40,7 @@ public class AthletePanel extends JPanel {
 	private JLabel staminaBonusLabel;
 	private JLabel roleLabel;
 	private JComboBox roleComboBox;
+	private JLabel contractLabel;
 	private JLabel contractValueLabel;
 	private JButton backButton;
 	private JButton confirmButton;
@@ -92,22 +90,18 @@ public class AthletePanel extends JPanel {
 		gbc_editTipLabel.gridx = 0;
 		gbc_editTipLabel.gridy = 2;
 		this.add(editTipLabel, gbc_editTipLabel);
-		
-		
-		ImageIcon portraitIcon = new ImageIcon(AthleteTemp.class.getResource(GUIConstants.PORTRAIT_PLACEHOLDER));
-		Image portraitImage = portraitIcon.getImage().getScaledInstance(GUIConstants.PORTRAIT_LARGE, GUIConstants.PORTRAIT_LARGE, Image.SCALE_DEFAULT);
-		JLabel portraitLabel = new JLabel();
+
+		portraitLabel = new JLabel();
 		portraitLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		portraitLabel.setIcon(new ImageIcon(portraitImage));
 		portraitLabel.setPreferredSize(new Dimension(GUIConstants.PORTRAIT_LARGE, GUIConstants.PORTRAIT_LARGE));
-		portraitLabel.setBorder(GUIConstants.PORTRAIT_BORDER);
-		GridBagConstraints gbc_lblImg = new GridBagConstraints();
-		gbc_lblImg.gridheight = 11;
-		gbc_lblImg.gridwidth = 3;
-		gbc_lblImg.insets = new Insets(0, 0, 5, 5);
-		gbc_lblImg.gridx = 1;
-		gbc_lblImg.gridy = 3;
-		this.add(portraitLabel, gbc_lblImg);
+		portraitLabel.setBorder(GUIConstants.PORTRAIT_BORDER_LARGE);
+		GridBagConstraints gbc_portraitLabel = new GridBagConstraints();
+		gbc_portraitLabel.gridheight = 11;
+		gbc_portraitLabel.gridwidth = 3;
+		gbc_portraitLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_portraitLabel.gridx = 1;
+		gbc_portraitLabel.gridy = 3;
+		this.add(portraitLabel, gbc_portraitLabel);
 		
 		
 		JLabel reactionLabel = new JLabel("Reaction time:");
@@ -236,7 +230,7 @@ public class AthletePanel extends JPanel {
 		this.add(roleComboBox, gbc_roleComboBox);
 		
 		
-		JLabel contractLabel = new JLabel("Contract:");
+		contractLabel = new JLabel("Contract:");
 		contractLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_contractLabel = new GridBagConstraints();
 		gbc_contractLabel.anchor = GridBagConstraints.WEST;
@@ -301,10 +295,10 @@ public class AthletePanel extends JPanel {
 	}
 
 	/**
-	 * @return the portraitPath
+	 * @return the portraitLabel
 	 */
-	public String getPortraitPath() {
-		return portraitPath;
+	public JLabel getPortraitLabel() {
+		return portraitLabel;
 	}
 
 	/**
@@ -375,6 +369,13 @@ public class AthletePanel extends JPanel {
 	 */
 	public JComboBox getRoleComboBox() {
 		return roleComboBox;
+	}
+
+	/**
+	 * @return the contractLabel
+	 */
+	public JLabel getContractLabel() {
+		return contractLabel;
 	}
 
 	/**

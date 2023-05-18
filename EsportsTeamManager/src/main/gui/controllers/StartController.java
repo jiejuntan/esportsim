@@ -14,6 +14,7 @@ public class StartController extends Controller {
 	
 	public StartController(GameFrame frame) {
 		super(frame);
+		initialize();
 	}
 
 	@Override
@@ -36,7 +37,7 @@ public class StartController extends Controller {
 	}
 	
 	private void toSetupScreen() {
-//		close();
+		close();
 		frame.toSetupScreen();
 	}
 	

@@ -24,8 +24,8 @@ import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
-import main.Resources.RoundClipBorder;
 import main.gui.GUIConstants;
+import main.gui.RoundClipBorder;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -37,7 +37,7 @@ public class AthleteTemp {
 	private JFrame frame;
 	private JTextField nameTextField;
 	private JButton changeNameButton;
-	private String portraitPath;
+	private JLabel portraitLabel;
 	private JLabel reactionValueLabel;
 	private JLabel eyesightValueLabel;
 	private JLabel intelligenceValueLabel;
@@ -157,20 +157,20 @@ public class AthleteTemp {
 		panel.add(editTipLabel, gbc_editTipLabel);
 		
 		
-		ImageIcon portraitIcon = new ImageIcon(AthleteTemp.class.getResource(GUIConstants.PORTRAIT_PLACEHOLDER));
+		portraitLabel = new JLabel();
+		ImageIcon portraitIcon = new ImageIcon(getClass().getResource(GUIConstants.PORTRAIT_PLACEHOLDER));
 		Image portraitImage = portraitIcon.getImage().getScaledInstance(GUIConstants.PORTRAIT_LARGE, GUIConstants.PORTRAIT_LARGE, Image.SCALE_DEFAULT);
-		JLabel portraitLabel = new JLabel();
-		portraitLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		portraitLabel.setIcon(new ImageIcon(portraitImage));
+		portraitLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		portraitLabel.setPreferredSize(new Dimension(GUIConstants.PORTRAIT_LARGE, GUIConstants.PORTRAIT_LARGE));
-		portraitLabel.setBorder(GUIConstants.PORTRAIT_BORDER);
-		GridBagConstraints gbc_lblImg = new GridBagConstraints();
-		gbc_lblImg.gridheight = 11;
-		gbc_lblImg.gridwidth = 3;
-		gbc_lblImg.insets = new Insets(0, 0, 5, 5);
-		gbc_lblImg.gridx = 1;
-		gbc_lblImg.gridy = 3;
-		panel.add(portraitLabel, gbc_lblImg);
+		portraitLabel.setBorder(GUIConstants.PORTRAIT_BORDER_LARGE);
+		GridBagConstraints gbc_portraitLabel = new GridBagConstraints();
+		gbc_portraitLabel.gridheight = 11;
+		gbc_portraitLabel.gridwidth = 3;
+		gbc_portraitLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_portraitLabel.gridx = 1;
+		gbc_portraitLabel.gridy = 3;
+		panel.add(portraitLabel, gbc_portraitLabel);
 		
 		
 		JLabel reactionLabel = new JLabel("Reaction time:");
@@ -367,10 +367,10 @@ public class AthleteTemp {
 	}
 
 	/**
-	 * @return the portraitPath
+	 * @return the portraitLabel
 	 */
-	public String getPortraitPath() {
-		return portraitPath;
+	public JLabel getPortraitLabel() {
+		return portraitLabel;
 	}
 
 	/**
