@@ -75,9 +75,9 @@ public class Team {
 	public enum Role {
 
 		// Role(Health, Damage, Aggro Priority)
-		OFFENSE(50, 100, 2), 
-		SUPPORT(25, 0, 3), 
-		TANK(100, 50, 1), 
+		OFFENSE(50, 50, 2), 
+		SUPPORT(25, 10, 3), 
+		TANK(100, 25, 1), 
 		RESERVE(0, 0, 0);
 
 		private final int health;
@@ -363,6 +363,22 @@ public class Team {
 	 */
 	public String getName() {
 		return name;
+	}
+	
+	
+
+	/**
+	 * @return the reserveLimit
+	 */
+	public static int getReserveLimit() {
+		return RESERVE_LIMIT;
+	}
+
+	/**
+	 * @return the mainLimit
+	 */
+	public static int getMainLimit() {
+		return MAIN_LIMIT;
 	}
 
 	/********** Simple Getters and Setters **********/

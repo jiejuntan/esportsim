@@ -1,8 +1,8 @@
 package main.model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 import main.model.GameData.Difficulty;
 import main.model.Team.Role;
@@ -19,14 +19,17 @@ public class Match {
     private int rewardMoney;
     private List<IngameCharacters> homeTeam;
     private List<IngameCharacters> opponentTeam;
-    private GameData gameData;
-    private int outcome;
+    private int homeTurn;
+    private int opponentTurn;
+    
+    private int round;
+
     private List<String> roundResults;
     
     public Match(GameData gameData, Team opponents) {
-    	
-    	this.outcome = 999;
-    	this.gameData = gameData;
+    	this.homeTurn = 0;
+    	this.round = 0;
+    	this.opponentTurn = 0;
     	this.difficulty = gameData.getDifficulty();
     	calculateRewards(difficulty.getModifier());
     	
@@ -113,7 +116,7 @@ public class Match {
     	    	break;
     	    }
     	    
-    	    Athlete athlete = new Athlete(3);
+    	    Athlete athlete = new Athlete(8);
     	    
     	    //Create a new ingame character for each Athlete and adds to the matches homeTeam list
     	    homeTeam.add(new IngameCharacters(athlete, role));
@@ -138,100 +141,96 @@ public class Match {
     	    	break;
     	    }
     	    
-    	    Athlete athlete = new Athlete(3);
+    	    Athlete athlete = new Athlete(7);
     	    
     	    //Create a new ingame character for each Athlete and adds to the matches awayTeam list
     	    opponentTeam.add(new IngameCharacters(athlete, role));
     	}
     	
+    	homeTeam.sort(Comparator.comparing(IngameCharacters::getReactionTime).reversed());
+    	opponentTeam.sort(Comparator.comparing(IngameCharacters::getReactionTime).reversed());
 
- 
+
     	
     }
     
-    /**
-     * Starts the match by determining who goes first based on reaction time
-     */
-    public int startMatch() {
 
-        
-        //Determines what team goes first
-        if (getHighestSkillAthlete(homeTeam, "ReactionTime").getReactionTime() > getHighestSkillAthlete(opponentTeam, "ReactionTime").getReactionTime()) {
-        	simulateMatch(homeTeam, opponentTeam);
+    /**
+     * Simulates one player chracter vs an opponent character, every time this function is called the 
+     * team battle progresses until a team wins
+     * @return <CODE>int</CODE> Returns -1 if game is still going | 0 If player losses | 1 if player wins. 
+     */
+    public int simulateMatchup() {
+     	roundResults.clear();
+    	
+    	//Checks if all chracters have played their round, If so loop back to first character
+    	if (homeTurn > homeTeam.size()-1) {
+    		homeTurn = 0;
+    	}
+    	
+    	if (opponentTurn > opponentTeam.size()-1) {
+    		opponentTurn = 0;
+    	}
+    	
+    	
+    	
+    	//Both teams are already sorted from highest reaction time to lowest
+    	//each round increment through the list of quickest chracters to the slowest
+    	IngameCharacters homePlayer = homeTeam.get(homeTurn);
+    	IngameCharacters opponentPlayer = opponentTeam.get(opponentTurn);
+    	
+        //Determines the highest reaction time of both team characters to dermine who goes first
+        if (homePlayer.getReactionTime() > opponentPlayer.getReactionTime()) {
+        	//Home Team player was quicker, Will now pick opponent target with the highest aggro
+            action(homePlayer, getHighestSkillAthlete(opponentTeam, "Aggro"));
+            action(opponentPlayer, getHighestSkillAthlete(homeTeam, "Aggro"));
+            
+            //Testing
+            roundResults.add("Home Wins Round " +round+" |H Health: "+getTeamHealth(homeTeam)+" |O Health: "+getTeamHealth(opponentTeam));
         } else {
-        	simulateMatch(opponentTeam, homeTeam);
+        	//Opponent Team player was quicker, Will now pick opponent target with the highest aggro
+            action(opponentPlayer, getHighestSkillAthlete(homeTeam, "Aggro"));
+            action(homePlayer, getHighestSkillAthlete(opponentTeam, "Aggro"));
+            
+            //Testing
+            roundResults.add("Opponent Wins Round "+round+" |H Health: "+getTeamHealth(homeTeam)+" |O Health: "+getTeamHealth(opponentTeam));
         }
         
-        return this.outcome;
-        
+    	//Increments to the next matchup of characters
+    	this.round++;
+    	
+    	this.homeTurn++;
+    	this.opponentTurn++;
+    	
+    	if (homePlayer.getHealth() <= 0) {
+    		homeTeam.remove(homePlayer);
+    	} else if (opponentPlayer.getHealth() <= 0) {
+    		opponentTeam.remove(opponentPlayer);
+    	}
+    	
+    	
 
-    }
-    
-    /**
-     * 
-     * Simulates combat in a turn based style 
-     * 
-     * @param fastTeam <CODE>List<IngameCharacters></CODE> IngameCharacters list which plays first
-     * @param slowTeam <CODE>List<IngameCharacters></CODE> IngameCharacters list which plays second
-     */
-    public void simulateMatch(List<IngameCharacters> fastTeam, List<IngameCharacters> slowTeam) {
-    	
-        // total number of turn based rounds in a match
-        int totalRounds = 10;
         
-    	
-        // Loop over the turn based rounds
-        for (int round = 0; round < totalRounds; round++) {
-            // Iterate over each athlete in the home team and have them perform an action
-            for (IngameCharacters character : fastTeam) {
-                // The target is determined by the aggro levels of the opposing team
-            	IngameCharacters target = getHighestSkillAthlete(slowTeam, "Aggro");  
-                action(character, target);
-            }
-            
-            // Iterate over each athlete in the opponent team and have them perform an action
-            for (IngameCharacters character : slowTeam) {
-                // The target is determined by the aggro levels of the opposing team
-            	IngameCharacters target = getHighestSkillAthlete(fastTeam, "Aggro");  
-                action(character, target);
-            }
-            
-            // Shows who won each round
-            if (getTeamHealth(homeTeam) > getTeamHealth(opponentTeam)) {  
-            	roundResults.add("HomeTeam Wins Round"+" HomeHealth: "+getTeamHealth(homeTeam)+" Opon Health: "+getTeamHealth(opponentTeam));
-            } else {
-            	roundResults.add("OpponentTeam Wins Round"+" HomeHealth: "+getTeamHealth(homeTeam)+" Opon Health: "+getTeamHealth(opponentTeam));
-            }
-            
-            
-            // Check if all athletes on a team are out of health. If so, the other team wins
-            if (getTeamHealth(homeTeam) <= 0) {  
-            	this.outcome = 0;
-            } else if (getTeamHealth(opponentTeam) <= 0) {
-            	outcome = 1;
-            }
-           
+        // Check if all athletes on a team are out of health. If so, the other team wins
+        if (getTeamHealth(homeTeam) <= 0) {  
+        	return 0;
+        } else if (getTeamHealth(opponentTeam) <= 0) {
+        	return 1;
         }
-            	
+        
+        //No winner has been determined yet
+        return -1;
+    	  	
     }
     
     
-    
-    /**
-	 * @return the roundResults
-	 */
-	public List<String> getRoundResults() {
-		return roundResults;
-	}
 
 	/**
      * 
      *Athlete Actions
 	 *Each athlete will take an action depending on their role:
 	 *
-	 *Offense: Their target is determined by the aggro levels of the opposing team. They attack and deal damage based on their intelligence and the opponent's shield points and reaction time. If the attack hits, reduce the target's health points.
-	 *
-	 *Defense: They add shield points to their team based on their intelligence. The shield points decrease whenever a teammate is attacked.
+	 *Offense: Their target is determined by the aggro levels of the opposing team. They attack and deal damage based on their intelligence. If the attack hits, reduce the target's health points.
 	 *
 	 *Support: They can heal a teammate, buff an ally's stats, or debuff an opponent's stats. The choice can be random or based on the current state of the match.
 	 *
@@ -242,21 +241,22 @@ public class Match {
     public void action(IngameCharacters currentCharacter, IngameCharacters target) {
         Role role = currentCharacter.getRole();
         int damage = 0;
+        int newHealth = 0;
         switch (role) {
             case OFFENSE:
                 // Offense character attacks target
             	System.out.println("Offense Activate");
                 damage = currentCharacter.getIntelligence()+ currentCharacter.getDamage();
-                if (target.getHealth() - damage < 0) {
-                	target.setHealth(0);
-                } else {
-                	target.setHealth(target.getHealth() - damage);
-                }
+                newHealth = target.getHealth() - damage;
+                target.setHealth(newHealth > 0 ? newHealth : 0);
                     
                 
                 break;
            
             case SUPPORT:
+            	
+            	
+            	
                 // Support character heals a teammate, buffs an ally's stats, or debuffs an opponent's stats
 //                for (IngameCharacters character : homeTeam) {
 //                    if (character.getHealth() < character.getRole().getHealth()) {
@@ -265,22 +265,17 @@ public class Match {
 //                }
             	System.out.println("Support Activate");
                 damage = currentCharacter.getIntelligence()+ currentCharacter.getDamage();
-                if (target.getHealth() - damage < 0) {
-                	target.setHealth(0);
-                } else {
-                	target.setHealth(target.getHealth() - damage);
-                }
+                
+                newHealth = target.getHealth() - damage;
+                target.setHealth(newHealth > 0 ? newHealth : 0);
             
                 break;
             case TANK:
             	System.out.println("Tank Activate");
 
                 damage = currentCharacter.getIntelligence()+ currentCharacter.getDamage();
-                if (target.getHealth() - damage < 0) {
-                	target.setHealth(0);
-                } else {
-                	target.setHealth(target.getHealth() - damage);
-                }
+                newHealth = target.getHealth() - damage;
+                target.setHealth(newHealth > 0 ? newHealth : 0);
                 
                 break;
             default:
@@ -307,7 +302,9 @@ public class Match {
 	        	//Finds the character with the highest Aggro in the team
 	            for (IngameCharacters character : characters) {
 	                if (character.getHealth() > 0) {
-	                    if (character.getAggroLevel() > highestSkillCharacter.getAggroLevel()) {
+	                	
+	                	//Agrro Levels go like 1>2>3>4
+	                    if (character.getAggroLevel() < highestSkillCharacter.getAggroLevel()) {
 	                    	highestSkillCharacter = character;
 	                    }
 	                }
@@ -360,22 +357,12 @@ public class Match {
 	public List<IngameCharacters> getOpponentTeam() {
 		return opponentTeam;
 	}
-
-	/**
-	 * @return the outcome
+	
+    /**
+	 * @return the roundResults
 	 */
-	public int getOutcome() {
-		return outcome;
+	public List<String> getRoundResults() {
+		return roundResults;
 	}
-    
-    
-
-    
-    
-
-
-
-
-
 	
 }

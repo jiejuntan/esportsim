@@ -29,10 +29,14 @@ class MatchTests {
 	    
 	    @Test
 	    void playGame() {
-	    	match.startMatch();
-	    	System.out.println(match.getRoundResults());
+	    	int outcome = -1;
+	    	do {
+	    	outcome = match.simulateMatchup();
+	    	System.out.println(match.getRoundResults()+"\n");
 	    	
-	    	assertTrue(match.getOutcome() == 1 || match.getOutcome() == 0);
+	    	} while(outcome == -1);
+	    	
+	    	assertTrue(outcome == 1 || outcome == 0);
 	    	
 	    }
 

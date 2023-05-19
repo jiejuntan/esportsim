@@ -1,11 +1,8 @@
 package main.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
 import java.util.Random;
 
-import main.model.Team.Role;
 
 /**
  * Random events which can occur during the menu gameplay
@@ -15,10 +12,10 @@ import main.model.Team.Role;
  */
 public class RandomEvent {
 	
-	private GameData gameData;
+	private Team team;
 	
 	public RandomEvent(GameData gameData) {
-		this.gameData = gameData;
+		this.team = gameData.getTeam();
 	}
 	
 
@@ -28,7 +25,7 @@ public class RandomEvent {
     public void triggerEvent() {
     	Random random = new Random();
     	
-    	double threshold = 0;
+    	double threshold = 98;
     	
     	//Generates the random number
     	double randomNumber = random.nextGaussian(50,50);
@@ -61,14 +58,9 @@ public class RandomEvent {
      * Random Event - Adds an athlete to the team
      */
     public void addAthlete() {    
-    	
-    	Team team = gameData.getTeam();
-    	
-        //Athlete athlete = team.getTeamMembers().get();
-        
-        
-    	//team.removeAthlete(athlete);
-    	
+		if (team.getMainTeamSize() + team.getReserveTeamSize() <= Team.getMainLimit() + Team.getReserveLimit()) {
+    	Athlete athlete = new Athlete(3);
+    	team.addAthlete(athlete,Team.Role.RESERVE);}
     }
     
     /**
