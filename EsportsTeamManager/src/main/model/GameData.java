@@ -199,5 +199,17 @@ public class GameData {
     public Team getTeam() {
 		return this.team;
 	}
+
+
+	/**
+	 * Calculates purchase price with Purchasable object
+	 * 
+	 * @param market TODO
+	 * @param purchase	Purchasable object
+	 * @return			purchase price
+	 */
+	public int getPurchasePrice(Market market, Purchasable purchase) {
+		return purchase.getBasePrice() * getDifficulty().modifier;
+	}
     
 }

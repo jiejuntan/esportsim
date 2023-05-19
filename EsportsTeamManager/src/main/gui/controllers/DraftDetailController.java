@@ -27,8 +27,10 @@ import main.gui.GUIConstants;
 import main.gui.GameFrame;
 import main.gui.panels.DetailPanel;
 import main.gui.panels.DraftDetailPanel;
+import main.model.Team.Role;
 import main.model.Athlete;
-import main.model.Equipment;
+import main.model.GameData;
+import main.model.GameData.Difficulty;
 import main.model.Market;
 
 /**
@@ -66,11 +68,11 @@ public class DraftDetailController extends Controller {
 		
 		initializeBackButton();
 		initializeConfirmButton();
-		
+
 		launch();
 	}
 
-
+	
 	/**
 	 * Sets heading to an editable name
 	 */
@@ -147,8 +149,8 @@ public class DraftDetailController extends Controller {
 		staminaValueLabel.setText(String.valueOf(athlete.getStamina()));
 		
 		
-		Market market = frame.getGame().getMarket();
-		int price = market.calculatePurchasePrice(athlete);
+		Difficulty diff = frame.getGame().getData().getDifficulty();
+		int price = athlete.calculatePurchasePrice(diff.modifier);
 		JLabel contractValueLabel = ((DetailPanel) panel).getPriceValueLabel();
 		contractValueLabel.setText("$" + String.valueOf(price));
 	}
@@ -172,7 +174,26 @@ public class DraftDetailController extends Controller {
 		JButton confirmButton = ((DetailPanel) panel).getConfirmButton();
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				GameData data = frame.getGame().getData();
+				int money = data.getMoney();
+				
+				Difficulty diff = data.getDifficulty();
+				int price = athlete.calculatePurchasePrice(diff.modifier);				
+				
 				JComboBox roleComboBox = ((DetailPanel) panel).getRoleComboBox();
+				Role role = (Role) roleComboBox.getSelectedItem();
+				
+				JTextField nameTextField = ((DetailPanel) panel).getNameTextField();
+				String newName = nameTextField.getText();
+				
+				if (money >= price) {
+					Market market = frame.getGame().getMarket();
+					market.purchaseAthlete(athlete, role, newName);
+					
+					toPreviousScreen();
+				}
+				
+				
 			}
 		});
 	}

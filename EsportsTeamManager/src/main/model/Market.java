@@ -1,13 +1,11 @@
 package main.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import main.exceptions.IllegalFundsException;
 import main.exceptions.TeamMemberLimitException;
+import main.model.GameData.Difficulty;
 import main.model.Team.Role;
 
 public class Market {
@@ -15,7 +13,7 @@ public class Market {
 	/**
 	 * Data transfer object
 	 */
-	private GameData data;
+	GameData data;
 	
 	/**
 	 * List of available athletes for purchase
@@ -77,54 +75,25 @@ public class Market {
     	}
     }
     
-    
     /**
      * Purchases an athlete from market
      * 
-     * @param indexes	index of Athletes to purchase with name
-     * @param isDrafting TODO
-     */
-//    public void purchaseAthletesAt(Map<Integer, String> indexes, boolean isDrafting) {
-//    	Map<Integer, String> reversed = new LinkedHashMap<Integer, String>();
-//        indexes.entrySet()
-//        		.stream()
-//        		.sorted(Collections.reverseOrder(Map.Entry.comparingByKey()))
-//        		.forEachOrdered(entry -> reversed.put(entry.getKey(), entry.getValue()));
-//    	for (Map.Entry<Integer, String> entry: reversed.entrySet()) {
-//    		int index = entry.getKey();
-//    		int price = calculatePurchasePriceAt(index);
-//    		Athlete athlete = availableAthletes.get(index);
-//    		athlete.changeName(entry.getValue());
-//    		data.deductMoney(price);
-//    		try {
-//				data.getTeam().addAthlete(athlete, Role.RESERVE);
-//    			purchasedAthletes.add(athlete);
-//			} catch (TeamMemberLimitException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-//    	}
-//    }
-    
-    /**
-     * Purchases an athlete from market
-     * 
-     * @param index		index of Athletes to purchase with name
+     * @param athlete	Athlete to purchase
      * @param role		role to assign Athlete
      * @param newName	new name for Athlete
      */
-    public void purchaseAthlete(int index, Role role, String newName) {
-    	int price = calculatePurchasePrice(index);
-    	Athlete athlete = availableAthletes.get(index);
-    	athlete.changeName(newName);
+    public void purchaseAthlete(Athlete athlete, Role role, String newName) {
+    	Difficulty diff = data.getDifficulty();
+		int price = athlete.calculatePurchasePrice(diff.modifier);
+    	
     	try {
+    		athlete.changeName(newName);
     		data.deductMoney(price);
-			data.getTeam().addAthlete(athlete, Role.RESERVE);
-			availableAthletes.remove(index);
+			data.getTeam().addAthlete(athlete, role);
+			purchasedAthletes.add(athlete);
 		} catch (TeamMemberLimitException | IllegalFundsException e1) {
 			e1.printStackTrace();
 		}
-    	
     }
     
     /**
@@ -143,7 +112,7 @@ public class Market {
      * @param athlete	Athlete to sell
      */
     public void sellAthlete(Athlete athlete) {
-		int price = calculateSalePrice(athlete);
+		int price = athlete.calculateSalePrice(data.getDifficulty().modifier);
 		
 		try {
 			data.incrementMoney(price);
@@ -153,51 +122,17 @@ public class Market {
 		}
 	}
     
-    /**
-     * Format a purchasable athlete into a string
-     * 
-     * @param 	index 	index of athlete in market
-     * 
-     * @return			string description of athlete
-     */
-	public String athleteDescriptionAt(int index) {
-		Athlete athlete = getAvailableAthletes().get(index);
-		return String.format("<html>%s<br><br>Contract: $%s</html>", athlete, calculatePurchasePrice(index));
-	}
-	
-    /**
-     * Calculates purchase price with index
-     * 
-     * @param 	index	index of athlete in market
-     * 
-     * @return			purchase price
-     */
-    public int calculatePurchasePrice(int index) {
-    	Athlete athlete = getAvailableAthletes().get(index);
-    	return athlete.getBasePrice() * data.getDifficulty().modifier;
-    }
-    
-    /**
-     * Calculates purchase price with Athlete object
-     * 
-     * @param athlete	athlete to check price
-     * 
-     * @return			purchase price
-     */
-    public int calculatePurchasePrice(Athlete athlete) {
-    	return athlete.getBasePrice() * data.getDifficulty().modifier;
-    }
-    
-    /**
-     * Calculates sale price
-     * 
-     * @param sale	Purchasable object
-     * @return		sale price
-     */
-    public int calculateSalePrice(Purchasable sale) {
-    	return sale.getBasePrice() / data.getDifficulty().modifier;
-    }
-    
+//    /**
+//     * Format a purchasable athlete into a string
+//     * 
+//     * @param 	index 	index of athlete in market
+//     * 
+//     * @return			string description of athlete
+//     */
+//	public String athleteDescriptionAt(int index) {
+//		Athlete athlete = getAvailableAthletes().get(index);
+//		return String.format("<html>%s<br><br>Contract: $%s</html>", athlete, calculatePurchasePrice(index));
+//	}
     
     /**
      * Views available athletes for purchase
@@ -208,7 +143,11 @@ public class Market {
 		return availableAthletes;
 	}
     
-    
+    /**
+     * Views available items for purchase
+     * 
+     * @return available items list
+     */
     public List<Equipment> viewStoresItems() {
 		return availableEquipment;}
 

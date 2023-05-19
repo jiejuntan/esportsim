@@ -52,7 +52,8 @@ public class DetailPanel extends JPanel {
 	protected JLabel roleLabel;
 	protected JLabel priceLabel;
 	
-	public DetailPanel() {
+	// Prevent instantiation without subclassing
+	protected DetailPanel() {
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 50, 0, 0, 0};
 		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 10, 0, 10, 0, 10, 0, 0, 0, 0, 0, 0, 10, 0, 0};
