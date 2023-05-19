@@ -65,7 +65,7 @@ public class DraftController extends Controller {
 	private void setDraftableAthletes() {
 		Market market = frame.getGame().getMarket();
 		List<Athlete> athletes = market.getAvailableAthletes();
-		List<JButton> athleteButtons = ((DraftPanel) panel).getAthleteButtons();
+		List<JButton> athleteButtons = ((DraftPanel) panel).getThumbButtons();
 		
 		for (int i = 0; i < athletes.size(); i++) {
 			Athlete athlete = athletes.get(i);

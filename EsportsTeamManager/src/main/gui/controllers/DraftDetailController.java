@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main.gui.controllers;
 
 import java.awt.Image;
@@ -23,13 +20,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import main.exceptions.IllegalFundsException;
+import main.exceptions.TeamMemberLimitException;
 import main.gui.GUIConstants;
 import main.gui.GameFrame;
 import main.gui.panels.DetailPanel;
 import main.gui.panels.DraftDetailPanel;
 import main.model.Team.Role;
 import main.model.Athlete;
-import main.model.GameData;
 import main.model.GameData.Difficulty;
 import main.model.Market;
 
@@ -43,7 +41,7 @@ public class DraftDetailController extends Controller {
 
 	/**
 	 * Athlete currently in view.
-	 */
+	 */ 
 	private Athlete athlete;
 	
 	/**
@@ -58,6 +56,9 @@ public class DraftDetailController extends Controller {
 		initialize();
 	}
 
+	/**
+	 * Runs initialize methods and launches panel
+	 */
 	@Override
 	protected void initialize() {
 		panel = new DraftDetailPanel();
@@ -156,7 +157,7 @@ public class DraftDetailController extends Controller {
 	}
 	
 	/**
-	 * Initializes back button based on previous screen
+	 * Initializes back button to return to draft
 	 */
 	private void initializeBackButton() {
 		JButton backButton = ((DetailPanel) panel).getBackButton();
@@ -168,32 +169,48 @@ public class DraftDetailController extends Controller {
 	}
 	
 	/**
-	 * Initializes confirm button based on previous screen
+	 * Initializes confirm button to purchase athlete and return to draft or show dialog for errors
 	 */
 	private void initializeConfirmButton() {
 		JButton confirmButton = ((DetailPanel) panel).getConfirmButton();
 		confirmButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				GameData data = frame.getGame().getData();
-				int money = data.getMoney();
-				
-				Difficulty diff = data.getDifficulty();
-				int price = athlete.calculatePurchasePrice(diff.modifier);				
-				
+			public void actionPerformed(ActionEvent e) {			
 				JComboBox roleComboBox = ((DetailPanel) panel).getRoleComboBox();
 				Role role = (Role) roleComboBox.getSelectedItem();
 				
 				JTextField nameTextField = ((DetailPanel) panel).getNameTextField();
 				String newName = nameTextField.getText();
 				
-				if (money >= price) {
-					Market market = frame.getGame().getMarket();
+				
+				Market market = frame.getGame().getMarket();
+				try {
 					market.purchaseAthlete(athlete, role, newName);
-					
 					toPreviousScreen();
+				} catch (IllegalFundsException e1) {
+					JOptionPane.showMessageDialog(panel, 
+							"You don't have enough money.", 
+							"Error", JOptionPane.ERROR_MESSAGE);
+				} catch (TeamMemberLimitException e2) {
+					switch (e2.getType()) {
+					case WHOLE:
+						JOptionPane.showMessageDialog(panel, 
+								"Your team is full.", 
+								"Error", JOptionPane.ERROR_MESSAGE);
+						break;
+					case MAIN:
+						JOptionPane.showMessageDialog(panel, 
+								"Your main team is full.", 
+								"Error", JOptionPane.ERROR_MESSAGE);
+						break;
+					case RESERVE:
+						JOptionPane.showMessageDialog(panel, 
+								"Your reserve team is full.", 
+								"Error", JOptionPane.ERROR_MESSAGE);
+						break;
+					default:
+						break;
+					}
 				}
-				
-				
 			}
 		});
 	}

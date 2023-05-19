@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Random;
 
 import main.exceptions.TeamMemberLimitException;
@@ -59,15 +58,6 @@ public class Team {
 	 * 5 starting, 1 reserve minimum
 	 */
 	public static final int MIN_TEAM_SIZE = 6;
-	
-	/**
-	 * Default configuration of a team's roles.
-	 */
-	public static final List<Role> DEFAULT_SETUP = new ArrayList<Role>(List.of(
-			Role.OFFENSE,
-			Role.OFFENSE,
-			Role.SUPPORT,
-			Role.TANK));
 	
 	/**
 	 * Defines the Athletes Roles and the stats of each role
@@ -144,12 +134,8 @@ public class Team {
 	 * 
 	 * @param athlete 					Athlete to add
 	 * @param role 						Role to add Athlete in
-	 * @throws TeamMemberLimitException if main team and or reserve team is full
 	 */
-	public void addAthlete(Athlete athlete, Role role) throws TeamMemberLimitException {
-		if (getMainTeamSize() + getReserveTeamSize() >= MAIN_LIMIT + RESERVE_LIMIT) {
-			throw new TeamMemberLimitException();
-		}
+	public void addAthlete(Athlete athlete, Role role) {
 		members.get(role).add(athlete);
 	}
 	
@@ -187,48 +173,25 @@ public class Team {
 		switch (role) {
 			
 		case RESERVE:
-			if (getReserveTeamSize() >= RESERVE_LIMIT) {
+			if (isReserveTeamFull()) {
 				
 			}
 			break;
 		default:
-			if (getMainTeamSize() >= MAIN_LIMIT) {
+			if (isMainTeamFull()) {
 				List<Athlete> athletesInRole = members.get(role);
 				athletesInRole.add(athlete);
 				athletesInRole.remove(0);
 			}
 			break;
 		}
-		
-
-//
-//		
-//		
-//		Athlete toReplace = mainMembers.get(role);
-//
-//		if (reserveMembers.contains(athlete)) {
-//			reserveMembers.remove(athlete);
-//			mainMembers.put(role, athlete);
-//
-//			if (toReplace != null) {
-//				reserveMembers.add(toReplace);
-//			}
-//		} else {
-//			for (Map.Entry<Role, Athlete> entry : mainMembers.entrySet()) {
-//				if (Objects.equals(athlete, entry.getValue())) {
-//					Role previousRole = entry.getKey();
-//					mainMembers.remove(previousRole);
-//					mainMembers.put(role, athlete);
-//
-//					if (toReplace != null) {
-//						mainMembers.put(previousRole, toReplace);
-//					}
-//				}
-//			}
-//		}
 	}
 	
-	
+	/**
+	 * Gets current size of starting team
+	 * 
+	 * @return number of athletes in main team
+	 */
 	public int getMainTeamSize() {
 		int count = 0;
 		for (Role role: Role.values()) {
@@ -240,8 +203,49 @@ public class Team {
 		return count;
 	}
 	
+	/**
+	 * Gets current size of reserve team
+	 * 
+	 * @return	number of athletes in reserve team
+	 */
 	public int getReserveTeamSize() {
 		return members.get(Role.RESERVE).size();
+	}
+	
+	/**
+	 * Checks if main team is full
+	 * 
+	 * @return	<code>true</code> if full
+	 */
+	public boolean isMainTeamFull() {
+		return getMainTeamSize() >= MAIN_LIMIT;
+	}
+	
+	/**
+	 * Checks if reserve team is full
+	 * 
+	 * @return	<code>true</code> if full
+	 */
+	public boolean isReserveTeamFull() {
+		return getReserveTeamSize() >= RESERVE_LIMIT;
+	}
+	
+	/**
+	 * Checks if entire team is full
+	 * 
+	 * @return	<code>true</code> if full
+	 */
+	public boolean isTeamFull() {
+		return isMainTeamFull() && isReserveTeamFull();
+	}
+	
+	/**
+	 * Checks if team has enough members
+	 * 
+	 * @return	<code>true</code> if minimum team size is met
+	 */
+	public boolean hasMinimumSize() {
+		return (getMainTeamSize() + getReserveTeamSize()) >= MIN_TEAM_SIZE;
 	}
 	
 	/**
@@ -271,9 +275,10 @@ public class Team {
 	 * Sets team name if valid
 	 * 
 	 * @param name name to set
+	 * 
 	 * @throws IllegalArgumentException if name is invalid
 	 */
-	public void setTeamName(String name) throws IllegalArgumentException {
+	public void setTeamName(String name) {
 		if (isValidTeamName(name)) {
 			this.name = name;
 		} else {
@@ -363,22 +368,6 @@ public class Team {
 	 */
 	public String getName() {
 		return name;
-	}
-	
-	
-
-	/**
-	 * @return the reserveLimit
-	 */
-	public static int getReserveLimit() {
-		return RESERVE_LIMIT;
-	}
-
-	/**
-	 * @return the mainLimit
-	 */
-	public static int getMainLimit() {
-		return MAIN_LIMIT;
 	}
 
 	/********** Simple Getters and Setters **********/

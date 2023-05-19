@@ -5,7 +5,7 @@ import java.util.List;
 
 import main.exceptions.IllegalFundsException;
 import main.exceptions.TeamMemberLimitException;
-import main.model.GameData.Difficulty;
+import main.exceptions.TeamMemberLimitException.Type;
 import main.model.Team.Role;
 
 public class Market {
@@ -81,19 +81,31 @@ public class Market {
      * @param athlete	Athlete to purchase
      * @param role		role to assign Athlete
      * @param newName	new name for Athlete
+     * 
+     * @throws IllegalFundsException 	if insufficient money
+     * @throws TeamMemberLimitException if team or particular role is full
      */
-    public void purchaseAthlete(Athlete athlete, Role role, String newName) {
-    	Difficulty diff = data.getDifficulty();
-		int price = athlete.calculatePurchasePrice(diff.modifier);
+    public void purchaseAthlete(Athlete athlete, Role role, String newName) throws IllegalFundsException, TeamMemberLimitException {
+    	int money = data.getMoney();
+		int price = athlete.calculatePurchasePrice(data.getDifficulty().modifier);
     	
-    	try {
-    		athlete.changeName(newName);
-    		data.deductMoney(price);
-			data.getTeam().addAthlete(athlete, role);
-			purchasedAthletes.add(athlete);
-		} catch (TeamMemberLimitException | IllegalFundsException e1) {
-			e1.printStackTrace();
+		if (money < price) {
+			throw new IllegalFundsException();
 		}
+		Team team = data.getTeam();
+		if (team.isTeamFull()) {
+			throw new TeamMemberLimitException(Type.WHOLE);
+		}
+		if (team.isMainTeamFull()) {
+			throw new TeamMemberLimitException(Type.MAIN);
+		}
+		if (data.getTeam().isReserveTeamFull()) {
+			throw new TeamMemberLimitException(Type.RESERVE);
+		}
+		athlete.setName(newName);
+		data.deductMoney(price);
+		data.getTeam().addAthlete(athlete, role);
+		purchasedAthletes.add(athlete);
     }
     
     /**
@@ -121,18 +133,6 @@ public class Market {
 			throw e;
 		}
 	}
-    
-//    /**
-//     * Format a purchasable athlete into a string
-//     * 
-//     * @param 	index 	index of athlete in market
-//     * 
-//     * @return			string description of athlete
-//     */
-//	public String athleteDescriptionAt(int index) {
-//		Athlete athlete = getAvailableAthletes().get(index);
-//		return String.format("<html>%s<br><br>Contract: $%s</html>", athlete, calculatePurchasePrice(index));
-//	}
     
     /**
      * Views available athletes for purchase

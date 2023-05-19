@@ -19,7 +19,7 @@ import main.gui.controllers.HomeController;
 import main.gui.controllers.SetupController;
 import main.gui.controllers.StartController;
 import main.gui.panels.ClubPanel;
-import main.gui.panels.DraftPanel;
+import main.gui.panels.ThumbnailPanel;
 import main.gui.panels.HomePanel;
 import main.gui.panels.SetupPanel;
 import main.gui.panels.StartPanel;

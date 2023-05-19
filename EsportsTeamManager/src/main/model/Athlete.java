@@ -13,11 +13,6 @@ import main.gui.GUIConstants;
  */
 public class Athlete extends Purchasable {
 	
-	/**
-	 * Regex pattern for athlete name validation
-	 */
-	private static final String VALID_NAME_PATTERN = "[ a-zA-Z]{3,10}";
-	
 	private String name;
 	
 	private int reactionTime;
@@ -131,33 +126,7 @@ public class Athlete extends Purchasable {
     	// implement some value calculation based on stats
     	
     	return calculateSkillLevel() * 5;
-    }
-    
-    
-    /**
-     * Sets team name if valid
-     * 
-     * @param name						name to set
-     * @throws IllegalArgumentException	if name is invalid
-     */
-    public void changeName(String name) throws IllegalArgumentException {
-    	if (isValidName(name)) {
-    		this.name = name;
-    	} else {
-    		throw new IllegalArgumentException();
-    	}
-    }
-    
-    
-    /**
-     * Checks if athlete name matches pattern
-     * 
-     * @param name	name to validate
-     * @return 		<CODE>true</CODE> if name is valid
-     */
-    private boolean isValidName(String name) {
-    	return name.matches(VALID_NAME_PATTERN);
-    }
+    }   
     
     /**
      * Sets the athlete's description
