@@ -19,34 +19,40 @@ import main.gui.GUIConstants;
 import main.model.Team.Role;
 
 /**
- * Modular layout for athlete detail screen.
+ * Subclassable detail layout for athletes and items.
  * 
  * @author Jiejun Tan
  *
  */
-public class AthletePanel extends JPanel {
+public class DetailPanel extends JPanel {
 	
+	// Gettable components for controller manipulation. Protected properties are also exposed to subclasses.
 	private JFrame frame;
 	private JTextField nameTextField;
 	private JButton changeNameButton;
 	private JLabel portraitLabel;
-	private JLabel reactionValueLabel;
-	private JLabel eyesightValueLabel;
-	private JLabel intelligenceValueLabel;
-	private JLabel staminaValueLabel;
-	private JLabel reactionBonusLabel;
-	private JLabel eyesightBonusLabel;
-	private JLabel intelligenceBonusLabel;
-	private JLabel staminaBonusLabel;
-	private JLabel roleLabel;
-	private JComboBox roleComboBox;
-	private JLabel contractLabel;
-	private JLabel contractValueLabel;
+	
+	protected JLabel reactionValueLabel;
+	protected JLabel eyesightValueLabel;
+	protected JLabel intelligenceValueLabel;
+	protected JLabel staminaValueLabel;
+	protected JLabel reactionBonusLabel;
+	protected JLabel eyesightBonusLabel;
+	protected JLabel intelligenceBonusLabel;
+	protected JLabel staminaBonusLabel;
+	protected JComboBox roleComboBox;
+	protected JLabel roleValueLabel;
+	protected JLabel priceValueLabel;
+	
 	private JButton backButton;
 	private JButton confirmButton;
 	
+	// Exposed components to toggle visibility in subclasses
+	protected JLabel editTipLabel;
+	protected JLabel roleLabel;
+	protected JLabel priceLabel;
 	
-	public AthletePanel() {
+	public DetailPanel() {
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 50, 0, 0, 0};
 		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 10, 0, 10, 0, 10, 0, 0, 0, 0, 0, 0, 10, 0, 0};
@@ -81,7 +87,8 @@ public class AthletePanel extends JPanel {
 		gbc_nameTextField.gridy = 1;
 		this.add(nameTextField, gbc_nameTextField);
 		
-		JLabel editTipLabel = new JLabel("(click to edit)");
+		editTipLabel = new JLabel("(click to edit)");
+		editTipLabel.setVisible(false);
 		editTipLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		editTipLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
 		GridBagConstraints gbc_editTipLabel = new GridBagConstraints();
@@ -114,6 +121,7 @@ public class AthletePanel extends JPanel {
 		this.add(reactionLabel, gbc_reactionLabel);
 		
 		reactionValueLabel = new JLabel("5");
+		reactionValueLabel.setVisible(false);
 		reactionValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_reactionValueLabel = new GridBagConstraints();
 		gbc_reactionValueLabel.insets = new Insets(0, 0, 5, 5);
@@ -122,6 +130,7 @@ public class AthletePanel extends JPanel {
 		this.add(reactionValueLabel, gbc_reactionValueLabel);
 		
 		reactionBonusLabel = new JLabel("+5");
+		reactionBonusLabel.setVisible(false);
 		reactionBonusLabel.setForeground(GUIConstants.BONUS_UP);
 		reactionBonusLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_reactionBonusLabel = new GridBagConstraints();
@@ -140,6 +149,7 @@ public class AthletePanel extends JPanel {
 		this.add(eyesightLabel, gbc_eyesightLabel);
 		
 		eyesightValueLabel = new JLabel("5");
+		eyesightValueLabel.setVisible(false);
 		eyesightValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_eyesightValueLabel = new GridBagConstraints();
 		gbc_eyesightValueLabel.insets = new Insets(0, 0, 5, 5);
@@ -148,6 +158,7 @@ public class AthletePanel extends JPanel {
 		this.add(eyesightValueLabel, gbc_eyesightValueLabel);
 		
 		eyesightBonusLabel = new JLabel("+5");
+		eyesightBonusLabel.setVisible(false);
 		eyesightBonusLabel.setForeground(GUIConstants.BONUS_UP);
 		eyesightBonusLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_eyesightBonusLabel = new GridBagConstraints();
@@ -166,6 +177,7 @@ public class AthletePanel extends JPanel {
 		this.add(intelligenceLabel, gbc_intelligenceLabel);
 		
 		intelligenceValueLabel = new JLabel("5");
+		intelligenceValueLabel.setVisible(false);
 		intelligenceValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_intelligenceValueLabel = new GridBagConstraints();
 		gbc_intelligenceValueLabel.insets = new Insets(0, 0, 5, 5);
@@ -174,6 +186,7 @@ public class AthletePanel extends JPanel {
 		this.add(intelligenceValueLabel, gbc_intelligenceValueLabel);
 		
 		intelligenceBonusLabel = new JLabel("-5");
+		intelligenceBonusLabel.setVisible(false);
 		intelligenceBonusLabel.setForeground(GUIConstants.BONUS_DOWN);
 		intelligenceBonusLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_intelligenceBonusLabel = new GridBagConstraints();
@@ -192,6 +205,7 @@ public class AthletePanel extends JPanel {
 		this.add(staminaLabel, gbc_staminaLabel);
 		
 		staminaValueLabel = new JLabel("5");
+		staminaValueLabel.setVisible(false);
 		staminaValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_staminaValueLabel = new GridBagConstraints();
 		gbc_staminaValueLabel.insets = new Insets(0, 0, 5, 5);
@@ -200,6 +214,7 @@ public class AthletePanel extends JPanel {
 		this.add(staminaValueLabel, gbc_staminaValueLabel);
 		
 		staminaBonusLabel = new JLabel("+5");
+		staminaBonusLabel.setVisible(false);
 		staminaBonusLabel.setForeground(GUIConstants.BONUS_UP);
 		staminaBonusLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_staminaBonusLabel = new GridBagConstraints();
@@ -210,6 +225,7 @@ public class AthletePanel extends JPanel {
 		
 		
 		roleLabel = new JLabel("Role:");
+		roleLabel.setVisible(false);
 		roleLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_roleLabel = new GridBagConstraints();
 		gbc_roleLabel.insets = new Insets(0, 0, 5, 5);
@@ -219,6 +235,7 @@ public class AthletePanel extends JPanel {
 		this.add(roleLabel, gbc_roleLabel);
 		
 		roleComboBox = new JComboBox();
+		roleComboBox.setVisible(false);
 		roleComboBox.setModel(new DefaultComboBoxModel(Role.values()));
 		roleComboBox.setPreferredSize(new Dimension(200, 50));
 		roleComboBox.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
@@ -229,23 +246,34 @@ public class AthletePanel extends JPanel {
 		gbc_roleComboBox.gridy = 12;
 		this.add(roleComboBox, gbc_roleComboBox);
 		
+		roleValueLabel = new JLabel();
+		roleValueLabel.setVisible(false);
+		roleValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		GridBagConstraints gbc_roleValueLabel = new GridBagConstraints();
+		gbc_roleValueLabel.gridwidth = 3;
+		gbc_roleValueLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_roleValueLabel.gridx = 6;
+		gbc_roleValueLabel.gridy = 12;
+		this.add(roleValueLabel, gbc_roleValueLabel);
 		
-		contractLabel = new JLabel("Contract:");
-		contractLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		priceLabel = new JLabel("Price:");
+		priceLabel.setVisible(false);
+		priceLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_contractLabel = new GridBagConstraints();
 		gbc_contractLabel.anchor = GridBagConstraints.WEST;
 		gbc_contractLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_contractLabel.gridx = 5;
 		gbc_contractLabel.gridy = 14;
-		this.add(contractLabel, gbc_contractLabel);
+		this.add(priceLabel, gbc_contractLabel);
 		
-		contractValueLabel = new JLabel("$200");
-		contractValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		priceValueLabel = new JLabel();
+		priceValueLabel.setVisible(false);
+		priceValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_contractValueLabel = new GridBagConstraints();
 		gbc_contractValueLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_contractValueLabel.gridx = 7;
 		gbc_contractValueLabel.gridy = 14;
-		this.add(contractValueLabel, gbc_contractValueLabel);
+		this.add(priceValueLabel, gbc_contractValueLabel);
 		
 		
 		backButton = new JButton("Back");
@@ -358,13 +386,6 @@ public class AthletePanel extends JPanel {
 	}
 
 	/**
-	 * @return the roleLabel
-	 */
-	public JLabel getRoleLabel() {
-		return roleLabel;
-	}
-
-	/**
 	 * @return the roleComboBox
 	 */
 	public JComboBox getRoleComboBox() {
@@ -372,17 +393,17 @@ public class AthletePanel extends JPanel {
 	}
 
 	/**
-	 * @return the contractLabel
+	 * @return the roleValueLabel
 	 */
-	public JLabel getContractLabel() {
-		return contractLabel;
+	public JLabel getRoleValueLabel() {
+		return roleValueLabel;
 	}
 
 	/**
-	 * @return the contractValueLabel
+	 * @return the priceValueLabel
 	 */
-	public JLabel getContractValueLabel() {
-		return contractValueLabel;
+	public JLabel getPriceValueLabel() {
+		return priceValueLabel;
 	}
 
 	/**

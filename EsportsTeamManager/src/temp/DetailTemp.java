@@ -32,7 +32,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import main.model.Team.Role;
 
-public class AthleteTemp {
+public class DetailTemp {
 
 	private JFrame frame;
 	private JTextField nameTextField;
@@ -48,6 +48,7 @@ public class AthleteTemp {
 	private JLabel staminaBonusLabel;
 	private JLabel roleLabel;
 	private JComboBox roleComboBox;
+	private JLabel roleValueLabel;
 	private JLabel contractValueLabel;
 	private JButton backButton;
 	private JButton confirmButton;
@@ -59,7 +60,7 @@ public class AthleteTemp {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AthleteTemp window = new AthleteTemp();
+					DetailTemp window = new DetailTemp();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -71,7 +72,7 @@ public class AthleteTemp {
 	/**
 	 * Create the application.
 	 */
-	public AthleteTemp() {
+	public DetailTemp() {
 		initialize();
 	}
 
@@ -183,6 +184,7 @@ public class AthleteTemp {
 		panel.add(reactionLabel, gbc_reactionLabel);
 		
 		reactionValueLabel = new JLabel("5");
+		reactionValueLabel.setVisible(false);
 		reactionValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_reactionValueLabel = new GridBagConstraints();
 		gbc_reactionValueLabel.insets = new Insets(0, 0, 5, 5);
@@ -209,6 +211,7 @@ public class AthleteTemp {
 		panel.add(eyesightLabel, gbc_eyesightLabel);
 		
 		eyesightValueLabel = new JLabel("5");
+		eyesightValueLabel.setVisible(false);
 		eyesightValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_eyesightValueLabel = new GridBagConstraints();
 		gbc_eyesightValueLabel.insets = new Insets(0, 0, 5, 5);
@@ -235,6 +238,7 @@ public class AthleteTemp {
 		panel.add(intelligenceLabel, gbc_intelligenceLabel);
 		
 		intelligenceValueLabel = new JLabel("5");
+		intelligenceValueLabel.setVisible(false);
 		intelligenceValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_intelligenceValueLabel = new GridBagConstraints();
 		gbc_intelligenceValueLabel.insets = new Insets(0, 0, 5, 5);
@@ -261,6 +265,7 @@ public class AthleteTemp {
 		panel.add(staminaLabel, gbc_staminaLabel);
 		
 		staminaValueLabel = new JLabel("5");
+		staminaValueLabel.setVisible(false);
 		staminaValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_staminaValueLabel = new GridBagConstraints();
 		gbc_staminaValueLabel.insets = new Insets(0, 0, 5, 5);
@@ -298,8 +303,18 @@ public class AthleteTemp {
 		gbc_roleComboBox.gridy = 12;
 		panel.add(roleComboBox, gbc_roleComboBox);
 		
+		roleValueLabel = new JLabel("Support");
+		roleValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		roleValueLabel.setVisible(false);
+		GridBagConstraints gbc_roleValueLabel = new GridBagConstraints();
+		gbc_roleValueLabel.gridwidth = 3;
+		gbc_roleValueLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_roleValueLabel.gridx = 6;
+		gbc_roleValueLabel.gridy = 12;
+		panel.add(roleValueLabel, gbc_roleValueLabel);
 		
-		JLabel contractLabel = new JLabel("Contract:");
+		
+		JLabel contractLabel = new JLabel("Price:");
 		contractLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_contractLabel = new GridBagConstraints();
 		gbc_contractLabel.anchor = GridBagConstraints.WEST;
@@ -441,6 +456,13 @@ public class AthleteTemp {
 	 */
 	public JComboBox getRoleComboBox() {
 		return roleComboBox;
+	}
+
+	/**
+	 * @return the roleValueLabel
+	 */
+	public JLabel getRoleValueLabel() {
+		return roleValueLabel;
 	}
 
 	/**

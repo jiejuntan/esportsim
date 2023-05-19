@@ -25,69 +25,46 @@ import javax.swing.JTextField;
 
 import main.gui.GUIConstants;
 import main.gui.GameFrame;
-import main.gui.panels.AthletePanel;
+import main.gui.panels.DetailPanel;
+import main.gui.panels.DraftDetailPanel;
 import main.model.Athlete;
 import main.model.Equipment;
+import main.model.Market;
 
 /**
- * Modular controller for athlete detail screen.
+ * Controller for detail screen during draft
  * 
  * @author Jiejun Tan
  *
  */
-public class AthleteController extends Controller {
+public class DraftDetailController extends Controller {
 
 	/**
 	 * Athlete currently in view.
 	 */
 	private Athlete athlete;
-	private String previous;
 	
 	/**
-	 * Constructor when drafting or purchasing
+	 * Constructor when drafting
 	 * 
 	 * @param frame 	game frame
 	 * @param athlete 	athlete to view
 	 */
-	public AthleteController(GameFrame frame, Athlete athlete) {
+	public DraftDetailController(GameFrame frame, Athlete athlete) {
 		super(frame);
 		this.athlete = athlete;
 		initialize();
 	}
-	
-	/**
-	 * Constructor when using items on athlete
-	 * 
-	 * @param frame
-	 * @param athlete
-	 * @param item
-	 */
-	public AthleteController(GameFrame frame, Athlete athlete, Equipment item) {
-		super(frame);
-		this.athlete = athlete;
-	}
 
 	@Override
 	protected void initialize() {
-		panel = new AthletePanel();
+		panel = new DraftDetailPanel();
 		
 		setHeading();
 		setPortrait();
 		setStats();
 		
-		if (previous == "Item") {
-			setBonusStats();
-		}
-		
-		JLabel roleLabel = ((AthletePanel) panel).getRoleLabel();
-		JComboBox roleComboBox = ((AthletePanel) panel).getRoleComboBox();
-		
-		JLabel contractLabel = ((AthletePanel) panel).getContractLabel();
-		JLabel contractValueLabel = ((AthletePanel) panel).getContractValueLabel();
-		
-		
 		initializeBackButton();
-		
 		initializeConfirmButton();
 		
 		launch();
@@ -98,7 +75,7 @@ public class AthleteController extends Controller {
 	 * Sets heading to an editable name
 	 */
 	private void setHeading() {
-		JTextField nameTextField = ((AthletePanel) panel).getNameTextField();
+		JTextField nameTextField = ((DetailPanel) panel).getNameTextField();
 		nameTextField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -113,7 +90,7 @@ public class AthleteController extends Controller {
 				}
 			}
 		});
-		JButton changeNameButton = ((AthletePanel) panel).getChangeNameButton();
+		JButton changeNameButton = ((DetailPanel) panel).getChangeNameButton();
 		changeNameButton.setText(athlete.getName());
 		nameTextField.setText(athlete.getName());
 		changeNameButton.addActionListener(new ActionListener() {
@@ -139,7 +116,7 @@ public class AthleteController extends Controller {
 	 * Sets the athlete's portrait
 	 */
 	private void setPortrait() {
-		JLabel portraitLabel = ((AthletePanel) panel).getPortraitLabel();
+		JLabel portraitLabel = ((DetailPanel) panel).getPortraitLabel();
 		String portraitPath = athlete.getPortraitPath();
 		BufferedImage portraitImage = null;
 		try {
@@ -154,37 +131,33 @@ public class AthleteController extends Controller {
 	}
 	
 	/**
-	 * Displays athlete's current stats.
+	 * Displays athlete's current stats and contract price
 	 */
 	private void setStats() {
-		JLabel reactionValueLabel = ((AthletePanel) panel).getReactionValueLabel();
+		JLabel reactionValueLabel = ((DetailPanel) panel).getReactionValueLabel();
 		reactionValueLabel.setText(String.valueOf(athlete.getReactionTime()));
 		
-		JLabel eyesightValueLabel = ((AthletePanel) panel).getEyesightValueLabel();
+		JLabel eyesightValueLabel = ((DetailPanel) panel).getEyesightValueLabel();
 		eyesightValueLabel.setText(String.valueOf(athlete.getEyeSight()));
 		
-		JLabel intelligenceValueLabel = ((AthletePanel) panel).getIntelligenceValueLabel();
+		JLabel intelligenceValueLabel = ((DetailPanel) panel).getIntelligenceValueLabel();
 		intelligenceValueLabel.setText(String.valueOf(athlete.getIntelligence()));
 		
-		JLabel staminaValueLabel = ((AthletePanel) panel).getStaminaValueLabel();
+		JLabel staminaValueLabel = ((DetailPanel) panel).getStaminaValueLabel();
 		staminaValueLabel.setText(String.valueOf(athlete.getStamina()));
-	}
-	
-	/**
-	 * Displays bonus stats added when using an item.
-	 */
-	private void setBonusStats() {
-		JLabel reactionBonusLabel = ((AthletePanel) panel).getReactionBonusLabel();
-		JLabel eyesightBonusLabel = ((AthletePanel) panel).getEyesightBonusLabel();
-		JLabel intelligenceBonusLabel = ((AthletePanel) panel).getIntelligenceBonusLabel();
-		JLabel staminaBonusLabel = ((AthletePanel) panel).getStaminaBonusLabel();
+		
+		
+		Market market = frame.getGame().getMarket();
+		int price = market.calculatePurchasePrice(athlete);
+		JLabel contractValueLabel = ((DetailPanel) panel).getPriceValueLabel();
+		contractValueLabel.setText("$" + String.valueOf(price));
 	}
 	
 	/**
 	 * Initializes back button based on previous screen
 	 */
 	private void initializeBackButton() {
-		JButton backButton = ((AthletePanel) panel).getBackButton();
+		JButton backButton = ((DetailPanel) panel).getBackButton();
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				toPreviousScreen();
@@ -196,9 +169,10 @@ public class AthleteController extends Controller {
 	 * Initializes confirm button based on previous screen
 	 */
 	private void initializeConfirmButton() {
-		JButton confirmButton = ((AthletePanel) panel).getConfirmButton();
+		JButton confirmButton = ((DetailPanel) panel).getConfirmButton();
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JComboBox roleComboBox = ((DetailPanel) panel).getRoleComboBox();
 			}
 		});
 	}

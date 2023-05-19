@@ -12,7 +12,7 @@ import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
-import main.gui.controllers.AthleteController;
+import main.gui.controllers.DraftDetailController;
 import main.gui.controllers.ClubController;
 import main.gui.controllers.DraftController;
 import main.gui.controllers.HomeController;
@@ -97,7 +97,7 @@ public class GameFrame {
 	 * @param athlete	Athlete to view
 	 */
 	public void toAthleteScreen(Athlete athlete) {
-		new AthleteController(this, athlete);
+		new DraftDetailController(this, athlete);
 	}
 	
 	/**

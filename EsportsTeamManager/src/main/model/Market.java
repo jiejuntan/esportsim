@@ -84,31 +84,37 @@ public class Market {
      * @param indexes	index of Athletes to purchase with name
      * @param isDrafting TODO
      */
-    public void purchaseAthletesAt(Map<Integer, String> indexes, boolean isDrafting) {
-    	Map<Integer, String> reversed = new LinkedHashMap<Integer, String>();
-        indexes.entrySet()
-        		.stream()
-        		.sorted(Collections.reverseOrder(Map.Entry.comparingByKey()))
-        		.forEachOrdered(entry -> reversed.put(entry.getKey(), entry.getValue()));
-    	for (Map.Entry<Integer, String> entry: reversed.entrySet()) {
-    		int index = entry.getKey();
-    		int price = calculatePurchasePriceAt(index);
-    		Athlete athlete = availableAthletes.get(index);
-    		athlete.changeName(entry.getValue());
-    		data.deductMoney(price);
-    		try {
-				data.getTeam().addAthlete(athlete, Role.RESERVE);
-    			purchasedAthletes.add(athlete);
-			} catch (TeamMemberLimitException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-    	}
-    }
+//    public void purchaseAthletesAt(Map<Integer, String> indexes, boolean isDrafting) {
+//    	Map<Integer, String> reversed = new LinkedHashMap<Integer, String>();
+//        indexes.entrySet()
+//        		.stream()
+//        		.sorted(Collections.reverseOrder(Map.Entry.comparingByKey()))
+//        		.forEachOrdered(entry -> reversed.put(entry.getKey(), entry.getValue()));
+//    	for (Map.Entry<Integer, String> entry: reversed.entrySet()) {
+//    		int index = entry.getKey();
+//    		int price = calculatePurchasePriceAt(index);
+//    		Athlete athlete = availableAthletes.get(index);
+//    		athlete.changeName(entry.getValue());
+//    		data.deductMoney(price);
+//    		try {
+//				data.getTeam().addAthlete(athlete, Role.RESERVE);
+//    			purchasedAthletes.add(athlete);
+//			} catch (TeamMemberLimitException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+//    	}
+//    }
     
-    
+    /**
+     * Purchases an athlete from market
+     * 
+     * @param index		index of Athletes to purchase with name
+     * @param role		role to assign Athlete
+     * @param newName	new name for Athlete
+     */
     public void purchaseAthlete(int index, Role role, String newName) {
-    	int price = calculatePurchasePriceAt(index);
+    	int price = calculatePurchasePrice(index);
     	Athlete athlete = availableAthletes.get(index);
     	athlete.changeName(newName);
     	try {
@@ -156,21 +162,31 @@ public class Market {
      */
 	public String athleteDescriptionAt(int index) {
 		Athlete athlete = getAvailableAthletes().get(index);
-		return String.format("<html>%s<br><br>Contract: $%s</html>", athlete, calculatePurchasePriceAt(index));
+		return String.format("<html>%s<br><br>Contract: $%s</html>", athlete, calculatePurchasePrice(index));
 	}
 	
     /**
-     * Calculates purchase price
+     * Calculates purchase price with index
      * 
      * @param 	index	index of athlete in market
      * 
      * @return			purchase price
      */
-    public int calculatePurchasePriceAt(int index) {
+    public int calculatePurchasePrice(int index) {
     	Athlete athlete = getAvailableAthletes().get(index);
     	return athlete.getBasePrice() * data.getDifficulty().modifier;
     }
     
+    /**
+     * Calculates purchase price with Athlete object
+     * 
+     * @param athlete	athlete to check price
+     * 
+     * @return			purchase price
+     */
+    public int calculatePurchasePrice(Athlete athlete) {
+    	return athlete.getBasePrice() * data.getDifficulty().modifier;
+    }
     
     /**
      * Calculates sale price
