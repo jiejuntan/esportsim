@@ -16,7 +16,6 @@ public class DraftPanel extends ThumbnailPanel {
 	 */
 	public DraftPanel() {
 		titleLabel.setText("Draft Team");
-		moneyLabel.setVisible(true);
 	}
 
 }

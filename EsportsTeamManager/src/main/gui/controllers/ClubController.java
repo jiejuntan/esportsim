@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 
 import main.gui.GameFrame;
 import main.gui.panels.ClubPanel;
+import main.gui.panels.DraftPanel;
 import main.model.Athlete;
 import main.model.Team;
 
@@ -23,6 +24,7 @@ public class ClubController extends Controller {
 	protected void initialize() {
 		panel = new ClubPanel();
 		setTitle();
+		setMoney(((ClubPanel) panel).getMoneyLabel());
 		setAthletes();
 		
 //		JButton returnButton = ((ClubPanel) panel).getReturnButton();

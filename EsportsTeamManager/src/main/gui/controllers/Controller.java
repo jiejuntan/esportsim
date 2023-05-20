@@ -9,6 +9,7 @@ import java.net.URISyntaxException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.gui.GUIConstants;
@@ -89,5 +90,16 @@ abstract class Controller {
 				new ImageIcon(GUIConstants
 						.tintImage(portraitImage, GUIConstants.PORTRAIT_BUTTON_ROLLOVER)
 						.getScaledInstance(GUIConstants.PORTRAIT_SMALL, GUIConstants.PORTRAIT_SMALL, Image.SCALE_DEFAULT)));
+	}
+
+	/**
+	 * Visually sets the current money.
+	 * 
+	 * @param moneyLabel label to display
+	 */
+	protected void setMoney(JLabel moneyLabel) {
+		int money = frame.getGame().getData().getMoney();
+		moneyLabel.setText("Money: $" + money);
+		moneyLabel.setVisible(true);
 	}
 }
