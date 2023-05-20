@@ -77,7 +77,7 @@ public class DraftController extends ThumbnailController {
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (team.hasMinimumSize()) {
-					toHomeScreen();
+					startGame();
 				} else {
 					JOptionPane.showMessageDialog(panel, 
 							"You don't have enough athletes to start! Select at least " + Team.MIN_TEAM_SIZE  + ".", 
@@ -85,6 +85,14 @@ public class DraftController extends ThumbnailController {
 				}
 			}
 		});
+	}
+	
+	/**
+	 * Starts the game.
+	 */
+	public void startGame() {
+		frame.getGame().getData().nextWeek();
+		toHomeScreen();
 	}
 	
 	/**

@@ -5,6 +5,7 @@ package main.gui.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -13,6 +14,7 @@ import main.gui.GameFrame;
 import main.gui.panels.RoleSwapPanel;
 import main.model.Athlete;
 import main.model.Team;
+import main.model.Team.Role;
 
 /**
  * Controller for swapping role of an athlete.
@@ -47,14 +49,19 @@ public class RoleSwapController extends ThumbnailController {
 		panel = new RoleSwapPanel();
 		
 		setSwappableAthletes();
-		initializeConfirmButton();
 		
 		launch();
 	}
 	
 	private void setSwappableAthletes() {
 		Team team = frame.getGame().getData().getTeam();
-		List<Athlete> athletes = team.getMainMembers();
+		
+		List<Athlete> athletes = new ArrayList<Athlete>();
+		if (athlete.getRole() == Role.RESERVE) {
+			athletes = team.getMainMembers();
+		} else {
+			athletes = team.getReserveMembers();
+		}
 		List<JButton> athleteButtons = ((RoleSwapPanel) panel).getThumbButtons();
 		
 		for (int i = 0; i < athletes.size(); i++) {
@@ -67,20 +74,24 @@ public class RoleSwapController extends ThumbnailController {
 			button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					team.swapRole(athlete, outgoingAthlete);
-					toDraftScreen();
+					if (frame.getGame().getData().seasonHasStarted()) {
+						toClubScreen();
+					} else {
+						toDraftScreen();
+					}
 				}
 			});
 		}
-	}
-	
-	private void initializeConfirmButton() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	private void toDraftScreen() {
 		close();
 		frame.toDraftScreen();
+	}
+	
+	private void toClubScreen() {
+		close();
+		frame.toClubScreen();
 	}
 
 }

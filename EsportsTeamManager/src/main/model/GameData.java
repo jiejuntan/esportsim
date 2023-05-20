@@ -66,7 +66,7 @@ public class GameData {
      * 
      * @return	<CODE>true</CODE> if season has started
      */
-    private boolean seasonHasStarted() {
+    public boolean seasonHasStarted() {
     	return getCurrentWeek() != 0;
     }
     
@@ -119,6 +119,12 @@ public class GameData {
 		}
 	}
 	
+	/**
+	 * Moves current week forward.
+	 */
+	public void nextWeek() {
+		currentWeek++;
+	}
 	
 	/**
 	 * Checks if duration is valid
