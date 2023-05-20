@@ -154,7 +154,7 @@ public class GameFrame {
 	/**
 	 * Launch the match screen.
 	 */
-	public void toMatchScreen(Team team) {
+	public void toMatchScreen() {
 		new MatchController(this);
 	}
 	

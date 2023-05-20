@@ -4,22 +4,25 @@ package main.gui.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import main.gui.GameFrame;
 import main.gui.panels.ClubPanel;
-import main.gui.panels.DraftPanel;
 import main.gui.panels.StadiumPanel;
-import main.model.Athlete;
 import main.model.Stadium;
 import main.model.Team;
 
+/**
+ * Handles the Stadium menu
+ * 
+ * @author blake
+ *
+ */
 public class StadiumController extends ThumbnailController {
 
 	/**
+	 * Constructor for controller
+	 * 
 	 * @param frame
 	 */
 	public StadiumController(GameFrame frame) {
@@ -35,6 +38,7 @@ public class StadiumController extends ThumbnailController {
 		panel = new StadiumPanel();
 		getMatches();
 		initializeConfirmButton();
+		initializeBackButton();
 		launch();
 	}
 	
@@ -82,10 +86,6 @@ public class StadiumController extends ThumbnailController {
 
 	    }
 	}
-
-	
-
-
 	
 	/**
 	 * If an opponent is selected then a match will be started
@@ -97,7 +97,7 @@ public class StadiumController extends ThumbnailController {
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (isOpponentSelected()) {
-					toMatchScreen(stadium.getSelectedOpponent());
+					toMatchScreen();
 				} else {
 					JOptionPane.showMessageDialog(panel, 
 							"You need to select an Opponent!.", 
@@ -107,10 +107,20 @@ public class StadiumController extends ThumbnailController {
 		});
 	}
 	
+
+	private void initializeBackButton() {
+		JButton backButton = ((StadiumPanel) panel).getBackButton();
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				toHomeScreen();
+			}
+		});
+	}
+	
 	/**
-	 * Checkds the opponent team button to see if any is selected
+	 * Checks the opponent team button to see if any is selected
 	 * 
-	 * @return
+	 * @return <CODE>boolean</CODE> isOpponentSelected?
 	 */
 	private boolean isOpponentSelected() {
 	    List<JButton> thumbButton = ((StadiumPanel) panel).getThumbButtons();
@@ -128,9 +138,9 @@ public class StadiumController extends ThumbnailController {
 	/**
 	 * Closes stadium screen and launches the match
 	 */
-	private void toMatchScreen(Team team) {
+	private void toMatchScreen() {
 		close();
-		frame.toMatchScreen(team);
+		frame.toMatchScreen();
 	}
 	
 	/**

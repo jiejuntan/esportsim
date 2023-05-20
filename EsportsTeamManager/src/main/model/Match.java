@@ -158,14 +158,15 @@ public class Match {
             action(opponentPlayer, getHighestSkillAthlete(homeTeam, "Aggro"));
             
             //Testing
-            roundResults.add("Home Wins Round " +round+" |H Health: "+getTeamHealth(homeTeam)+" |O Health: "+getTeamHealth(opponentTeam));
+            //roundResults.add("Home Wins Round " +round+" |H Health: "+getTeamHealth(homeTeam)+" |O Health: "+getTeamHealth(opponentTeam));
+            recordRoundResults(homePlayer, opponentPlayer);
         } else {
         	//Opponent Team player was quicker, Will now pick opponent target with the highest aggro
             action(opponentPlayer, getHighestSkillAthlete(homeTeam, "Aggro"));
             action(homePlayer, getHighestSkillAthlete(opponentTeam, "Aggro"));
             
             //Testing
-            roundResults.add("Opponent Wins Round "+round+" |H Health: "+getTeamHealth(homeTeam)+" |O Health: "+getTeamHealth(opponentTeam));
+           // roundResults.add("Opponent Wins Round "+round+" |H Health: "+getTeamHealth(homeTeam)+" |O Health: "+getTeamHealth(opponentTeam));
         }
         
     	//Increments to the next matchup of characters
@@ -193,6 +194,11 @@ public class Match {
         //No winner has been determined yet
         return -1;
     	  	
+    }
+    
+    private void recordRoundResults(IngameCharacters home, IngameCharacters opponent) {
+    	
+    	
     }
     
     

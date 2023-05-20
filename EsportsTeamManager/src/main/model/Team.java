@@ -325,6 +325,27 @@ public class Team {
 	private boolean isValidTeamName(String name) {
 		return name.matches(VALID_NAME_PATTERN);
 	}
+	
+	/**
+	 * Returns the total skill level of the team
+	 * 
+	 * @return <CODE>int</CODE> totalSkillLevel
+	 */
+	public int calculateTeamlevel() {
+		int totalSkillLevel = 0;
+		 
+		for (HashMap.Entry<Role, List<Athlete>> entry : members.entrySet()) {
+            // Get the list of Athletes for the current Role
+            List<Athlete> athletes = entry.getValue();
+
+            // Loop over all Athletes in the list
+            for (Athlete athlete : athletes) {
+            	totalSkillLevel += athlete.calculateSkillLevel();
+            }
+        }
+		
+		return totalSkillLevel;
+	}
 
 
     /********** Simple Getters & Setters **********/

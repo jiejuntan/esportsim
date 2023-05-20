@@ -22,5 +22,14 @@ public class MatchController extends Controller {
 		launch();
 	}
 	
+	
+	private void startBattle() {
+		
+	}
+	
+	private void displayRoundResults() {
+		
+	}
+	
 
 }
