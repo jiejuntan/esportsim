@@ -124,6 +124,8 @@ public class DraftDetailController extends DetailController {
 		JLabel staminaValueLabel = ((DetailPanel) panel).getStaminaValueLabel();
 		staminaValueLabel.setText(String.valueOf(athlete.getStamina()));
 		
+		JComboBox roleComboBox = ((DetailPanel) panel).getRoleComboBox();
+		roleComboBox.setSelectedItem(athlete.getRole());
 		
 		Difficulty diff = frame.getGame().getData().getDifficulty();
 		int price = athlete.calculatePurchasePrice(diff.modifier);

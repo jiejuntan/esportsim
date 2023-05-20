@@ -265,7 +265,7 @@ public class Team {
 	 * 
 	 * @return Role
 	 */
-	public Role getRandomRole(boolean includeReserve) {
+	static public Role getRandomRole(boolean includeReserve) {
 		Random random = new Random();
 	        
         // Picks one of the three roles to assign to the Athlete
@@ -275,11 +275,9 @@ public class Team {
         // to the list of possible return values
         if (includeReserve) {
         	return roles[random.nextInt(4)];
-        	
         } else {
         	return roles[random.nextInt(3)];
         }
-
 	}
 	
 	/**
