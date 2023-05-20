@@ -50,7 +50,7 @@ public class DraftDetailController extends Controller {
 	 * Constructor when drafting
 	 * 
 	 * @param frame 	game frame
-	 * @param athlete 	athlete to view
+	 * @param athlete 	Athlete to view
 	 */
 	public DraftDetailController(GameFrame frame, Athlete athlete) {
 		super(frame);

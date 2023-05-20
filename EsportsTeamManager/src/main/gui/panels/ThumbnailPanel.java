@@ -32,7 +32,7 @@ public class ThumbnailPanel extends JPanel {
 	
 	// Gettable components for controller manipulation. Protected properties are also exposed to subclasses.
 	private List<JButton> thumbButtons;	
-	private JLabel moneyLabel;
+	protected JLabel moneyLabel;
 	protected JButton confirmButton;
 
 	
@@ -42,7 +42,7 @@ public class ThumbnailPanel extends JPanel {
 	protected JLabel subheadingLabel2;
 	
 	// Prevent instantiation without subclassing
-	protected ThumbnailPanel() {	
+	protected ThumbnailPanel() {
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 10, 0, 10, 0};
@@ -210,6 +210,12 @@ public class ThumbnailPanel extends JPanel {
 		this.add(confirmButton, gbc_confirmButton);
 	}
 
+	protected void disableBottomThumbs() {
+		for (int i = 5; i < 10; i++) {
+			thumbButtons.get(i).setVisible(false);
+		}
+	}
+	
 	/**
 	 * @return the thumbButtons
 	 */
