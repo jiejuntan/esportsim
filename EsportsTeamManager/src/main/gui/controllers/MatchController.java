@@ -1,7 +1,7 @@
 package main.gui.controllers;
 
 import main.gui.GameFrame;
-import main.gui.panels.StadiumPanel;
+import main.gui.panels.MatchPanel;
 
 public class MatchController extends Controller {
 
@@ -18,7 +18,7 @@ public class MatchController extends Controller {
 	 */
 	@Override
 	protected void initialize() {
-		panel = new StadiumPanel();
+		panel = new MatchPanel();
 		launch();
 	}
 	

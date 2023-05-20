@@ -14,9 +14,9 @@ public class Stadium {
 	 */
 	private static final int OPPONENT_LIMIT = 5;
     
-    public Stadium(Difficulty difficulty) {
+    public Stadium(GameData gameData) {
     	this.matches = new ArrayList<Team>();
-    	generateMatches(difficulty);
+    	generateMatches(gameData.getDifficulty());
     }
     
     

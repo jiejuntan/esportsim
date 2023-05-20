@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Random;
 
 import main.exceptions.TeamLimitException;
+import main.gui.GUIConstants;
 
 /**
  * Represents the player's and opponents' teams.
@@ -58,6 +59,8 @@ public class Team {
 	 * 5 starting, 1 reserve minimum
 	 */
 	public static final int MIN_TEAM_SIZE = 6;
+	
+	private String logoPath;
 	
 	/**
 	 * Defines the Athletes Roles and the stats of each role
@@ -134,7 +137,7 @@ public class Team {
 			addAthlete(new Athlete(skillLevel),getRandomRole(false));
 		}
 		
-		
+		this.logoPath = GUIConstants.PORTRAIT_PLACEHOLDER;
 		
 		this.wins = 0;
 		this.losses = 0;
@@ -402,6 +405,13 @@ public class Team {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * @return the logoPath
+	 */
+	public String getLogoPath() {
+		return logoPath;
 	}
 
 	/********** Simple Getters and Setters **********/
