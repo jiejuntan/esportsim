@@ -33,6 +33,7 @@ public class ThumbnailPanel extends JPanel {
 	// Gettable components for controller manipulation. Protected properties are also exposed to subclasses.
 	private List<JButton> thumbButtons;	
 	protected JLabel moneyLabel;
+	protected JButton backButton;
 	protected JButton confirmButton;
 	protected JLabel titleLabel;
 	
@@ -193,10 +194,21 @@ public class ThumbnailPanel extends JPanel {
 		GridBagConstraints gbc_moneyLabel = new GridBagConstraints();
 		gbc_moneyLabel.fill = GridBagConstraints.VERTICAL;
 		gbc_moneyLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_moneyLabel.gridx = 3;
+		gbc_moneyLabel.gridx = 7;
 		gbc_moneyLabel.gridy = 11;
 		this.add(moneyLabel, gbc_moneyLabel);
 		
+		backButton = new JButton("Return");
+		backButton.setVisible(false);
+		backButton.setPreferredSize(new Dimension(250, 50));
+		backButton.setFocusPainted(false);
+		backButton.setBackground(GUIConstants.COMPONENT);
+		backButton.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		GridBagConstraints gbc_backButton = new GridBagConstraints();
+		gbc_backButton.insets = new Insets(0, 0, 5, 5);
+		gbc_backButton.gridx = 1;
+		gbc_backButton.gridy = 11;
+		this.add(backButton, gbc_backButton);
 		
 		confirmButton = new JButton("Confirm");
 		confirmButton.setPreferredSize(new Dimension(250, 50));
@@ -228,6 +240,13 @@ public class ThumbnailPanel extends JPanel {
 	 */
 	public JLabel getMoneyLabel() {
 		return moneyLabel;
+	}
+
+	/**
+	 * @return the backButton
+	 */
+	public JButton getBackButton() {
+		return backButton;
 	}
 
 	/**

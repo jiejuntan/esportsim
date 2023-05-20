@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import main.gui.GameFrame;
@@ -20,7 +19,7 @@ import main.model.Team;
  * @author Jiejun Tan
  *
  */
-public class DraftController extends Controller {
+public class DraftController extends ThumbnailController {
 	
 	/**
 	 * @param frame	game frame
@@ -36,19 +35,10 @@ public class DraftController extends Controller {
 	@Override
 	protected void initialize() {
 		panel = new DraftPanel();
-		setMoney();
+		setMoney(((DraftPanel) panel).getMoneyLabel());
 		setDraftableAthletes();
 		initializeConfirmButton();
 		launch();
-	}
-	
-	/**
-	 * Visually sets the current money.
-	 */
-	private void setMoney() {
-		int money = frame.getGame().getData().getMoney();
-		JLabel moneyValueLabel = ((DraftPanel) panel).getMoneyLabel();
-		moneyValueLabel.setText("Money: $" + money);
 	}
 	
 	/**
