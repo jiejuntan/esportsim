@@ -180,43 +180,18 @@ public class ClubDetailController extends DetailController {
 				
 				JTextField nameTextField = ((DetailPanel) panel).getNameTextField();
 				String newName = nameTextField.getText();
-				
-				
-				Market market = frame.getGame().getMarket();
+			
 				Team team = frame.getGame().getData().getTeam();
 				try {
-					market.purchaseAthlete(athlete, role, newName);
+					athlete.setName(newName);
+					team.changeRole(athlete, role);
 					toPreviousScreen();
-				} catch (IllegalFundsException e1) {
-					JOptionPane.showMessageDialog(panel, 
-							"You don't have enough money.", 
+				} catch (IllegalTeamException e1) {
+					int shouldSwap = JOptionPane.showConfirmDialog(panel, 
+							"Choose a member to swap with or cancel.", 
 							"Error", JOptionPane.ERROR_MESSAGE);
-				} catch (IllegalTeamException e2) {
-					JOptionPane.showMessageDialog(panel, 
-							"You need to have a full starting team of " + Team.MAIN_LIMIT + " before assigning reserves.", 
-							"Error", JOptionPane.ERROR_MESSAGE);
-				} catch (TeamLimitException e3) {
-					switch 	(e3.getType()) {
-					case WHOLE:
-						JOptionPane.showMessageDialog(panel, 
-								"Your team is full.", 
-								"Error", JOptionPane.ERROR_MESSAGE);
-						break;
-					case MAIN:
-						int shouldSwap = JOptionPane.showConfirmDialog(panel, 
-								"Your main team is full.\nDo you want to replace a current starting member?\n\nYou may also return and assign the new member as a reserve.", 
-								"Error", JOptionPane.ERROR_MESSAGE);
-						if (shouldSwap == JOptionPane.YES_OPTION) {
-							try {
-								market.purchaseAthlete(athlete, Role.RESERVE, newName);
-								toRoleSwapScreen(athlete);
-							} catch (IllegalFundsException | TeamLimitException | IllegalTeamException e1) {
-								e1.printStackTrace();
-							}
-						}
-						break;
-					default:
-						break;
+					if (shouldSwap == JOptionPane.YES_OPTION) {
+						toRoleSwapScreen(athlete);
 					}
 				}
 			}

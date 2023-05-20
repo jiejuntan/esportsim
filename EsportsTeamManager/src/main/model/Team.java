@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import main.exceptions.IllegalTeamException;
 import main.exceptions.TeamLimitException;
 import main.gui.GUIConstants;
+import main.exceptions.TeamLimitException.Type;
 
 /**
  * Represents the player's and opponents' teams.
@@ -133,8 +135,12 @@ public class Team {
 		}
 		
 		for (int athleteCount = 0; athleteCount < MAIN_LIMIT; athleteCount++) {
-			//Adds athlete to the team
-			addAthlete(new Athlete(skillLevel),getRandomRole(false));
+			try {
+				addAthlete(new Athlete(skillLevel),getRandomRole(false));
+			} catch (IllegalTeamException | TeamLimitException e) {
+				// Exception is unrecoverable
+				e.printStackTrace();
+			}
 		}
 		
 		this.logoPath = GUIConstants.PORTRAIT_PLACEHOLDER;
@@ -148,14 +154,31 @@ public class Team {
 	 * 
 	 * @param athlete 					Athlete to add
 	 * @param role 						Role to add Athlete in
+	 * @throws IllegalTeamException 	if whole team or main team is full
+     * @throws IllegalTeamException 	if adding as reserve while main team is not full
 	 */
-	public void addAthlete(Athlete athlete, Role role) {
+	public void addAthlete(Athlete athlete, Role role) throws IllegalTeamException, TeamLimitException {
+		if (isTeamFull()) {
+			throw new TeamLimitException(Type.WHOLE);
+		}
+		switch (role) {
+		case RESERVE:
+			if (!isMainTeamFull()) {
+				throw new IllegalTeamException();
+			}
+			break;
+		default:
+			if (isMainTeamFull()) {
+				throw new TeamLimitException(Type.MAIN);
+			}
+			break;
+		}
 		members.get(role).add(athlete);
 		athlete.setRole(role);
 	}
 	
 	/**
-	 * Removes an Athlete from the Team and returns the role it was in.
+	 * Removes an Athlete from the Team
 	 * 
 	 * @param athlete Athlete to remove
 	 */
@@ -170,18 +193,33 @@ public class Team {
 	}
 
 	/**
-	 * Assigns an athlete to a role
+	 * Changes a current member's role
 	 * 
-	 * @param athlete Athlete to assign
-	 * @param role    Role to assign to
+	 * @param athlete 				Athlete to assign
+	 * @param role    				Role to assign to
+	 * @throws IllegalTeamException if swapping between main and reserve
 	 */
-	public void assignRole(Athlete athlete, Role role) {
-		removeAthlete(athlete);
-		addAthlete(athlete, role);
+	public void changeRole(Athlete athlete, Role role) throws IllegalTeamException {
+		// Do nothing if same role
+		if (athlete.getRole() == role) {
+			return;
+		} 
+		// Throw exception to prompt swap if swapping between main and reserve
+		if (athlete.getRole() == Role.RESERVE || role == Role.RESERVE) {
+			throw new IllegalTeamException();
+		}
+		// Swapping between main roles should be legal
+		try {
+			removeAthlete(athlete);
+			addAthlete(athlete, role);
+		} catch (IllegalTeamException | TeamLimitException e) {
+			// Unrecoverable exception
+			e.printStackTrace();
+		}
 	}
 	
 	/**
-	 * Swaps two athlete's roles
+	 * Swaps two athletes between main team and reserve team
 	 * 
 	 * @param incoming	Athlete triggering role swap
 	 * @param outgoing	target Athlete to swap
@@ -190,8 +228,22 @@ public class Team {
 		Role incomingRole = incoming.getRole();
 		Role outgoingRole = outgoing.getRole();
 		
-		assignRole(incoming, outgoingRole);
-		assignRole(outgoing, incomingRole);
+		removeAthlete(incoming);
+		removeAthlete(outgoing);
+		
+		// Check which is in main role and add to main role first to avoid illegal team exception
+		try {
+			if (incomingRole != Role.RESERVE) {
+				addAthlete(outgoing, incomingRole);
+				addAthlete(incoming, outgoingRole);
+			} else {
+				addAthlete(incoming, outgoingRole);
+				addAthlete(outgoing, incomingRole);
+			}
+		} catch (TeamLimitException | IllegalTeamException e1) {
+			// Exception is unrecoverable
+			e1.printStackTrace();
+		}
 	}
 	
 	/**
