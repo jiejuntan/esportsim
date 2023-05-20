@@ -34,11 +34,24 @@ public class HomeController extends Controller {
 				toClubScreen();
 			}
 		});
+		
+		JButton stadiumButton = ((HomePanel) panel).getStadiumButton();
+		stadiumButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				toStadiumScreen();
+			}
+		});
+		
 		launch();
 	}
 	
 	private void toClubScreen() {
 		close();
 		frame.toClubScreen();
+	}
+	
+	private void toStadiumScreen() {
+		close();
+		frame.toStadiumScreen();
 	}
 }

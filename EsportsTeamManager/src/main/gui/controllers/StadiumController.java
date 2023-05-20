@@ -4,22 +4,25 @@ package main.gui.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import main.gui.GameFrame;
 import main.gui.panels.ClubPanel;
-import main.gui.panels.DraftPanel;
 import main.gui.panels.StadiumPanel;
-import main.model.Athlete;
 import main.model.Stadium;
 import main.model.Team;
 
+/**
+ * Handles the Stadium menu
+ * 
+ * @author blake
+ *
+ */
 public class StadiumController extends ThumbnailController {
 
 	/**
+	 * Constructor for controller
+	 * 
 	 * @param frame
 	 */
 	public StadiumController(GameFrame frame) {
@@ -34,8 +37,8 @@ public class StadiumController extends ThumbnailController {
 	protected void initialize() {
 		panel = new StadiumPanel();
 		getMatches();
-		chooseOpponentButton();
 		initializeConfirmButton();
+		initializeBackButton();
 		launch();
 	}
 	
@@ -43,43 +46,45 @@ public class StadiumController extends ThumbnailController {
 	 * Gets the opponent teams and displays them on the panel
 	 */
 	private void getMatches() {
-		
-		Stadium stadium = frame.getGame().getStadium();
-		List<Team> opponentTeams = stadium.getMatches();
-		List<JButton> teamButtons = ((DraftPanel) panel).getThumbButtons();
-		
-		for(int i = 0; i < opponentTeams.size(); i++) {
-			
-			Team team = opponentTeams.get(i);
-			JButton button = teamButtons.get(i);
-			
-		}
-		
-	}
-	
-	/**
-	 *  Adds listeners to the Opponent team buttons to check if selected
-	 */
-	private void chooseOpponentButton() {
-		List<JButton> thumbButton = ((StadiumPanel) panel).getThumbButtons();
 
-		//adds listiners
-		for (int i = 0; i < thumbButton.size(); i++) {
-		    final int index = i;
-		    thumbButton.get(i).addActionListener(new ActionListener() {
-		        public void actionPerformed(ActionEvent e) {
-		            //Set clicked button 
-		            thumbButton.get(index).setEnabled(true);
-		            
-		            // Enable all other buttons
-		            for (int j = 0; j < thumbButton.size(); j++) {
-		                if (j != index) {
-		                    thumbButton.get(j).setEnabled(false);
-		                }
-		            }
-		        }
-		    });
-		}
+	    Stadium stadium = frame.getGame().getStadium();
+	    List<Team> opponentTeams = stadium.getMatches();
+	    List<JButton> teamButtons = ((StadiumPanel) panel).getThumbButtons();
+
+	    for(int i = 0; i < opponentTeams.size(); i++) {
+
+	        Team team = opponentTeams.get(i);
+	        JButton thumbButton = teamButtons.get(i);
+	        String path = team.getLogoPath();
+
+	        formatButtonIcon(thumbButton, path);
+
+	        thumbButton.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                // If button is already enabled, disable it and enable all others
+	                if (thumbButton.isEnabled()) {
+	                    thumbButton.setEnabled(false);
+	                    for (JButton otherButton : teamButtons) {
+	                        if (otherButton != thumbButton) {
+	                            otherButton.setEnabled(true);
+	                        }
+	                    }
+	                }
+	                // If button is disabled, enable it and disable all others
+	                else {
+	                    thumbButton.setEnabled(true);
+	                    for (JButton otherButton : teamButtons) {
+	                        if (otherButton != thumbButton) {
+	                            otherButton.setEnabled(false);
+	                        }
+	                    }
+	                }
+	            }
+	        });
+	        
+	        thumbButton.setEnabled(true); // Enable the button by default
+
+	    }
 	}
 	
 	/**
@@ -88,11 +93,11 @@ public class StadiumController extends ThumbnailController {
 	private void initializeConfirmButton() {
 		Stadium stadium = frame.getGame().getStadium();	
 		
-		JButton confirmButton = ((DraftPanel) panel).getConfirmButton();
+		JButton confirmButton = ((StadiumPanel) panel).getConfirmButton();
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (isOpponentSelected()) {
-					toMatchScreen(stadium.getSelectedOpponent());
+					toMatchScreen();
 				} else {
 					JOptionPane.showMessageDialog(panel, 
 							"You need to select an Opponent!.", 
@@ -102,10 +107,20 @@ public class StadiumController extends ThumbnailController {
 		});
 	}
 	
+
+	private void initializeBackButton() {
+		JButton backButton = ((StadiumPanel) panel).getBackButton();
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				toHomeScreen();
+			}
+		});
+	}
+	
 	/**
-	 * Checkds the opponent team button to see if any is selected
+	 * Checks the opponent team button to see if any is selected
 	 * 
-	 * @return
+	 * @return <CODE>boolean</CODE> isOpponentSelected?
 	 */
 	private boolean isOpponentSelected() {
 	    List<JButton> thumbButton = ((StadiumPanel) panel).getThumbButtons();
@@ -123,9 +138,9 @@ public class StadiumController extends ThumbnailController {
 	/**
 	 * Closes stadium screen and launches the match
 	 */
-	private void toMatchScreen(Team team) {
+	private void toMatchScreen() {
 		close();
-		frame.toMatchScreen(team);
+		frame.toMatchScreen();
 	}
 	
 	/**

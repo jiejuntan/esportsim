@@ -19,6 +19,7 @@ public class HomePanel extends JPanel {
 	private JLabel weekLabel;
 	private JLabel moneyLabel;
 	private JButton clubButton;
+	private JButton stadiumButton;
 	
 	public HomePanel() {
 		GridBagLayout gbl_panel = new GridBagLayout();
@@ -68,16 +69,16 @@ public class HomePanel extends JPanel {
 		gbc_clubButton.gridy = 3;
 		this.add(clubButton, gbc_clubButton);
 		
-		JButton btnStadium = new JButton("Stadium");
-		btnStadium.setPreferredSize(new Dimension(200, 50));
-		btnStadium.setFont(new Font("Unispace", Font.PLAIN, 30));
-		btnStadium.setFocusPainted(false);
-		btnStadium.setBackground(Color.LIGHT_GRAY);
+		stadiumButton = new JButton("Stadium");
+		stadiumButton.setPreferredSize(new Dimension(200, 50));
+		stadiumButton.setFont(new Font("Unispace", Font.PLAIN, 30));
+		stadiumButton.setFocusPainted(false);
+		stadiumButton.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_btnStadium = new GridBagConstraints();
 		gbc_btnStadium.insets = new Insets(0, 0, 5, 5);
 		gbc_btnStadium.gridx = 3;
 		gbc_btnStadium.gridy = 4;
-		this.add(btnStadium, gbc_btnStadium);
+		this.add(stadiumButton, gbc_btnStadium);
 		
 		JButton marketButton = new JButton("Market");
 		marketButton.setPreferredSize(new Dimension(200, 50));
@@ -124,5 +125,13 @@ public class HomePanel extends JPanel {
 	public JButton getClubButton() {
 		return clubButton;
 	}
+	
+	/**
+	 * @return the clubButton
+	 */
+	public JButton getStadiumButton() {
+		return stadiumButton;
+	}
+	
 
 }

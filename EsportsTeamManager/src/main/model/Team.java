@@ -9,6 +9,7 @@ import java.util.Random;
 
 import main.exceptions.IllegalTeamException;
 import main.exceptions.TeamLimitException;
+import main.gui.GUIConstants;
 import main.exceptions.TeamLimitException.Type;
 
 /**
@@ -60,6 +61,8 @@ public class Team {
 	 * 5 starting, 1 reserve minimum
 	 */
 	public static final int MIN_TEAM_SIZE = 6;
+	
+	private String logoPath;
 	
 	/**
 	 * Defines the Athletes Roles and the stats of each role
@@ -140,7 +143,7 @@ public class Team {
 			}
 		}
 		
-		
+		this.logoPath = GUIConstants.PORTRAIT_PLACEHOLDER;
 		
 		this.wins = 0;
 		this.losses = 0;
@@ -372,6 +375,27 @@ public class Team {
 	private boolean isValidTeamName(String name) {
 		return name.matches(VALID_NAME_PATTERN);
 	}
+	
+	/**
+	 * Returns the total skill level of the team
+	 * 
+	 * @return <CODE>int</CODE> totalSkillLevel
+	 */
+	public int calculateTeamlevel() {
+		int totalSkillLevel = 0;
+		 
+		for (HashMap.Entry<Role, List<Athlete>> entry : members.entrySet()) {
+            // Get the list of Athletes for the current Role
+            List<Athlete> athletes = entry.getValue();
+
+            // Loop over all Athletes in the list
+            for (Athlete athlete : athletes) {
+            	totalSkillLevel += athlete.calculateSkillLevel();
+            }
+        }
+		
+		return totalSkillLevel;
+	}
 
 
     /********** Simple Getters & Setters **********/
@@ -452,6 +476,13 @@ public class Team {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * @return the logoPath
+	 */
+	public String getLogoPath() {
+		return logoPath;
 	}
 
 	/********** Simple Getters and Setters **********/
