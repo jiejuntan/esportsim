@@ -10,9 +10,9 @@ import java.util.List;
 import javax.swing.JButton;
 
 import main.gui.GameFrame;
-import main.gui.panels.DraftPanel;
 import main.gui.panels.RoleSwapPanel;
 import main.model.Athlete;
+import main.model.Team;
 
 /**
  * Controller for swapping role of an athlete.
@@ -53,24 +53,23 @@ public class RoleSwapController extends Controller {
 	}
 	
 	private void setSwappableAthletes() {
-		List<Athlete> athletes = frame.getGame().getData().getTeam().getMainMembers();
-		List<JButton> athleteButtons = ((DraftPanel) panel).getThumbButtons();
+		Team team = frame.getGame().getData().getTeam();
+		List<Athlete> athletes = team.getMainMembers();
+		List<JButton> athleteButtons = ((RoleSwapPanel) panel).getThumbButtons();
 		
 		for (int i = 0; i < athletes.size(); i++) {
-			Athlete athlete = athletes.get(i);
+			Athlete outgoingAthlete = athletes.get(i);
 			JButton button = athleteButtons.get(i);
-			String path = athlete.getPortraitPath();
+			String path = outgoingAthlete.getPortraitPath();
 			
 			formatButtonIcon(button, path);
-			
-//			if (!market.isPurchased(athlete)) {
-//				button.setEnabled(true);
-//				button.addActionListener(new ActionListener() {
-//					public void actionPerformed(ActionEvent e) {
-//						toAthleteScreen(athlete);
-//					}
-//				});
-//			}
+			button.setEnabled(true);
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					team.swapRole(athlete, outgoingAthlete);
+					toDraftScreen();
+				}
+			});
 		}
 	}
 	
@@ -79,6 +78,9 @@ public class RoleSwapController extends Controller {
 		
 	}
 
-	
+	private void toDraftScreen() {
+		close();
+		frame.toDraftScreen();
+	}
 
 }
