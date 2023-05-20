@@ -4,6 +4,8 @@
 package main.gui.panels;
 
 /**
+ * Panel to display available athletes to swap.
+ * 
  * @author Jiejun Tan
  *
  */

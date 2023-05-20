@@ -16,36 +16,8 @@ public class Club {
     public Club(GameData data) {
     	this.data = data;
     }
-    
-    public String athleteDescriptionAt(Role role) {
-    	Athlete athlete = data.getTeam().getTeamMembers().get(role);
-    	return String.valueOf(athlete);
-    }
-    
-    
-//    /**
-//     * Swaps Athletes between teamMembers and reserveMembers
-//     * 
-//     * @param teamIndex
-//     * @param reserveIndex
-//     */
-//    public void swapAthletes(int teamIndex, int reserveIndex) {
-//    	
-//    	//Gets that Teams Current Players
-//        List<Athlete> teamMembers = team.getTeamMembers();
-//        List<Athlete> reserveMembers = team.getReserveMembers();
-//    	
-//    	
-//    	 // Get the Athletes to be swapped
-//        Athlete teamSwap = teamMembers.get(teamIndex);
-//        Athlete reserveSwap = reserveMembers.get(reserveIndex);
-//
-//        // Swap the Athletes
-//        teamMembers.set(teamIndex, reserveSwap);
-//        reserveMembers.set(reserveIndex, teamSwap);
-//    	
-//    }
-    
+
+  
     /**
      * Takes in an item and athlete and applies that items effect to the athlete
      * 
@@ -76,8 +48,6 @@ public class Club {
     	 }
     	
     }
-    
-    
     
     /**
      * Gets the Club inventory

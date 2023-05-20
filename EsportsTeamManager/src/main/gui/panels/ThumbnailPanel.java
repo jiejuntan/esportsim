@@ -34,10 +34,9 @@ public class ThumbnailPanel extends JPanel {
 	private List<JButton> thumbButtons;	
 	protected JLabel moneyLabel;
 	protected JButton confirmButton;
-
+	protected JLabel titleLabel;
 	
 	// Exposed components to toggle visibility in subclasses
-	protected JLabel titleLabel;
 	protected JLabel subheadingLabel1;
 	protected JLabel subheadingLabel2;
 	
@@ -189,6 +188,7 @@ public class ThumbnailPanel extends JPanel {
 				
 		
 		moneyLabel = new JLabel();
+		moneyLabel.setVisible(false);
 		moneyLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_moneyLabel = new GridBagConstraints();
 		gbc_moneyLabel.fill = GridBagConstraints.VERTICAL;
@@ -235,6 +235,13 @@ public class ThumbnailPanel extends JPanel {
 	 */
 	public JButton getConfirmButton() {
 		return confirmButton;
+	}
+
+	/**
+	 * @return the titleLabel
+	 */
+	public JLabel getTitleLabel() {
+		return titleLabel;
 	}
 	
 }

@@ -1,21 +1,13 @@
 package main.gui.controllers;
 
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import main.gui.GUIConstants;
 import main.gui.GameFrame;
 import main.gui.panels.DraftPanel;
 import main.model.Athlete;
@@ -86,30 +78,6 @@ public class DraftController extends Controller {
 	}
 	
 	/**
-	 * Format button icons for available athletes.
-	 * 
-	 * @param button		button to format
-	 * @param portraitPath 	path of athlete portrait
-	 */
-	private void formatButtonIcon(JButton button, String portraitPath) {
-		button.setBorder(GUIConstants.PORTRAIT_BORDER_SMALL);
-		BufferedImage portraitImage = null;
-		try {
-			portraitImage = ImageIO.read(new File(getClass()
-					.getResource(portraitPath)
-					.toURI()));
-		} catch (IOException | URISyntaxException e) {
-			e.printStackTrace();
-		}
-		button.setIcon(new ImageIcon(portraitImage
-				.getScaledInstance(GUIConstants.PORTRAIT_SMALL, GUIConstants.PORTRAIT_SMALL, Image.SCALE_DEFAULT)));
-		button.setRolloverIcon(
-				new ImageIcon(GUIConstants
-						.tintImage(portraitImage, GUIConstants.PORTRAIT_BUTTON_ROLLOVER)
-						.getScaledInstance(GUIConstants.PORTRAIT_SMALL, GUIConstants.PORTRAIT_SMALL, Image.SCALE_DEFAULT)));
-	}
-	
-	/**
 	 * Initialize the confirm button used once drafting is finished.
 	 */
 	private void initializeConfirmButton() {
@@ -142,7 +110,7 @@ public class DraftController extends Controller {
 	 */
 	private void toAthleteScreen(Athlete athlete) {
 		close();
-		frame.toAthleteScreen(athlete);
+		frame.toDraftDetailScreen(athlete);
 	}
 	
 }

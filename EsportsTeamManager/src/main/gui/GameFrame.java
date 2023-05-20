@@ -16,6 +16,7 @@ import main.gui.controllers.DraftDetailController;
 import main.gui.controllers.ClubController;
 import main.gui.controllers.DraftController;
 import main.gui.controllers.HomeController;
+import main.gui.controllers.RoleSwapController;
 import main.gui.controllers.MatchController;
 import main.gui.controllers.SetupController;
 import main.gui.controllers.StartController;
@@ -99,8 +100,15 @@ public class GameFrame {
 	 * Launch the specified Athlete's detail screen.
 	 * @param athlete	Athlete to view
 	 */
-	public void toAthleteScreen(Athlete athlete) {
+	public void toDraftDetailScreen(Athlete athlete) {
 		new DraftDetailController(this, athlete);
+	}
+	
+	/**
+	 * Launch the screen to swap specified Athlete.
+	 */
+	public void toRoleSwapScreen(Athlete athlete) {
+		new RoleSwapController(this, athlete);
 	}
 	
 	/**
@@ -166,7 +174,7 @@ public class GameFrame {
 		FlatLightLaf.setup();
 		UIManager.put("Button.arc", 20);
 		UIManager.put("Button.hoverBorderColor", Color.GRAY);
-		UIManager.put("TextComponent.arc", 20);
+		UIManager.put("TextComponesssssnt.arc", 20);
 		UIManager.put("Component.focusColor", Color.GRAY);
 		UIManager.put("Component.focusedBorderColor", Color.GRAY);
 	}
