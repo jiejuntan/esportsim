@@ -2,14 +2,22 @@ package main.gui.panels;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
+import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import javax.swing.GroupLayout.Alignment;
 
-public class StartPanel extends JPanel {
+import main.gui.GUIConstants;
+
+public class StartPanel extends BackgroundPanel {
 
 	private JButton newGameButton;
 	
@@ -48,5 +56,4 @@ public class StartPanel extends JPanel {
 	public JButton getNewGameButton() {
 		return newGameButton;
 	}
-	
 }

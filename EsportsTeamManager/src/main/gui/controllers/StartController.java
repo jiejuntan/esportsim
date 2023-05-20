@@ -28,7 +28,7 @@ public class StartController extends Controller {
 	@Override
 	protected void initialize() {
 		panel = new StartPanel();
-		
+		panel.paint(null);
 		JButton newGameButton = ((StartPanel) panel).getNewGameButton();
 		newGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

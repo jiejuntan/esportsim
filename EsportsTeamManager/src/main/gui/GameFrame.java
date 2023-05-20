@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,22 +17,15 @@ import main.gui.controllers.ClubDetailController;
 import main.gui.controllers.DraftController;
 import main.gui.controllers.HomeController;
 import main.gui.controllers.InventoryController;
+import main.gui.controllers.ItemDetailController;
 import main.gui.controllers.RoleSwapController;
 import main.gui.controllers.MatchController;
 import main.gui.controllers.SetupController;
 import main.gui.controllers.StartController;
 import main.gui.controllers.StadiumController;
-import main.gui.panels.ClubPanel;
-import main.gui.panels.ThumbnailPanel;
-import main.gui.panels.HomePanel;
-import main.gui.panels.SetupPanel;
-import main.gui.panels.StartPanel;
 import main.model.Athlete;
 import main.model.Equipment;
 import main.model.GameEnvironment;
-import main.model.Team;
-
-import javax.swing.JButton;
 
 /**
  * Main access point of game, initializes frame and game environment, handles navigation

@@ -27,6 +27,9 @@ public class GUIConstants {
 	public static final int BODY = 30;
 	public static final int DETAIL = 20;
 	
+	// Backgrounds
+	public static final String BACKGROUND_PLACEHOLDER = "/main/Resources/mountains.png";
+	
 	// Athlete portraits
 	public static final String PORTRAIT_PLACEHOLDER = "/main/Resources/placeholder_portrait.jpg";
 	public static final int PORTRAIT_SMALL = 250;

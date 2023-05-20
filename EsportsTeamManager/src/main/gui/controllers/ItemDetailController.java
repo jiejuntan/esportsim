@@ -7,20 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
-import main.exceptions.IllegalTeamException;
 import main.gui.GameFrame;
-import main.gui.panels.ClubPanel;
 import main.gui.panels.DetailPanel;
 import main.gui.panels.ItemDetailPanel;
 import main.model.Equipment;
-import main.model.Team;
 import main.model.GameData.Difficulty;
-import main.model.Team.Role;
 
 /**
  * Controller for item detail view.
