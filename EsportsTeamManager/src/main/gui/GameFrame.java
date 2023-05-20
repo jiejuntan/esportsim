@@ -17,8 +17,10 @@ import main.gui.controllers.ClubController;
 import main.gui.controllers.DraftController;
 import main.gui.controllers.HomeController;
 import main.gui.controllers.RoleSwapController;
+import main.gui.controllers.MatchController;
 import main.gui.controllers.SetupController;
 import main.gui.controllers.StartController;
+import main.gui.controllers.StadiumController;
 import main.gui.panels.ClubPanel;
 import main.gui.panels.ThumbnailPanel;
 import main.gui.panels.HomePanel;
@@ -26,6 +28,7 @@ import main.gui.panels.SetupPanel;
 import main.gui.panels.StartPanel;
 import main.model.Athlete;
 import main.model.GameEnvironment;
+import main.model.Team;
 
 import javax.swing.JButton;
 
@@ -140,14 +143,14 @@ public class GameFrame {
 	 * Launch the stadium screen.
 	 */
 	public void toStadiumScreen() {
-		
+		new StadiumController(this);
 	}
 	
 	/**
 	 * Launch the match screen.
 	 */
-	public void toMatchScreen() {
-		
+	public void toMatchScreen(Team team) {
+		new MatchController(this);
 	}
 	
 	/**
@@ -171,7 +174,7 @@ public class GameFrame {
 		FlatLightLaf.setup();
 		UIManager.put("Button.arc", 20);
 		UIManager.put("Button.hoverBorderColor", Color.GRAY);
-		UIManager.put("TextComponent.arc", 20);
+		UIManager.put("TextComponesssssnt.arc", 20);
 		UIManager.put("Component.focusColor", Color.GRAY);
 		UIManager.put("Component.focusedBorderColor", Color.GRAY);
 	}

@@ -104,6 +104,8 @@ public class Athlete extends Purchasable {
     	this.intelligence = (int) random.nextGaussian(defaultSkillNumber, skillDeviation);
     	this.stamina = (int) random.nextGaussian(defaultSkillNumber, skillDeviation);
     	
+    	//NEED TO ADD CHECK TO SEE IF ANY SKILLS ARE 0
+    	
     	//Picks a skill to be the athletes special skill
     	int specialSkill = random.nextInt(4);
     	

@@ -1,7 +1,11 @@
 package main.model;
 
 
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
+
+import main.model.Team.Role;
 
 
 /**
@@ -40,7 +44,7 @@ public class RandomEvent {
 	    			addAthlete();
 	    			break;
 	    		case 1:
-	    			removeAthlete();
+	    			//removeAthlete();
 	    			break;
 	    		case 2:
 	    			statsIncrease();
@@ -58,17 +62,29 @@ public class RandomEvent {
      * Random Event - Adds an athlete to the team
      */
     public void addAthlete() {    
-		if (team.getMainTeamSize() + team.getReserveTeamSize() <= Team.getMainLimit() + Team.getReserveLimit()) {
-    	Athlete athlete = new Athlete(3);
-    	team.addAthlete(athlete,Team.Role.RESERVE);}
+//		if (team.getMainTeamSize() + team.getReserveTeamSize() <= 10) {
+//    	Athlete athlete = new Athlete(3);
+//    	team.addAthlete(athlete,Team.Role.RESERVE);}
     }
     
     /**
      * Random Event - Removes an athlete from the team
      */
-    public void removeAthlete() {
-    	
-    }
+//    public void removeAthlete() {
+//    	
+//    	for (Map.Entry<Role,  List<Athlete>> entry : team.getTeamMembers().entrySet()) {
+//    		//Gets the Athlete from the team and picks a random one to remove
+//    		Random random = new Random();
+//    	    
+//    	    for (Athlete athlete :  entry.getValue()) {
+//    	    	//Create a new ingame character for each Athlete and adds to the matches homeTeam list
+//        	    team.add(new IngameCharacters(athlete, role));
+//    	    }
+//    	    
+//    	    
+//    	}
+//    	
+//    }
     
     /**
      * Random Event - Increases a stats for one of the teams Athletes
