@@ -100,7 +100,7 @@ public class GameFrame {
 	 * Launch the specified Athlete's detail screen.
 	 * @param athlete	Athlete to view
 	 */
-	public void toAthleteScreen(Athlete athlete) {
+	public void toDraftDetailScreen(Athlete athlete) {
 		new DraftDetailController(this, athlete);
 	}
 	

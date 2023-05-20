@@ -110,7 +110,7 @@ public class DraftController extends Controller {
 	 */
 	private void toAthleteScreen(Athlete athlete) {
 		close();
-		frame.toAthleteScreen(athlete);
+		frame.toDraftDetailScreen(athlete);
 	}
 	
 }

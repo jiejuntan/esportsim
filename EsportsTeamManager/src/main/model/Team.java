@@ -355,12 +355,28 @@ public class Team {
 		return members;
 	}
 	
+	/**
+	 * Gets the main members as a list.
+	 * 
+	 * @return list of main Athletes
+	 */
 	public List<Athlete> getMainMembers() {
 		List<Athlete> result = new ArrayList<Athlete>();
 		for (Map.Entry<Role, List<Athlete>> entry : members.entrySet()) {
-			result.addAll(entry.getValue());
+			if (entry.getKey() != Role.RESERVE) {
+				result.addAll(entry.getValue());
+			}
 		}
 		return result;
+	}
+	
+	/**
+	 * Gets the reserve members as a list.
+	 * 
+	 * @return list of reserve Athletes
+	 */
+	public List<Athlete> getReserveMembers() {		
+		return members.get(Role.RESERVE);
 	}
 
 	/**
