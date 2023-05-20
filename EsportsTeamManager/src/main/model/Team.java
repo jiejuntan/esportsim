@@ -121,13 +121,31 @@ public class Team {
 	 * 
 	 * @param difficulty
 	 */
-//	public Team() {
-//    	this.name = getRandomTeamName();
-//    	this.wins = 0;
-//    	this.losses = 0;
-//    	this.teamMembers = generateTeam(false);
-//    	this.reserveMembers = generateTeam(true);
-//    }
+	public Team(int skillLevel) {
+		this.name = getRandomTeamName();
+		this.members = new HashMap<Role, List<Athlete>>();
+		
+		for (Role role : Role.values()) {
+			members.put(role, new ArrayList<Athlete>());
+		}
+		
+		for (int athleteCount = 0; athleteCount < MAIN_LIMIT; athleteCount++) {
+			
+	        Random random = new Random();
+	        
+	        // Picks one of the three roles to assign to the Athlete
+	        Role[] roles = Role.values();
+	        Role randomRole = roles[random.nextInt(3)];
+	        
+			//Adds athlete to the team
+			addAthlete(new Athlete(skillLevel),roles[random.nextInt(3)]);
+		}
+		
+		
+		
+		this.wins = 0;
+		this.losses = 0;
+    }
 
 	/**
 	 * Adds an new Athlete in a main role or reserve
@@ -296,23 +314,6 @@ public class Team {
 		return name.matches(VALID_NAME_PATTERN);
 	}
 
-	/**
-	 * Generates a random team full of Athletes
-	 * 
-	 * @return Randomly Generated Team
-	 */
-	public ArrayList<Athlete> generateTeam(boolean isReserve) {
-
-		ArrayList<Athlete> generatedTeam = new ArrayList<Athlete>();
-
-		for (int teamRosterLimit = 5; teamRosterLimit > 0; teamRosterLimit--) {
-
-//    		Athlete randomAthlete = new Athlete(isReserve);
-//    		generatedTeam.add(randomAthlete);
-		}
-
-		return generatedTeam;
-	}
 
     /********** Simple Getters & Setters **********/
     

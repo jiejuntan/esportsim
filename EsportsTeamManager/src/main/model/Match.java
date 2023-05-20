@@ -3,6 +3,7 @@ package main.model;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 import main.model.GameData.Difficulty;
 import main.model.Team.Role;
@@ -93,64 +94,35 @@ public class Match {
      * @param opponents
      */
     public void createIngameCharacters(Team home, Team opponents) {
-    	Role role = null;
-	    
+    	
     	
     	//Gets the players Team Members
-    	for(int i = 0;i!=4 ; i++) {
+    	for (Map.Entry<Role,  List<Athlete>> entry : home.getTeamMembers().entrySet()) {
     		//Gets the Athlete and Role from the team
-    	  
+    	    Role role = entry.getKey();
     	    
-    	    switch (i) {
-    	    case 0:
-    	    	role = Team.Role.OFFENSE;
-    	    	break;
-    	    case 1:
-    	    	role = Team.Role.TANK;
-    	    	break;
-    	    case 2:
-    	    	role = Team.Role.SUPPORT;
-    	    	break;
-    	    case 3:
-    	    	role = Team.Role.OFFENSE;
-    	    	break;
+    	    for (Athlete athlete :  entry.getValue()) {
+    	    	//Create a new ingame character for each Athlete and adds to the matches homeTeam list
+        	    homeTeam.add(new IngameCharacters(athlete, role));
     	    }
     	    
-    	    Athlete athlete = new Athlete(8);
     	    
-    	    //Create a new ingame character for each Athlete and adds to the matches homeTeam list
-    	    homeTeam.add(new IngameCharacters(athlete, role));
     	}
     	
-    	//Gets the players Team Members
-    	for(int i = 0;i !=4 ; i++) {
+    	//Gets the players the Opponent Team 
+    	for (Map.Entry<Role, List<Athlete>> entry : opponents.getTeamMembers().entrySet()) {
     		//Gets the Athlete and Role from the team
+    	    Role role = entry.getKey();
     	    
-    	    switch (i) {
-    	    case 0:
-    	    	role = Team.Role.OFFENSE;
-    	    	break;
-    	    case 1:
-    	    	role = Team.Role.TANK;
-    	    	break;
-    	    case 2:
-    	    	role = Team.Role.SUPPORT;
-    	    	break;
-    	    case 3:
-    	    	role = Team.Role.OFFENSE;
-    	    	break;
+    	    for (Athlete athlete :  entry.getValue()) {
+    	    	//Create a new ingame character for each Athlete and adds to the matches homeTeam list
+    	    	opponentTeam.add(new IngameCharacters(athlete, role));
     	    }
     	    
-    	    Athlete athlete = new Athlete(7);
-    	    
-    	    //Create a new ingame character for each Athlete and adds to the matches awayTeam list
-    	    opponentTeam.add(new IngameCharacters(athlete, role));
     	}
     	
     	homeTeam.sort(Comparator.comparing(IngameCharacters::getReactionTime).reversed());
     	opponentTeam.sort(Comparator.comparing(IngameCharacters::getReactionTime).reversed());
-
-
     	
     }
     

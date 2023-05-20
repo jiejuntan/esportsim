@@ -19,9 +19,9 @@ class MatchTests {
 
 	    @BeforeEach
 	    void setUp() {
-	        homeTeam = new Team();
+	        homeTeam = new Team(3);
 
-	        opponentTeam = new Team();
+	        opponentTeam = new Team(3);
 	        
 	        gameData = new GameData();
 	        match = new Match(gameData, opponentTeam);
