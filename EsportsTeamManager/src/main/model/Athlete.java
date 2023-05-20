@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import main.gui.GUIConstants;
+import main.model.Team.Role;
 
 /**
  * Represents the characters in the game.
@@ -20,8 +21,27 @@ public class Athlete extends Purchasable {
     private int intelligence;
     private int stamina;
     
-    private String portraitPath;
+    private Role role;
     
+    /**
+	 * @return the role
+	 */
+	public Role getRole() {
+		return role;
+	}
+
+
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+
+
+	private String portraitPath;
 
     /**
      * Constructor for creating Athlete with scaling skill level

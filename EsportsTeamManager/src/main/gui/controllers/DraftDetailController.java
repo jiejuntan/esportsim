@@ -21,7 +21,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import main.exceptions.IllegalFundsException;
-import main.exceptions.TeamMemberLimitException;
+import main.exceptions.IllegalTeamException;
+import main.exceptions.TeamLimitException;
 import main.gui.GUIConstants;
 import main.gui.GameFrame;
 import main.gui.panels.DetailPanel;
@@ -30,6 +31,7 @@ import main.model.Team.Role;
 import main.model.Athlete;
 import main.model.GameData.Difficulty;
 import main.model.Market;
+import main.model.Team;
 
 /**
  * Controller for detail screen during draft
@@ -183,6 +185,7 @@ public class DraftDetailController extends Controller {
 				
 				
 				Market market = frame.getGame().getMarket();
+				Team team = frame.getGame().getData().getTeam();
 				try {
 					market.purchaseAthlete(athlete, role, newName);
 					toPreviousScreen();
@@ -190,22 +193,30 @@ public class DraftDetailController extends Controller {
 					JOptionPane.showMessageDialog(panel, 
 							"You don't have enough money.", 
 							"Error", JOptionPane.ERROR_MESSAGE);
-				} catch (TeamMemberLimitException e2) {
-					switch (e2.getType()) {
+				} catch (IllegalTeamException e2) {
+					JOptionPane.showMessageDialog(panel, 
+							"You need to have a full starting team of " + Team.MAIN_LIMIT + " before assigning reserves.", 
+							"Error", JOptionPane.ERROR_MESSAGE);
+				} catch (TeamLimitException e3) {
+					switch 	(e3.getType()) {
 					case WHOLE:
 						JOptionPane.showMessageDialog(panel, 
 								"Your team is full.", 
 								"Error", JOptionPane.ERROR_MESSAGE);
 						break;
 					case MAIN:
-						JOptionPane.showMessageDialog(panel, 
-								"Your main team is full.", 
+						int shouldSwap = JOptionPane.showConfirmDialog(panel, 
+								"Your main team is full.\nDo you want to replace a current starting member?\n\nYou may also return and assign the new member as a reserve.", 
 								"Error", JOptionPane.ERROR_MESSAGE);
-						break;
-					case RESERVE:
-						JOptionPane.showMessageDialog(panel, 
-								"Your reserve team is full.", 
-								"Error", JOptionPane.ERROR_MESSAGE);
+//						if (shouldSwap == JOptionPane.YES_OPTION) {
+//							try {
+//								market.purchaseAthlete(athlete, Role.RESERVE, newName);
+//								
+//								team.swapRole(athlete, athlete)
+//							} catch (IllegalFundsException | TeamLimitException | IllegalTeamException e1) {
+//								e1.printStackTrace();
+//							}
+//						}
 						break;
 					default:
 						break;
@@ -222,6 +233,13 @@ public class DraftDetailController extends Controller {
 		close();
 		
 		frame.toDraftScreen();
+	}
+	
+	/**
+	 * Launches screen to choose athlete in team to swap roles with drafted athlete
+	 */
+	private void toSwapAthleteScreen() {
+		close();
 	}
 
 }
