@@ -353,6 +353,14 @@ public class Team {
 	public HashMap<Role, List<Athlete>> getTeamMembers() {
 		return members;
 	}
+	
+	public List<Athlete> getMainMembers() {
+		List<Athlete> result = new ArrayList<Athlete>();
+		for (Map.Entry<Role, List<Athlete>> entry : members.entrySet()) {
+			result.addAll(entry.getValue());
+		}
+		return result;
+	}
 
 	/**
 	 * Gets the name of the Team

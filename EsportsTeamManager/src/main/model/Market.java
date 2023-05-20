@@ -103,10 +103,12 @@ public class Market {
 			if (!team.isMainTeamFull()) {
 				throw new IllegalTeamException();
 			}
+			break;
 		default:
 			if (team.isMainTeamFull()) {
 				throw new TeamLimitException(Type.MAIN);
 			}
+			break;
 		}
 		athlete.setName(newName);
 		data.deductMoney(price);

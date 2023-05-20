@@ -189,6 +189,7 @@ public class ThumbnailPanel extends JPanel {
 				
 		
 		moneyLabel = new JLabel();
+		moneyLabel.setVisible(false);
 		moneyLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_moneyLabel = new GridBagConstraints();
 		gbc_moneyLabel.fill = GridBagConstraints.VERTICAL;

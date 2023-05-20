@@ -16,6 +16,7 @@ import main.gui.controllers.DraftDetailController;
 import main.gui.controllers.ClubController;
 import main.gui.controllers.DraftController;
 import main.gui.controllers.HomeController;
+import main.gui.controllers.RoleSwapController;
 import main.gui.controllers.SetupController;
 import main.gui.controllers.StartController;
 import main.gui.panels.ClubPanel;
@@ -98,6 +99,13 @@ public class GameFrame {
 	 */
 	public void toAthleteScreen(Athlete athlete) {
 		new DraftDetailController(this, athlete);
+	}
+	
+	/**
+	 * Launch the screen to swap specified Athlete.
+	 */
+	public void toRoleSwapScreen(Athlete athlete) {
+		new RoleSwapController(this, athlete);
 	}
 	
 	/**

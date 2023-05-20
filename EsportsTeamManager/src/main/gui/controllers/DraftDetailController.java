@@ -208,15 +208,14 @@ public class DraftDetailController extends Controller {
 						int shouldSwap = JOptionPane.showConfirmDialog(panel, 
 								"Your main team is full.\nDo you want to replace a current starting member?\n\nYou may also return and assign the new member as a reserve.", 
 								"Error", JOptionPane.ERROR_MESSAGE);
-//						if (shouldSwap == JOptionPane.YES_OPTION) {
-//							try {
-//								market.purchaseAthlete(athlete, Role.RESERVE, newName);
-//								
-//								team.swapRole(athlete, athlete)
-//							} catch (IllegalFundsException | TeamLimitException | IllegalTeamException e1) {
-//								e1.printStackTrace();
-//							}
-//						}
+						if (shouldSwap == JOptionPane.YES_OPTION) {
+							try {
+								market.purchaseAthlete(athlete, Role.RESERVE, newName);
+								toRoleSwapScreen(athlete);
+							} catch (IllegalFundsException | TeamLimitException | IllegalTeamException e1) {
+								e1.printStackTrace();
+							}
+						}
 						break;
 					default:
 						break;
@@ -231,15 +230,15 @@ public class DraftDetailController extends Controller {
 	 */
 	private void toPreviousScreen() {
 		close();
-		
 		frame.toDraftScreen();
 	}
 	
 	/**
 	 * Launches screen to choose athlete in team to swap roles with drafted athlete
 	 */
-	private void toSwapAthleteScreen() {
+	private void toRoleSwapScreen(Athlete athlete) {
 		close();
+		frame.toRoleSwapScreen(athlete);
 	}
 
 }
