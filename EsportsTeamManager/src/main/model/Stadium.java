@@ -8,7 +8,7 @@ import main.model.GameData.Difficulty;
 public class Stadium {
 	
     private List<Team> matches;
-    private Team selectedOpponent;
+    
 	/**
 	 * Maximum number of main members
 	 */
@@ -51,20 +51,8 @@ public class Stadium {
 		return matches;
 	}
 	
-    /**
-	 * @return the selectedOpponent
-	 */
-	public Team getSelectedOpponent() {
-		return selectedOpponent;
-	}
 
 
-	/**
-	 * @param selectedOpponent the selectedOpponent to set
-	 */
-	public void setSelectedOpponent(Team selectedOpponent) {
-		this.selectedOpponent = selectedOpponent;
-	}
 
     
 

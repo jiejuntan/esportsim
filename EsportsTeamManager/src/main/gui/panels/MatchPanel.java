@@ -96,4 +96,41 @@ public class MatchPanel extends JPanel {
 		this.add(nextMatchButton, gbc_nextMatchButton);
       
     }
+
+	/**
+	 * @return the playerNameLabel
+	 */
+	public JLabel getPlayerNameLabel() {
+		return playerNameLabel;
+	}
+
+	/**
+	 * @return the opponentNameLabel
+	 */
+	public JLabel getOpponentNameLabel() {
+		return opponentNameLabel;
+	}
+
+	/**
+	 * @return the battleButton
+	 */
+	public JButton getBattleButton() {
+		return battleButton;
+	}
+
+	/**
+	 * @return the resultsLabel
+	 */
+	public JLabel getResultsLabel() {
+		return resultsLabel;
+	}
+
+	/**
+	 * @return the nextMatchButton
+	 */
+	public JButton getNextMatchButton() {
+		return nextMatchButton;
+	}
+    
+    
 }
