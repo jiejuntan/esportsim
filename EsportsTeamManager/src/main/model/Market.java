@@ -112,7 +112,7 @@ public class Market {
      * @param athlete	Athlete to check
      * @return			<code>true</code> if purchased
      */
-    public boolean isPurchased(Athlete athlete) {
+    public boolean isPurchased(Purchasable athlete) {
     	return purchasedAthletes.contains(athlete);
     }
     

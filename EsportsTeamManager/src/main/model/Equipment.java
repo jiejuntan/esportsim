@@ -2,13 +2,15 @@ package main.model;
 
 import java.util.Random;
 
+import main.gui.GUIConstants;
+
 /**
  * Represents the characters in the game.
  * 
  * @author Blake and Jun
  *
  */
-public class Equipment extends Purchasable{ 
+public class Equipment extends Purchasable { 
 
 private TrainingItem equipment;
 	
@@ -26,6 +28,7 @@ private TrainingItem equipment;
 
         // Set the item to the random enum value
         this.equipment = trainingItems[randomItemIndex];
+        this.portraitPath = GUIConstants.PORTRAIT_PLACEHOLDER;
 	}
 	
 	/**
@@ -48,7 +51,16 @@ private TrainingItem equipment;
 	        this.affectedStat = affectedStat;
 	        this.name = name;
 	    }
-
+	    
+	    /**
+	     * Returns the name of item
+	     * 
+	     * @return <CODE>String</CODE> item name
+	     */
+	    public String getName() {
+	        return name;
+	    }
+	    
 	    /**
 	     * Returns the amount of skill value that the Training Item affects
 	     * 

@@ -39,9 +39,9 @@ public class DraftDetailController extends DetailController {
 	private Athlete athlete;
 	
 	/**
-	 * Constructor when drafting
+	 * Constructor for detail view when drafting.
 	 * 
-	 * @param frame 	game frame
+	 * @param frame 	game frame to manage navigation
 	 * @param athlete 	Athlete to view
 	 */
 	public DraftDetailController(GameFrame frame, Athlete athlete) {
@@ -51,7 +51,7 @@ public class DraftDetailController extends DetailController {
 	}
 
 	/**
-	 * Runs initialize methods and launches panel
+	 * Initializes panel and components then launches panel.
 	 */
 	@Override
 	protected void initialize() {

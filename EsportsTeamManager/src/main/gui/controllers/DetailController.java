@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main.gui.controllers;
 
 import java.awt.Image;

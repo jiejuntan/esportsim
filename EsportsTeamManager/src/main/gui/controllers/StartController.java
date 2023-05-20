@@ -12,11 +12,19 @@ import main.gui.panels.StartPanel;
 
 public class StartController extends Controller {
 	
+	/**
+	 * Constructor for start screen
+	 * 
+	 * @param frame game frame to manage navigation
+	 */
 	public StartController(GameFrame frame) {
 		super(frame);
 		initialize();
 	}
 
+	/**
+	 * Initializes panel and components then launches panel.
+	 */
 	@Override
 	protected void initialize() {
 		panel = new StartPanel();

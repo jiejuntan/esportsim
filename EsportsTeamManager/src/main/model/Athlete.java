@@ -22,28 +22,9 @@ public class Athlete extends Purchasable {
     private int stamina;
     
     private Role role;
-    
-    /**
-	 * @return the role
-	 */
-	public Role getRole() {
-		return role;
-	}
-
 
 
 	/**
-	 * @param role the role to set
-	 */
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-
-
-	private String portraitPath;
-
-    /**
      * Constructor for creating Athlete with scaling skill level
      * 
      * @param skillLevel	skill level of athlete
@@ -56,8 +37,6 @@ public class Athlete extends Purchasable {
     	setDescription();
     	this.portraitPath = GUIConstants.PORTRAIT_PLACEHOLDER;
     }
-    
-    
     
     /**
      * Picks a random name from an inputed name list
@@ -138,7 +117,6 @@ public class Athlete extends Purchasable {
         return getEyeSight() + getIntelligence() + getReactionTime() + getStamina();
     }
     
-    
     /**
      * Calculates base purchase price before difficulty scaling
      * 
@@ -168,25 +146,12 @@ public class Athlete extends Purchasable {
     	return super.getDescription();
     }
 
-
-
-	/**
-	 * @return the portraitPath
-	 */
-	public String getPortraitPath() {
-		return portraitPath;
-	}
-
-
-
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
-
-
 
 	/**
 	 * @param name the name to set
@@ -195,16 +160,12 @@ public class Athlete extends Purchasable {
 		this.name = name;
 	}
 
-
-
 	/**
 	 * @return the reactionTime
 	 */
 	public int getReactionTime() {
 		return reactionTime;
 	}
-
-
 
 	/**
 	 * @param reactionTime the reactionTime to set
@@ -213,16 +174,12 @@ public class Athlete extends Purchasable {
 		this.reactionTime = reactionTime;
 	}
 
-
-
 	/**
 	 * @return the eyeSight
 	 */
 	public int getEyeSight() {
 		return eyeSight;
 	}
-
-
 
 	/**
 	 * @param eyeSight the eyeSight to set
@@ -231,16 +188,12 @@ public class Athlete extends Purchasable {
 		this.eyeSight = eyeSight;
 	}
 
-
-
 	/**
 	 * @return the intelligence
 	 */
 	public int getIntelligence() {
 		return intelligence;
 	}
-
-
 
 	/**
 	 * @param intelligence the intelligence to set
@@ -249,8 +202,6 @@ public class Athlete extends Purchasable {
 		this.intelligence = intelligence;
 	}
 
-
-
 	/**
 	 * @return the stamina
 	 */
@@ -258,17 +209,25 @@ public class Athlete extends Purchasable {
 		return stamina;
 	}
 
-
-
 	/**
 	 * @param stamina the stamina to set
 	 */
 	public void setStamina(int stamina) {
 		this.stamina = stamina;
 	}
-        
+	
+    /**
+	 * @return the role
+	 */
+	public Role getRole() {
+		return role;
+	}
 
-
-
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(Role role) {
+		this.role = role;
+	}
 	
 }

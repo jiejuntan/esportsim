@@ -22,7 +22,9 @@ import main.model.Team;
 public class DraftController extends ThumbnailController {
 	
 	/**
-	 * @param frame	game frame
+	 * Constructor for drafting screen.
+	 * 
+	 * @param frame	game frame to manage navigation
 	 */
 	public DraftController(GameFrame frame) {
 		super(frame);
@@ -30,7 +32,7 @@ public class DraftController extends ThumbnailController {
 	}
 
 	/**
-	 * Initializes screen
+	 * Initializes panel and components then launches panel.
 	 */
 	@Override
 	protected void initialize() {

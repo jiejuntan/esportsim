@@ -15,11 +15,19 @@ import main.model.GameData.Difficulty;
 
 public class SetupController extends Controller {
 
+	/**
+	 * Constructor for game setup screen.
+	 * 
+	 * @param frame game frame to manage navigation
+	 */
 	public SetupController(GameFrame frame) {
 		super(frame);
 		initialize();
 	}
 
+	/**
+	 * Initializes panel and components then launches panel.
+	 */
 	@Override
 	protected void initialize() {
 		panel = new SetupPanel();

@@ -10,7 +10,7 @@ package main.gui.panels;
 public class ClubPanel extends ThumbnailPanel {
 
 	/**
-	 * 
+	 * Constructor for club panel to display team members.
 	 */
 	public ClubPanel() {
 		backButton.setVisible(true);

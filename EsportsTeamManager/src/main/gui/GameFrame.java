@@ -17,6 +17,7 @@ import main.gui.controllers.ClubController;
 import main.gui.controllers.ClubDetailController;
 import main.gui.controllers.DraftController;
 import main.gui.controllers.HomeController;
+import main.gui.controllers.InventoryController;
 import main.gui.controllers.RoleSwapController;
 import main.gui.controllers.MatchController;
 import main.gui.controllers.SetupController;
@@ -28,6 +29,7 @@ import main.gui.panels.HomePanel;
 import main.gui.panels.SetupPanel;
 import main.gui.panels.StartPanel;
 import main.model.Athlete;
+import main.model.Equipment;
 import main.model.GameEnvironment;
 import main.model.Team;
 
@@ -126,6 +128,11 @@ public class GameFrame {
 		new ClubController(this);
 	}
 	
+	/**
+	 * Launches athlete detail screen from club screen.
+	 * 
+	 * @param athlete	Athlete to view
+	 */
 	public void toClubDetailScreen(Athlete athlete) {
 		new ClubDetailController(this, athlete);
 	}
@@ -134,7 +141,16 @@ public class GameFrame {
 	 * Launch the inventory screen.
 	 */
 	public void toInventoryScreen() {
-		
+		new InventoryController(this);
+	}
+	
+	/**
+	 * Launch the item detail screen.
+	 * 
+	 * @param item	item to view
+	 */
+	public void toItemDetailScreen(Equipment item) {
+		new ItemDetailController(this, item);
 	}
 	
 	/**

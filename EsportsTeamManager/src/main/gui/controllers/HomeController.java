@@ -11,11 +11,19 @@ import main.gui.panels.HomePanel;
 
 public class HomeController extends Controller {
 
+	/**
+	 * Constructor for home screen.
+	 * 
+	 * @param frame game frame to manage navigation.
+	 */
 	public HomeController(GameFrame frame) {
 		super(frame);
 		initialize();
 	}
-
+	
+	/**
+	 * Initializes panel and components then launches panel.
+	 */
 	@Override
 	protected void initialize() {
 		panel = new HomePanel();

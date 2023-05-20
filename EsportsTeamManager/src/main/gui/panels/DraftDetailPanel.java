@@ -12,7 +12,7 @@ package main.gui.panels;
 public class DraftDetailPanel extends DetailPanel {
 
 	/**
-	 * Sets components required during draft to visible.
+	 * Sets visual only components for draft detail view.
 	 */
 	public DraftDetailPanel() {
 		editTipLabel.setVisible(true);

@@ -6,7 +6,9 @@ import main.gui.panels.MatchPanel;
 public class MatchController extends Controller {
 
 	/**
-	 * @param frame
+	 * Constructor for match screen.
+	 * 
+	 * @param frame game frame to manage navigation
 	 */
 	public MatchController(GameFrame frame) {
 		super(frame);
@@ -14,7 +16,7 @@ public class MatchController extends Controller {
 	}
 
 	/**
-	 * Initializes screen
+	 * Initializes panel and components then launches panel.
 	 */
 	@Override
 	protected void initialize() {
