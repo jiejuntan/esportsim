@@ -11,6 +11,7 @@ public class StadiumPanel extends ThumbnailPanel {
 	
 	public StadiumPanel() {
 		titleLabel.setText("Stadium");
+		disableBottomThumbs();
 		//subheadingLabel1.setText("Select Your Opponent Team");
 	}
 

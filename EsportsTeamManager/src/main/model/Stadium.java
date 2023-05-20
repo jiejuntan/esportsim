@@ -8,13 +8,14 @@ import main.model.GameData.Difficulty;
 public class Stadium {
 	
     private List<Team> matches;
+    private Team selectedOpponent;
 	/**
 	 * Maximum number of main members
 	 */
 	private static final int OPPONENT_LIMIT = 5;
     
     public Stadium(Difficulty difficulty) {
-    	matches = new ArrayList<Team>();
+    	this.matches = new ArrayList<Team>();
     	generateMatches(difficulty);
     }
     
@@ -28,7 +29,8 @@ public class Stadium {
      * v. If a player wins a match (by having the highest score) they are rewarded with money and points
      */
 
-    /**
+
+	/**
      * Generantes 5 opponent teams to verse and add them to the matches list
      * 
      * @param difficulty
@@ -48,6 +50,22 @@ public class Stadium {
 	public List<Team> getMatches() {
 		return matches;
 	}
+	
+    /**
+	 * @return the selectedOpponent
+	 */
+	public Team getSelectedOpponent() {
+		return selectedOpponent;
+	}
+
+
+	/**
+	 * @param selectedOpponent the selectedOpponent to set
+	 */
+	public void setSelectedOpponent(Team selectedOpponent) {
+		this.selectedOpponent = selectedOpponent;
+	}
+
     
 
 }

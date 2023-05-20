@@ -34,6 +34,8 @@ public class StadiumController extends Controller {
 	protected void initialize() {
 		panel = new StadiumPanel();
 		getMatches();
+		chooseOpponentButton();
+		initializeConfirmButton();
 		launch();
 	}
 	
@@ -55,43 +57,45 @@ public class StadiumController extends Controller {
 		
 	}
 	
+	/**
+	 *  Adds listeners to the Opponent team buttons to check if selected
+	 */
 	private void chooseOpponentButton() {
 		List<JButton> thumbButton = ((StadiumPanel) panel).getThumbButtons();
-		//Button 0
-		thumbButton.get(0).addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(thumbButton.get(1).isEnabled() || thumbButton.get(2).isEnabled()) {
-					
-				}
-			}
-		});
-		
-		//Button 1
-		thumbButton.get(1).addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		
-		//Button 2
-		thumbButton.get(2).addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
+
+		//adds listiners
+		for (int i = 0; i < thumbButton.size(); i++) {
+		    final int index = i;
+		    thumbButton.get(i).addActionListener(new ActionListener() {
+		        public void actionPerformed(ActionEvent e) {
+		            //Set clicked button 
+		            thumbButton.get(index).setEnabled(true);
+		            
+		            // Enable all other buttons
+		            for (int j = 0; j < thumbButton.size(); j++) {
+		                if (j != index) {
+		                    thumbButton.get(j).setEnabled(false);
+		                }
+		            }
+		        }
+		    });
+		}
 	}
 	
+	/**
+	 * If an opponent is selected then a match will be started
+	 */
 	private void initializeConfirmButton() {
-		Team team = frame.getGame().getData().getTeam();	
+		Stadium stadium = frame.getGame().getStadium();	
 		
 		JButton confirmButton = ((DraftPanel) panel).getConfirmButton();
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (team.hasMinimumSize()) {
-					toHomeScreen();
+				if (isOpponentSelected()) {
+					toMatchScreen(stadium.getSelectedOpponent());
 				} else {
 					JOptionPane.showMessageDialog(panel, 
-							"You don't have enough athletes to start! Select at least " + Team.MIN_TEAM_SIZE  + ".", 
+							"You need to select an Opponent!.", 
 							"Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -99,9 +103,27 @@ public class StadiumController extends Controller {
 	}
 	
 	/**
+	 * Checkds the opponent team button to see if any is selected
+	 * 
+	 * @return
+	 */
+	private boolean isOpponentSelected() {
+	    List<JButton> thumbButton = ((StadiumPanel) panel).getThumbButtons();
+
+	    // Check each button in the list to see if any is selected
+	    for (JButton button : thumbButton) {
+	        if (button.isEnabled()) {
+	            return true;  // An opponent (button) is selected
+	        }
+	    }
+
+	    return false;  // No opponent (button) is selected
+	}
+	
+	/**
 	 * Closes stadium screen and launches the match
 	 */
-	private void toAthleteScreen(Team team) {
+	private void toMatchScreen(Team team) {
 		close();
 		frame.toMatchScreen(team);
 	}
