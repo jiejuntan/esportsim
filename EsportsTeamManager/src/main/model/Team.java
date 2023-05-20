@@ -282,6 +282,7 @@ public class Team {
         	return roles[random.nextInt(3)];
         }
 	}
+
 	
 	/**
 	 * Gets current size of reserve team

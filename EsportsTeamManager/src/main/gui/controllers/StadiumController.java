@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import main.gui.GameFrame;
 import main.gui.panels.ClubPanel;
 import main.gui.panels.StadiumPanel;
+import main.model.GameData;
+import main.model.Match;
 import main.model.Stadium;
 import main.model.Team;
 
@@ -19,6 +21,8 @@ import main.model.Team;
  *
  */
 public class StadiumController extends ThumbnailController {
+	
+	List<Team> opponentTeams;
 
 	/**
 	 * Constructor for stadium screen
@@ -48,7 +52,7 @@ public class StadiumController extends ThumbnailController {
 	private void getMatches() {
 
 	    Stadium stadium = frame.getGame().getStadium();
-	    List<Team> opponentTeams = stadium.getMatches();
+	    opponentTeams = stadium.getMatches();
 	    List<JButton> teamButtons = ((StadiumPanel) panel).getThumbButtons();
 
 	    for(int i = 0; i < opponentTeams.size(); i++) {
@@ -91,13 +95,23 @@ public class StadiumController extends ThumbnailController {
 	 * If an opponent is selected then a match will be started
 	 */
 	private void initializeConfirmButton() {
-		Stadium stadium = frame.getGame().getStadium();	
+		GameData gameData = frame.getGame().getData();
+		List<JButton> thumbButton = ((StadiumPanel) panel).getThumbButtons();
+		
 		
 		JButton confirmButton = ((StadiumPanel) panel).getConfirmButton();
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (isOpponentSelected()) {
-					toMatchScreen();
+					
+					//Add the selected team to gameData
+					for (JButton button : thumbButton) {
+				        if (button.isEnabled()) {
+				        	int teamIndex = thumbButton.indexOf(button);
+							gameData.setOpponent(frame.getGame().getStadium().getMatches().get(teamIndex));
+							toMatchScreen(); 
+					}}
+					
 				} else {
 					JOptionPane.showMessageDialog(panel, 
 							"You need to select an Opponent!.", 

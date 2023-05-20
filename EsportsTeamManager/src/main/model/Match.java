@@ -22,14 +22,16 @@ public class Match {
     private List<IngameCharacters> opponentTeam;
     private int homeTurn;
     private int opponentTurn;
+    private int outcome;
     
     private int round;
 
     private List<String> roundResults;
     
-    public Match(GameData gameData, Team opponents) {
+    public Match(GameData gameData) {
     	this.homeTurn = 0;
     	this.round = 0;
+    	this.outcome = -1;
     	this.opponentTurn = 0;
     	this.difficulty = gameData.getDifficulty();
     	calculateRewards(difficulty.getModifier());
@@ -38,7 +40,7 @@ public class Match {
     	opponentTeam = new ArrayList<IngameCharacters>();
     	roundResults = new ArrayList<String>();
     	
-    	createIngameCharacters(gameData.getTeam(), opponents);
+    	createIngameCharacters(gameData.getTeam(), gameData.getOpponent());
     	
     };
     
@@ -132,7 +134,7 @@ public class Match {
      * team battle progresses until a team wins
      * @return <CODE>int</CODE> Returns -1 if game is still going | 0 If player losses | 1 if player wins. 
      */
-    public int simulateMatchup() {
+    public void simulateMatchup() {
      	roundResults.clear();
     	
     	//Checks if all chracters have played their round, If so loop back to first character
@@ -186,13 +188,13 @@ public class Match {
         
         // Check if all athletes on a team are out of health. If so, the other team wins
         if (getTeamHealth(homeTeam) <= 0) {  
-        	return 0;
+        	this.outcome = 0;
         } else if (getTeamHealth(opponentTeam) <= 0) {
-        	return 1;
+        	this.outcome = 1;
         }
         
         //No winner has been determined yet
-        return -1;
+        this.outcome = -1;
     	  	
     }
     
@@ -342,5 +344,14 @@ public class Match {
 	public List<String> getRoundResults() {
 		return roundResults;
 	}
+
+	/**
+	 * @return the outcome
+	 */
+	public int getOutcome() {
+		return outcome;
+	}
+	
+	
 	
 }
