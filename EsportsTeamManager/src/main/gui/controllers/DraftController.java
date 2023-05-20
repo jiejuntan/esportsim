@@ -118,8 +118,7 @@ public class DraftController extends Controller {
 		JButton confirmButton = ((DraftPanel) panel).getConfirmButton();
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int teamCount = team.getMainTeamSize() + team.getReserveTeamSize();
-				if (teamCount >= Team.MIN_TEAM_SIZE) {
+				if (team.hasMinimumSize()) {
 					toHomeScreen();
 				} else {
 					JOptionPane.showMessageDialog(panel, 

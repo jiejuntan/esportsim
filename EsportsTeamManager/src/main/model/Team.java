@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import main.exceptions.TeamMemberLimitException;
+import main.exceptions.TeamLimitException;
 
 /**
  * Represents the player's and opponents' teams.
@@ -50,7 +50,7 @@ public class Team {
 	/**
 	 * Maximum number of main members
 	 */
-	private static final int MAIN_LIMIT = 5;
+	public static final int MAIN_LIMIT = 5;
 
 	/**
 	 * Number of total athletes required
@@ -137,54 +137,47 @@ public class Team {
 	 */
 	public void addAthlete(Athlete athlete, Role role) {
 		members.get(role).add(athlete);
+		athlete.setRole(role);
 	}
 	
 	/**
 	 * Removes an Athlete from the Team and returns the role it was in.
 	 * 
 	 * @param athlete Athlete to remove
-	 * 
-	 * @return role the athlete was in
 	 */
-	public Role removeAthlete(Athlete athlete) {
+	public void removeAthlete(Athlete athlete) {
 		for (Map.Entry<Role, List<Athlete>> entry : members.entrySet()) {
 			List<Athlete> athletesInRole = entry.getValue();
 			if (athletesInRole.contains(athlete)) {
 				athletesInRole.remove(athlete);
-				return entry.getKey();
+				athlete.setRole(null);
 			}
 		}
-		return null;
 	}
 
 	/**
-	 * Assigns an athlete to a role, swapping roles with the athlete in that role if
-	 * one exists.
+	 * Assigns an athlete to a role
 	 * 
 	 * @param athlete Athlete to assign
 	 * @param role    Role to assign to
 	 */
 	public void assignRole(Athlete athlete, Role role) {
-		Role previousRole = removeAthlete(athlete);
+		removeAthlete(athlete);
+		addAthlete(athlete, role);
+	}
+	
+	/**
+	 * Swaps two athlete's roles
+	 * 
+	 * @param incoming	Athlete triggering role swap
+	 * @param outgoing	target Athlete to swap
+	 */
+	public void swapRole(Athlete incoming, Athlete outgoing) {
+		Role incomingRole = incoming.getRole();
+		Role outgoingRole = outgoing.getRole();
 		
-		if (previousRole == null) {
-			
-		}
-		switch (role) {
-			
-		case RESERVE:
-			if (isReserveTeamFull()) {
-				
-			}
-			break;
-		default:
-			if (isMainTeamFull()) {
-				List<Athlete> athletesInRole = members.get(role);
-				athletesInRole.add(athlete);
-				athletesInRole.remove(0);
-			}
-			break;
-		}
+		assignRole(incoming, outgoingRole);
+		assignRole(outgoing, incomingRole);
 	}
 	
 	/**
@@ -192,7 +185,7 @@ public class Team {
 	 * 
 	 * @return number of athletes in main team
 	 */
-	public int getMainTeamSize() {
+	private int getMainTeamSize() {
 		int count = 0;
 		for (Role role: Role.values()) {
 			if (role != Role.RESERVE) {
@@ -208,7 +201,7 @@ public class Team {
 	 * 
 	 * @return	number of athletes in reserve team
 	 */
-	public int getReserveTeamSize() {
+	private int getReserveTeamSize() {
 		return members.get(Role.RESERVE).size();
 	}
 	
@@ -253,7 +246,7 @@ public class Team {
 	 * 
 	 * @return Random Team Name
 	 */
-	public String getRandomTeamName() {
+	private String getRandomTeamName() {
 
 		// Grabs a list of names
 		String[] namesList = null;

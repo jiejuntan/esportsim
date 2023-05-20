@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.exceptions.IllegalFundsException;
-import main.exceptions.TeamMemberLimitException;
-import main.exceptions.TeamMemberLimitException.Type;
+import main.exceptions.IllegalTeamException;
+import main.exceptions.TeamLimitException;
+import main.exceptions.TeamLimitException.Type;
 import main.model.Team.Role;
 
 public class Market {
@@ -83,9 +84,10 @@ public class Market {
      * @param newName	new name for Athlete
      * 
      * @throws IllegalFundsException 	if insufficient money
-     * @throws TeamMemberLimitException if team or particular role is full
+     * @throws TeamLimitException 		if whole team or main team is full
+     * @throws IllegalTeamException 	if adding as reserve while main team is not full
      */
-    public void purchaseAthlete(Athlete athlete, Role role, String newName) throws IllegalFundsException, TeamMemberLimitException {
+    public void purchaseAthlete(Athlete athlete, Role role, String newName) throws IllegalFundsException, TeamLimitException, IllegalTeamException {
     	int money = data.getMoney();
 		int price = athlete.calculatePurchasePrice(data.getDifficulty().modifier);
     	
@@ -94,13 +96,17 @@ public class Market {
 		}
 		Team team = data.getTeam();
 		if (team.isTeamFull()) {
-			throw new TeamMemberLimitException(Type.WHOLE);
+			throw new TeamLimitException(Type.WHOLE);
 		}
-		if (team.isMainTeamFull()) {
-			throw new TeamMemberLimitException(Type.MAIN);
-		}
-		if (data.getTeam().isReserveTeamFull()) {
-			throw new TeamMemberLimitException(Type.RESERVE);
+		switch (role) {
+		case RESERVE:
+			if (!team.isMainTeamFull()) {
+				throw new IllegalTeamException();
+			}
+		default:
+			if (team.isMainTeamFull()) {
+				throw new TeamLimitException(Type.MAIN);
+			}
 		}
 		athlete.setName(newName);
 		data.deductMoney(price);

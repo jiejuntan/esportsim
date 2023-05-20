@@ -4,13 +4,13 @@ package main.exceptions;
  * Thrown when team member limit is reached.
  *
  */
-public class TeamMemberLimitException extends Exception {
+public class TeamLimitException extends Exception {
 	
 	/**
 	 *	Part of team that is full
 	 */
 	public enum Type {
-		WHOLE, MAIN, RESERVE
+		WHOLE, MAIN
 	}
 	private Type type;
 	
@@ -18,7 +18,7 @@ public class TeamMemberLimitException extends Exception {
 	 * Constructor with type detail
 	 * @param type which part of team is full
 	 */
-	public TeamMemberLimitException(Type type) {
+	public TeamLimitException(Type type) {
 		super();
 		this.type = type;
 	}
