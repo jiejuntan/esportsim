@@ -130,15 +130,8 @@ public class Team {
 		}
 		
 		for (int athleteCount = 0; athleteCount < MAIN_LIMIT; athleteCount++) {
-			
-	        Random random = new Random();
-	        
-	        // Picks one of the three roles to assign to the Athlete
-	        Role[] roles = Role.values();
-	        Role randomRole = roles[random.nextInt(3)];
-	        
 			//Adds athlete to the team
-			addAthlete(new Athlete(skillLevel),roles[random.nextInt(3)]);
+			addAthlete(new Athlete(skillLevel),getRandomRole(false));
 		}
 		
 		
@@ -212,6 +205,29 @@ public class Team {
 			}
 		}
 		return count;
+	}
+	
+
+	/**
+	 * Returns a randomly picked role
+	 * 
+	 * @return Role
+	 */
+	public Role getRandomRole(boolean includeReserve) {
+		Random random = new Random();
+	        
+        // Picks one of the three roles to assign to the Athlete
+        Role[] roles = Role.values();
+        
+        // if includeReserve is true then the reserve role is added 
+        // to the list of possible return values
+        if (includeReserve) {
+        	return roles[random.nextInt(4)];
+        	
+        } else {
+        	return roles[random.nextInt(3)];
+        }
+
 	}
 	
 	/**
