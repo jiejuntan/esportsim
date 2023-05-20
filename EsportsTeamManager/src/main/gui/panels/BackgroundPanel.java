@@ -19,38 +19,45 @@ import main.gui.GUIConstants;
  *
  */
 public class BackgroundPanel extends JPanel {
+	
+	/**
+	 * Background horizontal speed
+	 */
     private static final int INCREMENT = 5;
 
+    /**
+     * Background image
+     */
     private BufferedImage backgroundImage;
 
+    /**
+     * Coordinates
+     */
     private int dx1, dx2, dy;
 
+    /**
+     * Constructor for background panel
+     */
     public BackgroundPanel() {
         initializeImages();
         initializeCoordinates();
-        Timer timer = new Timer(50, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                moveBackground();
-                repaint();
-            }
-        });
-        timer.start();
+        setTimer();
     }
 
-    @Override
+    /**
+     * Paints background
+     */
+	@Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage, dx1, dy, this);
         g.drawImage(backgroundImage, dx2, dy, this);
     }
 
-    private void initializeCoordinates() {
-        dx1 = 0;
-        dx2 = 1600;
-        dy = 0;
-    }
-
-    private void initializeImages() {
+	/**
+	 * Load background and format
+	 */
+	private void initializeImages() {
         try {
         	Image img = ImageIO.read(getClass().getResource(
             		GUIConstants.BACKGROUND_PLACEHOLDER)).getScaledInstance(1600, 900, Image.SCALE_DEFAULT);
@@ -60,7 +67,32 @@ public class BackgroundPanel extends JPanel {
             ex.printStackTrace();
         }
     }
+	
+	/**
+	 * Sets initial coordinates of background image
+	 */
+    private void initializeCoordinates() {
+        dx1 = 0;
+        dx2 = 1600;
+        dy = 0;
+    }
 
+    /**
+     * Creates and starts timer to call move background method
+     */
+    private void setTimer() {
+    	Timer timer = new Timer(50, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                moveBackground();
+                repaint();
+            }
+        });
+        timer.start();
+	}
+
+    /**
+     * Moves background by manipulating coordinates
+     */
     private void moveBackground() {
         if (dx1 <= -1600) {
         	dx1 = 1600;

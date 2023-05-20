@@ -2,35 +2,28 @@ package main.gui.panels;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-
-import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
 import javax.swing.GroupLayout.Alignment;
 
-import main.gui.GUIConstants;
 
 public class StartPanel extends BackgroundPanel {
 
 	private JButton newGameButton;
 	
 	public StartPanel() {
-		newGameButton = new JButton("<html><center><span style=\"font-size: 50px\">"
+		newGameButton = new JButton("<html><center><span style=\"font-size: 70px\">"
 				+ "Esports Simulator"
 				+ "<br><br><br></span>"
 				+ "<span style=\"font-size: 20px\">"
 				+ "Press any button to start"
+				+ "<br><br>"
 				+ "</span></center></html>");
 		newGameButton.setContentAreaFilled(false);
 		newGameButton.setFocusPainted(false);
 		newGameButton.setFont(new Font("Unispace", Font.PLAIN, 10));
+		newGameButton.setForeground(Color.WHITE);
 		
 		GroupLayout gl_panel = new GroupLayout(this);
 		gl_panel.setHorizontalGroup(

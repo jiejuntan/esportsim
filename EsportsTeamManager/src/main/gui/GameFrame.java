@@ -200,11 +200,21 @@ public class GameFrame {
 	}
 	
 	/**
+	 * Constructs the music player.
+	 */
+	private void initializeMusic() {
+		Music player = new Music();
+		player.setFile(GUIConstants.BACKGROUND_MUSIC);
+		player.play();
+	}
+	
+	/**
 	 * Initialize the application.
 	 */
 	public GameFrame() {
 		initializeEnvironment();
 		initializeFrame();
+		initializeMusic();
 		toStartScreen();
 	}
 	

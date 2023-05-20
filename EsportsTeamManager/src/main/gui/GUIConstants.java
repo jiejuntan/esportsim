@@ -30,6 +30,9 @@ public class GUIConstants {
 	// Backgrounds
 	public static final String BACKGROUND_PLACEHOLDER = "/main/Resources/mountains.png";
 	
+	// Audio
+	public static final String BACKGROUND_MUSIC = "/main/Resources/retro-music.wav";
+	
 	// Athlete portraits
 	public static final String PORTRAIT_PLACEHOLDER = "/main/Resources/placeholder_portrait.jpg";
 	public static final int PORTRAIT_SMALL = 250;
