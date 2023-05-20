@@ -38,7 +38,6 @@ public class ClubController extends ThumbnailController {
 		initializeBackButton();
 		initializeInventoryButton();
 		
-		
 		launch();
 	}
 	

@@ -20,6 +20,8 @@ public class HomePanel extends JPanel {
 	private JLabel moneyLabel;
 	private JButton clubButton;
 	private JButton stadiumButton;
+	private JButton marketButton;
+	private JButton endWeekButton;
 	
 	public HomePanel() {
 		GridBagLayout gbl_panel = new GridBagLayout();
@@ -80,7 +82,7 @@ public class HomePanel extends JPanel {
 		gbc_btnStadium.gridy = 4;
 		this.add(stadiumButton, gbc_btnStadium);
 		
-		JButton marketButton = new JButton("Market");
+		marketButton = new JButton("Market");
 		marketButton.setPreferredSize(new Dimension(200, 50));
 		marketButton.setFont(new Font("Unispace", Font.PLAIN, 30));
 		marketButton.setFocusPainted(false);
@@ -92,7 +94,7 @@ public class HomePanel extends JPanel {
 		this.add(marketButton, gbc_marketButton);
 		
 		
-		JButton endWeekButton = new JButton("End Week");
+		endWeekButton = new JButton("End Week");
 		endWeekButton.setPreferredSize(new Dimension(200, 50));
 		endWeekButton.setFont(new Font("Unispace", Font.PLAIN, 30));
 		endWeekButton.setFocusPainted(false);
@@ -131,6 +133,20 @@ public class HomePanel extends JPanel {
 	 */
 	public JButton getStadiumButton() {
 		return stadiumButton;
+	}
+
+	/**
+	 * @return the marketButton
+	 */
+	public JButton getMarketButton() {
+		return marketButton;
+	}
+
+	/**
+	 * @return the endWeekButton
+	 */
+	public JButton getEndWeekButton() {
+		return endWeekButton;
 	}
 	
 

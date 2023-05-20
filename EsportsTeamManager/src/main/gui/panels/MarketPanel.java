@@ -1,0 +1,24 @@
+/**
+ * 
+ */
+package main.gui.panels;
+
+/**
+ * Panel for market.
+ * 
+ * @author Jiejun Tan
+ *
+ */
+public class MarketPanel extends ThumbnailPanel {
+
+	/**
+	 * Constructor for market panel to display purchasable athletes/items and sell button
+	 */
+	public MarketPanel() {
+		titleLabel.setText("Market");
+		backButton.setVisible(true);
+		subheadingLabel1.setVisible(true);
+		subheadingLabel2.setVisible(true);
+	}
+
+}

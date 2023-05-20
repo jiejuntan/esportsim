@@ -15,13 +15,13 @@ import main.model.Equipment;
 /**
  * Controller for player inventory.
  * 
- * @author jjt56
+ * @author Jiejun Tan
  *
  */
 public class InventoryController extends ThumbnailController {
 
 	/**
-	 * Constructor for inventory controller
+	 * Constructor for inventory controller.
 	 * 
 	 * @param frame	game frame to manage navigation
 	 */

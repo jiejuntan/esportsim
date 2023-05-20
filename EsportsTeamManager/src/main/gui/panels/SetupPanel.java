@@ -6,21 +6,17 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
-import main.gui.GameFrame;
-import main.model.GameData.Difficulty;
+import main.gui.GUIConstants;
 
 public class SetupPanel extends JPanel {
 	
@@ -41,7 +37,7 @@ public class SetupPanel extends JPanel {
 		
 		JLabel titleLabel = new JLabel("New Game");
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		titleLabel.setFont(new Font("Unispace", Font.PLAIN, 50));
+		titleLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.HEADING));
 		GridBagConstraints gbc_titleLabel = new GridBagConstraints();
 		gbc_titleLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_titleLabel.gridwidth = 5;
@@ -51,7 +47,7 @@ public class SetupPanel extends JPanel {
 		
 		
 		JLabel teamNameLabel = new JLabel("Team Name:");
-		teamNameLabel.setFont(new Font("Unispace", Font.PLAIN, 30));
+		teamNameLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_teamNameLabel = new GridBagConstraints();
 		gbc_teamNameLabel.anchor = GridBagConstraints.WEST;
 		gbc_teamNameLabel.insets = new Insets(0, 0, 5, 5);
@@ -63,7 +59,7 @@ public class SetupPanel extends JPanel {
 		teamNameTextField.setBackground(Color.WHITE);
 		teamNameTextField.setPreferredSize(new Dimension(200, 50));
 		teamNameTextField.setMargin(new Insets(5, 10, 2, 10));
-		teamNameTextField.setFont(new Font("Unispace", Font.PLAIN, 30));
+		teamNameTextField.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_teamNameTextField = new GridBagConstraints();
 		gbc_teamNameTextField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_teamNameTextField.insets = new Insets(0, 0, 5, 5);
@@ -74,7 +70,7 @@ public class SetupPanel extends JPanel {
 		
 		
 		JLabel durationLabel = new JLabel("Season Duration:");
-		durationLabel.setFont(new Font("Unispace", Font.PLAIN, 30));
+		durationLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_durationLabel = new GridBagConstraints();
 		gbc_durationLabel.anchor = GridBagConstraints.WEST;
 		gbc_durationLabel.insets = new Insets(0, 0, 5, 5);
@@ -83,7 +79,7 @@ public class SetupPanel extends JPanel {
 		this.add(durationLabel, gbc_durationLabel);
 		
 		durationSlider = new JSlider();
-		durationSlider.setBackground(Color.LIGHT_GRAY);
+		durationSlider.setBackground(GUIConstants.COMPONENT);
 		durationSlider.setForeground(Color.BLACK);
 		durationSlider.setPreferredSize(new Dimension(200, 50));
 		durationSlider.setOpaque(false);
@@ -92,7 +88,7 @@ public class SetupPanel extends JPanel {
 		durationSlider.setMinimum(5);
 		durationSlider.setMaximum(15);
 		durationSlider.setSnapToTicks(true);
-		durationSlider.setFont(new Font("Unispace", Font.PLAIN, 20));
+		durationSlider.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
 		durationSlider.setBorder(null);
 		GridBagConstraints gbc_durationSlider = new GridBagConstraints();
 		gbc_durationSlider.fill = GridBagConstraints.HORIZONTAL;
@@ -104,7 +100,7 @@ public class SetupPanel extends JPanel {
 		
 		
 		JLabel difficultyLabel = new JLabel("Difficulty:");
-		difficultyLabel.setFont(new Font("Unispace", Font.PLAIN, 30));
+		difficultyLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_difficultyLabel = new GridBagConstraints();
 		gbc_difficultyLabel.anchor = GridBagConstraints.WEST;
 		gbc_difficultyLabel.insets = new Insets(0, 0, 5, 5);
@@ -118,8 +114,8 @@ public class SetupPanel extends JPanel {
 		difficultyGroup.add(easyToggleButton);
 		easyToggleButton.setOpaque(true);
 		easyToggleButton.setPreferredSize(new Dimension(200, 50));
-		easyToggleButton.setFont(new Font("Unispace", Font.PLAIN, 30));
-		easyToggleButton.setBackground(Color.LIGHT_GRAY);
+		easyToggleButton.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		easyToggleButton.setBackground(GUIConstants.COMPONENT);
 		easyToggleButton.setFocusPainted(false);
 		GridBagConstraints gbc_easyToggleButton = new GridBagConstraints();
 		gbc_easyToggleButton.fill = GridBagConstraints.HORIZONTAL;
@@ -132,8 +128,8 @@ public class SetupPanel extends JPanel {
 		difficultyGroup.add(hardToggleButton);
 		hardToggleButton.setOpaque(true);
 		hardToggleButton.setPreferredSize(new Dimension(200, 50));
-		hardToggleButton.setFont(new Font("Unispace", Font.PLAIN, 30));
-		hardToggleButton.setBackground(Color.LIGHT_GRAY);
+		hardToggleButton.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		hardToggleButton.setBackground(GUIConstants.COMPONENT);
 		hardToggleButton.setFocusPainted(false);
 		GridBagConstraints gbc_hardToggleButton = new GridBagConstraints();
 		gbc_hardToggleButton.insets = new Insets(0, 0, 5, 5);
@@ -146,8 +142,8 @@ public class SetupPanel extends JPanel {
 		confirmButton = new JButton("Confirm");
 		confirmButton.setPreferredSize(new Dimension(200, 50));
 		confirmButton.setFocusPainted(false);
-		confirmButton.setBackground(Color.LIGHT_GRAY);
-		confirmButton.setFont(new Font("Unispace", Font.PLAIN, 30));
+		confirmButton.setBackground(GUIConstants.COMPONENT);
+		confirmButton.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_confirmButton = new GridBagConstraints();
 		gbc_confirmButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_confirmButton.gridwidth = 3;

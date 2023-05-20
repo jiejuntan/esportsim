@@ -93,7 +93,7 @@ public class DraftController extends ThumbnailController {
 	 * Starts the game.
 	 */
 	public void startGame() {
-		frame.getGame().getData().nextWeek();
+		frame.getGame().advanceWeek();
 		toHomeScreen();
 	}
 	

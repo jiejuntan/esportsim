@@ -3,7 +3,7 @@ package main.gui.panels;
 /**
  * Panel for player inventory.
  * 
- * @author jjt56
+ * @author Jiejun Tan
  *
  */
 public class InventoryPanel extends ThumbnailPanel {

@@ -7,6 +7,8 @@ import javax.swing.JButton;
 
 import javax.swing.GroupLayout.Alignment;
 
+import main.gui.GUIConstants;
+
 
 public class StartPanel extends BackgroundPanel {
 
@@ -22,7 +24,7 @@ public class StartPanel extends BackgroundPanel {
 				+ "</span></center></html>");
 		newGameButton.setContentAreaFilled(false);
 		newGameButton.setFocusPainted(false);
-		newGameButton.setFont(new Font("Unispace", Font.PLAIN, 10));
+		newGameButton.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
 		newGameButton.setForeground(Color.WHITE);
 		
 		GroupLayout gl_panel = new GroupLayout(this);

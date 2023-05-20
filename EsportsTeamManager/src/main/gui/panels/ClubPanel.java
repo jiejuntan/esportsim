@@ -4,6 +4,8 @@
 package main.gui.panels;
 
 /**
+ * Panel for club.
+ * 
  * @author Jiejun Tan
  *
  */

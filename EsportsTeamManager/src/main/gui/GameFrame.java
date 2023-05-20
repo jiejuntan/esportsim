@@ -1,6 +1,11 @@
 package main.gui;
 
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,6 +23,7 @@ import main.gui.controllers.DraftController;
 import main.gui.controllers.HomeController;
 import main.gui.controllers.InventoryController;
 import main.gui.controllers.ItemDetailController;
+import main.gui.controllers.MarketController;
 import main.gui.controllers.RoleSwapController;
 import main.gui.controllers.MatchController;
 import main.gui.controllers.SetupController;
@@ -58,9 +64,17 @@ public class GameFrame {
 	 * @param panel	panel to display
 	 */
 	public void launchPanel(JPanel panel) {
+		frame.getContentPane().removeAll();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		frame.revalidate();
+		revalidate();
 	}	
+	
+	/**
+	 * Revalidates frame if updates are needed.
+	 */
+	public void revalidate() {
+		frame.revalidate();
+	}
 	
 	/**
 	 * Close the current panel.
@@ -149,7 +163,7 @@ public class GameFrame {
 	 * Launch the market screen.
 	 */
 	public void toMarketScreen() {
-		
+		new MarketController(this);
 	}
 	
 	/**
@@ -215,9 +229,23 @@ public class GameFrame {
 		initializeEnvironment();
 		initializeFrame();
 		initializeMusic();
+		initializeFont();
 		toStartScreen();
 	}
-	
+
+	/*
+	 * Doesn't work
+	 */
+	private void initializeFont() {
+		try {
+			File file = new File(this.getClass().getResource(GUIConstants.UNISPACE).toURI());
+			Font font = Font.createFont(Font.TRUETYPE_FONT, file);
+		} catch (FontFormatException | IOException | URISyntaxException e) {
+			e.printStackTrace();
+		}
+	}
+
+
 	/**
 	 * Launch the application.
 	 */

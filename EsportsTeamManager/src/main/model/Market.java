@@ -146,8 +146,9 @@ public class Market {
      * 
      * @return available items list
      */
-    public List<Equipment> viewStoresItems() {
-		return availableEquipment;}
+    public List<Equipment> getAvailableItems() {
+		return availableEquipment;
+	}
 
     public void purchaseItem(Equipment item) {}
 
@@ -158,7 +159,9 @@ public class Market {
      */
     public void clearMarket() {
     	availableAthletes.clear();
+    	purchasedAthletes.clear();
     	availableEquipment.clear();
+    	purchasedEquipment.clear();
     }
     
 }
