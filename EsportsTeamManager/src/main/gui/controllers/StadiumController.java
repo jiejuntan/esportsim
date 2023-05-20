@@ -17,7 +17,7 @@ import main.model.Athlete;
 import main.model.Stadium;
 import main.model.Team;
 
-public class StadiumController extends Controller {
+public class StadiumController extends ThumbnailController {
 
 	/**
 	 * @param frame

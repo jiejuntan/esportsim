@@ -12,7 +12,7 @@ import main.gui.panels.ClubPanel;
 import main.model.Athlete;
 import main.model.Team;
 
-public class ClubController extends Controller {
+public class ClubController extends ThumbnailController {
 
 	public ClubController(GameFrame frame) {
 		super(frame);
@@ -102,6 +102,6 @@ public class ClubController extends Controller {
 	 */
 	private void toAthleteScreen(Athlete athlete) {
 		close();
-//		frame.toDraftDetailScreen(athlete);
+		frame.toClubDetailScreen(athlete);
 	}
 }

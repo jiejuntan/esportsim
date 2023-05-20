@@ -19,7 +19,7 @@ import main.model.Team;
  * @author Jiejun Tan
  *
  */
-public class DraftController extends Controller {
+public class DraftController extends ThumbnailController {
 	
 	/**
 	 * @param frame	game frame

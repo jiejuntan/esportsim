@@ -14,6 +14,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import main.gui.controllers.DraftDetailController;
 import main.gui.controllers.ClubController;
+import main.gui.controllers.ClubDetailController;
 import main.gui.controllers.DraftController;
 import main.gui.controllers.HomeController;
 import main.gui.controllers.RoleSwapController;
@@ -123,6 +124,10 @@ public class GameFrame {
 	 */
 	public void toClubScreen() {
 		new ClubController(this);
+	}
+	
+	public void toClubDetailScreen(Athlete athlete) {
+		new ClubDetailController(this, athlete);
 	}
 	
 	/**

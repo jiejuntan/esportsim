@@ -1,19 +1,12 @@
 package main.gui.controllers;
 
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -23,7 +16,6 @@ import javax.swing.JTextField;
 import main.exceptions.IllegalFundsException;
 import main.exceptions.IllegalTeamException;
 import main.exceptions.TeamLimitException;
-import main.gui.GUIConstants;
 import main.gui.GameFrame;
 import main.gui.panels.DetailPanel;
 import main.gui.panels.DraftDetailPanel;
@@ -39,7 +31,7 @@ import main.model.Team;
  * @author Jiejun Tan
  *
  */
-public class DraftDetailController extends Controller {
+public class DraftDetailController extends DetailController {
 
 	/**
 	 * Athlete currently in view.
@@ -66,7 +58,7 @@ public class DraftDetailController extends Controller {
 		panel = new DraftDetailPanel();
 		
 		setHeading();
-		setPortrait();
+		setPortrait(((DetailPanel) panel).getPortraitLabel(), athlete.getPortraitPath());
 		setStats();
 		
 		initializeBackButton();
@@ -75,7 +67,6 @@ public class DraftDetailController extends Controller {
 		launch();
 	}
 
-	
 	/**
 	 * Sets heading to an editable name
 	 */
@@ -115,24 +106,6 @@ public class DraftDetailController extends Controller {
 				
             }
         });
-	}
-	
-	/**
-	 * Sets the athlete's portrait
-	 */
-	private void setPortrait() {
-		JLabel portraitLabel = ((DetailPanel) panel).getPortraitLabel();
-		String portraitPath = athlete.getPortraitPath();
-		BufferedImage portraitImage = null;
-		try {
-			portraitImage = ImageIO.read(new File(getClass()
-					.getResource(portraitPath)
-					.toURI()));
-		} catch (IOException | URISyntaxException e) {
-			e.printStackTrace();
-		}
-		portraitLabel.setIcon(new ImageIcon(portraitImage
-				.getScaledInstance(GUIConstants.PORTRAIT_LARGE, GUIConstants.PORTRAIT_LARGE, Image.SCALE_DEFAULT)));
 	}
 	
 	/**
