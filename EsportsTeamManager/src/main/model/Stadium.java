@@ -39,13 +39,15 @@ public class Stadium {
     		Team opponent = new Team(difficulty.getModifier());
     		matches.add(opponent);
     	}
-    	
-    	
     }
-    
-    
-    
 
 
+	/**
+	 * @return the matches
+	 */
+	public List<Team> getMatches() {
+		return matches;
+	}
+    
 
 }
