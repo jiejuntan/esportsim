@@ -13,6 +13,7 @@ public class ClubPanel extends ThumbnailPanel {
 	 * 
 	 */
 	public ClubPanel() {
+		backButton.setVisible(true);
 		subheadingLabel1.setVisible(true);
 		subheadingLabel1.setText("Main Members:");
 		subheadingLabel2.setVisible(true);

@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 
 import main.gui.GameFrame;
 import main.gui.panels.ClubPanel;
-import main.gui.panels.DraftPanel;
 import main.model.Athlete;
 import main.model.Team;
 
@@ -23,22 +22,20 @@ public class ClubController extends Controller {
 	@Override
 	protected void initialize() {
 		panel = new ClubPanel();
+		
 		setTitle();
 		setMoney(((ClubPanel) panel).getMoneyLabel());
 		setAthletes();
 		
-//		JButton returnButton = ((ClubPanel) panel).getReturnButton();
-//		returnButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				toHomeScreen();
-//			}
-//		});
-//		
+		initializeBackButton();
+		
 //		JButton inventoryButton = ((ClubPanel) panel).getInventoryButton();
 		
 		launch();
 	}
 	
+	
+
 	/**
 	 * Sets title and subheadings of the screen based on team name.
 	 */
@@ -84,6 +81,15 @@ public class ClubController extends Controller {
 				}
 			});
 		}
+	}
+	
+	private void initializeBackButton() {
+		JButton backButton = ((ClubPanel) panel).getBackButton();
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				toHomeScreen();
+			}
+		});
 	}
 	
 	private void toHomeScreen() {
