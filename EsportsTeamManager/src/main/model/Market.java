@@ -90,29 +90,13 @@ public class Market {
     public void purchaseAthlete(Athlete athlete, Role role, String newName) throws IllegalFundsException, TeamLimitException, IllegalTeamException {
     	int money = data.getMoney();
 		int price = athlete.calculatePurchasePrice(data.getDifficulty().modifier);
-    	
+		// Check money first then check team
 		if (money < price) {
 			throw new IllegalFundsException();
 		}
-		Team team = data.getTeam();
-		if (team.isTeamFull()) {
-			throw new TeamLimitException(Type.WHOLE);
-		}
-		switch (role) {
-		case RESERVE:
-			if (!team.isMainTeamFull()) {
-				throw new IllegalTeamException();
-			}
-			break;
-		default:
-			if (team.isMainTeamFull()) {
-				throw new TeamLimitException(Type.MAIN);
-			}
-			break;
-		}
 		athlete.setName(newName);
-		data.deductMoney(price);
 		data.getTeam().addAthlete(athlete, role);
+		data.deductMoney(price);
 		purchasedAthletes.add(athlete);
     }
     

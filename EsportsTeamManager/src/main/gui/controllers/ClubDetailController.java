@@ -182,7 +182,6 @@ public class ClubDetailController extends DetailController {
 				String newName = nameTextField.getText();
 				
 				
-				Market market = frame.getGame().getMarket();
 				Team team = frame.getGame().getData().getTeam();
 				try {
 					market.purchaseAthlete(athlete, role, newName);
