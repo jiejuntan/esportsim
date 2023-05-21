@@ -28,9 +28,9 @@ public class StadiumController extends ThumbnailController {
 	List<Team> opponentTeams;
 
 	/**
-	 * Constructor for controller
+	 * Constructor for stadium screen
 	 * 
-	 * @param frame
+	 * @param frame game frame to manage navigation
 	 */
 	public StadiumController(GameFrame frame) {
 		super(frame);
@@ -38,7 +38,7 @@ public class StadiumController extends ThumbnailController {
 	}
 
 	/**
-	 * Initializes screen
+	 * Initializes panel and components then launches panel.
 	 */
 	@Override
 	protected void initialize() {

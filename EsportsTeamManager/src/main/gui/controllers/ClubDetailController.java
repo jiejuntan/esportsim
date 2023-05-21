@@ -50,7 +50,7 @@ public class ClubDetailController extends DetailController {
 	/**
 	 * Constructor when viewing team athlete
 	 * 
-	 * @param frame 	game frame
+	 * @param frame 	game frame to manage navigation
 	 * @param athlete 	Athlete to view
 	 */
 	public ClubDetailController(GameFrame frame, Athlete athlete) {
@@ -60,7 +60,7 @@ public class ClubDetailController extends DetailController {
 	}
 
 	/**
-	 * Runs initialize methods and launches panel
+	 * Initializes panel and components then launches panel.
 	 */
 	@Override
 	protected void initialize() {

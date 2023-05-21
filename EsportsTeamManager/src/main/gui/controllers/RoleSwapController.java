@@ -30,9 +30,9 @@ public class RoleSwapController extends ThumbnailController {
 	private Athlete athlete;
 	
 	/**
-	 * Constructor when drafting
+	 * Constructor for role swap screen.
 	 * 
-	 * @param frame 	game frame
+	 * @param frame 	game frame to manage navigation
 	 * @param athlete 	Athlete initiating role swap
 	 */
 	public RoleSwapController(GameFrame frame, Athlete athlete) {
@@ -42,7 +42,7 @@ public class RoleSwapController extends ThumbnailController {
 	}
 
 	/**
-	 * Runs initialize methods and launches panel
+	 * Initializes panel and components then launches panel.
 	 */
 	@Override
 	protected void initialize() {

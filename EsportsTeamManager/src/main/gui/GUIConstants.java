@@ -21,11 +21,20 @@ public class GUIConstants {
 	public static final Color COMPONENT = Color.LIGHT_GRAY;
 	
 	// Fonts
+	public static final String UNISPACE = "/main/Resources/unispace.ttf"; // issue implementing might delete along with ttf file
 	public static final String FONT = "Unispace";
 	public static final int HEADING = 50;
-	public static final int SUBHEADING = 40;
+	public static final int SUBHEADING = 35;
 	public static final int BODY = 30;
 	public static final int DETAIL = 20;
+	
+	// Audio
+	// Background music by Abel Geyskens, obtained from https://freesound.org/s/668879/ under the Attribute 4.0 License
+	public static final String BACKGROUND_MUSIC = "/main/Resources/retro-music.wav";
+		
+	// Backgrounds
+	// Background image by Lesiakower via Pixabay under the Content License
+	public static final String BACKGROUND_PLACEHOLDER = "/main/Resources/mountains.png";
 	
 	// Athlete portraits
 	public static final String PORTRAIT_PLACEHOLDER = "/main/Resources/placeholder_portrait.jpg";
@@ -33,13 +42,13 @@ public class GUIConstants {
 	public static final RoundClipBorder PORTRAIT_BORDER_SMALL = new RoundClipBorder(Color.BLACK, 2, 20, 0);
 	public static final int PORTRAIT_LARGE = 350;
 	public static final RoundClipBorder PORTRAIT_BORDER_LARGE = new RoundClipBorder(Color.BLACK, 2, 50, 0);
-
 	public static final Color PORTRAIT_BUTTON_ROLLOVER = new Color(255, 255, 255, 50);
 	
 	// Color for bonus stats
 	public static final Color BONUS_UP = new Color(0, 128, 0);
 	public static final Color BONUS_DOWN = new Color(255, 0, 0);
 
+	// Tints images
 	public static BufferedImage tintImage(BufferedImage image, Color color) {
 	    Graphics g = image.getGraphics();
 	    g.setColor(color);

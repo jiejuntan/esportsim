@@ -33,6 +33,14 @@ public final class GameEnvironment {
     	this.market = new Market(data);
     }
     
+    /**
+     * Advances to next week in season and calls update methods.
+     */
+    public void advanceWeek() {
+    	data.nextWeek();
+    	market.updateMarket(false);
+    }
+    
     /** 
      * @return the data
      */

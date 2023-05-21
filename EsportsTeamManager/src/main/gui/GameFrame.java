@@ -1,10 +1,14 @@
 package main.gui;
 
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,22 +21,19 @@ import main.gui.controllers.ClubController;
 import main.gui.controllers.ClubDetailController;
 import main.gui.controllers.DraftController;
 import main.gui.controllers.HomeController;
+import main.gui.controllers.InventoryController;
+import main.gui.controllers.ItemDetailController;
+import main.gui.controllers.MarketController;
 import main.gui.controllers.RoleSwapController;
 import main.gui.controllers.MatchController;
 import main.gui.controllers.SetupController;
 import main.gui.controllers.StartController;
 import main.gui.controllers.StadiumController;
 import main.gui.controllers.StadiumTeamDetailsController;
-import main.gui.panels.ClubPanel;
-import main.gui.panels.ThumbnailPanel;
-import main.gui.panels.HomePanel;
-import main.gui.panels.SetupPanel;
-import main.gui.panels.StartPanel;
 import main.model.Athlete;
+import main.model.Equipment;
 import main.model.GameEnvironment;
 import main.model.Team;
-
-import javax.swing.JButton;
 
 /**
  * Main access point of game, initializes frame and game environment, handles navigation
@@ -65,9 +66,17 @@ public class GameFrame {
 	 * @param panel	panel to display
 	 */
 	public void launchPanel(JPanel panel) {
+		frame.getContentPane().removeAll();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		frame.revalidate();
+		revalidate();
 	}	
+	
+	/**
+	 * Revalidates frame if updates are needed.
+	 */
+	public void revalidate() {
+		frame.revalidate();
+	}
 	
 	/**
 	 * Close the current panel.
@@ -127,6 +136,11 @@ public class GameFrame {
 		new ClubController(this);
 	}
 	
+	/**
+	 * Launches athlete detail screen from club screen.
+	 * 
+	 * @param athlete	Athlete to view
+	 */
 	public void toClubDetailScreen(Athlete athlete) {
 		new ClubDetailController(this, athlete);
 	}
@@ -135,14 +149,23 @@ public class GameFrame {
 	 * Launch the inventory screen.
 	 */
 	public void toInventoryScreen() {
-		
+		new InventoryController(this);
+	}
+	
+	/**
+	 * Launch the item detail screen.
+	 * 
+	 * @param item	item to view
+	 */
+	public void toItemDetailScreen(Equipment item) {
+		new ItemDetailController(this, item);
 	}
 	
 	/**
 	 * Launch the market screen.
 	 */
 	public void toMarketScreen() {
-		
+		new MarketController(this);
 	}
 	
 	/**
@@ -201,14 +224,38 @@ public class GameFrame {
 	}
 	
 	/**
+	 * Constructs the music player.
+	 */
+	private void initializeMusic() {
+		Music player = new Music();
+		player.setFile(GUIConstants.BACKGROUND_MUSIC);
+		player.play();
+	}
+	
+	/**
 	 * Initialize the application.
 	 */
 	public GameFrame() {
 		initializeEnvironment();
 		initializeFrame();
+		initializeMusic();
+		initializeFont();
 		toStartScreen();
 	}
-	
+
+	/*
+	 * Doesn't work
+	 */
+	private void initializeFont() {
+		try {
+			File file = new File(this.getClass().getResource(GUIConstants.UNISPACE).toURI());
+			Font font = Font.createFont(Font.TRUETYPE_FONT, file);
+		} catch (FontFormatException | IOException | URISyntaxException e) {
+			e.printStackTrace();
+		}
+	}
+
+
 	/**
 	 * Launch the application.
 	 */

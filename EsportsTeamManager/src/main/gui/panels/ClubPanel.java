@@ -4,13 +4,15 @@
 package main.gui.panels;
 
 /**
+ * Panel for club.
+ * 
  * @author Jiejun Tan
  *
  */
 public class ClubPanel extends ThumbnailPanel {
 
 	/**
-	 * 
+	 * Constructor for club panel to display team members.
 	 */
 	public ClubPanel() {
 		backButton.setVisible(true);

@@ -36,10 +36,11 @@ public class ThumbnailPanel extends JPanel {
 	protected JButton backButton;
 	protected JButton confirmButton;
 	protected JLabel titleLabel;
-	
-	// Exposed components to toggle visibility in subclasses
 	protected JLabel subheadingLabel1;
 	protected JLabel subheadingLabel2;
+	
+	// Exposed components to toggle visibility in subclasses
+	
 	
 	// Prevent instantiation without subclassing
 	protected ThumbnailPanel() {
@@ -261,6 +262,20 @@ public class ThumbnailPanel extends JPanel {
 	 */
 	public JLabel getTitleLabel() {
 		return titleLabel;
+	}
+
+	/**
+	 * @return the subheadingLabel1
+	 */
+	public JLabel getSubheadingLabel1() {
+		return subheadingLabel1;
+	}
+
+	/**
+	 * @return the subheadingLabel2
+	 */
+	public JLabel getSubheadingLabel2() {
+		return subheadingLabel2;
 	}
 	
 }

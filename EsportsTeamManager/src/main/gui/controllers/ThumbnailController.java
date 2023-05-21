@@ -43,10 +43,8 @@ abstract class ThumbnailController extends Controller {
 		button.setBorder(GUIConstants.PORTRAIT_BORDER_SMALL);
 		BufferedImage portraitImage = null;
 		try {
-			portraitImage = ImageIO.read(new File(getClass()
-					.getResource(portraitPath)
-					.toURI()));
-		} catch (IOException | URISyntaxException e) {
+			portraitImage = ImageIO.read(getClass().getResource(portraitPath));
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		button.setIcon(new ImageIcon(portraitImage

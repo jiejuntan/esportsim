@@ -19,7 +19,9 @@ public class MatchController extends Controller {
 	Match match;
 	
 	/**
-	 * @param frame
+	 * Constructor for match screen.
+	 * 
+	 * @param frame game frame to manage navigation
 	 */
 	public MatchController(GameFrame frame, Team  team) {
 		super(frame);
@@ -27,7 +29,7 @@ public class MatchController extends Controller {
 	}
 
 	/**
-	 * Initializes screen
+	 * Initializes panel and components then launches panel.
 	 */
 	@Override
 	protected void initialize() {

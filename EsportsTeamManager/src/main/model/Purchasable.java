@@ -3,6 +3,7 @@ package main.model;
 public abstract class Purchasable {
 	
     protected String description;
+	protected String portraitPath;
 	
     public abstract int getBasePrice();
     public abstract void setDescription();
@@ -29,6 +30,12 @@ public abstract class Purchasable {
     
 	public String getDescription() {
 		return description;
+	}
+	/**
+	 * @return the portraitPath
+	 */
+	public String getPortraitPath() {
+		return portraitPath;
 	}
 
 }

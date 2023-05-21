@@ -11,11 +11,19 @@ import main.gui.panels.HomePanel;
 
 public class HomeController extends Controller {
 
+	/**
+	 * Constructor for home screen.
+	 * 
+	 * @param frame game frame to manage navigation.
+	 */
 	public HomeController(GameFrame frame) {
 		super(frame);
 		initialize();
 	}
-
+	
+	/**
+	 * Initializes panel and components then launches panel.
+	 */
 	@Override
 	protected void initialize() {
 		panel = new HomePanel();
@@ -42,6 +50,20 @@ public class HomeController extends Controller {
 			}
 		});
 		
+		JButton marketButton = ((HomePanel) panel).getMarketButton();
+		marketButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				toMarketScreen();
+			}
+		});
+		
+		JButton endWeekButton = ((HomePanel) panel).getEndWeekButton();
+		marketButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// do something to advance week
+			}
+		});
+		
 		launch();
 	}
 	
@@ -53,5 +75,10 @@ public class HomeController extends Controller {
 	private void toStadiumScreen() {
 		close();
 		frame.toStadiumScreen();
+	}
+	
+	private void toMarketScreen() {
+		close();
+		frame.toMarketScreen();
 	}
 }

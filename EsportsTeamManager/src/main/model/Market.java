@@ -2,6 +2,7 @@ package main.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import main.exceptions.IllegalFundsException;
 import main.exceptions.IllegalTeamException;
@@ -49,30 +50,35 @@ public class Market {
     	this.availableEquipment = new ArrayList<Equipment>();
     	this.purchasedEquipment = new ArrayList<Equipment>();
     	
-    	updateMarket(8);
+    	updateMarket(true);
     }
 
     
     /**
-     * Clears the list: (availableAthletes, availableEquipment) and adds new Equipment and Athletes
-     * @param maxCount maximum number of athlete/items to list
+     * Clears the market and adds new Equipment and Athletes
+     * 
+     * @param isDrafting is in draft phase or in market
      */
-    public void updateMarket(int maxCount) {
+    public void updateMarket(boolean isDrafting) {
     	clearMarket();
-    	
+ 
+		Random random = new Random();
+    	int maxCount = isDrafting ? 10 : 3 + random.nextInt(3);
     	for (int count=0; count < maxCount; count++) {
     		Athlete athlete = new Athlete(3);
+    		athlete.setRole(Team.getRandomRole(false));
+    		
     		// implement difficulty + weekly scalings for athlete stats
     		
     		availableAthletes.add(athlete);
     	}
-    	
-    	for (int equipmentCount = 20; equipmentCount > 0; equipmentCount--) {
-    		
-    		
-    		Equipment trainingEquipment = new Equipment();
-    		
-    		availableEquipment.add(trainingEquipment);
+    	if (!isDrafting) {
+    		maxCount = 3 + random.nextInt(3);
+	    	for (int count=0; count <= maxCount; count++) {
+	    		Equipment trainingEquipment = new Equipment();
+	    		
+	    		availableEquipment.add(trainingEquipment);
+	    	}
     	}
     }
     
@@ -106,7 +112,7 @@ public class Market {
      * @param athlete	Athlete to check
      * @return			<code>true</code> if purchased
      */
-    public boolean isPurchased(Athlete athlete) {
+    public boolean isPurchased(Purchasable athlete) {
     	return purchasedAthletes.contains(athlete);
     }
     
@@ -140,8 +146,9 @@ public class Market {
      * 
      * @return available items list
      */
-    public List<Equipment> viewStoresItems() {
-		return availableEquipment;}
+    public List<Equipment> getAvailableItems() {
+		return availableEquipment;
+	}
 
     public void purchaseItem(Equipment item) {}
 
@@ -152,7 +159,9 @@ public class Market {
      */
     public void clearMarket() {
     	availableAthletes.clear();
+    	purchasedAthletes.clear();
     	availableEquipment.clear();
+    	purchasedEquipment.clear();
     }
     
 }

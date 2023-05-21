@@ -1,8 +1,7 @@
 package main.model;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import main.model.Team.Role;
 
 public class Club {
 	
@@ -11,22 +10,23 @@ public class Club {
 	 */
 	private GameData data;
 	
+	/**
+	 * Player inventory
+	 */
     private List<Equipment> inventory;
     
     public Club(GameData data) {
     	this.data = data;
+    	this.inventory = new ArrayList<Equipment>();
     }
-
   
     /**
      * Takes in an item and athlete and applies that items effect to the athlete
      * 
-     * @param item
-     * @param athlete
+     * @param item		item to use
+     * @param athlete	Athlete to use item on
      */
-    public void useEqupment(Equipment equipment, Athlete athlete) {
-    	
-    	
+    public void useItem(Equipment equipment, Athlete athlete) {
     	String AffectedStat = equipment.getEquipment().getAffectedStat();
     	int itemStatValue = equipment.getEquipment().getValue();
     	
@@ -46,11 +46,11 @@ public class Club {
          default:
              break;
     	 }
-    	
     }
     
     /**
      * Gets the Club inventory
+     * 
 	 * @return Club inventory
 	 */
 	public List<Equipment> getInventory() {
@@ -58,19 +58,12 @@ public class Club {
 	}
 
 	/**
-	 * Sets the Club inventory
-	 * @param inventory to set
-	 */
-	public void setInventory(List<Equipment> inventory) {
-		this.inventory = inventory;
-	}
-
-	/**
      * Adds Equipment to the clubs inventory
-     * @param Equipment
+     * 
+     * @param equipment equipment to add
      */
-    public void addToInventory(Equipment Equipment) {
-    	inventory.add(Equipment);
+    public void addToInventory(Equipment equipment) {
+    	inventory.add(equipment);
     }
 
 }

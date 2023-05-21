@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main.gui.controllers;
 
 import java.awt.Image;
@@ -42,10 +39,8 @@ abstract class DetailController extends Controller {
 	protected void setPortrait(JLabel portraitLabel, String path) {
 		BufferedImage portraitImage = null;
 		try {
-			portraitImage = ImageIO.read(new File(getClass()
-					.getResource(path)
-					.toURI()));
-		} catch (IOException | URISyntaxException e) {
+			portraitImage = ImageIO.read(getClass().getResource(path));
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		portraitLabel.setIcon(new ImageIcon(portraitImage
