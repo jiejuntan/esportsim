@@ -19,7 +19,7 @@ import main.model.Team.Role;
  * @author Jiejun Tan
  *
  */
-public final class RoleSwapController extends ThumbnailController {
+public class RoleSwapController extends ThumbnailController {
 
 	/**
 	 * Athlete initiating role swap.
@@ -74,28 +74,17 @@ public final class RoleSwapController extends ThumbnailController {
 			button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					team.swapRole(athlete, outgoingAthlete);
-					if (frame.getGame().getData().seasonHasStarted()) {
-						toClubScreen();
-					} else {
-						toDraftScreen();
-					}
+					toPreviousScreen();
 				}
 			});
 		}
 	}
 
 	/**
-	 * Returns to draft screen.
+	 * Returns to previous screen.
 	 */
-	private void toDraftScreen() {
+	protected void toPreviousScreen() {
 		frame.toDraftScreen();
-	}
-	
-	/**
-	 * Returns to club screen.
-	 */
-	private void toClubScreen() {
-		frame.toClubScreen();
 	}
 
 }

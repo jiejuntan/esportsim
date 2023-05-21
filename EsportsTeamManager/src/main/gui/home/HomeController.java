@@ -90,6 +90,6 @@ public final class HomeController extends Controller {
 	 * Launches market screen
 	 */
 	private void toMarketScreen() {
-		frame.toMarketScreen();
+		frame.toMarketScreen(false);
 	}
 }

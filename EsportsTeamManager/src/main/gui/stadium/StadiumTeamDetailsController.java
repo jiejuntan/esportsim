@@ -80,7 +80,7 @@ public final class StadiumTeamDetailsController extends DetailController {
 	/**
 	 * Initializes back button to return to draft
 	 */
-	private void initializeBackButton() {
+	protected void initializeBackButton() {
 		JButton backButton = ((StadiumTeamDetailsPanel) panel).getBackButton();
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -104,7 +104,7 @@ public final class StadiumTeamDetailsController extends DetailController {
 	/**
 	 * Returns to previous screen
 	 */
-	private void toPreviousScreen() {
+	protected void toPreviousScreen() {
 		frame.toStadiumScreen();
 	}
 	

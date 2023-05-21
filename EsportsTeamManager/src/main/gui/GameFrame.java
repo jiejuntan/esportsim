@@ -1,11 +1,6 @@
 package main.gui;
 
 import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
 
@@ -16,6 +11,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import main.gui.club.ClubController;
 import main.gui.club.ClubDetailController;
+import main.gui.club.ClubRoleSwapController;
 import main.gui.club.InventoryController;
 import main.gui.club.ItemDetailController;
 import main.gui.drafting.DraftController;
@@ -23,6 +19,9 @@ import main.gui.drafting.DraftDetailController;
 import main.gui.drafting.RoleSwapController;
 import main.gui.home.HomeController;
 import main.gui.market.MarketController;
+import main.gui.market.MarketRoleSwapController;
+import main.gui.market.PurchaseAthleteDetailController;
+import main.gui.market.SellAthleteDetailController;
 import main.gui.stadium.MatchController;
 import main.gui.stadium.StadiumController;
 import main.gui.stadium.StadiumTeamDetailsController;
@@ -99,7 +98,7 @@ public final class GameFrame {
 	}
 	
 	/**
-	 * Launch the screen to swap specified Athlete.
+	 * Launch the screen to swap specified Athlete in draft.
 	 */
 	public void toRoleSwapScreen(Athlete athlete) {
 		new RoleSwapController(this, athlete);
@@ -129,6 +128,13 @@ public final class GameFrame {
 	}
 	
 	/**
+	 * Launch the screen to swap specified Athlete in club.
+	 */
+	public void toClubRoleSwapScreen(Athlete athlete) {
+		new ClubRoleSwapController(this, athlete);
+	}
+	
+	/**
 	 * Launch the inventory screen.
 	 */
 	public void toInventoryScreen() {
@@ -146,9 +152,36 @@ public final class GameFrame {
 	
 	/**
 	 * Launch the market screen.
+	 * 
+	 * @param isSelling buy/sell mode
 	 */
-	public void toMarketScreen() {
-		new MarketController(this);
+	public void toMarketScreen(boolean isSelling) {
+		new MarketController(this, isSelling);
+	}
+	
+	/**
+	 * Launch the detail screen to purchase an athlete
+	 * 
+	 * @param athlete	athlete to purchase
+	 */
+	public void toPurchaseAthleteDetailScreen(Athlete athlete) {
+		new PurchaseAthleteDetailController(this, athlete);
+	}
+	
+	/**
+	 * Launch the screen to swap specified Athlete in market.
+	 */
+	public void toMarketRoleSwapScreen(Athlete athlete) {
+		new MarketRoleSwapController(this, athlete);
+	}
+	
+	/**
+	 * Launch the detail screen to sell an athlete
+	 * 
+	 * @param athlete	athlete to sell
+	 */
+	public void toSellAthleteDetailScreen(Athlete athlete) {
+		new SellAthleteDetailController(this, athlete);
 	}
 	
 	/**
@@ -237,5 +270,5 @@ public final class GameFrame {
 			}
 		});
 	}
-	
+
 }

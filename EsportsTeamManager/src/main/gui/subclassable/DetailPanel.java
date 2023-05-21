@@ -49,7 +49,7 @@ public class DetailPanel extends BasePanel {
 	protected JLabel priceValueLabel;
 	
 	private JButton backButton;
-	private JButton confirmButton;
+	protected JButton confirmButton;
 	
 	// Exposed components to toggle visibility in subclasses
 	protected JLabel editTipLabel;
