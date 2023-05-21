@@ -14,7 +14,7 @@ import main.gui.panels.thumbnailPanels.ClubPanel;
 import main.model.Athlete;
 import main.model.Team;
 
-public class ClubController extends ThumbnailController {
+public final class ClubController extends ThumbnailController {
 
 	/**
 	 * Constructor for club controller

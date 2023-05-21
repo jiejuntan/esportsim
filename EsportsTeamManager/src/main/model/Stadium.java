@@ -5,7 +5,7 @@ import java.util.List;
 
 import main.model.GameData.Difficulty;
 
-public class Stadium {
+public final class Stadium {
 	
     private List<Team> matches;
     private Team opponent;

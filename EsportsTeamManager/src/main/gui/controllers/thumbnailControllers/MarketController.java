@@ -25,7 +25,7 @@ import main.model.Team;
  * @author Jiejun Tan
  *
  */
-public class MarketController extends ThumbnailController {
+public final class MarketController extends ThumbnailController {
 
 	/**
 	 * Whether in buy or sell mode.

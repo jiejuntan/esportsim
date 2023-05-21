@@ -17,7 +17,7 @@ import main.model.Team;
  * @author blake
  *
  */
-public class StadiumController extends ThumbnailController {
+public final class StadiumController extends ThumbnailController {
 	
 	List<Team> opponentTeams;
 

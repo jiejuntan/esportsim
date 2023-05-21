@@ -39,7 +39,7 @@ import main.model.Team;
  * @author Jiejun Tan
  *
  */
-public class GameFrame {
+public final class GameFrame {
 
 	/**
 	 * App frame

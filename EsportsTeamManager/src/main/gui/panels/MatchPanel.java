@@ -13,7 +13,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-public class MatchPanel extends BasePanel {
+public final class MatchPanel extends BasePanel {
 	
 	protected JLabel playerNameLabel;
 	protected JLabel opponentNameLabel;

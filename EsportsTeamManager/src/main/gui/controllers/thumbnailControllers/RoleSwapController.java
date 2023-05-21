@@ -23,7 +23,7 @@ import main.model.Team.Role;
  * @author Jiejun Tan
  *
  */
-public class RoleSwapController extends ThumbnailController {
+public final class RoleSwapController extends ThumbnailController {
 
 	/**
 	 * Athlete initiating role swap.

@@ -11,7 +11,7 @@ import main.gui.GUIConstants;
 import main.gui.panels.subclassable.BackgroundPanel;
 
 
-public class StartPanel extends BackgroundPanel {
+public final class StartPanel extends BackgroundPanel {
 
 	private JButton newGameButton;
 	

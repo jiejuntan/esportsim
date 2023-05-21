@@ -12,7 +12,7 @@ import java.util.Random;
  * @author Blake and Jun
  *
  */
-public class IO {
+public final class IO {
 	
 	private static final String IMAGE_DIRECTORY = "/main/Resources/CharacterImage/";
 	

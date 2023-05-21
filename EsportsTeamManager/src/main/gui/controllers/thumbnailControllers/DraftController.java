@@ -20,7 +20,7 @@ import main.model.Team;
  * @author Jiejun Tan
  *
  */
-public class DraftController extends ThumbnailController {
+public final class DraftController extends ThumbnailController {
 	
 	/**
 	 * Constructor for drafting screen.

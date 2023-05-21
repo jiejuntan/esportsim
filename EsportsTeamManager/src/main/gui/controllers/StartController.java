@@ -11,7 +11,7 @@ import main.gui.GameFrame;
 import main.gui.controllers.subclassable.Controller;
 import main.gui.panels.StartPanel;
 
-public class StartController extends Controller {
+public final class StartController extends Controller {
 	
 	/**
 	 * Constructor for start screen

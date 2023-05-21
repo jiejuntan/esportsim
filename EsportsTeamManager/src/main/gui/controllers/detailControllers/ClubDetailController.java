@@ -41,7 +41,7 @@ import main.model.Team;
  * @author Jiejun Tan
  *
  */
-public class ClubDetailController extends DetailController {
+public final class ClubDetailController extends DetailController {
 
 	/**
 	 * Athlete currently in view.

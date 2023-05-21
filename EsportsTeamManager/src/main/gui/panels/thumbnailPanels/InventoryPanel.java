@@ -8,7 +8,7 @@ import main.gui.panels.subclassable.ThumbnailPanel;
  * @author Jiejun Tan
  *
  */
-public class InventoryPanel extends ThumbnailPanel {
+public final class InventoryPanel extends ThumbnailPanel {
 
 	/**
 	 * Constructor for inventory panel to display items.

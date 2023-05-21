@@ -18,7 +18,7 @@ import javax.swing.border.AbstractBorder;
  * 
  * @author Jiejun Tan
  */
-public class RoundClipBorder extends AbstractBorder {
+public final class RoundClipBorder extends AbstractBorder {
 
     private Color color;
     private int thickness;

@@ -11,7 +11,7 @@ import main.gui.panels.subclassable.DetailPanel;
  * @author Jiejun Tan
  *
  */
-public class DraftDetailPanel extends DetailPanel {
+public final class DraftDetailPanel extends DetailPanel {
 
 	/**
 	 * Sets visual only components for draft detail view.

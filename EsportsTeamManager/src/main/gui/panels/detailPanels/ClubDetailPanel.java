@@ -11,7 +11,7 @@ import main.gui.panels.subclassable.DetailPanel;
  * @author Jiejun Tan
  *
  */
-public class ClubDetailPanel extends DetailPanel {
+public final class ClubDetailPanel extends DetailPanel {
 
 	/**
 	 * Sets components required when viewing team athletes to visible.

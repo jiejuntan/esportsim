@@ -11,7 +11,7 @@ import main.gui.panels.subclassable.ThumbnailPanel;
  * @author Jiejun Tan
  *
  */
-public class MarketPanel extends ThumbnailPanel {
+public final class MarketPanel extends ThumbnailPanel {
 
 	/**
 	 * Constructor for market panel to display purchasable athletes/items and sell button

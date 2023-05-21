@@ -11,7 +11,7 @@ import main.gui.panels.subclassable.ThumbnailPanel;
  * @author Jiejun Tan
  *
  */
-public class DraftPanel extends ThumbnailPanel {
+public final class DraftPanel extends ThumbnailPanel {
 
 	/**
 	 * Sets components for draft screen

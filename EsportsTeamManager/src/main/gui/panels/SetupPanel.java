@@ -19,7 +19,7 @@ import javax.swing.SwingConstants;
 import main.gui.GUIConstants;
 import main.gui.panels.subclassable.BasePanel;
 
-public class SetupPanel extends BasePanel {
+public final class SetupPanel extends BasePanel {
 	
 	private JTextField teamNameTextField;
 	private JSlider durationSlider;

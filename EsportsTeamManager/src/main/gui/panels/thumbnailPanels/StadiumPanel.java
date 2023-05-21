@@ -8,7 +8,7 @@ import main.gui.panels.subclassable.ThumbnailPanel;
  * @author blake
  *
  */
-public class StadiumPanel extends ThumbnailPanel {
+public final class StadiumPanel extends ThumbnailPanel {
 	
 	
 	public StadiumPanel() {

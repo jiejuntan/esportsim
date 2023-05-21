@@ -14,7 +14,7 @@ import main.model.GameData;
 import main.model.Match;
 import main.model.Team;
 
-public class MatchController extends Controller {
+public final class MatchController extends Controller {
 	
 	Match match;
 	Team opponent;

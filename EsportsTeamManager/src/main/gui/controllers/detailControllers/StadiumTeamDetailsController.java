@@ -19,7 +19,7 @@ import main.model.Team;
  * @author Jiejun Tan
  *
  */
-public class StadiumTeamDetailsController extends DetailController {
+public final class StadiumTeamDetailsController extends DetailController {
 
 	/**
 	 * Team currently in view.

@@ -8,7 +8,7 @@ import main.gui.panels.subclassable.DetailPanel;
  * @author blake
  *
  */
-public class StadiumTeamDetailsPanel extends DetailPanel{
+public final class StadiumTeamDetailsPanel extends DetailPanel{
 	
 	public StadiumTeamDetailsPanel() {
 		reactionValueLabel.setVisible(true);

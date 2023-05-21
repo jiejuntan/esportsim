@@ -32,7 +32,7 @@ import main.model.Team;
  * @author Jiejun Tan
  *
  */
-public class DraftDetailController extends DetailController {
+public final class DraftDetailController extends DetailController {
 
 	/**
 	 * Athlete currently in view.

@@ -18,7 +18,7 @@ import main.exceptions.TeamLimitException.Type;
  * @author Blake and Jun
  *
  */
-public class Team {
+public final class Team {
 
 	/**
 	 * Team name

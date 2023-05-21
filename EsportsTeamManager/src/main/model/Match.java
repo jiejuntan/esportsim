@@ -14,7 +14,7 @@ import main.model.Team.Role;
  * @author Blake and Jun
  *
  */
-public class Match {
+public final class Match {
 
     private Difficulty difficulty;
     private int rewardMoney;

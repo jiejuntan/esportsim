@@ -22,7 +22,7 @@ import main.model.GameData.Difficulty;
  * @author Jiejun Tan
  *
  */
-public class ItemDetailController extends DetailController {
+public final class ItemDetailController extends DetailController {
 	
 	/**
 	 * Item currently in view.

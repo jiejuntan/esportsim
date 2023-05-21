@@ -14,7 +14,7 @@ import main.model.Team.Role;
  * @author Blake and Jun
  *
  */
-public class RandomEvent {
+public final class RandomEvent {
 	
 	private Team team;
 	private GameData gameData;

@@ -11,7 +11,7 @@ import main.gui.panels.subclassable.ThumbnailPanel;
  * @author Jiejun Tan
  *
  */
-public class ClubPanel extends ThumbnailPanel {
+public final class ClubPanel extends ThumbnailPanel {
 
 	/**
 	 * Constructor for club panel to display team members.

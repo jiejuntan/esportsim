@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
  * @author Jiejun Tan
  *
  */
-public class GUIConstants {
+public final class GUIConstants {
 	
 	// Component colors
 	public static final Color COMPONENT = new Color(203, 224, 255);

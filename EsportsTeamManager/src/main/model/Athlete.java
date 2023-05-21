@@ -16,7 +16,7 @@ import main.model.Team.Role;
  * @author Blake and Jun
  *
  */
-public class Athlete extends Purchasable {
+public final class Athlete extends Purchasable {
 	
 	/** 
 	 * Static property storing unused portrait indexes

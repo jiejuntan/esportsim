@@ -11,7 +11,7 @@ import main.gui.panels.subclassable.DetailPanel;
  * @author Jiejun Tan
  *
  */
-public class ItemDetailPanel extends DetailPanel {
+public final class ItemDetailPanel extends DetailPanel {
 
 	/**
 	 * Sets visual only components for item detail view.

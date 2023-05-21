@@ -9,7 +9,7 @@ package main.exceptions;
  * @author Jiejun Tan
  *
  */
-public class IllegalTeamException extends Exception {
+public final class IllegalTeamException extends Exception {
 
 	/**
 	 * Constructor

@@ -4,7 +4,7 @@ package main.exceptions;
  * Thrown when team member limit is reached.
  *
  */
-public class TeamLimitException extends Exception {
+public final class TeamLimitException extends Exception {
 	
 	/**
 	 *	Part of team that is full

@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 
 import main.gui.panels.subclassable.BasePanel;
 
-public class HomePanel extends BasePanel {
+public final class HomePanel extends BasePanel {
 	
 	private JLabel weekLabel;
 	private JLabel moneyLabel;

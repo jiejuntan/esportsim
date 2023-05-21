@@ -10,7 +10,7 @@ import main.gui.GameFrame;
 import main.gui.controllers.subclassable.Controller;
 import main.gui.panels.HomePanel;
 
-public class HomeController extends Controller {
+public final class HomeController extends Controller {
 
 	/**
 	 * Constructor for home screen.

@@ -8,7 +8,7 @@ import main.model.Team.Role;
  * @author Blake and Jun
  *
  */
-public class IngameCharacters {
+public final class IngameCharacters {
 	
 	private String name;
 	

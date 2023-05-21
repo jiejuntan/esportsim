@@ -10,7 +10,7 @@ import main.exceptions.TeamLimitException;
 import main.exceptions.TeamLimitException.Type;
 import main.model.Team.Role;
 
-public class Market {
+public final class Market {
 	
 	/**
 	 * Data transfer object

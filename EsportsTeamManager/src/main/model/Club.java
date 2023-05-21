@@ -3,7 +3,7 @@ package main.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Club {
+public final class Club {
 	
 	/**
 	 * Data transfer object

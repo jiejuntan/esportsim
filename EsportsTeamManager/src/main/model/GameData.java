@@ -1,6 +1,6 @@
 package main.model;
 
-public class GameData {
+public final class GameData {
 	
 	/**
      * Enum for difficulty setting

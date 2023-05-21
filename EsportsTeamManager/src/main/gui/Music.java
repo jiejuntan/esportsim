@@ -10,7 +10,7 @@ import java.io.IOException;
  * @author Jiejun Tan
  *
  */
-public class Music {
+public final class Music {
 	
     Clip clip;
     AudioInputStream sound;

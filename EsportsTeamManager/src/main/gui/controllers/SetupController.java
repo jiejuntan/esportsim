@@ -14,7 +14,7 @@ import main.gui.controllers.subclassable.Controller;
 import main.gui.panels.SetupPanel;
 import main.model.GameData.Difficulty;
 
-public class SetupController extends Controller {
+public final class SetupController extends Controller {
 
 	/**
 	 * Constructor for game setup screen.

@@ -19,7 +19,7 @@ import main.model.Equipment;
  * @author Jiejun Tan
  *
  */
-public class InventoryController extends ThumbnailController {
+public final class InventoryController extends ThumbnailController {
 
 	/**
 	 * Constructor for inventory controller.

@@ -11,7 +11,7 @@ import main.gui.panels.subclassable.ThumbnailPanel;
  * @author Jiejun Tan
  *
  */
-public class RoleSwapPanel extends ThumbnailPanel {
+public final class RoleSwapPanel extends ThumbnailPanel {
 
 	/**
 	 * 

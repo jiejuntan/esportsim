@@ -10,7 +10,7 @@ import main.gui.GUIConstants;
  * @author Blake and Jun
  *
  */
-public class Equipment extends Purchasable { 
+public final class Equipment extends Purchasable { 
 
 private TrainingItem equipment;
 	
