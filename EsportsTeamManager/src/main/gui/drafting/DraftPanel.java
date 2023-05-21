@@ -15,6 +15,7 @@ public final class DraftPanel extends ThumbnailPanel {
 	 */
 	public DraftPanel() {
 		titleLabel.setText("Draft Team");
+		confirmButton.setText("Start season");
 	}
 
 }

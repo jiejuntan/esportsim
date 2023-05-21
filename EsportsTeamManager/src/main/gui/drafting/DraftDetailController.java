@@ -30,7 +30,7 @@ import main.model.Team;
  * @author Jiejun Tan
  *
  */
-public final class DraftDetailController extends DetailController {
+public class DraftDetailController extends DetailController {
 
 	/**
 	 * Athlete currently in view.
@@ -198,7 +198,7 @@ public final class DraftDetailController extends DetailController {
 	/**
 	 * Launches screen to choose athlete in team to swap roles with drafted athlete
 	 */
-	private void toRoleSwapScreen(Athlete athlete) {
+	protected void toRoleSwapScreen(Athlete athlete) {
 		frame.toRoleSwapScreen(athlete);
 	}
 

@@ -165,7 +165,7 @@ public final class ClubDetailController extends DetailController {
 	 * Launches screen to choose athlete in team to swap roles with current athlete
 	 */
 	private void toRoleSwapScreen(Athlete athlete) {
-		frame.toRoleSwapScreen(athlete);
+		frame.toClubRoleSwapScreen(athlete);
 	}
 
 }

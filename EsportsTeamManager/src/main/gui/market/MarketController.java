@@ -31,11 +31,12 @@ public final class MarketController extends ThumbnailController {
 	/**
 	 * Constructor for market controller.
 	 * 
-	 * @param frame game frame to manage navigation
+	 * @param frame 	game frame to manage navigation
+	 * @param isSelling buy or sell mode
 	 */
-	public MarketController(GameFrame frame) {
+	public MarketController(GameFrame frame, boolean isSelling) {
 		super(frame);
-		isSelling = false;
+		this.isSelling = isSelling;
 		initialize();
 	}
 
@@ -159,11 +160,9 @@ public final class MarketController extends ThumbnailController {
 	 */
 	private void toAthleteScreen(Athlete athlete) {
 		if (isSelling) {
-			// TODO Auto-generated method stub
-			frame.toClubDetailScreen(athlete);
+			frame.toSellAthleteDetailScreen(athlete);
 		} else {
-			// TODO Auto-generated method stub
-			frame.toClubDetailScreen(athlete);
+			frame.toPurchaseAthleteDetailScreen(athlete);
 		}
 	}
 	

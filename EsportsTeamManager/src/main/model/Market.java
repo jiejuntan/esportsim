@@ -128,7 +128,8 @@ public final class Market {
 			data.incrementMoney(price);
 			data.getTeam().removeAthlete(athlete);
 		} catch (IllegalArgumentException e) {
-			throw e;
+			// Price is negative, unrecoverable exception
+			e.printStackTrace();
 		}
 	}
     

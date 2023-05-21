@@ -21,6 +21,8 @@ public final class ItemDetailPanel extends DetailPanel {
 		
 		priceLabel.setVisible(true);
 		priceValueLabel.setVisible(true);
+		
+		confirmButton.setText("Use");
 	}
 
 }

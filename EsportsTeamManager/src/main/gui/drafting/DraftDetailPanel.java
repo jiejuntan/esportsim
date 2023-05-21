@@ -26,6 +26,8 @@ public final class DraftDetailPanel extends DetailPanel {
 
 		priceLabel.setVisible(true);
 		priceValueLabel.setVisible(true);
+		
+		confirmButton.setText("Draft");
 	}
 
 }
