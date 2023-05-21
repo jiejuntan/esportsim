@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main.gui.club;
 
 import java.awt.event.ActionEvent;
@@ -50,7 +47,7 @@ public final class ItemDetailController extends DetailController {
 		super.setPortrait(((ItemDetailPanel) panel).getPortraitLabel(), item.getPortraitPath());
 		setStats();
 		
-		initializeBackButton();
+		super.initializeBackButton();
 		initializeUseButton();
 		
 		super.launch();
@@ -85,18 +82,6 @@ public final class ItemDetailController extends DetailController {
 		JLabel itemValueLabel = ((ItemDetailPanel) panel).getPriceValueLabel();
 		itemValueLabel.setText("$" + String.valueOf(price));
 	}
-
-	/**
-	 * Initializes back button to return to club
-	 */
-	private void initializeBackButton() {
-		JButton backButton = ((ItemDetailPanel) panel).getBackButton();
-		backButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				toPreviousScreen();
-			}
-		});
-	}
 	
 	/**
 	 * Initializes use button to choose an athlete to use item on.
@@ -113,7 +98,7 @@ public final class ItemDetailController extends DetailController {
 	/**
 	 * Returns to previous screen
 	 */
-	private void toPreviousScreen() {
+	protected void toPreviousScreen() {
 		frame.toClubScreen();
 	}
 }

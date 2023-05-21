@@ -10,6 +10,12 @@ import javax.swing.JButton;
 import main.gui.GameFrame;
 import main.gui.subclassable.Controller;
 
+/**
+ * Controller for start screen.
+ * 
+ * @author Jiejun Tan
+ *
+ */
 public final class StartController extends Controller {
 	
 	/**
@@ -44,6 +50,9 @@ public final class StartController extends Controller {
 		super.launch();
 	}
 	
+	/**
+	 * Launches setup screen.
+	 */
 	private void toSetupScreen() {
 		frame.toSetupScreen();
 	}

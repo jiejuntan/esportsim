@@ -56,7 +56,7 @@ public final class ClubDetailController extends DetailController {
 		super.setPortrait(((ClubDetailPanel) panel).getPortraitLabel(), athlete.getPortraitPath());
 		setStats();
 		
-		initializeBackButton();
+		super.initializeBackButton();
 		initializeConfirmButton();
 
 		super.launch();
@@ -125,18 +125,6 @@ public final class ClubDetailController extends DetailController {
 	}
 	
 	/**
-	 * Initializes back button to return to club
-	 */
-	private void initializeBackButton() {
-		JButton backButton = ((ClubDetailPanel) panel).getBackButton();
-		backButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				toPreviousScreen();
-			}
-		});
-	}
-	
-	/**
 	 * Initializes confirm button to confirm changes or show dialog for errors
 	 */
 	private void initializeConfirmButton() {
@@ -169,7 +157,7 @@ public final class ClubDetailController extends DetailController {
 	/**
 	 * Returns to previous screen
 	 */
-	private void toPreviousScreen() {
+	protected void toPreviousScreen() {
 		frame.toClubScreen();
 	}
 	

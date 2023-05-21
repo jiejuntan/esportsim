@@ -13,6 +13,11 @@ import main.gui.subclassable.ThumbnailController;
 import main.model.Athlete;
 import main.model.Team;
 
+/**
+ * Controller for viewing team and inventory in club.
+ * 
+ * @author Jiejun Tan
+ */
 public final class ClubController extends ThumbnailController {
 
 	/**
@@ -33,7 +38,7 @@ public final class ClubController extends ThumbnailController {
 		panel = new ClubPanel();
 		
 		setTitle();
-		setMoney(((ClubPanel) panel).getMoneyLabel());
+		super.setMoney(((ClubPanel) panel).getMoneyLabel());
 		setAthletes();
 		initializeBackButton();
 		initializeInventoryButton();
@@ -76,13 +81,13 @@ public final class ClubController extends ThumbnailController {
 	}
 	
 	/**
-	 * Initializes back button to return.
+	 * Initializes back button
 	 */
 	private void initializeBackButton() {
 		JButton backButton = ((ClubPanel) panel).getBackButton();
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				toHomeScreen();
+				toPreviousScreen();
 			}
 		});
 	}
@@ -102,7 +107,7 @@ public final class ClubController extends ThumbnailController {
 	/**
 	 * Closes club screen and launches home screen.
 	 */
-	private void toHomeScreen() {
+	private void toPreviousScreen() {
 		frame.toHomeScreen();
 	}
 	

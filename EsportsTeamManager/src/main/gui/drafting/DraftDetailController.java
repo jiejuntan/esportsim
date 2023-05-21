@@ -60,7 +60,7 @@ public final class DraftDetailController extends DetailController {
 		super.setPortrait(((DraftDetailPanel) panel).getPortraitLabel(), athlete.getPortraitPath());
 		setStats();
 		
-		initializeBackButton();
+		super.initializeBackButton();
 		initializeConfirmButton();
 
 		super.launch();
@@ -132,17 +132,6 @@ public final class DraftDetailController extends DetailController {
 		contractValueLabel.setText("$" + String.valueOf(price));
 	}
 	
-	/**
-	 * Initializes back button to return to draft
-	 */
-	private void initializeBackButton() {
-		JButton backButton = ((DraftDetailPanel) panel).getBackButton();
-		backButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				toPreviousScreen();
-			}
-		});
-	}
 	
 	/**
 	 * Initializes confirm button to purchase athlete and return to draft or show dialog for errors
@@ -202,7 +191,7 @@ public final class DraftDetailController extends DetailController {
 	/**
 	 * Returns to previous screen
 	 */
-	private void toPreviousScreen() {
+	protected void toPreviousScreen() {
 		frame.toDraftScreen();
 	}
 	

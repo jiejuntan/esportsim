@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main.gui.market;
 
 import main.gui.subclassable.ThumbnailPanel;

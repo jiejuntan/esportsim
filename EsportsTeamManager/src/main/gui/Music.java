@@ -12,9 +12,21 @@ import java.io.IOException;
  */
 public final class Music {
 	
+	/**
+	 * Sound clip
+	 */
     Clip clip;
+    
+    /**
+     * Input stream
+     */
     AudioInputStream sound;
     
+    /**
+     * Sets audio file
+     * 
+     * @param soundFileName	path of audio clip
+     */
     public void setFile(String soundFileName) {
         try {
             File file = new File(this.getClass().getResource(soundFileName).toURI());
@@ -25,10 +37,17 @@ public final class Music {
         }
     }
     
+    /**
+     * Plays audio continuously.
+     */
     public void play() {
     	clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
     
+    /**
+     * Stops audio
+     * @throws IOException if interrupted
+     */
     public void stop() throws IOException {
         sound.close();
         clip.close();

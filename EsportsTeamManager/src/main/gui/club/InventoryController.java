@@ -35,7 +35,7 @@ public final class InventoryController extends ThumbnailController {
 	protected void initialize() {
 		panel = new InventoryPanel();
 		
-		setMoney(((InventoryPanel) panel).getMoneyLabel());
+		super.setMoney(((InventoryPanel) panel).getMoneyLabel());
 		setItems();
 		
 		initializeBackButton();

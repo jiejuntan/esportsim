@@ -52,5 +52,5 @@ public abstract class ThumbnailController extends Controller {
 						.tintImage(portraitImage, GUIConstants.PORTRAIT_BUTTON_ROLLOVER)
 						.getScaledInstance(GUIConstants.PORTRAIT_SMALL, GUIConstants.PORTRAIT_SMALL, Image.SCALE_DEFAULT)));
 	}
-
+	
 }

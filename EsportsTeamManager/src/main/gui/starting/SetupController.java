@@ -13,6 +13,12 @@ import main.gui.GameFrame;
 import main.gui.subclassable.Controller;
 import main.model.GameData.Difficulty;
 
+/**
+ * Controller for setup screen.
+ * 
+ * @author Jiejun Tan
+ *
+ */
 public final class SetupController extends Controller {
 
 	/**
@@ -60,6 +66,9 @@ public final class SetupController extends Controller {
 		super.launch();
 	}
 	
+	/**
+	 * Launches draft screen
+	 */
 	private void toDraftScreen() {
 		frame.toDraftScreen();
 	}

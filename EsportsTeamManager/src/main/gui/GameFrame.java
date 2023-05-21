@@ -218,20 +218,7 @@ public final class GameFrame {
 		initializeEnvironment();
 		initializeFrame();
 		initializeMusic();
-		initializeFont();
 		toStartScreen();
-	}
-
-	/*
-	 * Doesn't work
-	 */
-	private void initializeFont() {
-		try {
-			File file = new File(this.getClass().getResource(GUIConstants.UNISPACE).toURI());
-			Font font = Font.createFont(Font.TRUETYPE_FONT, file);
-		} catch (FontFormatException | IOException | URISyntaxException e) {
-			e.printStackTrace();
-		}
 	}
 
 

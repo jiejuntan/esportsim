@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main.gui.market;
 
 import java.awt.event.ActionEvent;
@@ -49,7 +46,7 @@ public final class MarketController extends ThumbnailController {
 	protected void initialize() {
 		panel = new MarketPanel();
 		
-		setMoney(((MarketPanel) panel).getMoneyLabel());
+		super.setMoney(((MarketPanel) panel).getMoneyLabel());
 		setSubheadings();
 		setAthletes();
 		setItems();
@@ -125,13 +122,13 @@ public final class MarketController extends ThumbnailController {
 	}
 
 	/**
-	 * Initializes back button to return to home screen.
+	 * Initializes back button
 	 */
 	private void initializeBackButton() {
 		JButton backButton = ((MarketPanel) panel).getBackButton();
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				toHomeScreen();
+				toPreviousScreen();
 			}
 		});
 	}
@@ -153,7 +150,7 @@ public final class MarketController extends ThumbnailController {
 	/**
 	 * Closes club screen and launches home screen.
 	 */
-	private void toHomeScreen() {
+	protected void toPreviousScreen() {
 		frame.toHomeScreen();
 	}
 	

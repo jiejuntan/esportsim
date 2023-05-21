@@ -1,11 +1,14 @@
 package main.gui.subclassable;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import main.gui.GUIConstants;
@@ -44,5 +47,22 @@ public abstract class DetailController extends Controller {
 		portraitLabel.setIcon(new ImageIcon(portraitImage
 				.getScaledInstance(GUIConstants.PORTRAIT_LARGE, GUIConstants.PORTRAIT_LARGE, Image.SCALE_DEFAULT)));
 	}
+	
+	/**
+	 * All detail panels must have a return button, initialize it
+	 */
+	protected void initializeBackButton() {
+		JButton backButton = ((DetailPanel) panel).getBackButton();
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				toPreviousScreen();
+			}
+		});
+	}
+	
+	/**
+	 * Previous screen method can be used by back button or after performing action
+	 */
+	protected abstract void toPreviousScreen();
 
 }
