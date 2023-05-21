@@ -8,6 +8,7 @@ import main.model.GameData.Difficulty;
 public class Stadium {
 	
     private List<Team> matches;
+    private Team opponent;
     
 	/**
 	 * Maximum number of main members
@@ -17,6 +18,7 @@ public class Stadium {
     public Stadium(GameData gameData) {
     	this.matches = new ArrayList<Team>();
     	generateMatches(gameData.getDifficulty());
+    	this.opponent = new Team();
     }
     
     
@@ -51,6 +53,13 @@ public class Stadium {
 		return matches;
 	}
 	
+	/**
+	 * Return where an opponent has been selected
+	 * @return <CODE>boolean</CODE> 
+	 */
+	public boolean isOpponentSelected() {
+		return opponent.isTeamFull();
+	}
 
 
 

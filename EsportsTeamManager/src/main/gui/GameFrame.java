@@ -21,6 +21,7 @@ import main.gui.controllers.StartController;
 import main.gui.controllers.detailControllers.ClubDetailController;
 import main.gui.controllers.detailControllers.DraftDetailController;
 import main.gui.controllers.detailControllers.ItemDetailController;
+import main.gui.controllers.detailControllers.StadiumTeamDetailsController;
 import main.gui.controllers.thumbnailControllers.ClubController;
 import main.gui.controllers.thumbnailControllers.DraftController;
 import main.gui.controllers.thumbnailControllers.InventoryController;
@@ -30,6 +31,7 @@ import main.gui.controllers.thumbnailControllers.StadiumController;
 import main.model.Athlete;
 import main.model.Equipment;
 import main.model.GameEnvironment;
+import main.model.Team;
 
 /**
  * Main access point of game, initializes frame and game environment, handles navigation
@@ -157,10 +159,18 @@ public class GameFrame {
 	}
 	
 	/**
+	 * Launch the stadium team details screen.
+	 */
+	public void toTeamDetailsScreen(Team team) {
+		new StadiumTeamDetailsController(this, team);
+	}
+
+	
+	/**
 	 * Launch the match screen.
 	 */
-	public void toMatchScreen() {
-		new MatchController(this);
+	public void toMatchScreen(Team team) {
+		new MatchController(this, team);
 	}
 	
 	/**

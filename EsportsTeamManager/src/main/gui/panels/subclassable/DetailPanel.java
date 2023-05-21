@@ -1,6 +1,5 @@
 package main.gui.panels.subclassable;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -12,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -32,6 +30,12 @@ public class DetailPanel extends BasePanel {
 	private JTextField nameTextField;
 	private JButton changeNameButton;
 	private JLabel portraitLabel;
+	
+	private JLabel reactionLabel;
+	private JLabel eyesightLabel;
+	private JLabel intelligenceLabel;
+	private JLabel staminaLabel;
+	
 	
 	protected JLabel reactionValueLabel;
 	protected JLabel eyesightValueLabel;
@@ -115,7 +119,7 @@ public class DetailPanel extends BasePanel {
 		this.add(portraitLabel, gbc_portraitLabel);
 		
 		
-		JLabel reactionLabel = new JLabel("Reaction time:");
+		reactionLabel = new JLabel("Reaction time:");
 		reactionLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_reactionLabel = new GridBagConstraints();
 		gbc_reactionLabel.anchor = GridBagConstraints.WEST;
@@ -143,7 +147,7 @@ public class DetailPanel extends BasePanel {
 		gbc_reactionBonusLabel.gridy = 4;
 		this.add(reactionBonusLabel, gbc_reactionBonusLabel);
 		
-		JLabel eyesightLabel = new JLabel("Eyesight:");
+		eyesightLabel = new JLabel("Eyesight:");
 		eyesightLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_eyesightLabel = new GridBagConstraints();
 		gbc_eyesightLabel.anchor = GridBagConstraints.WEST;
@@ -171,7 +175,7 @@ public class DetailPanel extends BasePanel {
 		gbc_eyesightBonusLabel.gridy = 6;
 		this.add(eyesightBonusLabel, gbc_eyesightBonusLabel);
 		
-		JLabel intelligenceLabel = new JLabel("Intelligence:");
+		intelligenceLabel = new JLabel("Intelligence:");
 		intelligenceLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_intelligenceLabel = new GridBagConstraints();
 		gbc_intelligenceLabel.anchor = GridBagConstraints.WEST;
@@ -199,7 +203,7 @@ public class DetailPanel extends BasePanel {
 		gbc_intelligenceBonusLabel.gridy = 8;
 		this.add(intelligenceBonusLabel, gbc_intelligenceBonusLabel);
 		
-		JLabel staminaLabel = new JLabel("Stamina:");
+		staminaLabel = new JLabel("Stamina:");
 		staminaLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_staminaLabel = new GridBagConstraints();
 		gbc_staminaLabel.anchor = GridBagConstraints.WEST;
@@ -326,6 +330,34 @@ public class DetailPanel extends BasePanel {
 	 */
 	public JLabel getPortraitLabel() {
 		return portraitLabel;
+	}
+
+	/**
+	 * @return the reactionLabel
+	 */
+	public JLabel getReactionLabel() {
+		return reactionLabel;
+	}
+
+	/**
+	 * @return the eyesightLabel
+	 */
+	public JLabel getEyesightLabel() {
+		return eyesightLabel;
+	}
+
+	/**
+	 * @return the intelligenceLabel
+	 */
+	public JLabel getIntelligenceLabel() {
+		return intelligenceLabel;
+	}
+
+	/**
+	 * @return the staminaLabel
+	 */
+	public JLabel getStaminaLabel() {
+		return staminaLabel;
 	}
 
 	/**

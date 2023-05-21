@@ -10,6 +10,8 @@ import main.model.Team.Role;
  */
 public class IngameCharacters {
 	
+	private String name;
+	
     //Ingame Character Stats
     private int health;
     private int damage;
@@ -23,6 +25,7 @@ public class IngameCharacters {
     private Role role;
     
 	public IngameCharacters(Athlete athlete, Role role) {
+		this.name = athlete.getName();
 		this.role = role;
 		this.health = role.getHealth();
 		this.damage = role.getDamage();
@@ -122,5 +125,14 @@ public class IngameCharacters {
 	public Role getRole() {
 		return role;
 	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	
+	
 
 }

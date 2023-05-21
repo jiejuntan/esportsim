@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Random;
 
 /**
  * Holds Input/Output functions
@@ -12,6 +13,8 @@ import java.nio.file.Paths;
  *
  */
 public class IO {
+	
+	private static final String IMAGE_DIRECTORY = "/main/Resources/CharacterImage/";
 	
 	
 	/**
@@ -35,6 +38,23 @@ public class IO {
 		
 		return textArray;
 	}
+	
+	/**
+	 * Randomly pick a image from the CharactersImages Directory
+	 * 
+	 * @return <CODE>String</CODE> path of image
+	 */
+	 public static String getRandomImagePath() {
+	        Random rand = new Random();
+	        
+	        // Generate a random number between 1 and totalNumberOfImages
+	        int randomImageNumber = rand.nextInt(1, 67);
+	        
+	        // Build the image path
+	        String imagePath = IMAGE_DIRECTORY + randomImageNumber + ".png";
+	       	        
+	        return imagePath;
+	    }
 	
 
 }

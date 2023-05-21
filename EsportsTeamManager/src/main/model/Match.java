@@ -28,7 +28,7 @@ public class Match {
 
     private List<String> roundResults;
     
-    public Match(GameData gameData) {
+    public Match(GameData gameData, Team opponent) {
     	this.homeTurn = 0;
     	this.round = 0;
     	this.outcome = -1;
@@ -40,7 +40,7 @@ public class Match {
     	opponentTeam = new ArrayList<IngameCharacters>();
     	roundResults = new ArrayList<String>();
     	
-    	createIngameCharacters(gameData.getTeam(), gameData.getOpponent());
+    	createIngameCharacters(gameData.getTeam(), opponent);
     	
     };
     
@@ -351,6 +351,22 @@ public class Match {
 	public int getOutcome() {
 		return outcome;
 	}
+
+	/**
+	 * @return the homeTurn
+	 */
+	public int getHomeTurn() {
+		return homeTurn;
+	}
+
+	/**
+	 * @return the opponentTurn
+	 */
+	public int getOpponentTurn() {
+		return opponentTurn;
+	}
+	
+	
 	
 	
 	
