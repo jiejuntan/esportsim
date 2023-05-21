@@ -29,6 +29,9 @@ public final class GUIConstants {
 	// Backgrounds
 	// Background image by Lesiakower via Pixabay under the Content License
 	public static final String BACKGROUND_ANIMATED = "/main/Resources/mountains.png";
+	public static final String BACKGROUND_OFFICE = "/main/Resources/office.png";
+	public static final String BACKGROUND_NEWGAME = "/main/Resources/newGame.png";
+	public static final String BACKGROUND_BATTLE = "/main/Resources/battle.png";
 	public static final Color BACKGROUND_SOLID = new Color(221, 235, 255);
 	
 	// Athlete portraits
@@ -43,6 +46,9 @@ public final class GUIConstants {
 	
 	public static final int PORTRAIT_LARGE = 350;
 	public static final RoundClipBorder PORTRAIT_BORDER_LARGE = new RoundClipBorder(Color.BLACK, 2, 50);
+	
+	// Team Logos
+	public static final int LOGO_COUNT = 15;
 	
 	// Color for bonus stats
 	public static final Color BONUS_UP = new Color(0, 128, 0);

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import main.exceptions.IllegalTeamException;
 import main.exceptions.TeamLimitException;
@@ -63,6 +65,11 @@ public final class Team {
 	public static final int MIN_TEAM_SIZE = 6;
 	
 	private String logoPath;
+	
+	/** 
+	 * Static property storing unused portrait indexes
+	 */
+	private static List<Integer> availableLogos = IntStream.range(0, GUIConstants.PORTRAIT_COUNT).boxed().collect(Collectors.toCollection(ArrayList::new));
 	
 	/**
 	 * Defines the Athletes Roles and the stats of each role
@@ -143,8 +150,7 @@ public final class Team {
 			}
 		}
 		
-		this.logoPath = GUIConstants.PORTRAIT_PLACEHOLDER;
-		
+		setLogo();
 		this.wins = 0;
 		this.losses = 0;
     }
@@ -282,6 +288,21 @@ public final class Team {
         	return roles[random.nextInt(3)];
         }
 	}
+	
+    /**
+     * Sets logo path for Team and prevents reuse unless there are no remaining logos
+     */
+    private void setLogo() {
+    	if (availableLogos.size() == 0) {
+    		availableLogos = IntStream.range(0, GUIConstants.PORTRAIT_COUNT).boxed().collect(Collectors.toCollection(ArrayList::new));
+    	}
+    	Random random = new Random();
+    	int index = random.nextInt(availableLogos.size());
+    	int portrait = availableLogos.get(index);
+    	availableLogos.remove(index);
+    	
+    	this.logoPath = "/main/Resources/teamLogos/" + portrait + ".png";
+    }
 
 	
 	/**

@@ -68,7 +68,7 @@ public final class MatchController extends Controller {
 					} else {
 						displayRoundResults();
 						battleButton.setVisible(false);
-						nextMatchButton.setEnabled(true);
+						nextMatchButton.setVisible(true);
 					}
 					
 			}
@@ -82,7 +82,7 @@ public final class MatchController extends Controller {
 		JButton nextMatchButton = ((MatchPanel) panel).getNextMatchButton();
 		nextMatchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				nextMatchButton.setEnabled(false);
+				nextMatchButton.setVisible(false);
 				battleButton.setVisible(true);
 				displayPlayers();
 				resetRoundResults();
@@ -109,22 +109,22 @@ public final class MatchController extends Controller {
 	}
 	
 	private void displayRoundResults() {
-		JLabel resultsValueLabel = ((MatchPanel) panel).getResultsValueLabel();
-		JLabel resultsLabel = ((MatchPanel) panel).getResultsLabel();
-		resultsLabel.setVisible(true);
-		resultsValueLabel.setVisible(true);
+		JLabel resultsValueLabel1 = ((MatchPanel) panel).getResultsValueLabel1();
+		JLabel resultsValueLabel2 = ((MatchPanel) panel).getResultsValueLabel2();
+		resultsValueLabel1.setVisible(true);
+		resultsValueLabel2.setVisible(true);
 		
-		resultsValueLabel.setText("Results will go here");
+		resultsValueLabel1.setText(match.getRoundResults().get(0));
+		resultsValueLabel2.setText(match.getRoundResults().get(1));
 		
 		
 	}
 	
 	private void resetRoundResults() {
-		JLabel resultsValueLabel = ((MatchPanel) panel).getResultsValueLabel();
-		JLabel resultsLabel = ((MatchPanel) panel).getResultsLabel();
-		resultsLabel.setVisible(false);
-		resultsValueLabel.setVisible(false);
-		
+		JLabel resultsValueLabel1 = ((MatchPanel) panel).getResultsValueLabel1();
+		JLabel resultsValueLabel2 = ((MatchPanel) panel).getResultsValueLabel2();
+		resultsValueLabel1.setVisible(false);
+		resultsValueLabel2.setVisible(false);		
 	}
 	
 	private void matchOver() {

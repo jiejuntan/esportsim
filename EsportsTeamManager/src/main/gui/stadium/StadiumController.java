@@ -69,7 +69,7 @@ public final class StadiumController extends ThumbnailController {
 	}
 	
 	/**
-	 * If an opponent is selected then a match will be started
+	 * Hide unused button
 	 */
 	private void initializeConfirmButton() {
 		JButton confirmButton = ((StadiumPanel) panel).getConfirmButton();
@@ -85,25 +85,6 @@ public final class StadiumController extends ThumbnailController {
 			}
 		});
 	}
-	
-	/**
-	 * Checks the opponent team button to see if any is selected
-	 * 
-	 * @return <CODE>boolean</CODE> isOpponentSelected?
-	 */
-	private boolean isOpponentSelected() {
-	    List<JButton> thumbButton = ((StadiumPanel) panel).getThumbButtons();
-
-	    // Check each button in the list to see if any is selected
-	    for (JButton button : thumbButton) {
-	        if (button.isEnabled()) {
-	            return true;  // An opponent (button) is selected
-	        }
-	    }
-
-	    return false;  // No opponent (button) is selected
-	}
-	
 	
 	/**
 	 * Closes stadium screen and launches the team details Screen
