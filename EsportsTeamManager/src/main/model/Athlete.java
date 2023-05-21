@@ -54,7 +54,7 @@ public class Athlete extends Purchasable {
     	generateAthleteStats(skillLevel);
     	
     	setDescription();
-    	this.portraitPath = GUIConstants.PORTRAIT_PLACEHOLDER;
+    	this.portraitPath = IO.getRandomImagePath();
     }
     
     
