@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 
 import main.gui.GameFrame;
 import main.gui.controllers.subclassable.DetailController;
-import main.gui.panels.detailPanels.DraftDetailPanel;
+import main.gui.panels.detailPanels.StadiumTeamDetailsPanel;
 import main.gui.panels.subclassable.DetailPanel;
 import main.model.Team;
 
@@ -43,7 +43,7 @@ public class StadiumTeamDetailsController extends DetailController {
 	 */
 	@Override
 	protected void initialize() {
-		panel = new DraftDetailPanel();
+		panel = new StadiumTeamDetailsPanel();
 		
 		teamDetailsSetup();
 		
