@@ -12,6 +12,7 @@ import main.gui.panels.StadiumPanel;
 import main.model.GameData;
 import main.model.Match;
 import main.model.Stadium;
+import main.model.Team;
 
 public class MatchController extends Controller {
 	
@@ -20,7 +21,7 @@ public class MatchController extends Controller {
 	/**
 	 * @param frame
 	 */
-	public MatchController(GameFrame frame) {
+	public MatchController(GameFrame frame, Team  team) {
 		super(frame);
 		initialize();
 	}

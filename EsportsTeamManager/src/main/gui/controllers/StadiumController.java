@@ -8,8 +8,11 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import main.gui.GameFrame;
 import main.gui.panels.ClubPanel;
+import main.gui.panels.DraftPanel;
 import main.gui.panels.StadiumPanel;
+import main.model.Athlete;
 import main.model.GameData;
+import main.model.Market;
 import main.model.Match;
 import main.model.Stadium;
 import main.model.Team;
@@ -40,7 +43,7 @@ public class StadiumController extends ThumbnailController {
 	@Override
 	protected void initialize() {
 		panel = new StadiumPanel();
-		getMatches();
+		opponentTeamButtons();
 		initializeConfirmButton();
 		initializeBackButton();
 		launch();
@@ -49,76 +52,35 @@ public class StadiumController extends ThumbnailController {
 	/**
 	 * Gets the opponent teams and displays them on the panel
 	 */
-	private void getMatches() {
-
-	    Stadium stadium = frame.getGame().getStadium();
-	    opponentTeams = stadium.getMatches();
-	    List<JButton> teamButtons = ((StadiumPanel) panel).getThumbButtons();
-
-	    for(int i = 0; i < opponentTeams.size(); i++) {
-
-	        Team team = opponentTeams.get(i);
-	        JButton thumbButton = teamButtons.get(i);
-	        String path = team.getLogoPath();
-
-	        formatButtonIcon(thumbButton, path);
-
-	        thumbButton.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	                // If button is already enabled, disable it and enable all others
-	                if (thumbButton.isEnabled()) {
-	                    thumbButton.setEnabled(false);
-	                    for (JButton otherButton : teamButtons) {
-	                        if (otherButton != thumbButton) {
-	                            otherButton.setEnabled(true);
-	                        }
-	                    }
-	                }
-	                // If button is disabled, enable it and disable all others
-	                else {
-	                    thumbButton.setEnabled(true);
-	                    for (JButton otherButton : teamButtons) {
-	                        if (otherButton != thumbButton) {
-	                            otherButton.setEnabled(false);
-	                        }
-	                    }
-	                }
-	            }
-	        });
-	        
-	        thumbButton.setEnabled(true); // Enable the button by default
-
-	    }
+	private void opponentTeamButtons() {
+		 Stadium stadium = frame.getGame().getStadium();
+		 opponentTeams = stadium.getMatches();
+		 List<JButton> teamButtons = ((StadiumPanel) panel).getThumbButtons();
+		
+		for (int i = 0; i < opponentTeams.size(); i++) {
+			Team team = opponentTeams.get(i);
+			JButton button = teamButtons.get(i);
+			String path = team.getLogoPath();
+			
+			formatButtonIcon(button, path);
+			
+			if (!stadium.isOpponentSelected()) {
+				button.setEnabled(true);
+				button.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						toTeamDetailsScreen(team);
+					}
+				});
+			}
+		}
 	}
 	
 	/**
 	 * If an opponent is selected then a match will be started
 	 */
 	private void initializeConfirmButton() {
-		GameData gameData = frame.getGame().getData();
-		List<JButton> thumbButton = ((StadiumPanel) panel).getThumbButtons();
-		
-		
 		JButton confirmButton = ((StadiumPanel) panel).getConfirmButton();
-		confirmButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (isOpponentSelected()) {
-					
-					//Add the selected team to gameData
-					for (JButton button : thumbButton) {
-				        if (button.isEnabled()) {
-				        	int teamIndex = thumbButton.indexOf(button);
-							gameData.setOpponent(frame.getGame().getStadium().getMatches().get(teamIndex));
-							toMatchScreen(); 
-					}}
-					
-				} else {
-					JOptionPane.showMessageDialog(panel, 
-							"You need to select an Opponent!.", 
-							"Error", JOptionPane.ERROR_MESSAGE);
-				}
-			}
-		});
+		confirmButton.setVisible(false);
 	}
 	
 
@@ -149,12 +111,13 @@ public class StadiumController extends ThumbnailController {
 	    return false;  // No opponent (button) is selected
 	}
 	
+	
 	/**
-	 * Closes stadium screen and launches the match
+	 * Closes stadium screen and launches the team details Screen
 	 */
-	private void toMatchScreen() {
+	private void toTeamDetailsScreen(Team team) {
 		close();
-		frame.toMatchScreen();
+		frame.toTeamDetailsScreen(team);
 	}
 	
 	/**

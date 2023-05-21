@@ -22,6 +22,7 @@ import main.gui.controllers.MatchController;
 import main.gui.controllers.SetupController;
 import main.gui.controllers.StartController;
 import main.gui.controllers.StadiumController;
+import main.gui.controllers.StadiumTeamDetailsController;
 import main.gui.panels.ClubPanel;
 import main.gui.panels.ThumbnailPanel;
 import main.gui.panels.HomePanel;
@@ -152,10 +153,18 @@ public class GameFrame {
 	}
 	
 	/**
+	 * Launch the stadium team details screen.
+	 */
+	public void toTeamDetailsScreen(Team team) {
+		new StadiumTeamDetailsController(this, team);
+	}
+
+	
+	/**
 	 * Launch the match screen.
 	 */
-	public void toMatchScreen() {
-		new MatchController(this);
+	public void toMatchScreen(Team team) {
+		new MatchController(this, team);
 	}
 	
 	/**

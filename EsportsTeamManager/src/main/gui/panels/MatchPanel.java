@@ -40,7 +40,7 @@ public class MatchPanel extends JPanel {
 		
 		
 		playerNameLabel = new JLabel("Name: ");
-		playerNameLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY - 10));
+		playerNameLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
 		GridBagConstraints gbc_playerNameLabel = new GridBagConstraints();
 		gbc_playerNameLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_playerNameLabel.gridx = 0;
@@ -48,7 +48,7 @@ public class MatchPanel extends JPanel {
 		this.add(playerNameLabel, gbc_playerNameLabel);
 		
 		opponentNameLabel = new JLabel("Name:");
-		opponentNameLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY - 10));
+		opponentNameLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
 		GridBagConstraints gbc_opponentNameLabel = new GridBagConstraints();
 		gbc_opponentNameLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_opponentNameLabel.gridx = 9;
@@ -65,7 +65,7 @@ public class MatchPanel extends JPanel {
 		
 		resultsLabel = new JLabel("Results");
 		resultsLabel.setEnabled(false);
-		resultsLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY - 10));
+		resultsLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
 		GridBagConstraints gbc_resultsLabel = new GridBagConstraints();
 		gbc_resultsLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_resultsLabel.gridx = 4;

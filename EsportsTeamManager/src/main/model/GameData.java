@@ -49,12 +49,6 @@ public class GameData {
     private Team team;
     
     /**
-     * Selected Opponent for BATTLE
-     */
-    private Team Opponent;
-    
-    
-    /**
      * Constructor for GameData
      */
     public GameData() {
@@ -209,23 +203,6 @@ public class GameData {
      */
     public Team getTeam() {
 		return this.team;
-	}
-
-    
-
-	/**
-	 * @return the opponent
-	 */
-	public Team getOpponent() {
-		return Opponent;
-	}
-
-
-	/**
-	 * @param opponent the opponent to set
-	 */
-	public void setOpponent(Team opponent) {
-		Opponent = opponent;
 	}
 
 

@@ -52,6 +52,11 @@ public class DetailPanel extends JPanel {
 	protected JLabel roleLabel;
 	protected JLabel priceLabel;
 	
+	protected JLabel reactionLabel;
+	protected JLabel eyesightLabel;
+	protected JLabel intelligenceLabel;
+	protected JLabel staminaLabel;
+	
 	// Prevent instantiation without subclassing
 	protected DetailPanel() {
 		GridBagLayout gbl_panel = new GridBagLayout();
@@ -112,7 +117,7 @@ public class DetailPanel extends JPanel {
 		this.add(portraitLabel, gbc_portraitLabel);
 		
 		
-		JLabel reactionLabel = new JLabel("Reaction time:");
+		reactionLabel = new JLabel("Reaction time:");
 		reactionLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_reactionLabel = new GridBagConstraints();
 		gbc_reactionLabel.anchor = GridBagConstraints.WEST;
@@ -140,7 +145,7 @@ public class DetailPanel extends JPanel {
 		gbc_reactionBonusLabel.gridy = 4;
 		this.add(reactionBonusLabel, gbc_reactionBonusLabel);
 		
-		JLabel eyesightLabel = new JLabel("Eyesight:");
+		eyesightLabel = new JLabel("Eyesight:");
 		eyesightLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_eyesightLabel = new GridBagConstraints();
 		gbc_eyesightLabel.anchor = GridBagConstraints.WEST;
@@ -168,7 +173,7 @@ public class DetailPanel extends JPanel {
 		gbc_eyesightBonusLabel.gridy = 6;
 		this.add(eyesightBonusLabel, gbc_eyesightBonusLabel);
 		
-		JLabel intelligenceLabel = new JLabel("Intelligence:");
+		intelligenceLabel = new JLabel("Intelligence:");
 		intelligenceLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_intelligenceLabel = new GridBagConstraints();
 		gbc_intelligenceLabel.anchor = GridBagConstraints.WEST;
@@ -196,7 +201,7 @@ public class DetailPanel extends JPanel {
 		gbc_intelligenceBonusLabel.gridy = 8;
 		this.add(intelligenceBonusLabel, gbc_intelligenceBonusLabel);
 		
-		JLabel staminaLabel = new JLabel("Stamina:");
+		staminaLabel = new JLabel("Stamina:");
 		staminaLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_staminaLabel = new GridBagConstraints();
 		gbc_staminaLabel.anchor = GridBagConstraints.WEST;
@@ -419,6 +424,56 @@ public class DetailPanel extends JPanel {
 	 */
 	public JButton getConfirmButton() {
 		return confirmButton;
+	}
+
+	/**
+	 * @return the roleLabel
+	 */
+	public JLabel getRoleLabel() {
+		return roleLabel;
+	}
+
+	/**
+	 * @return the priceLabel
+	 */
+	public JLabel getPriceLabel() {
+		return priceLabel;
+	}
+
+	/**
+	 * @return the reactionLabel
+	 */
+	public JLabel getReactionLabel() {
+		return reactionLabel;
+	}
+
+	/**
+	 * @return the eyesightLabel
+	 */
+	public JLabel getEyesightLabel() {
+		return eyesightLabel;
+	}
+
+	/**
+	 * @return the intelligenceLabel
+	 */
+	public JLabel getIntelligenceLabel() {
+		return intelligenceLabel;
+	}
+
+
+	/**
+	 * @return the staminaLabel
+	 */
+	public JLabel getStaminaLabel() {
+		return staminaLabel;
+	}
+
+	/**
+	 * @return the editTipLabel
+	 */
+	public JLabel getEditTipLabel() {
+		return editTipLabel;
 	}
 	
 }
