@@ -2,6 +2,7 @@ package main.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import main.model.GameData.Difficulty;
 
@@ -9,6 +10,7 @@ public final class Stadium {
 	
     private List<Team> matches;
     private Team opponent;
+    private GameData gameData;
     
 	/**
 	 * Maximum number of main members
@@ -16,6 +18,7 @@ public final class Stadium {
 	private static final int OPPONENT_LIMIT = 5;
     
     public Stadium(GameData gameData) {
+    	this.gameData = gameData;
     	this.matches = new ArrayList<Team>();
     	generateMatches(gameData.getDifficulty());
     	this.opponent = new Team();
@@ -38,10 +41,32 @@ public final class Stadium {
      * @param difficulty
      */
     public void generateMatches(Difficulty difficulty) {
+    	Random random = new Random();
+    	
+    	//Increases the opponent team difficulty based on the week
+    	int randomSkillIncrease = random.nextInt(0, 2 + gameData.getCurrentWeek());
     	
     	for (int opponentCount = 0; opponentCount < OPPONENT_LIMIT; opponentCount++) {
-    		Team opponent = new Team(difficulty.getModifier());
+    		Team opponent = new Team(difficulty.getModifier() + randomSkillIncrease);
     		matches.add(opponent);
+    	}
+    }
+    
+    public String getDifficulty(Team opponentTeam) {
+    	int playerTeamLevel = gameData.getTeam().calculateTeamlevel();
+    	int opponentTeamLevel = opponentTeam.calculateTeamlevel();
+    	
+    	System.out.println(playerTeamLevel);
+    	
+    	int levelDifference = Math.abs(playerTeamLevel - opponentTeamLevel);
+    	
+    	
+    	if (levelDifference < 5) {
+    		return "Easy";
+    	} else if (levelDifference > 5 && levelDifference < 15) {
+    		return "Medium";
+    	} else {
+    		return "Hard";
     	}
     }
 

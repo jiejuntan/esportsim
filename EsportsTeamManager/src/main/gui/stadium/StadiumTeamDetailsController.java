@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import main.gui.GameFrame;
 import main.gui.subclassable.DetailController;
 import main.gui.subclassable.DetailPanel;
+import main.model.Stadium;
 import main.model.Team;
 
 /**
@@ -53,6 +54,8 @@ public final class StadiumTeamDetailsController extends DetailController {
 	}
 	
 	private void teamDetailsSetup() {
+		Stadium stadium = frame.getGame().getStadium();
+		
 		JLabel winsLabel = ((DetailPanel) panel).getReactionLabel();
 		JLabel winsValueLabel = ((DetailPanel) panel).getReactionValueLabel();
 		winsLabel.setText("Wins: ");
@@ -71,10 +74,10 @@ public final class StadiumTeamDetailsController extends DetailController {
 		JLabel difficultyLabel = ((DetailPanel) panel).getStaminaLabel();
 		JLabel difficultyValueLabel = ((DetailPanel) panel).getStaminaValueLabel();
 		difficultyLabel.setText("Difficulty:");
-		difficultyValueLabel.setText("***");
+		difficultyValueLabel.setText(stadium.getDifficulty(team));
 		
 		JTextField nameTextField = ((DetailPanel) panel).getNameTextField();
-		nameTextField.setText(team.getName()+"blblb");
+		nameTextField.setText("blblb");
 	}
 
 
