@@ -8,7 +8,6 @@ import javax.swing.JButton;
 
 import main.gui.GameFrame;
 import main.gui.subclassable.ThumbnailController;
-import main.model.Athlete;
 import main.model.Equipment;
 
 /**

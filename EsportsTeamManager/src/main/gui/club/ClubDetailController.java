@@ -1,37 +1,23 @@
 package main.gui.club;
 
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import main.exceptions.IllegalFundsException;
 import main.exceptions.IllegalTeamException;
-import main.exceptions.TeamLimitException;
-import main.gui.GUIConstants;
 import main.gui.GameFrame;
-import main.gui.drafting.DraftDetailPanel;
 import main.gui.subclassable.DetailController;
-import main.gui.subclassable.DetailPanel;
 import main.model.Team.Role;
 import main.model.Athlete;
-import main.model.GameData.Difficulty;
-import main.model.Market;
 import main.model.Team;
 
 /**
@@ -67,7 +53,7 @@ public final class ClubDetailController extends DetailController {
 		panel = new ClubDetailPanel();
 		
 		setHeading();
-		super.setPortrait(((DetailPanel) panel).getPortraitLabel(), athlete.getPortraitPath());
+		super.setPortrait(((ClubDetailPanel) panel).getPortraitLabel(), athlete.getPortraitPath());
 		setStats();
 		
 		initializeBackButton();
@@ -81,7 +67,7 @@ public final class ClubDetailController extends DetailController {
 	 * Sets heading to an editable name
 	 */
 	private void setHeading() {
-		JTextField nameTextField = ((DetailPanel) panel).getNameTextField();
+		JTextField nameTextField = ((ClubDetailPanel) panel).getNameTextField();
 		nameTextField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -96,7 +82,7 @@ public final class ClubDetailController extends DetailController {
 				}
 			}
 		});
-		JButton changeNameButton = ((DetailPanel) panel).getChangeNameButton();
+		JButton changeNameButton = ((ClubDetailPanel) panel).getChangeNameButton();
 		changeNameButton.setText(athlete.getName());
 		nameTextField.setText(athlete.getName());
 		changeNameButton.addActionListener(new ActionListener() {
@@ -122,19 +108,19 @@ public final class ClubDetailController extends DetailController {
 	 * Displays athlete's current stats
 	 */
 	private void setStats() {
-		JLabel reactionValueLabel = ((DetailPanel) panel).getReactionValueLabel();
+		JLabel reactionValueLabel = ((ClubDetailPanel) panel).getReactionValueLabel();
 		reactionValueLabel.setText(String.valueOf(athlete.getReactionTime()));
 		
-		JLabel eyesightValueLabel = ((DetailPanel) panel).getEyesightValueLabel();
+		JLabel eyesightValueLabel = ((ClubDetailPanel) panel).getEyesightValueLabel();
 		eyesightValueLabel.setText(String.valueOf(athlete.getEyeSight()));
 		
-		JLabel intelligenceValueLabel = ((DetailPanel) panel).getIntelligenceValueLabel();
+		JLabel intelligenceValueLabel = ((ClubDetailPanel) panel).getIntelligenceValueLabel();
 		intelligenceValueLabel.setText(String.valueOf(athlete.getIntelligence()));
 		
-		JLabel staminaValueLabel = ((DetailPanel) panel).getStaminaValueLabel();
+		JLabel staminaValueLabel = ((ClubDetailPanel) panel).getStaminaValueLabel();
 		staminaValueLabel.setText(String.valueOf(athlete.getStamina()));
 		
-		JComboBox roleComboBox = ((DetailPanel) panel).getRoleComboBox();
+		JComboBox roleComboBox = ((ClubDetailPanel) panel).getRoleComboBox();
 		roleComboBox.setSelectedItem(athlete.getRole());
 	}
 	
@@ -142,7 +128,7 @@ public final class ClubDetailController extends DetailController {
 	 * Initializes back button to return to club
 	 */
 	private void initializeBackButton() {
-		JButton backButton = ((DetailPanel) panel).getBackButton();
+		JButton backButton = ((ClubDetailPanel) panel).getBackButton();
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				toPreviousScreen();
@@ -154,13 +140,13 @@ public final class ClubDetailController extends DetailController {
 	 * Initializes confirm button to confirm changes or show dialog for errors
 	 */
 	private void initializeConfirmButton() {
-		JButton confirmButton = ((DetailPanel) panel).getConfirmButton();
+		JButton confirmButton = ((ClubDetailPanel) panel).getConfirmButton();
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {			
-				JComboBox roleComboBox = ((DetailPanel) panel).getRoleComboBox();
+				JComboBox roleComboBox = ((ClubDetailPanel) panel).getRoleComboBox();
 				Role role = (Role) roleComboBox.getSelectedItem();
 				
-				JTextField nameTextField = ((DetailPanel) panel).getNameTextField();
+				JTextField nameTextField = ((ClubDetailPanel) panel).getNameTextField();
 				String newName = nameTextField.getText();
 			
 				Team team = frame.getGame().getData().getTeam();

@@ -7,7 +7,6 @@ import javax.swing.*;
 import main.gui.GUIConstants;
 import main.gui.subclassable.BasePanel;
 
-import java.awt.Label;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;

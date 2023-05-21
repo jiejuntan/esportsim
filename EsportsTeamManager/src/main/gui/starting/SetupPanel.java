@@ -1,4 +1,4 @@
-package main.gui.setup;
+package main.gui.starting;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,11 +10,9 @@ import java.awt.Insets;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
-import javax.swing.SwingConstants;
 
 import main.gui.GUIConstants;
 import main.gui.subclassable.BasePanel;

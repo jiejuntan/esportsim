@@ -9,7 +9,6 @@ import javax.swing.JTextField;
 
 import main.gui.GameFrame;
 import main.gui.subclassable.DetailController;
-import main.gui.subclassable.DetailPanel;
 import main.model.Team;
 
 /**
@@ -53,27 +52,27 @@ public final class StadiumTeamDetailsController extends DetailController {
 	}
 	
 	private void teamDetailsSetup() {
-		JLabel winsLabel = ((DetailPanel) panel).getReactionLabel();
-		JLabel winsValueLabel = ((DetailPanel) panel).getReactionValueLabel();
+		JLabel winsLabel = ((StadiumTeamDetailsPanel) panel).getReactionLabel();
+		JLabel winsValueLabel = ((StadiumTeamDetailsPanel) panel).getReactionValueLabel();
 		winsLabel.setText("Wins: ");
 		winsValueLabel.setText(String.valueOf(team.getWins()));
 		
-		JLabel lossesLabel = ((DetailPanel) panel).getEyesightLabel();
-		JLabel lossesValueLabel = ((DetailPanel) panel).getEyesightValueLabel();
+		JLabel lossesLabel = ((StadiumTeamDetailsPanel) panel).getEyesightLabel();
+		JLabel lossesValueLabel = ((StadiumTeamDetailsPanel) panel).getEyesightValueLabel();
 		lossesLabel.setText("Losses: ");
 		lossesValueLabel.setText(String.valueOf(team.getLosses()));
 		
-		JLabel skillLevelLabel = ((DetailPanel) panel).getIntelligenceLabel();
-		JLabel skillLevelValueLabel = ((DetailPanel) panel).getIntelligenceValueLabel();
+		JLabel skillLevelLabel = ((StadiumTeamDetailsPanel) panel).getIntelligenceLabel();
+		JLabel skillLevelValueLabel = ((StadiumTeamDetailsPanel) panel).getIntelligenceValueLabel();
 		skillLevelLabel.setText("Total Skill Level: ");
 		skillLevelValueLabel.setText(String.valueOf(team.calculateTeamlevel()));
 		
-		JLabel difficultyLabel = ((DetailPanel) panel).getStaminaLabel();
-		JLabel difficultyValueLabel = ((DetailPanel) panel).getStaminaValueLabel();
+		JLabel difficultyLabel = ((StadiumTeamDetailsPanel) panel).getStaminaLabel();
+		JLabel difficultyValueLabel = ((StadiumTeamDetailsPanel) panel).getStaminaValueLabel();
 		difficultyLabel.setText("Difficulty:");
 		difficultyValueLabel.setText("***");
 		
-		JTextField nameTextField = ((DetailPanel) panel).getNameTextField();
+		JTextField nameTextField = ((StadiumTeamDetailsPanel) panel).getNameTextField();
 		nameTextField.setText(team.getName()+"blblb");
 	}
 
@@ -82,7 +81,7 @@ public final class StadiumTeamDetailsController extends DetailController {
 	 * Initializes back button to return to draft
 	 */
 	private void initializeBackButton() {
-		JButton backButton = ((DetailPanel) panel).getBackButton();
+		JButton backButton = ((StadiumTeamDetailsPanel) panel).getBackButton();
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				toPreviousScreen();
@@ -94,7 +93,7 @@ public final class StadiumTeamDetailsController extends DetailController {
 	 * Initializes confirm button to purchase athlete and return to draft or show dialog for errors
 	 */
 	private void initializeConfirmButton() {
-		JButton confirmButton = ((DetailPanel) panel).getConfirmButton();
+		JButton confirmButton = ((StadiumTeamDetailsPanel) panel).getConfirmButton();
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {			
 				toMatchScreen(team);
