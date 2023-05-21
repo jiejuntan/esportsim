@@ -65,7 +65,7 @@ public final class Market {
 		Random random = new Random();
     	int maxCount = isDrafting ? 10 : 3 + random.nextInt(3);
     	for (int count=0; count < maxCount; count++) {
-    		Athlete athlete = new Athlete(3);
+    		Athlete athlete = new Athlete(data.getCurrentWeek());
     		athlete.setRole(Team.getRandomRole(false));
     		
     		// implement difficulty + weekly scalings for athlete stats

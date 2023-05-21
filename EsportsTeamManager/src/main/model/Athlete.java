@@ -28,7 +28,7 @@ public final class Athlete extends Purchasable {
 	private int reactionTime;
     private int eyeSight;
     private int intelligence;
-    private int stamina;
+    private int stamina = 100;
     
     private Role role;
 
@@ -36,19 +36,19 @@ public final class Athlete extends Purchasable {
 	/**
      * Constructor for creating Athlete with scaling skill level
      * 
-     * @param skillLevel	skill level of athlete
+     * @param currentWeek		current week
      */
-    public Athlete(int skillLevel) {
+    public Athlete(int currentWeek) {
     	setName(getRandomName());
     	setPortrait();
-    	generateAthleteStats(skillLevel);
+    	generateAthleteStats(currentWeek);
     	
-    	// not sure this is needed anymore
+    	// not needed for stats unless we want a chatgpt generated description
     	setDescription();
     }
     
     /**
-     * Picks a random name from an inputed name list
+     * Picks a random name from a list
      * 
      * @return Random Name
      */
@@ -86,46 +86,44 @@ public final class Athlete extends Purchasable {
     }
     
     /**
-     * Generates the athelets skills and also gives an athlete one special skill
+     * Generates the athelete's skills and also gives an athlete one special skill
      * 
-     * @param defaultSkillNumber int which sill numbers are generated around
+     * @param currentWeek 		current week
      */
-    public void generateAthleteStats(int defaultSkillNumber) {
+    public void generateAthleteStats(int currentWeek) {
+    	int base = 20;
+    	int cap = 80;
+    	int perWeek = (cap - base) / 15;
+    	int current = currentWeek == 0 ? perWeek : perWeek * currentWeek;
     	
     	Random random = new Random();
+    	this.reactionTime = Math.min(base + (int) random.nextGaussian(current, current / 3), cap);
+    	this.eyeSight = Math.min(base + (int) random.nextGaussian(current, current / 3), cap);
+    	this.intelligence = Math.min(base + (int) random.nextGaussian(current, current / 3), cap);
     	
-    	//Average amount of skill level added to special skill
-    	int specialSkillNumber = 2;
     	
-    	//Adds some more randomness
-    	double skillDeviation = random.nextInt(2);
-    	
-    	//Generate the Athletes skils 
-    	this.reactionTime = (int) random.nextGaussian(defaultSkillNumber, skillDeviation);
-    	this.eyeSight = (int) random.nextGaussian(defaultSkillNumber, skillDeviation);
-    	this.intelligence = (int) random.nextGaussian(defaultSkillNumber, skillDeviation);
-    	this.stamina = (int) random.nextGaussian(defaultSkillNumber, skillDeviation);
-    	
-    	//NEED TO ADD CHECK TO SEE IF ANY SKILLS ARE 0
-    	
-    	//Picks a skill to be the athletes special skill
-    	int specialSkill = random.nextInt(4);
-    	
-    	//Adds 2-4 skill points to the special skill
-    	switch (specialSkill) {
+    	// Sets stats to favour a particular combination
+    	int combination = random.nextInt(3);
+    	int primarySkill = random.nextInt(2);
+    	switch (combination) {
 	        case 0:
-	        	this.reactionTime += (int) random.nextGaussian(specialSkillNumber, 1);
+	        	this.reactionTime *= primarySkill == 0 ? 1 : 1.25;
+	        	this.eyeSight *= primarySkill == 0 ? 1.25 : 1;
+	        	this.intelligence /= 1.5;
 	            break;
 	        case 1:
-	        	this.eyeSight += (int) random.nextGaussian(specialSkillNumber, 1);
+	        	this.reactionTime /= 1.5;
+	        	this.eyeSight *= primarySkill == 0 ? 1 : 1.25;
+	        	this.intelligence *= primarySkill == 0 ? 1.25 : 1;
 	            break;
 	        case 2:
-	        	this.intelligence += (int) random.nextGaussian(specialSkillNumber, 1);
+	        	this.reactionTime *= primarySkill == 0 ? 1 : 1.25;
+	        	this.eyeSight /= 1.5;
+	        	this.intelligence *= primarySkill == 0 ? 1.25 : 1;
 	            break;
-	        case 3:
-	        	this.stamina += (int) random.nextGaussian(specialSkillNumber, 1);
-	            break;
-            }
+	        default:
+	        	 break;
+    	}
     }
 
 	/**
@@ -133,10 +131,8 @@ public final class Athlete extends Purchasable {
      * 
      * @return Athletes Skill Level
      */
-    public int calculateSkillLevel() {
-    	// Still needs improvement ?
-    	
-        return getEyeSight() + getIntelligence() + getReactionTime() + getStamina();
+    public int calculateSkillLevel() {    	
+        return getEyeSight() + getIntelligence() + getReactionTime();
     }
     
     /**

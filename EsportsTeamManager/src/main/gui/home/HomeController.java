@@ -41,6 +41,14 @@ public final class HomeController extends Controller {
 				frame.getGame().getData().getCurrentWeek(),
 				frame.getGame().getData().getSeasonDuration()));
 		
+		JLabel winsLabel = ((HomePanel) panel).getWinsLabel();
+		winsLabel.setText(String.format("Wins: %d", 
+				frame.getGame().getData().getTeam().getWins()));
+		
+		JLabel lossesLabel = ((HomePanel) panel).getLossesLabel();
+		lossesLabel.setText(String.format("Losses: %d", 
+				frame.getGame().getData().getTeam().getLosses()));
+		
 		JButton clubButton = ((HomePanel) panel).getClubButton();
 		clubButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

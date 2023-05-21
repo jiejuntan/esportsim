@@ -21,6 +21,8 @@ public final class HomePanel extends BasePanel {
 	// Gettable components for controller manipulation. Protected properties are also exposed to subclasses.
 	private JLabel weekLabel;
 	private JLabel moneyLabel;
+	private JLabel winsLabel;
+	private JLabel lossesLabel;
 	private JButton clubButton;
 	private JButton stadiumButton;
 	private JButton marketButton;
@@ -31,10 +33,10 @@ public final class HomePanel extends BasePanel {
 	 */
 	public HomePanel() {
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{10, 0, 100, 0, 10, 0};
-		gbl_panel.rowHeights = new int[]{10, 0, 10, 0, 0, 0, 10, 0, 10, 0};
+		gbl_panel.columnWidths = new int[]{0, 0, 100, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		this.setLayout(gbl_panel);
 		
 		JLabel titleLabel = new JLabel("Esports Simulator");
@@ -63,6 +65,21 @@ public final class HomePanel extends BasePanel {
 		gbc_moneyLabel.gridy = 4;
 		this.add(moneyLabel, gbc_moneyLabel);
 		
+		winsLabel = new JLabel();
+		winsLabel.setFont(new Font("Unispace", Font.PLAIN, 30));
+		GridBagConstraints gbc_winsLabel = new GridBagConstraints();
+		gbc_winsLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_winsLabel.gridx = 1;
+		gbc_winsLabel.gridy = 5;
+		this.add(winsLabel, gbc_winsLabel);
+		
+		lossesLabel = new JLabel();
+		lossesLabel.setFont(new Font("Unispace", Font.PLAIN, 30));
+		GridBagConstraints gbc_lossesLabel = new GridBagConstraints();
+		gbc_lossesLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lossesLabel.gridx = 1;
+		gbc_lossesLabel.gridy = 6;
+		this.add(lossesLabel, gbc_lossesLabel);
 		
 		clubButton = new JButton("Club");
 		super.setupButton(clubButton);
@@ -95,7 +112,7 @@ public final class HomePanel extends BasePanel {
 		gbc_endWeekButton.gridwidth = 3;
 		gbc_endWeekButton.insets = new Insets(0, 0, 5, 5);
 		gbc_endWeekButton.gridx = 1;
-		gbc_endWeekButton.gridy = 7;
+		gbc_endWeekButton.gridy = 8;
 		this.add(endWeekButton, gbc_endWeekButton);
 	}
 
@@ -111,6 +128,20 @@ public final class HomePanel extends BasePanel {
 	 */
 	public JLabel getMoneyLabel() {
 		return moneyLabel;
+	}
+
+	/**
+	 * @return the winsLabel
+	 */
+	public JLabel getWinsLabel() {
+		return winsLabel;
+	}
+
+	/**
+	 * @return the lossesLabel
+	 */
+	public JLabel getLossesLabel() {
+		return lossesLabel;
 	}
 
 	/**

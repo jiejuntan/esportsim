@@ -6,16 +6,18 @@ public final class GameData {
      * Enum for difficulty setting
      */
     public enum Difficulty {
-    	EASY("Easy", 2000, 2),
-    	HARD("Hard", 1000, 3);
+    	EASY("Easy", 5000, 2000, 1),
+    	HARD("Hard", 5000, 1000, 2);
     	
     	public final String asString;
     	public final int startingMoney;
+    	public final int prizeMoney;
     	public final int modifier;
 
-		private Difficulty(String asString, int startingMoney, int modifier) {
+		private Difficulty(String asString, int startingMoney, int prizeMoney, int modifier) {
     		this.asString = asString;
     		this.startingMoney = startingMoney;
+    		this.prizeMoney = prizeMoney;
     		this.modifier = modifier;
     	}
 		
