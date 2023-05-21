@@ -2,9 +2,14 @@ package main.gui.stadium;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import main.gui.GameFrame;
@@ -51,6 +56,48 @@ public final class StadiumTeamDetailsController extends DetailController {
 		initializeConfirmButton();
 
 		super.launch();
+	}
+	
+	
+	/**
+	 * Sets heading to an editable name
+	 */
+	private void setHeading() {
+		JTextField nameTextField = ((DetailPanel) panel).getNameTextField();
+		nameTextField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (String.valueOf(e.getKeyChar()).matches("[ a-zA-Z]")
+						&& nameTextField.getText().length() >= 10
+						|| String.valueOf(e.getKeyChar()).matches("[0-9!@#$%^&*()-_=+|\\\\:;\"',.<>?/{}\\[\\]]")) {
+					e.consume();
+					JOptionPane.showMessageDialog(panel, 
+							"Your desired name must be under 10 characters long and only contain letters.", 
+							"Error", JOptionPane.ERROR_MESSAGE);
+
+				}
+			}
+		});
+		JButton changeNameButton = ((DetailPanel) panel).getChangeNameButton();
+		changeNameButton.setText("waaa");
+		nameTextField.setText("chur");
+		changeNameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				changeNameButton.setVisible(false);
+				nameTextField.setVisible(true);
+				nameTextField.requestFocusInWindow();
+			}
+		});
+		panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+            	String tempName = nameTextField.getText();
+            	changeNameButton.setText(tempName);
+            	changeNameButton.setVisible(true);
+				nameTextField.setVisible(false);
+				
+            }
+        });
 	}
 	
 	private void teamDetailsSetup() {
