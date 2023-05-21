@@ -48,7 +48,7 @@ public final class GUIConstants {
 	public static final RoundClipBorder PORTRAIT_BORDER_LARGE = new RoundClipBorder(Color.BLACK, 2, 50);
 	
 	// Team Logos
-	public static final int LOGO_COUNT = 37;
+	public static final int LOGO_COUNT = 15;
 	
 	// Color for bonus stats
 	public static final Color BONUS_UP = new Color(0, 128, 0);
