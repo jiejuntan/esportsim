@@ -74,7 +74,7 @@ public class Market {
     	}
     	if (!isDrafting) {
     		maxCount = 3 + random.nextInt(3);
-	    	for (int count=0; count <= maxCount; count++) {
+	    	for (int count=0; count < maxCount; count++) {
 	    		Equipment trainingEquipment = new Equipment();
 	    		
 	    		availableEquipment.add(trainingEquipment);
@@ -109,11 +109,11 @@ public class Market {
     /**
      * Checks if the selected Athlete has already been purchased.
      * 
-     * @param athlete	Athlete to check
+     * @param purchase	purchasable to check
      * @return			<code>true</code> if purchased
      */
-    public boolean isPurchased(Purchasable athlete) {
-    	return purchasedAthletes.contains(athlete);
+    public boolean isPurchased(Purchasable purchase) {
+    	return purchasedAthletes.contains(purchase) || purchasedEquipment.contains(purchase);
     }
     
     /**

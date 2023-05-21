@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import javax.swing.*;
 
 import main.gui.GUIConstants;
+import main.gui.panels.subclassable.BasePanel;
 
 import java.awt.Label;
 import java.awt.Dimension;
@@ -12,7 +13,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-public class MatchPanel extends JPanel {
+public class MatchPanel extends BasePanel {
 	
 	protected JLabel playerNameLabel;
 	protected JLabel opponentNameLabel;
@@ -21,17 +22,16 @@ public class MatchPanel extends JPanel {
 	protected JButton nextMatchButton;
 	
     public MatchPanel() {
-    	
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 50, 0, 0, 0};
 		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 10, 0, 10, 0, 10, 0, 0, 0, 0, 0, 0, 10, 0, 0};
 		gbl_panel.columnWeights = new double[]{3.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 3.0};
 		gbl_panel.rowWeights = new double[]{3.0, 0.0, 2.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 2.0, 1.0, 3.0, Double.MIN_VALUE};
 		this.setLayout(gbl_panel);
-		
+
 		JLabel titleLabel = new JLabel("Match Battle");
+		super.setupTitle(titleLabel);
 		GridBagConstraints gbc_titleLabel = new GridBagConstraints();
-		titleLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.HEADING));
 		titleLabel.setPreferredSize(new Dimension(350, 60));
 		gbc_titleLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_titleLabel.gridx = 4;
@@ -73,10 +73,7 @@ public class MatchPanel extends JPanel {
 		this.add(resultsLabel, gbc_resultsLabel);
 		
 		battleButton = new JButton("BATTLE!");
-		battleButton.setFocusPainted(false);
-		battleButton.setPreferredSize(new Dimension(200, 50));
-		battleButton.setBackground(GUIConstants.COMPONENT);
-		battleButton.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		super.setupButton(battleButton);
 		GridBagConstraints gbc_battleButton = new GridBagConstraints();
 		gbc_battleButton.insets = new Insets(0, 0, 5, 5);
 		gbc_battleButton.gridx = 4;
@@ -84,11 +81,7 @@ public class MatchPanel extends JPanel {
 		this.add(battleButton, gbc_battleButton);
 		
 		nextMatchButton = new JButton("Next Match");
-		nextMatchButton.setEnabled(false);
-		nextMatchButton.setFocusPainted(false);
-		nextMatchButton.setPreferredSize(new Dimension(200, 50));
-		nextMatchButton.setBackground(GUIConstants.COMPONENT);
-		nextMatchButton.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		super.setupButton(nextMatchButton);
 		GridBagConstraints gbc_nextMatchButton = new GridBagConstraints();
 		gbc_nextMatchButton.insets = new Insets(0, 0, 5, 0);
 		gbc_nextMatchButton.gridx = 9;

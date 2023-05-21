@@ -1,7 +1,11 @@
 package main.model;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import main.gui.GUIConstants;
 import main.model.Team.Role;
@@ -13,6 +17,11 @@ import main.model.Team.Role;
  *
  */
 public class Athlete extends Purchasable {
+	
+	/** 
+	 * Static property storing unused portrait indexes
+	 */
+	private static List<Integer> availablePortraits = IntStream.range(0, GUIConstants.PORTRAIT_COUNT).boxed().collect(Collectors.toCollection(ArrayList::new));
 	
 	private String name;
 	
@@ -31,11 +40,11 @@ public class Athlete extends Purchasable {
      */
     public Athlete(int skillLevel) {
     	setName(getRandomName());
-    	
+    	setPortrait();
     	generateAthleteStats(skillLevel);
     	
+    	// not sure this is needed anymore
     	setDescription();
-    	this.portraitPath = GUIConstants.PORTRAIT_PLACEHOLDER;
     }
     
     /**
@@ -61,6 +70,20 @@ public class Athlete extends Purchasable {
         return namesList[randomNumber];
     }
     
+    /**
+     * Sets portrait path for athlete and prevents reuse unless there are no remaining portraits
+     */
+    private void setPortrait() {
+    	if (availablePortraits.size() == 0) {
+    		availablePortraits = IntStream.range(0, GUIConstants.PORTRAIT_COUNT).boxed().collect(Collectors.toCollection(ArrayList::new));
+    	}
+    	Random random = new Random();
+    	int index = random.nextInt(availablePortraits.size());
+    	int portrait = availablePortraits.get(index);
+    	availablePortraits.remove(index);
+    	
+    	this.portraitPath = "/main/Resources/athletePortraits/portrait_clear_" + portrait + ".png";
+    }
     
     /**
      * Generates the athelets skills and also gives an athlete one special skill
@@ -104,8 +127,7 @@ public class Athlete extends Purchasable {
 	            break;
             }
     }
-    
-    
+
 	/**
      * Calculates the Athletes Skill Level based on the Athletes stats
      * 
@@ -128,23 +150,6 @@ public class Athlete extends Purchasable {
     	return calculateSkillLevel() * 5;
     }   
     
-    /**
-     * Sets the athlete's description
-     */
-    public void setDescription() {
-    	super.description = String.format(
-    			"Reaction Time: %d<br>"
-    			+ "Eyesight: %d<br>"
-    			+ "Intelligence: %d<br>"
-    			+ "Stamina: %d", 
-    			reactionTime, eyeSight, intelligence, stamina);
-    }
-
-    
-    @Override
-    public String toString() {
-    	return super.getDescription();
-    }
 
 	/**
 	 * @return the name
@@ -230,4 +235,20 @@ public class Athlete extends Purchasable {
 		this.role = role;
 	}
 	
+    /**
+     * Sets the athlete's description
+     */
+    public void setDescription() {
+    	super.description = String.format(
+    			"Reaction Time: %d<br>"
+    			+ "Eyesight: %d<br>"
+    			+ "Intelligence: %d<br>"
+    			+ "Stamina: %d", 
+    			reactionTime, eyeSight, intelligence, stamina);
+    }
+    
+	@Override
+    public String toString() {
+    	return super.getDescription();
+    }
 }

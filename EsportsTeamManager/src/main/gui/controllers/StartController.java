@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 
 import main.gui.GameFrame;
+import main.gui.controllers.subclassable.Controller;
 import main.gui.panels.StartPanel;
 
 public class StartController extends Controller {
@@ -41,11 +42,10 @@ public class StartController extends Controller {
 				toSetupScreen();
 			}
 		});
-		launch();
+		super.launch();
 	}
 	
 	private void toSetupScreen() {
-		close();
 		frame.toSetupScreen();
 	}
 	

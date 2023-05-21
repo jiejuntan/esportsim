@@ -8,27 +8,25 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
-import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
-import main.gui.controllers.DraftDetailController;
-import main.gui.controllers.ClubController;
-import main.gui.controllers.ClubDetailController;
-import main.gui.controllers.DraftController;
 import main.gui.controllers.HomeController;
-import main.gui.controllers.InventoryController;
-import main.gui.controllers.ItemDetailController;
-import main.gui.controllers.MarketController;
-import main.gui.controllers.RoleSwapController;
 import main.gui.controllers.MatchController;
 import main.gui.controllers.SetupController;
 import main.gui.controllers.StartController;
-import main.gui.controllers.StadiumController;
+import main.gui.controllers.detailControllers.ClubDetailController;
+import main.gui.controllers.detailControllers.DraftDetailController;
+import main.gui.controllers.detailControllers.ItemDetailController;
+import main.gui.controllers.thumbnailControllers.ClubController;
+import main.gui.controllers.thumbnailControllers.DraftController;
+import main.gui.controllers.thumbnailControllers.InventoryController;
+import main.gui.controllers.thumbnailControllers.MarketController;
+import main.gui.controllers.thumbnailControllers.RoleSwapController;
+import main.gui.controllers.thumbnailControllers.StadiumController;
 import main.model.Athlete;
 import main.model.Equipment;
 import main.model.GameEnvironment;
@@ -66,23 +64,8 @@ public class GameFrame {
 	public void launchPanel(JPanel panel) {
 		frame.getContentPane().removeAll();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		revalidate();
-	}	
-	
-	/**
-	 * Revalidates frame if updates are needed.
-	 */
-	public void revalidate() {
 		frame.revalidate();
-	}
-	
-	/**
-	 * Close the current panel.
-	 */
-	public void closePanel() {
-		frame.getContentPane().removeAll();
-	}
-	
+	}	
 	
 	/**
 	 * Launch the start screen.
@@ -199,12 +182,8 @@ public class GameFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		FlatLightLaf.setup();
-		UIManager.put("Button.arc", 20);
-		UIManager.put("Button.hoverBorderColor", Color.GRAY);
-		UIManager.put("TextComponesssssnt.arc", 20);
-		UIManager.put("Component.focusColor", Color.GRAY);
-		UIManager.put("Component.focusedBorderColor", Color.GRAY);
 	}
+	
 	
 	/**
 	 * Construct the game environment.

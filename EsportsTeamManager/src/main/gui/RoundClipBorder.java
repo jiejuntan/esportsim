@@ -6,7 +6,6 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
-import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.geom.Area;
@@ -15,34 +14,23 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.border.AbstractBorder;
 
 /**
- * Creates round borders, full credit to online forum StackOverflow
+ * Creates round borders, modified from StackOverflow
  * 
  * @author Jiejun Tan
- *
  */
 public class RoundClipBorder extends AbstractBorder {
 
     private Color color;
-    private int thickness = 4;
-    private int radii = 8;
-    private int pointerSize = 7;
-    private Insets insets = null;
-    private BasicStroke stroke = null;
+    private int thickness;
+    private int radius;
+    private Insets insets;
+    private BasicStroke stroke;
     private int strokePad;
-    private int pointerPad = 4;
-    private boolean left = true;
     RenderingHints hints;
 
-    RoundClipBorder(
-            Color color) {
-        this(color, 4, 8, 7);
-    }
-
-    public RoundClipBorder(
-            Color color, int thickness, int radii, int pointerSize) {
+    public RoundClipBorder(Color color, int thickness, int radius) {
         this.thickness = thickness;
-        this.radii = radii;
-        this.pointerSize = pointerSize;
+        this.radius = radius;
         this.color = color;
 
         stroke = new BasicStroke(thickness);
@@ -52,15 +40,9 @@ public class RoundClipBorder extends AbstractBorder {
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
-        int pad = radii + strokePad;
-        int bottomPad = pad + pointerSize + strokePad;
-        insets = new Insets(pad, pad, bottomPad, pad);
-    }
-
-    RoundClipBorder(
-            Color color, int thickness, int radii, int pointerSize, boolean left) {
-        this(color, thickness, radii, pointerSize);
-        this.left = left;
+        int xPad = 10 + strokePad;
+        int yPad = 2 + strokePad;
+        insets = new Insets(yPad, xPad, strokePad, xPad);
     }
 
     @Override
@@ -82,55 +64,25 @@ public class RoundClipBorder extends AbstractBorder {
 
         Graphics2D g2 = (Graphics2D) g;
 
-        int bottomLineY = height - thickness - pointerSize;
+        int bottomLineY = height - thickness;
 
         RoundRectangle2D.Double bubble = new RoundRectangle2D.Double(
                 0 + strokePad,
                 0 + strokePad,
                 width - thickness,
                 bottomLineY,
-                radii,
-                radii);
+                radius,
+                radius);
 
-        Polygon pointer = new Polygon();
-
-        if (left) {
-            // left point
-            pointer.addPoint(
-                    strokePad + radii + pointerPad,
-                    bottomLineY);
-            // right point
-            pointer.addPoint(
-                    strokePad + radii + pointerPad + pointerSize,
-                    bottomLineY);
-            // bottom point
-            pointer.addPoint(
-                    strokePad + radii + pointerPad + (pointerSize / 2),
-                    height - strokePad);
-        } else {
-            // left point
-            pointer.addPoint(
-                    width - (strokePad + radii + pointerPad),
-                    bottomLineY);
-            // right point
-            pointer.addPoint(
-                    width - (strokePad + radii + pointerPad + pointerSize),
-                    bottomLineY);
-            // bottom point
-            pointer.addPoint(
-                    width - (strokePad + radii + pointerPad + (pointerSize / 2)),
-                    height - strokePad);
-        }
 
         Area area = new Area(bubble);
-        area.add(new Area(pointer));
 
         g2.setRenderingHints(hints);
 
         Component parent  = c.getParent();
         if (parent != null) {
             Color bg = parent.getBackground();
-            Rectangle rect = new Rectangle(0,0,width, height);
+            Rectangle rect = new Rectangle(0, 0, width, height);
             Area borderRegion = new Area(rect);
             borderRegion.subtract(area);
             g2.setClip(borderRegion);

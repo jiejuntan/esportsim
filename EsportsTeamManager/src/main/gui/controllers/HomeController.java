@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import main.gui.GameFrame;
+import main.gui.controllers.subclassable.Controller;
 import main.gui.panels.HomePanel;
 
 public class HomeController extends Controller {
@@ -64,21 +65,18 @@ public class HomeController extends Controller {
 			}
 		});
 		
-		launch();
+		super.launch();
 	}
 	
 	private void toClubScreen() {
-		close();
 		frame.toClubScreen();
 	}
 	
 	private void toStadiumScreen() {
-		close();
 		frame.toStadiumScreen();
 	}
 	
 	private void toMarketScreen() {
-		close();
 		frame.toMarketScreen();
 	}
 }

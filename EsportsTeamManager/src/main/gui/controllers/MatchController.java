@@ -7,8 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import main.gui.GameFrame;
+import main.gui.controllers.subclassable.Controller;
 import main.gui.panels.MatchPanel;
-import main.gui.panels.StadiumPanel;
+import main.gui.panels.thumbnailPanels.StadiumPanel;
 import main.model.GameData;
 import main.model.Match;
 import main.model.Stadium;
@@ -42,7 +43,7 @@ public class MatchController extends Controller {
 		initializeNextMatchButton();
 		displayPlayers();
 		
-		launch();
+		super.launch();
 	}
 	
 	

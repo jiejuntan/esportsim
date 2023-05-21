@@ -3,12 +3,6 @@ package main.gui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 /**
  * Constant values for UI components to maintain uniformity.
@@ -18,12 +12,12 @@ import javax.swing.ImageIcon;
 public class GUIConstants {
 	
 	// Component colors
-	public static final Color COMPONENT = Color.LIGHT_GRAY;
+	public static final Color COMPONENT = new Color(203, 224, 255);
 	
 	// Fonts
 	public static final String UNISPACE = "/main/Resources/unispace.ttf"; // issue implementing might delete along with ttf file
 	public static final String FONT = "Unispace";
-	public static final int HEADING = 50;
+	public static final int HEADING = 60;
 	public static final int SUBHEADING = 35;
 	public static final int BODY = 30;
 	public static final int DETAIL = 20;
@@ -34,15 +28,21 @@ public class GUIConstants {
 		
 	// Backgrounds
 	// Background image by Lesiakower via Pixabay under the Content License
-	public static final String BACKGROUND_PLACEHOLDER = "/main/Resources/mountains.png";
+	public static final String BACKGROUND_ANIMATED = "/main/Resources/mountains.png";
+	public static final Color BACKGROUND_SOLID = new Color(221, 235, 255);
 	
 	// Athlete portraits
-	public static final String PORTRAIT_PLACEHOLDER = "/main/Resources/placeholder_portrait.jpg";
+	public static final int PORTRAIT_COUNT = 24;
+	public static final String PORTRAIT_PLACEHOLDER = "/main/Resources/athletePortraits/portrait_opaque_0.png";
+	
+	public static final Color PORTRAIT_BACKGROUND = new Color(203, 224, 255);
+	public static final Color PORTRAIT_BUTTON_ROLLOVER = new Color(203, 224, 255, 50);
+	
 	public static final int PORTRAIT_SMALL = 250;
-	public static final RoundClipBorder PORTRAIT_BORDER_SMALL = new RoundClipBorder(Color.BLACK, 2, 20, 0);
+	public static final RoundClipBorder PORTRAIT_BORDER_SMALL = new RoundClipBorder(Color.BLACK, 2, 20);
+	
 	public static final int PORTRAIT_LARGE = 350;
-	public static final RoundClipBorder PORTRAIT_BORDER_LARGE = new RoundClipBorder(Color.BLACK, 2, 50, 0);
-	public static final Color PORTRAIT_BUTTON_ROLLOVER = new Color(255, 255, 255, 50);
+	public static final RoundClipBorder PORTRAIT_BORDER_LARGE = new RoundClipBorder(Color.BLACK, 2, 50);
 	
 	// Color for bonus stats
 	public static final Color BONUS_UP = new Color(0, 128, 0);

@@ -1,20 +1,16 @@
 package main.gui.panels;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class HomePanel extends JPanel {
+import main.gui.panels.subclassable.BasePanel;
+
+public class HomePanel extends BasePanel {
 	
 	private JLabel weekLabel;
 	private JLabel moneyLabel;
@@ -31,9 +27,8 @@ public class HomePanel extends JPanel {
 		gbl_panel.rowWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		this.setLayout(gbl_panel);
 		
-		
 		JLabel titleLabel = new JLabel("Esports Simulator");
-		titleLabel.setFont(new Font("Unispace", Font.PLAIN, 50));
+		super.setupTitle(titleLabel);
 		GridBagConstraints gbc_titleLabel = new GridBagConstraints();
 		gbc_titleLabel.gridwidth = 3;
 		gbc_titleLabel.insets = new Insets(0, 0, 5, 5);
@@ -60,22 +55,15 @@ public class HomePanel extends JPanel {
 		
 		
 		clubButton = new JButton("Club");
-		clubButton.setPreferredSize(new Dimension(200, 50));
-		clubButton.setFocusPainted(false);
-		clubButton.setBackground(Color.LIGHT_GRAY);
-		clubButton.setFont(new Font("Unispace", Font.PLAIN, 30));
+		super.setupButton(clubButton);
 		GridBagConstraints gbc_clubButton = new GridBagConstraints();
-		gbc_clubButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_clubButton.insets = new Insets(0, 0, 5, 5);
 		gbc_clubButton.gridx = 3;
 		gbc_clubButton.gridy = 3;
 		this.add(clubButton, gbc_clubButton);
 		
 		stadiumButton = new JButton("Stadium");
-		stadiumButton.setPreferredSize(new Dimension(200, 50));
-		stadiumButton.setFont(new Font("Unispace", Font.PLAIN, 30));
-		stadiumButton.setFocusPainted(false);
-		stadiumButton.setBackground(Color.LIGHT_GRAY);
+		super.setupButton(stadiumButton);
 		GridBagConstraints gbc_btnStadium = new GridBagConstraints();
 		gbc_btnStadium.insets = new Insets(0, 0, 5, 5);
 		gbc_btnStadium.gridx = 3;
@@ -83,10 +71,7 @@ public class HomePanel extends JPanel {
 		this.add(stadiumButton, gbc_btnStadium);
 		
 		marketButton = new JButton("Market");
-		marketButton.setPreferredSize(new Dimension(200, 50));
-		marketButton.setFont(new Font("Unispace", Font.PLAIN, 30));
-		marketButton.setFocusPainted(false);
-		marketButton.setBackground(Color.LIGHT_GRAY);
+		super.setupButton(marketButton);
 		GridBagConstraints gbc_marketButton = new GridBagConstraints();
 		gbc_marketButton.insets = new Insets(0, 0, 5, 5);
 		gbc_marketButton.gridx = 3;
@@ -95,10 +80,7 @@ public class HomePanel extends JPanel {
 		
 		
 		endWeekButton = new JButton("End Week");
-		endWeekButton.setPreferredSize(new Dimension(200, 50));
-		endWeekButton.setFont(new Font("Unispace", Font.PLAIN, 30));
-		endWeekButton.setFocusPainted(false);
-		endWeekButton.setBackground(Color.LIGHT_GRAY);
+		super.setupButton(endWeekButton);
 		GridBagConstraints gbc_endWeekButton = new GridBagConstraints();
 		gbc_endWeekButton.gridwidth = 3;
 		gbc_endWeekButton.insets = new Insets(0, 0, 5, 5);

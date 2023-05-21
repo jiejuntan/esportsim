@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
 import main.gui.GameFrame;
+import main.gui.controllers.subclassable.Controller;
 import main.gui.panels.SetupPanel;
 import main.model.GameData.Difficulty;
 
@@ -57,11 +58,10 @@ public class SetupController extends Controller {
 				}				
 			}
 		});
-		launch();
+		super.launch();
 	}
 	
 	private void toDraftScreen() {
-		close();
 		frame.toDraftScreen();
 	}
 }

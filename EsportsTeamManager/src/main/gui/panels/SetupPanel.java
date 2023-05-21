@@ -17,8 +17,9 @@ import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
 import main.gui.GUIConstants;
+import main.gui.panels.subclassable.BasePanel;
 
-public class SetupPanel extends JPanel {
+public class SetupPanel extends BasePanel {
 	
 	private JTextField teamNameTextField;
 	private JSlider durationSlider;
@@ -33,11 +34,9 @@ public class SetupPanel extends JPanel {
 		gbl_panel.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{3.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 5.0, Double.MIN_VALUE};
 		this.setLayout(gbl_panel);
-		
-		
+				
 		JLabel titleLabel = new JLabel("New Game");
-		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		titleLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.HEADING));
+		super.setupTitle(titleLabel);
 		GridBagConstraints gbc_titleLabel = new GridBagConstraints();
 		gbc_titleLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_titleLabel.gridwidth = 5;
@@ -56,6 +55,7 @@ public class SetupPanel extends JPanel {
 		this.add(teamNameLabel, gbc_teamNameLabel);
 		
 		teamNameTextField = new JTextField();
+		teamNameTextField.setBorder(GUIConstants.PORTRAIT_BORDER_SMALL);
 		teamNameTextField.setBackground(Color.WHITE);
 		teamNameTextField.setPreferredSize(new Dimension(200, 50));
 		teamNameTextField.setMargin(new Insets(5, 10, 2, 10));
@@ -79,7 +79,7 @@ public class SetupPanel extends JPanel {
 		this.add(durationLabel, gbc_durationLabel);
 		
 		durationSlider = new JSlider();
-		durationSlider.setBackground(GUIConstants.COMPONENT);
+		durationSlider.setBackground(Color.BLACK);
 		durationSlider.setForeground(Color.BLACK);
 		durationSlider.setPreferredSize(new Dimension(200, 50));
 		durationSlider.setOpaque(false);
@@ -112,7 +112,7 @@ public class SetupPanel extends JPanel {
 		
 		easyToggleButton = new JToggleButton("Easy");
 		difficultyGroup.add(easyToggleButton);
-		easyToggleButton.setOpaque(true);
+		easyToggleButton.setBorder(GUIConstants.PORTRAIT_BORDER_SMALL);
 		easyToggleButton.setPreferredSize(new Dimension(200, 50));
 		easyToggleButton.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		easyToggleButton.setBackground(GUIConstants.COMPONENT);
@@ -126,7 +126,7 @@ public class SetupPanel extends JPanel {
 		
 		hardToggleButton = new JToggleButton("Hard");
 		difficultyGroup.add(hardToggleButton);
-		hardToggleButton.setOpaque(true);
+		hardToggleButton.setBorder(GUIConstants.PORTRAIT_BORDER_SMALL);
 		hardToggleButton.setPreferredSize(new Dimension(200, 50));
 		hardToggleButton.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		hardToggleButton.setBackground(GUIConstants.COMPONENT);
@@ -140,10 +140,7 @@ public class SetupPanel extends JPanel {
 		
 		
 		confirmButton = new JButton("Confirm");
-		confirmButton.setPreferredSize(new Dimension(200, 50));
-		confirmButton.setFocusPainted(false);
-		confirmButton.setBackground(GUIConstants.COMPONENT);
-		confirmButton.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		super.setupButton(confirmButton);
 		GridBagConstraints gbc_confirmButton = new GridBagConstraints();
 		gbc_confirmButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_confirmButton.gridwidth = 3;

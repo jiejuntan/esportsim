@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.GroupLayout.Alignment;
 
 import main.gui.GUIConstants;
+import main.gui.panels.subclassable.BackgroundPanel;
 
 
 public class StartPanel extends BackgroundPanel {
