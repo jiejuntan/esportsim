@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import main.exceptions.IllegalTeamException;
+import main.exceptions.TeamLimitException;
 import main.model.Team.Role;
 
 
@@ -80,11 +82,21 @@ public final class RandomEvent {
     private void addAthlete() {    
 		if (!team.isMainTeamFull()) {
 			//Adds an Athlete with a skill based on the difficulty modifier and a random role
-			team.addAthlete(new Athlete(gameData.getDifficulty().getModifier()), team.getRandomRole(false));
+			try {
+				team.addAthlete(new Athlete(gameData.getDifficulty().getModifier()), Team.getRandomRole(false));
+			} catch (IllegalTeamException | TeamLimitException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		} else if (!team.isReserveTeamFull()) {
 			//Adds an Athlete with a skill based on the difficulty modifier and the reserver role
-			team.addAthlete(new Athlete(gameData.getDifficulty().getModifier()), Team.Role.RESERVE);
+			try {
+				team.addAthlete(new Athlete(gameData.getDifficulty().getModifier()), Team.Role.RESERVE);
+			} catch (IllegalTeamException | TeamLimitException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			this.activatedEvent = 1;
 		} else {
@@ -99,7 +111,7 @@ public final class RandomEvent {
     private void removeAthlete() {
     	
     	//Chooses a random (role : List<Athletes>) to get remove an athlete from
-    	List<Athlete> athletes = team.getTeamMembers().get(team.getRandomRole(true));
+    	List<Athlete> athletes = team.getTeamMembers().get(Team.getRandomRole(true));
     	
     	//Removes the athlete from 
     	team.removeAthlete(athletes.get(random.nextInt(athletes.size())));
@@ -114,7 +126,7 @@ public final class RandomEvent {
     private void statsIncrease() {
     	
     	//Chooses a random (role : List<Athletes>) to get an athlete to increases thier stat
-    	List<Athlete> athletes = team.getTeamMembers().get(team.getRandomRole(true));
+    	List<Athlete> athletes = team.getTeamMembers().get(Team.getRandomRole(true));
     	
     	Athlete athlete = athletes.get(random.nextInt(athletes.size()));
     	
