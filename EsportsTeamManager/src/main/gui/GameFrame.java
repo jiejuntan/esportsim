@@ -23,10 +23,10 @@ import main.gui.drafting.DraftDetailController;
 import main.gui.drafting.RoleSwapController;
 import main.gui.home.HomeController;
 import main.gui.market.MarketController;
-import main.gui.setup.SetupController;
 import main.gui.stadium.MatchController;
 import main.gui.stadium.StadiumController;
 import main.gui.stadium.StadiumTeamDetailsController;
+import main.gui.starting.SetupController;
 import main.gui.starting.StartController;
 import main.model.Athlete;
 import main.model.Equipment;
@@ -218,20 +218,7 @@ public final class GameFrame {
 		initializeEnvironment();
 		initializeFrame();
 		initializeMusic();
-		initializeFont();
 		toStartScreen();
-	}
-
-	/*
-	 * Doesn't work
-	 */
-	private void initializeFont() {
-		try {
-			File file = new File(this.getClass().getResource(GUIConstants.UNISPACE).toURI());
-			Font font = Font.createFont(Font.TRUETYPE_FONT, file);
-		} catch (FontFormatException | IOException | URISyntaxException e) {
-			e.printStackTrace();
-		}
 	}
 
 

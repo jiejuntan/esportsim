@@ -8,7 +8,6 @@ import javax.swing.JButton;
 
 import main.gui.GameFrame;
 import main.gui.subclassable.ThumbnailController;
-import main.model.Athlete;
 import main.model.Equipment;
 
 /**
@@ -36,7 +35,7 @@ public final class InventoryController extends ThumbnailController {
 	protected void initialize() {
 		panel = new InventoryPanel();
 		
-		setMoney(((InventoryPanel) panel).getMoneyLabel());
+		super.setMoney(((InventoryPanel) panel).getMoneyLabel());
 		setItems();
 		
 		initializeBackButton();

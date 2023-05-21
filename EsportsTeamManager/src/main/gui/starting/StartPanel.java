@@ -10,11 +10,20 @@ import javax.swing.GroupLayout.Alignment;
 import main.gui.GUIConstants;
 import main.gui.subclassable.BackgroundPanel;
 
-
+/**
+ * Panel for start screen.
+ * 
+ * @author Jiejun Tan
+ *
+ */
 public final class StartPanel extends BackgroundPanel {
 
+	// Gettable components for controller manipulation. Protected properties are also exposed to subclasses.
 	private JButton newGameButton;
 	
+	/**
+	 * Constructor for start panel
+	 */
 	public StartPanel() {
 		newGameButton = new JButton("<html><center><span style=\"font-size: 70px\">"
 				+ "Esports Simulator"

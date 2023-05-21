@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main.gui.drafting;
 
 import main.gui.subclassable.ThumbnailPanel;
@@ -14,7 +11,7 @@ import main.gui.subclassable.ThumbnailPanel;
 public final class RoleSwapPanel extends ThumbnailPanel {
 
 	/**
-	 * 
+	 * Configures panel
 	 */
 	public RoleSwapPanel() {
 		titleLabel.setText("Select member to swap:");

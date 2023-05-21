@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main.gui.drafting;
 
 import java.awt.event.ActionEvent;
@@ -53,6 +50,9 @@ public final class RoleSwapController extends ThumbnailController {
 		super.launch();
 	}
 	
+	/**
+	 * Displays the available athletes to swap
+	 */
 	private void setSwappableAthletes() {
 		Team team = frame.getGame().getData().getTeam();
 		
@@ -84,10 +84,16 @@ public final class RoleSwapController extends ThumbnailController {
 		}
 	}
 
+	/**
+	 * Returns to draft screen.
+	 */
 	private void toDraftScreen() {
 		frame.toDraftScreen();
 	}
 	
+	/**
+	 * Returns to club screen.
+	 */
 	private void toClubScreen() {
 		frame.toClubScreen();
 	}

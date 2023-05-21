@@ -9,6 +9,12 @@ import javax.swing.JLabel;
 import main.gui.GameFrame;
 import main.gui.subclassable.Controller;
 
+/**
+ * Controller for home screen.
+ * 
+ * @author Jiejun Tan
+ *
+ */
 public final class HomeController extends Controller {
 
 	/**
@@ -27,14 +33,13 @@ public final class HomeController extends Controller {
 	@Override
 	protected void initialize() {
 		panel = new HomePanel();
-		
+
+		super.setMoney(((HomePanel) panel).getMoneyLabel());
+
 		JLabel weekLabel = ((HomePanel) panel).getWeekLabel();
 		weekLabel.setText(String.format("Week %d of %d", 
 				frame.getGame().getData().getCurrentWeek(),
 				frame.getGame().getData().getSeasonDuration()));
-		
-		JLabel moneyLabel = ((HomePanel) panel).getMoneyLabel();
-		moneyLabel.setText("Money: $" + frame.getGame().getData().getMoney());
 		
 		JButton clubButton = ((HomePanel) panel).getClubButton();
 		clubButton.addActionListener(new ActionListener() {
@@ -67,14 +72,23 @@ public final class HomeController extends Controller {
 		super.launch();
 	}
 	
+	/**
+	 * Launches club screen
+	 */
 	private void toClubScreen() {
 		frame.toClubScreen();
 	}
 	
+	/**
+	 * Launches stadium screen
+	 */
 	private void toStadiumScreen() {
 		frame.toStadiumScreen();
 	}
 	
+	/**
+	 * Launches market screen
+	 */
 	private void toMarketScreen() {
 		frame.toMarketScreen();
 	}

@@ -20,6 +20,7 @@ import javax.swing.border.AbstractBorder;
  */
 public final class RoundClipBorder extends AbstractBorder {
 
+	// Component values to set/calculate
     private Color color;
     private int thickness;
     private int radius;
@@ -28,6 +29,13 @@ public final class RoundClipBorder extends AbstractBorder {
     private int strokePad;
     RenderingHints hints;
 
+    /**
+     * Constructs border with options
+     * 
+     * @param color		border color
+     * @param thickness	border thickness
+     * @param radius	corner radius
+     */
     public RoundClipBorder(Color color, int thickness, int radius) {
         this.thickness = thickness;
         this.radius = radius;
@@ -44,17 +52,26 @@ public final class RoundClipBorder extends AbstractBorder {
         int yPad = 2 + strokePad;
         insets = new Insets(yPad, xPad, strokePad, xPad);
     }
-
+    
+    /**
+     * Gives the component inset information
+     */
     @Override
     public Insets getBorderInsets(Component c) {
         return insets;
     }
 
+    /**
+     * Gives the component inset information
+     */
     @Override
     public Insets getBorderInsets(Component c, Insets insets) {
         return getBorderInsets(c);
     }
 
+    /**
+     * Paints border and paints clipped area with background to hide it
+     */
     @Override
     public void paintBorder(
             Component c,

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main.gui.club;
 
 import main.gui.subclassable.DetailPanel;

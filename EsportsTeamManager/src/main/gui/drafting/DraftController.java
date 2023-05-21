@@ -37,7 +37,7 @@ public final class DraftController extends ThumbnailController {
 	@Override
 	protected void initialize() {
 		panel = new DraftPanel();
-		setMoney(((DraftPanel) panel).getMoneyLabel());
+		super.setMoney(((DraftPanel) panel).getMoneyLabel());
 		setDraftableAthletes();
 		initializeConfirmButton();
 		super.launch();
@@ -92,7 +92,7 @@ public final class DraftController extends ThumbnailController {
 	/**
 	 * Starts the game.
 	 */
-	public void startGame() {
+	private void startGame() {
 		frame.getGame().advanceWeek();
 		toHomeScreen();
 	}

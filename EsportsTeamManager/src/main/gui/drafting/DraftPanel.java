@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main.gui.drafting;
 
 import main.gui.subclassable.ThumbnailPanel;

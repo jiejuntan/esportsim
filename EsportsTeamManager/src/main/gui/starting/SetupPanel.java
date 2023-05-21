@@ -1,4 +1,4 @@
-package main.gui.setup;
+package main.gui.starting;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,23 +10,31 @@ import java.awt.Insets;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
-import javax.swing.SwingConstants;
 
 import main.gui.GUIConstants;
 import main.gui.subclassable.BasePanel;
 
+/**
+ * Panel for setup screen.
+ * 
+ * @author Jiejun Tan
+ *
+ */
 public final class SetupPanel extends BasePanel {
 	
+	// Gettable components for controller manipulation. Protected properties are also exposed to subclasses.
 	private JTextField teamNameTextField;
 	private JSlider durationSlider;
 	private JToggleButton easyToggleButton;
 	private JToggleButton hardToggleButton;
 	private JButton confirmButton;
 	
+	/**
+	 * Constructor for setup panel.
+	 */
 	public SetupPanel() {
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{10, 0, 30, 0, 10, 0, 10, 0};

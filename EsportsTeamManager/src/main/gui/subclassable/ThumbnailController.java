@@ -5,9 +5,7 @@ package main.gui.subclassable;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -54,5 +52,5 @@ public abstract class ThumbnailController extends Controller {
 						.tintImage(portraitImage, GUIConstants.PORTRAIT_BUTTON_ROLLOVER)
 						.getScaledInstance(GUIConstants.PORTRAIT_SMALL, GUIConstants.PORTRAIT_SMALL, Image.SCALE_DEFAULT)));
 	}
-
+	
 }

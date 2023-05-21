@@ -18,7 +18,6 @@ import main.exceptions.IllegalTeamException;
 import main.exceptions.TeamLimitException;
 import main.gui.GameFrame;
 import main.gui.subclassable.DetailController;
-import main.gui.subclassable.DetailPanel;
 import main.model.Team.Role;
 import main.model.Athlete;
 import main.model.GameData.Difficulty;
@@ -58,10 +57,10 @@ public final class DraftDetailController extends DetailController {
 		panel = new DraftDetailPanel();
 		
 		setHeading();
-		super.setPortrait(((DetailPanel) panel).getPortraitLabel(), athlete.getPortraitPath());
+		super.setPortrait(((DraftDetailPanel) panel).getPortraitLabel(), athlete.getPortraitPath());
 		setStats();
 		
-		initializeBackButton();
+		super.initializeBackButton();
 		initializeConfirmButton();
 
 		super.launch();
@@ -71,7 +70,7 @@ public final class DraftDetailController extends DetailController {
 	 * Sets heading to an editable name
 	 */
 	private void setHeading() {
-		JTextField nameTextField = ((DetailPanel) panel).getNameTextField();
+		JTextField nameTextField = ((DraftDetailPanel) panel).getNameTextField();
 		nameTextField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -86,7 +85,7 @@ public final class DraftDetailController extends DetailController {
 				}
 			}
 		});
-		JButton changeNameButton = ((DetailPanel) panel).getChangeNameButton();
+		JButton changeNameButton = ((DraftDetailPanel) panel).getChangeNameButton();
 		changeNameButton.setText(athlete.getName());
 		nameTextField.setText(athlete.getName());
 		changeNameButton.addActionListener(new ActionListener() {
@@ -112,50 +111,39 @@ public final class DraftDetailController extends DetailController {
 	 * Displays athlete's current stats and contract price
 	 */
 	private void setStats() {
-		JLabel reactionValueLabel = ((DetailPanel) panel).getReactionValueLabel();
+		JLabel reactionValueLabel = ((DraftDetailPanel) panel).getReactionValueLabel();
 		reactionValueLabel.setText(String.valueOf(athlete.getReactionTime()));
 		
-		JLabel eyesightValueLabel = ((DetailPanel) panel).getEyesightValueLabel();
+		JLabel eyesightValueLabel = ((DraftDetailPanel) panel).getEyesightValueLabel();
 		eyesightValueLabel.setText(String.valueOf(athlete.getEyeSight()));
 		
-		JLabel intelligenceValueLabel = ((DetailPanel) panel).getIntelligenceValueLabel();
+		JLabel intelligenceValueLabel = ((DraftDetailPanel) panel).getIntelligenceValueLabel();
 		intelligenceValueLabel.setText(String.valueOf(athlete.getIntelligence()));
 		
-		JLabel staminaValueLabel = ((DetailPanel) panel).getStaminaValueLabel();
+		JLabel staminaValueLabel = ((DraftDetailPanel) panel).getStaminaValueLabel();
 		staminaValueLabel.setText(String.valueOf(athlete.getStamina()));
 		
-		JComboBox roleComboBox = ((DetailPanel) panel).getRoleComboBox();
+		JComboBox roleComboBox = ((DraftDetailPanel) panel).getRoleComboBox();
 		roleComboBox.setSelectedItem(athlete.getRole());
 		
 		Difficulty diff = frame.getGame().getData().getDifficulty();
 		int price = athlete.calculatePurchasePrice(diff.modifier);
-		JLabel contractValueLabel = ((DetailPanel) panel).getPriceValueLabel();
+		JLabel contractValueLabel = ((DraftDetailPanel) panel).getPriceValueLabel();
 		contractValueLabel.setText("$" + String.valueOf(price));
 	}
 	
-	/**
-	 * Initializes back button to return to draft
-	 */
-	private void initializeBackButton() {
-		JButton backButton = ((DetailPanel) panel).getBackButton();
-		backButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				toPreviousScreen();
-			}
-		});
-	}
 	
 	/**
 	 * Initializes confirm button to purchase athlete and return to draft or show dialog for errors
 	 */
 	private void initializeConfirmButton() {
-		JButton confirmButton = ((DetailPanel) panel).getConfirmButton();
+		JButton confirmButton = ((DraftDetailPanel) panel).getConfirmButton();
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {			
-				JComboBox roleComboBox = ((DetailPanel) panel).getRoleComboBox();
+				JComboBox roleComboBox = ((DraftDetailPanel) panel).getRoleComboBox();
 				Role role = (Role) roleComboBox.getSelectedItem();
 				
-				JTextField nameTextField = ((DetailPanel) panel).getNameTextField();
+				JTextField nameTextField = ((DraftDetailPanel) panel).getNameTextField();
 				String newName = nameTextField.getText();
 				
 				
@@ -203,7 +191,7 @@ public final class DraftDetailController extends DetailController {
 	/**
 	 * Returns to previous screen
 	 */
-	private void toPreviousScreen() {
+	protected void toPreviousScreen() {
 		frame.toDraftScreen();
 	}
 	

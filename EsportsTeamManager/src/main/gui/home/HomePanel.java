@@ -10,8 +10,15 @@ import javax.swing.JLabel;
 
 import main.gui.subclassable.BasePanel;
 
+/**
+ * Panel for home screen.
+ * 
+ * @author Jiejun Tan
+ *
+ */
 public final class HomePanel extends BasePanel {
 	
+	// Gettable components for controller manipulation. Protected properties are also exposed to subclasses.
 	private JLabel weekLabel;
 	private JLabel moneyLabel;
 	private JButton clubButton;
@@ -19,6 +26,9 @@ public final class HomePanel extends BasePanel {
 	private JButton marketButton;
 	private JButton endWeekButton;
 	
+	/**
+	 * Constructor for home panel
+	 */
 	public HomePanel() {
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{10, 0, 100, 0, 10, 0};

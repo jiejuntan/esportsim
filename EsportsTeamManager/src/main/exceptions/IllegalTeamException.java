@@ -12,7 +12,7 @@ package main.exceptions;
 public final class IllegalTeamException extends Exception {
 
 	/**
-	 * Constructor
+	 * Constructs exception
 	 */
 	public IllegalTeamException() {
 		super();
