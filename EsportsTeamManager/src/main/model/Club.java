@@ -13,11 +13,11 @@ public final class Club {
 	/**
 	 * Player inventory
 	 */
-    private List<Equipment> inventory;
+    private List<Item> inventory;
     
     public Club(GameData data) {
     	this.data = data;
-    	this.inventory = new ArrayList<Equipment>();
+    	this.inventory = new ArrayList<Item>();
     }
   
     /**
@@ -26,9 +26,9 @@ public final class Club {
      * @param item		item to use
      * @param athlete	Athlete to use item on
      */
-    public void useItem(Equipment equipment, Athlete athlete) {
-    	String AffectedStat = equipment.getEquipment().getAffectedStat();
-    	int itemStatValue = equipment.getEquipment().getValue();
+    public void useItem(Item item, Athlete athlete) {
+    	String AffectedStat = item.getItem().getPositiveStat();
+    	int itemStatValue = item.getItem().getPositiveValue();
     	
     	 switch (AffectedStat) {
          case "reactionTime":
@@ -53,17 +53,17 @@ public final class Club {
      * 
 	 * @return Club inventory
 	 */
-	public List<Equipment> getInventory() {
+	public List<Item> getInventory() {
 		return inventory;
 	}
 
 	/**
-     * Adds Equipment to the clubs inventory
+     * Adds Item to the clubs inventory
      * 
-     * @param equipment equipment to add
+     * @param item equipment to add
      */
-    public void addToInventory(Equipment equipment) {
-    	inventory.add(equipment);
+    public void addToInventory(Item item) {
+    	inventory.add(item);
     }
 
 }

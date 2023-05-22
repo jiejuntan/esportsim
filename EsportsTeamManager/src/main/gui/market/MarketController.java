@@ -11,7 +11,7 @@ import main.gui.GameFrame;
 import main.gui.subclassable.ThumbnailController;
 import main.model.Athlete;
 import main.model.Club;
-import main.model.Equipment;
+import main.model.Item;
 import main.model.Market;
 import main.model.Team;
 
@@ -101,11 +101,11 @@ public final class MarketController extends ThumbnailController {
 	private void setItems() {
 		Club club = frame.getGame().getClub();
 		Market market = frame.getGame().getMarket();
-		List<Equipment> items = isSelling ? club.getInventory() : market.getAvailableItems();
+		List<Item> items = isSelling ? club.getInventory() : market.getAvailableItems();
 		
 		List<JButton> itemButtons = ((MarketPanel) panel).getThumbButtons();
 		for (int i = 0; i < items.size(); i++) {
-			Equipment item = items.get(i);
+			Item item = items.get(i);
 			JButton button = itemButtons.get(i + 5);
 			String path = item.getPortraitPath();
 			
@@ -169,7 +169,7 @@ public final class MarketController extends ThumbnailController {
 	/**
 	 * Closes current screen and launches detailed buy/sell view of selected item.
 	 */
-	private void toItemScreen(Equipment item) {
+	private void toItemScreen(Item item) {
 		if (isSelling) {
 			// TODO Auto-generated method stub
 		} else {

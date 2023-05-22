@@ -127,19 +127,6 @@ public final class StadiumTeamDetailsController extends DetailController {
 		JTextField nameTextField = ((StadiumTeamDetailsPanel) panel).getNameTextField();
 		nameTextField.setText(team.getName()+"blblb");
 	}
-
-
-	/**
-	 * Initializes back button to return to draft
-	 */
-	protected void initializeBackButton() {
-		JButton backButton = ((StadiumTeamDetailsPanel) panel).getBackButton();
-		backButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				toPreviousScreen();
-			}
-		});
-	}
 	
 	/**
 	 * Initializes confirm button to purchase athlete and return to draft or show dialog for errors
