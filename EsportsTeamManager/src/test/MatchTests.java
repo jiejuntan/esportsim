@@ -20,10 +20,10 @@ class MatchTests {
 	    @BeforeEach
 	    void setUp() {
 	        homeTeam = new Team(3);
-
 	        opponentTeam = new Team(3);
 	        
 	        gameData = new GameData();
+	        gameData.setTeam(homeTeam);
 	        match = new Match(gameData, opponentTeam);
 	    }
 	    
@@ -31,8 +31,9 @@ class MatchTests {
 	    void playGame() {
 	    	int outcome = -1;
 	    	do {
-	    	outcome = match.simulateMatchup();
-	    	System.out.println(match.getRoundResults()+"\n");
+	    	match.simulateRound();
+	    	outcome = match.getOutcome();
+	    	System.out.println(match.getRoundResults());
 	    	
 	    	} while(outcome == -1);
 	    	
