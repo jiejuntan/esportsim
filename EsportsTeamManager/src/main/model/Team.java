@@ -150,7 +150,7 @@ public final class Team {
 			}
 		}
 		
-		this.logoPath = GUIConstants.PORTRAIT_PLACEHOLDER;
+		//this.logoPath = GUIConstants.PORTRAIT_PLACEHOLDER;
 		
 		//setLogo();
 		this.wins = 0;
