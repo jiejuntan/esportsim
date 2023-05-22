@@ -9,7 +9,6 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import main.exceptions.IllegalTeamException;
 import main.exceptions.TeamLimitException;
 import main.gui.GUIConstants;
 import main.exceptions.TeamLimitException.Type;
@@ -436,7 +435,7 @@ public final class Team {
 	 * 
 	 * @return number of athletes in main team
 	 */
-	private int getMainTeamSize() {
+	public int getMainTeamSize() {
 		int count = 0;
 		for (Role role: Role.values()) {
 			if (role != Role.RESERVE) {

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import main.exceptions.GameOverException;
 import main.gui.GameFrame;
@@ -60,7 +61,13 @@ public final class HomeController extends Controller {
 		JButton stadiumButton = ((HomePanel) panel).getStadiumButton();
 		stadiumButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				toStadiumScreen();
+				if (frame.getGame().getData().getTeam().isMainTeamFull()) {
+					toStadiumScreen();
+				} else {
+					JOptionPane.showMessageDialog(panel, 
+							"You don't have a full starting team to play.", 
+							"Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
@@ -77,6 +84,12 @@ public final class HomeController extends Controller {
 				try {
 					frame.getGame().advanceWeek();
 					initialize();
+					int shouldTrain = JOptionPane.showConfirmDialog(panel, 
+							"Do you want to train an athlete?", 
+							"Training available", JOptionPane.ERROR_MESSAGE);
+					if (shouldTrain == JOptionPane.YES_OPTION) {
+						toTrainAthleteScreen();
+					}
 				} catch (GameOverException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -107,5 +120,12 @@ public final class HomeController extends Controller {
 	 */
 	private void toMarketScreen() {
 		frame.toMarketScreen(false);
+	}
+	
+	/** 
+	 * Launches the training screen
+	 */
+	private void toTrainAthleteScreen() {
+		frame.toTrainAthleteScreen();
 	}
 }

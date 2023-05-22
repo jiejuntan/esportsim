@@ -2,6 +2,7 @@ package main.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import main.exceptions.IllegalFundsException;
@@ -129,6 +130,26 @@ public final class Market {
 			e.printStackTrace();
 		}
 	}
+    
+    /**
+     * Gets the price cheapest athlete available
+     * 
+     * @return price of cheapest athlete
+     */
+    public int getCheapestAthlete() {
+    	int cheapest = 0;
+    	for (Athlete athlete : availableAthletes) {
+    		if (!isPurchased(athlete)) {
+    			int price = athlete.calculatePurchasePrice(data.getDifficulty().modifier);
+        		if (cheapest == 0) {
+        			cheapest = price;
+        		} else if (price < cheapest) {
+        			cheapest = price;
+        		}
+    		}
+    	}
+    	return cheapest;
+    }
     
     /**
      * Views available athletes for purchase

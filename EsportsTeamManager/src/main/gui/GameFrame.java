@@ -20,6 +20,8 @@ import main.gui.drafting.DraftController;
 import main.gui.drafting.DraftDetailController;
 import main.gui.drafting.RoleSwapController;
 import main.gui.home.HomeController;
+import main.gui.home.TrainAthleteController;
+import main.gui.home.TrainAthleteDetailController;
 import main.gui.market.MarketController;
 import main.gui.market.MarketRoleSwapController;
 import main.gui.market.PurchaseAthleteDetailController;
@@ -113,6 +115,23 @@ public final class GameFrame {
 	 */
 	public void toHomeScreen() {
 		new HomeController(this);
+	}
+	
+	/**
+	 * Launch the training screen.
+	 */
+	public void toTrainAthleteScreen() {
+		new TrainAthleteController(this);
+	}
+	
+	/**
+	 * Launch the training detail screen.
+	 * 
+	 * @param athlete 	Athlete to train
+	 * @param item		Item to use for training
+	 */
+	public void toTrainAthleteDetailController(Athlete athlete, Item item) {
+		new TrainAthleteDetailController(this, athlete, item);
 	}
 	
 	/**
