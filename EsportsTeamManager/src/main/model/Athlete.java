@@ -23,12 +23,24 @@ public final class Athlete extends Purchasable {
 	 */
 	private static List<Integer> availablePortraits = IntStream.range(0, GUIConstants.PORTRAIT_COUNT).boxed().collect(Collectors.toCollection(ArrayList::new));
 	
+	/**
+	 * Maximum stamina
+	 * 0 = Injured
+	 * 1 = Questionable
+	 * 2 = Optimal
+	 */
+	private static int MAX_STAMINA = 2;
+	public static String[] STAMINA_LEVELS = new String[] {
+			"\"Get me out\"", 
+			"\"Meh\"",
+			"Optimal"};
+	
 	private String name;
 	
 	private int reactionTime;
     private int eyeSight;
     private int intelligence;
-    private int stamina = 100;
+    private int stamina = MAX_STAMINA;
     
     private Role role;
 
@@ -212,6 +224,13 @@ public final class Athlete extends Purchasable {
 	 */
 	public void setStamina(int stamina) {
 		this.stamina = stamina;
+	}
+	
+	/**
+	 * Resets stamina every week
+	 */
+	public void resetStamina() {
+		this.stamina = MAX_STAMINA;
 	}
 	
     /**

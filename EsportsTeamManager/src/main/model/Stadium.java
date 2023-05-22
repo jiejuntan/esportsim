@@ -86,8 +86,19 @@ public final class Stadium {
 		return opponent.isTeamFull();
 	}
 
-
-
+	/**
+	 * Clears match list to be repopulated every week
+	 */
+	private void clearMatches() {
+		matches.clear();
+	}
+	
+	/**
+	 * Generates new matches scaling with current week
+	 */
+	public void updateMatches() {
+		generateMatches(gameData.getDifficulty());
+	}
     
 
 }

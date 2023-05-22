@@ -199,7 +199,7 @@ public class DetailPanel extends BasePanel {
 		gbc_intelligenceBonusLabel.gridy = 8;
 		this.add(intelligenceBonusLabel, gbc_intelligenceBonusLabel);
 		
-		staminaLabel = new JLabel("Stamina:");
+		staminaLabel = new JLabel("Focus:");
 		staminaLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_staminaLabel = new GridBagConstraints();
 		gbc_staminaLabel.anchor = GridBagConstraints.WEST;

@@ -59,14 +59,27 @@ public class ClubController extends ThumbnailController {
 	 */
 	private void setAthletes() {
 		Team team = frame.getGame().getData().getTeam();
-		List<Athlete> athletes = new ArrayList<Athlete>();
-		athletes.addAll(team.getMainMembers());
-		athletes.addAll(team.getReserveMembers());
+		List<Athlete> mainAthletes = team.getMainMembers();
+		List<Athlete> reserves = team.getReserveMembers();
 		List<JButton> athleteButtons = ((ClubPanel) panel).getThumbButtons();
 		
-		for (int i = 0; i < athletes.size(); i++) {
-			Athlete athlete = athletes.get(i);
+		for (int i = 0; i < mainAthletes.size(); i++) {
+			Athlete athlete = mainAthletes.get(i);
 			JButton button = athleteButtons.get(i);
+			String path = athlete.getPortraitPath();
+			
+			super.formatButtonIcon(button, path);
+			
+			button.setEnabled(true);
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					toAthleteScreen(athlete);
+				}
+			});
+		}
+		for (int i = 0; i < reserves.size(); i++) {
+			Athlete athlete = reserves.get(i);
+			JButton button = athleteButtons.get(i + 5);
 			String path = athlete.getPortraitPath();
 			
 			super.formatButtonIcon(button, path);
