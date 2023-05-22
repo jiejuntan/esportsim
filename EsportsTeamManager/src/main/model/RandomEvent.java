@@ -84,7 +84,7 @@ public final class RandomEvent {
 			//Adds an Athlete with a skill based on the difficulty modifier and a random role
 			try {
 				team.addAthlete(new Athlete(gameData.getDifficulty().getModifier()), Team.getRandomRole(false));
-			} catch (IllegalTeamException | TeamLimitException e) {
+			} catch (TeamLimitException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -93,7 +93,7 @@ public final class RandomEvent {
 			//Adds an Athlete with a skill based on the difficulty modifier and the reserver role
 			try {
 				team.addAthlete(new Athlete(gameData.getDifficulty().getModifier()), Team.Role.RESERVE);
-			} catch (IllegalTeamException | TeamLimitException e) {
+			} catch (TeamLimitException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

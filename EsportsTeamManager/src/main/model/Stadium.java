@@ -18,7 +18,7 @@ public final class Stadium {
     /**
      * Data transfer object
      */
-    private GameData data;
+    private GameData gameData;
     
 	/**
 	 * Maximum number of matches to display per week
@@ -31,7 +31,7 @@ public final class Stadium {
 	 * @param data data transfer object
 	 */
     public Stadium(GameData data) {
-    	this.data = data;
+    	this.gameData = data;
     	this.matches = new ArrayList<Team>();
     }
 
@@ -40,7 +40,7 @@ public final class Stadium {
      */
     public void generateMatches() {
     	for (int opponentCount = 0; opponentCount < MATCH_LIMIT; opponentCount++) {
-    		matches.add(new Team(data.getCurrentWeek()));
+    		matches.add(new Team(gameData.getCurrentWeek()));
     	}
     }
     
@@ -51,7 +51,7 @@ public final class Stadium {
      * @return				difficulty string
      */
     public String getDifficulty(Team opponentTeam) {
-    	int playerTeamLevel = data.getTeam().calculateTeamlevel();
+    	int playerTeamLevel = gameData.getTeam().calculateTeamlevel();
     	int opponentTeamLevel = opponentTeam.calculateTeamlevel();
     	
     	double ratio = playerTeamLevel / opponentTeamLevel;
