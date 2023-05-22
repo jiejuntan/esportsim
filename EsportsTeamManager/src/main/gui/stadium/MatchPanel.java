@@ -19,22 +19,13 @@ import java.awt.Insets;
 import java.awt.Color;
 
 public final class MatchPanel extends BasePanel {
-	
-	protected JLabel playerNameLabel;
-	protected JLabel opponentNameLabel;
-	protected JButton battleButton;
-	protected JButton nextMatchButton;
 	private JLabel resultsValueLabel1;
-	private JLabel playerTeamLabel;
-	private JLabel opponentTeamLabel;
-	private JLabel playerHealthLabel;
-	private JLabel opponentHealthLabel;
-	private JLabel playerHealthValueLabel;
 	private JLabel playerTeamNameValueLabel;
 	private JLabel opponentTeamNameValueLabel;
-	private JLabel OpponentHealthValueLabel;
 	private JLabel resultsValueLabel2;
 	private Image img;
+	private JLabel roundValueLabel;
+	private JButton battleButton;
 	
 	
 	//Sets Background Image
@@ -54,124 +45,106 @@ public final class MatchPanel extends BasePanel {
         } catch(IOException e) {
             e.printStackTrace();
         }
-		setLayout(null);
-
-		JLabel titleLabel = new JLabel("Match Battle");
-		titleLabel.setForeground(new Color(255, 255, 255));
-		titleLabel.setBounds(622, 200, 356, 71);
-		super.setupTitle(titleLabel);
-		titleLabel.setPreferredSize(new Dimension(350, 60));
-		this.add(titleLabel);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{99, 285, 243, 350, 231, 265, 0};
+		gridBagLayout.rowHeights = new int[]{200, 71, 0, 16, 95, 16, 180, 40, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
 		
-		playerTeamLabel = new JLabel("Team");
-		playerTeamLabel.setForeground(new Color(255, 255, 255));
-		playerTeamLabel.setBounds(138, 271, 34, 16);
-		add(playerTeamLabel);
-		
-		opponentTeamLabel = new JLabel("Team");
-		opponentTeamLabel.setForeground(new Color(255, 255, 255));
-		opponentTeamLabel.setBounds(1260, 271, 34, 16);
-		add(opponentTeamLabel);
+		JLabel roundLabel = new JLabel(" Round ");
+		roundLabel.setForeground(new Color(255, 255, 255));
+		super.setupTitle(roundLabel);
+		roundLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.HEADING));
+		roundLabel.setPreferredSize(new Dimension(350, 60));
+		GridBagConstraints gbc_roundLabel = new GridBagConstraints();
+		gbc_roundLabel.anchor = GridBagConstraints.WEST;
+		gbc_roundLabel.fill = GridBagConstraints.VERTICAL;
+		gbc_roundLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_roundLabel.gridx = 3;
+		gbc_roundLabel.gridy = 1;
+		this.add(roundLabel, gbc_roundLabel);
 		
 		playerTeamNameValueLabel = new JLabel("Test");
+		playerTeamNameValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		playerTeamNameValueLabel.setVerticalAlignment(SwingConstants.BOTTOM);
 		playerTeamNameValueLabel.setForeground(new Color(255, 255, 255));
-		playerTeamNameValueLabel.setBounds(248, 271, 27, 16);
-		add(playerTeamNameValueLabel);
+		playerTeamNameValueLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
+		GridBagConstraints gbc_playerTeamNameValueLabel = new GridBagConstraints();
+		gbc_playerTeamNameValueLabel.anchor = GridBagConstraints.NORTH;
+		gbc_playerTeamNameValueLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_playerTeamNameValueLabel.gridx = 1;
+		gbc_playerTeamNameValueLabel.gridy = 2;
+		add(playerTeamNameValueLabel, gbc_playerTeamNameValueLabel);
+		
+		roundValueLabel = new JLabel("1");
+		roundValueLabel.setPreferredSize(new Dimension(350, 60));
+		roundValueLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		roundValueLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.HEADING));
+		roundValueLabel.setForeground(Color.WHITE);
+		GridBagConstraints gbc_roundValueLabel = new GridBagConstraints();
+		gbc_roundValueLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_roundValueLabel.gridx = 3;
+		gbc_roundValueLabel.gridy = 2;
+		add(roundValueLabel, gbc_roundValueLabel);
 		
 		opponentTeamNameValueLabel = new JLabel("Test");
+		opponentTeamNameValueLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		opponentTeamNameValueLabel.setForeground(new Color(255, 255, 255));
-		opponentTeamNameValueLabel.setBounds(1336, 271, 27, 16);
-		add(opponentTeamNameValueLabel);
-		
-		
-		playerNameLabel = new JLabel("Name");
-		playerNameLabel.setForeground(new Color(255, 255, 255));
-		playerNameLabel.setBounds(632, 304, 138, 25);
-		playerNameLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.DETAIL));
-		this.add(playerNameLabel);
-		
-		JLabel vsLabel = new JLabel("VS");
-		vsLabel.setForeground(new Color(255, 255, 255));
-		vsLabel.setBounds(782, 295, 36, 36);
-		vsLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
-		this.add(vsLabel);
-		
-		opponentNameLabel = new JLabel("Name");
-		opponentNameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		opponentNameLabel.setForeground(new Color(255, 255, 255));
-		opponentNameLabel.setBounds(836, 304, 139, 25);
-		opponentNameLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.DETAIL));
-		this.add(opponentNameLabel);
-		
-		resultsValueLabel1 = new JLabel("Battle Stats");
-		resultsValueLabel1.setForeground(new Color(255, 255, 255));
-		resultsValueLabel1.setBounds(1203, 382, 265, 16);
-		resultsValueLabel1.setEnabled(true);
-		add(resultsValueLabel1);
+		opponentTeamNameValueLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
+		GridBagConstraints gbc_opponentTeamNameValueLabel = new GridBagConstraints();
+		gbc_opponentTeamNameValueLabel.anchor = GridBagConstraints.NORTH;
+		gbc_opponentTeamNameValueLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_opponentTeamNameValueLabel.gridx = 5;
+		gbc_opponentTeamNameValueLabel.gridy = 2;
+		add(opponentTeamNameValueLabel, gbc_opponentTeamNameValueLabel);
 		
 		resultsValueLabel2 = new JLabel("Battle Stats");
+		resultsValueLabel2.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.SMALLERDETAIL));
+		resultsValueLabel2.setVerticalAlignment(SwingConstants.BOTTOM);
+		resultsValueLabel2.setHorizontalAlignment(SwingConstants.LEFT);
 		resultsValueLabel2.setForeground(new Color(255, 255, 255));
-		resultsValueLabel2.setBounds(149, 382, 285, 16);
 		resultsValueLabel2.setEnabled(true);
-		add(resultsValueLabel2);
+		GridBagConstraints gbc_resultsValueLabel2 = new GridBagConstraints();
+		gbc_resultsValueLabel2.gridwidth = 2;
+		gbc_resultsValueLabel2.anchor = GridBagConstraints.NORTH;
+		gbc_resultsValueLabel2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_resultsValueLabel2.insets = new Insets(0, 0, 5, 5);
+		gbc_resultsValueLabel2.gridx = 1;
+		gbc_resultsValueLabel2.gridy = 4;
+		add(resultsValueLabel2, gbc_resultsValueLabel2);
+		setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 		
-		playerHealthLabel = new JLabel("Health");
-		playerHealthLabel.setForeground(new Color(255, 255, 255));
-		playerHealthLabel.setBounds(139, 315, 41, 16);
-		add(playerHealthLabel);
-		
-		opponentHealthLabel = new JLabel("Health:");
-		opponentHealthLabel.setForeground(new Color(255, 255, 255));
-		opponentHealthLabel.setBounds(1270, 299, 45, 16);
-		add(opponentHealthLabel);
-		
-		playerHealthValueLabel = new JLabel("0");
-		playerHealthValueLabel.setForeground(new Color(255, 255, 255));
-		playerHealthValueLabel.setBounds(248, 315, 34, 16);
-		add(playerHealthValueLabel);
-		
-		OpponentHealthValueLabel = new JLabel("0");
-		OpponentHealthValueLabel.setForeground(new Color(255, 255, 255));
-		OpponentHealthValueLabel.setBounds(1334, 299, 68, 16);
-		add(OpponentHealthValueLabel);
+		resultsValueLabel1 = new JLabel("Battle Stats");
+		resultsValueLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
+		resultsValueLabel1.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.SMALLERDETAIL));
+		resultsValueLabel1.setForeground(new Color(255, 255, 255));
+		resultsValueLabel1.setEnabled(true);
+		GridBagConstraints gbc_resultsValueLabel1 = new GridBagConstraints();
+		gbc_resultsValueLabel1.gridwidth = 2;
+		gbc_resultsValueLabel1.anchor = GridBagConstraints.NORTH;
+		gbc_resultsValueLabel1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_resultsValueLabel1.insets = new Insets(0, 0, 5, 0);
+		gbc_resultsValueLabel1.gridx = 4;
+		gbc_resultsValueLabel1.gridy = 4;
+		add(resultsValueLabel1, gbc_resultsValueLabel1);
 		
 		battleButton = new JButton("BATTLE!");
-		battleButton.setForeground(new Color(254, 255, 255));
-		battleButton.setBounds(730, 619, 139, 40);
+		battleButton.setVerticalAlignment(SwingConstants.BOTTOM);
+		battleButton.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.SUBHEADING));
 		battleButton.setOpaque(false);
+		battleButton.setForeground(new Color(254, 255, 255));
 		battleButton.setFocusPainted(false);
-		battleButton.setBorderPainted(false);
 		battleButton.setContentAreaFilled(false);
-		super.setupButton(battleButton);
-		this.add(battleButton);
-		
-		nextMatchButton = new JButton("Next Round");
-		nextMatchButton.setForeground(new Color(254, 255, 255));
-		nextMatchButton.setBounds(704, 683, 193, 40);
-		nextMatchButton.setVisible(false);
-		nextMatchButton.setOpaque(false);
-		nextMatchButton.setFocusPainted(false);
-		nextMatchButton.setBorderPainted(false);
-		nextMatchButton.setContentAreaFilled(false);
-		setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-		super.setupButton(nextMatchButton);
-		this.add(nextMatchButton);
+		battleButton.setBorderPainted(false);
+		GridBagConstraints gbc_battleButton = new GridBagConstraints();
+		gbc_battleButton.insets = new Insets(0, 0, 0, 5);
+		gbc_battleButton.gridx = 3;
+		gbc_battleButton.gridy = 7;
+		add(battleButton, gbc_battleButton);
       
     }
 
-	/**
-	 * @return the playerNameLabel
-	 */
-	public JLabel getPlayerNameLabel() {
-		return playerNameLabel;
-	}
-
-	/**
-	 * @return the opponentNameLabel
-	 */
-	public JLabel getOpponentNameLabel() {
-		return opponentNameLabel;
-	}
 
 	/**
 	 * @return the battleButton
@@ -180,26 +153,14 @@ public final class MatchPanel extends BasePanel {
 		return battleButton;
 	}
 
-	/**
-	 * @return the nextMatchButton
-	 */
-	public JButton getNextMatchButton() {
-		return nextMatchButton;
-	}
 
 	/**
-	 * @return the resultsValueLabel
+	 * @return the resultsValueLabel1
 	 */
 	public JLabel getResultsValueLabel1() {
 		return resultsValueLabel1;
 	}
 
-	/**
-	 * @return the playerHealthValueLabel
-	 */
-	public JLabel getPlayerHealthValueLabel() {
-		return playerHealthValueLabel;
-	}
 
 	/**
 	 * @return the playerTeamNameValueLabel
@@ -208,6 +169,7 @@ public final class MatchPanel extends BasePanel {
 		return playerTeamNameValueLabel;
 	}
 
+
 	/**
 	 * @return the opponentTeamNameValueLabel
 	 */
@@ -215,12 +177,6 @@ public final class MatchPanel extends BasePanel {
 		return opponentTeamNameValueLabel;
 	}
 
-	/**
-	 * @return the opponentHealthValueLabel
-	 */
-	public JLabel getOpponentHealthValueLabel() {
-		return OpponentHealthValueLabel;
-	}
 
 	/**
 	 * @return the resultsValueLabel2
@@ -228,7 +184,16 @@ public final class MatchPanel extends BasePanel {
 	public JLabel getResultsValueLabel2() {
 		return resultsValueLabel2;
 	}
-    
-	
-    
+
+
+	/**
+	 * @return the roundValueLabel
+	 */
+	public JLabel getRoundValueLabel() {
+		return roundValueLabel;
+	}
+
+
+
+
 }

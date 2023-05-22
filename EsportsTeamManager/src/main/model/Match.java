@@ -551,6 +551,14 @@ public final class Match {
 	}
 
 	/**
+	 * @return the round
+	 */
+	public int getRound() {
+		return round;
+	}
+
+
+	/**
 	 * @return the outcome
 	 */
 	public int getOutcome() {
