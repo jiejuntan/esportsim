@@ -1,4 +1,4 @@
-package main.gui.club;
+package main.gui.home;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,31 +9,33 @@ import javax.swing.JLabel;
 
 import main.gui.GUIConstants;
 import main.gui.GameFrame;
+import main.gui.club.ClubDetailController;
+import main.gui.club.ClubDetailPanel;
 import main.model.Athlete;
 import main.model.Club;
 import main.model.Item;
 
 /**
- * Controller for athlete detail panel to confirm item use
+ * Controller for athlete detail panel to confirm training
  * 
  * @author Jiejun Tan
  *
  */
-public class UseAthleteDetailController extends ClubDetailController {
+public class TrainAthleteDetailController extends ClubDetailController {
 
 	/**
-	 * Item to use.
+	 * Item to use for training
 	 */
 	private Item item;
 	
 	/**
-	 * Constructor for athlete detail view to confirm item use
+	 * Constructor for athlete detail view to confirm training
 	 * 
 	 * @param frame 	game frame to manage navigation
 	 * @param athlete	Athlete to use on
-	 * @param item		Item to use
+	 * @param item		Item to use for training
 	 */
-	public UseAthleteDetailController(GameFrame frame, Athlete athlete, Item item) {
+	public TrainAthleteDetailController(GameFrame frame, Athlete athlete, Item item) {
 		super(frame, athlete);
 		this.item = item;
 		initializeAdditionalComponents();
@@ -125,7 +127,7 @@ public class UseAthleteDetailController extends ClubDetailController {
 				Club club = frame.getGame().getData().getClub();
 				club.useItem(item, athlete);
 				club.getInventory().remove(item);
-				toInventoryScreen();
+				toHomeScreen();
 			}
 		});
 	}
@@ -135,13 +137,13 @@ public class UseAthleteDetailController extends ClubDetailController {
 	 */
 	@Override
 	protected void toPreviousScreen() {
-		frame.toUseItemScreen(item);
+		frame.toTrainAthleteScreen();
 	}
 	
 	/**
-	 * Launches inventory screen after using item
+	 * Launches home screen after training.
 	 */
-	private void toInventoryScreen() {
-		frame.toInventoryScreen();
+	private void toHomeScreen() {
+		frame.toHomeScreen();
 	}
 }

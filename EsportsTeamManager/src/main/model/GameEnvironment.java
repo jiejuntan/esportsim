@@ -1,6 +1,7 @@
 package main.model;
 
 import main.exceptions.GameOverException;
+import main.exceptions.GameOverException.Type;
 
 /**
  * Model access point
@@ -41,10 +42,18 @@ public final class GameEnvironment {
     	stadium.updateMatches();
     	market.updateMarket(false);
     	
-    	//testing
+    	// IMPLEMENT RANDOM EVENTS THROW EXCEPTION IF OCCURS
+    	
+    	// If team has insufficient players, check if there are any available athletes the player can afford, otherwise end game
+    	if (data.getTeam().getMainTeamSize() < Team.MAIN_LIMIT) {
+    		if (market.getCheapestAthlete() == 0 || market.getCheapestAthlete() > data.getMoney()) {
+    			throw new GameOverException(Type.NO_TEAM_NO_MONEY);
+    		}
+    	}
+    	
+    	//testing stamina and removing athletes
     	if (data.getCurrentWeek() % 2 == 1) {
     		data.getTeam().dropStaminaAll();
-    		
     		data.getTeam().removeAthlete(data.getTeam().getMainMembers().get(0));
     	}
     	
