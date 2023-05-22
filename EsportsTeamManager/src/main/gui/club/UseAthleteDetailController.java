@@ -58,7 +58,10 @@ public class UseAthleteDetailController extends ClubDetailController {
 	 */
 	private void hideUnused() {
 		JButton nameButton = ((ClubDetailPanel) panel).getChangeNameButton();
-//		nameButton.removeActionListener(null);
+		ActionListener[] listeners = nameButton.getActionListeners();
+		for (ActionListener listener : listeners) {
+			nameButton.removeActionListener(listener);
+		}
 		JLabel editTipLabel = ((ClubDetailPanel) panel).getEditTipLabel();
 		editTipLabel.setVisible(false);
 		JComboBox roleComboBox = ((ClubDetailPanel) panel).getRoleComboBox();
