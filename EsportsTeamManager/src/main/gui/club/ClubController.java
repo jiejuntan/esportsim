@@ -18,7 +18,7 @@ import main.model.Team;
  * 
  * @author Jiejun Tan
  */
-public final class ClubController extends ThumbnailController {
+public class ClubController extends ThumbnailController {
 
 	/**
 	 * Constructor for club controller
@@ -49,7 +49,7 @@ public final class ClubController extends ThumbnailController {
 	/**
 	 * Sets title and subheadings of the screen based on team name.
 	 */
-	private void setTitle() {
+	protected void setTitle() {
 		JLabel titleLabel = ((ClubPanel) panel).getTitleLabel();
 		titleLabel.setText(String.format("Club of the %s", frame.getGame().getData().getTeam().getName()));
 	}
@@ -107,7 +107,7 @@ public final class ClubController extends ThumbnailController {
 	/**
 	 * Closes club screen and launches home screen.
 	 */
-	private void toPreviousScreen() {
+	protected void toPreviousScreen() {
 		frame.toHomeScreen();
 	}
 	
@@ -121,7 +121,7 @@ public final class ClubController extends ThumbnailController {
 	/**
 	 * Closes current screen and launches detailed view of selected athlete.
 	 */
-	private void toAthleteScreen(Athlete athlete) {
+	protected void toAthleteScreen(Athlete athlete) {
 		frame.toClubDetailScreen(athlete);
 	}
 }

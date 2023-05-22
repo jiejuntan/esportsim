@@ -91,15 +91,15 @@ public class ItemDetailController extends DetailController {
 		int negativeValue = item.getItem().getNegativeValue();
 		switch (negativeStat) {
 		case Item.REACTION_TIME:
-			reactionBonusLabel.setText("-" + String.valueOf(negativeValue));
+			reactionBonusLabel.setText(String.valueOf(negativeValue));
 			reactionBonusLabel.setForeground(GUIConstants.BONUS_DOWN);
 			break;
 		case Item.EYESIGHT:
-			eyesightBonusLabel.setText("-" + String.valueOf(negativeValue));
+			eyesightBonusLabel.setText(String.valueOf(negativeValue));
 			eyesightBonusLabel.setForeground(GUIConstants.BONUS_DOWN);
 			break;
 		case Item.INTELLIGENCE:
-			intelligenceBonusLabel.setText("-" + String.valueOf(negativeValue));
+			intelligenceBonusLabel.setText(String.valueOf(negativeValue));
 			intelligenceBonusLabel.setForeground(GUIConstants.BONUS_DOWN);
 			break;
 		default:
@@ -115,7 +115,7 @@ public class ItemDetailController extends DetailController {
 		confirmButton.setText("Use");
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {			
-				toPreviousScreen();
+				toUseItemScreen();
 			}
 		});
 	}
@@ -125,5 +125,12 @@ public class ItemDetailController extends DetailController {
 	 */
 	protected void toPreviousScreen() {
 		frame.toInventoryScreen();
+	}
+	
+	/**
+	 * Launches screen to pick an athlete to use item on
+	 */
+	private void toUseItemScreen() {
+		frame.toUseItemScreen(item);
 	}
 }

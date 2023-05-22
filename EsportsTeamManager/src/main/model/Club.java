@@ -28,13 +28,13 @@ public final class Club {
 		int positiveValue = item.getItem().getPositiveValue();
 		switch (positiveStat) {
 		case Item.REACTION_TIME:
-	       	 athlete.setReactionTime(athlete.getReactionTime() + positiveValue);
+	       	 athlete.setReactionTime(Math.min(100, athlete.getReactionTime() + positiveValue));
 			break;
 		case Item.EYESIGHT:
-	       	 athlete.setEyeSight(athlete.getEyeSight() + positiveValue);
+	       	 athlete.setEyeSight(Math.min(100, athlete.getEyeSight() + positiveValue));
 			break;
 		case Item.INTELLIGENCE:
-	       	 athlete.setIntelligence(athlete.getIntelligence() + positiveValue);
+	       	 athlete.setIntelligence(Math.min(100, athlete.getIntelligence() + positiveValue));
 			break;
 		default:
 			break;
@@ -43,13 +43,13 @@ public final class Club {
 		int negativeValue = item.getItem().getNegativeValue();
 		switch (negativeStat) {
 		case Item.REACTION_TIME:
-	       	 athlete.setReactionTime(athlete.getReactionTime() + negativeValue);
+	       	 athlete.setReactionTime(Math.min(100, athlete.getReactionTime() + negativeValue));
 			break;
 		case Item.EYESIGHT:
-	       	 athlete.setEyeSight(athlete.getEyeSight() + negativeValue);
+	       	 athlete.setEyeSight(Math.min(100, athlete.getEyeSight() + negativeValue));
 			break;
 		case Item.INTELLIGENCE:
-	       	 athlete.setIntelligence(athlete.getIntelligence() + negativeValue);
+	       	 athlete.setIntelligence(Math.min(100, athlete.getIntelligence() + negativeValue));
 			break;
 		default:
 			break;

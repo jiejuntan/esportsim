@@ -17,6 +17,7 @@ import main.model.Market;
 import main.model.GameData.Difficulty;
 
 /**
+ * Controller for purchasing items.
  * 
  * @author Jiejun Tan
  */
@@ -30,18 +31,14 @@ public class PurchaseItemDetailController extends ItemDetailController {
 	 */
 	public PurchaseItemDetailController(GameFrame frame, Item item) {
 		super(frame, item);
-		initialize();
+		initializeAdditionalComponents();
 	}
 	
 	/**
-	 * Initializes panel and components then launches panel.
+	 * Initializes additional components for this screen and relaunch.
 	 */
-	@Override
-	protected void initialize() {
-		// TODO Auto-generated method stub
-		super.initialize();
-		setPrice();
-		
+	protected void initializeAdditionalComponents() {
+		setPrice();		
 		super.launch();
 	}
 	
@@ -49,10 +46,13 @@ public class PurchaseItemDetailController extends ItemDetailController {
 	 * Sets the purchase price for the item.
 	 */
 	private void setPrice() {
+		JLabel priceLabel = ((ItemDetailPanel) panel).getPriceLabel();
+		priceLabel.setVisible(true);
 		Difficulty diff = frame.getGame().getData().getDifficulty();
 		int price = item.calculatePurchasePrice(diff.modifier);
 		JLabel itemValueLabel = ((ItemDetailPanel) panel).getPriceValueLabel();
 		itemValueLabel.setText("$" + String.valueOf(price));
+		itemValueLabel.setVisible(true);
 	}
 	
 	/**

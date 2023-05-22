@@ -13,31 +13,44 @@ import main.model.Item;
 import main.model.Market;
 import main.model.GameData.Difficulty;
 
+/**
+ * Controller for selling items.
+ * 
+ * @author Jiejun Tan
+ *
+ */
 public class SellItemDetailController extends ItemDetailController {
 
+	/**
+	 * Constructor for detail view when selling items.
+	 * 
+	 * @param frame 	game frame to manage navigation
+	 * @param item		Item to view
+	 */
 	public SellItemDetailController(GameFrame frame, Item item) {
 		super(frame, item);
-		// TODO Auto-generated constructor stub
+		initializeAdditionalComponents();
 	}
 
 	/**
-	 * Initializes panel and components then launches panel.
+	 * Initializes additional components for this screen and relaunch.
 	 */
-	@Override
-	protected void initialize() {
-		// TODO Auto-generated method stub
-		super.initialize();
-		setPrice();
+	protected void initializeAdditionalComponents() {
+		setPrice();		
+		super.launch();
 	}
 	
 	/**
 	 * Sets the purchase price for the item.
 	 */
 	private void setPrice() {
+		JLabel priceLabel = ((ItemDetailPanel) panel).getPriceLabel();
+		priceLabel.setVisible(true);
 		Difficulty diff = frame.getGame().getData().getDifficulty();
 		int price = item.calculatePurchasePrice(diff.modifier);
 		JLabel itemValueLabel = ((ItemDetailPanel) panel).getPriceValueLabel();
 		itemValueLabel.setText("$" + String.valueOf(price));
+		itemValueLabel.setVisible(true);
 	}	
 	
 	/**

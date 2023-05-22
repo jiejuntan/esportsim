@@ -26,12 +26,12 @@ import main.model.Team;
  * @author Jiejun Tan
  *
  */
-public final class ClubDetailController extends DetailController {
+public class ClubDetailController extends DetailController {
 
 	/**
 	 * Athlete currently in view.
 	 */ 
-	private Athlete athlete;
+	protected Athlete athlete;
 	
 	/**
 	 * Constructor when viewing team athlete
@@ -127,7 +127,7 @@ public final class ClubDetailController extends DetailController {
 	/**
 	 * Initializes confirm button to confirm changes or show dialog for errors
 	 */
-	private void initializeConfirmButton() {
+	protected void initializeConfirmButton() {
 		JButton confirmButton = ((ClubDetailPanel) panel).getConfirmButton();
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {			

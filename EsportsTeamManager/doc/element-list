@@ -1,4 +1,12 @@
+main.exceptions
 main.gui
-main.gui.controllers
-main.gui.panels
+main.gui.club
+main.gui.drafting
+main.gui.home
+main.gui.market
+main.gui.stadium
+main.gui.starting
+main.gui.subclassable
 main.model
+main.Resources
+test

@@ -14,6 +14,8 @@ import main.gui.club.ClubDetailController;
 import main.gui.club.ClubRoleSwapController;
 import main.gui.club.InventoryController;
 import main.gui.club.ItemDetailController;
+import main.gui.club.UseAthleteDetailController;
+import main.gui.club.UseItemController;
 import main.gui.drafting.DraftController;
 import main.gui.drafting.DraftDetailController;
 import main.gui.drafting.RoleSwapController;
@@ -150,6 +152,25 @@ public final class GameFrame {
 	 */
 	public void toItemDetailScreen(Item item) {
 		new ItemDetailController(this, item);
+	}
+	
+	/**
+	 * Launch the athlete picking screen to use items
+	 * 
+	 * @param item	item to use
+	 */
+	public void toUseItemScreen(Item item) {
+		new UseItemController(this, item);		
+	}
+	
+	/**
+	 * Launch the athlete detail screen to display bonus stats and confirm item use
+	 * 
+	 * @param athlete	Athlete to use item on 
+	 * @param item		Item to use
+	 */
+	public void toUseAthleteDetailController(Athlete athlete, Item item) {
+		new UseAthleteDetailController(this, athlete, item);		
 	}
 	
 	/**

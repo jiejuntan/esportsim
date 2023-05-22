@@ -26,12 +26,12 @@ public class BasePanel extends JPanel {
 	
 	protected void setupTitle(JLabel title) {
 		title.setHorizontalAlignment(SwingConstants.CENTER);
-		title.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.HEADING));
+		title.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.HEADING));
 	}
 	
 	protected void setupSubheading(JLabel subheading) {
 		subheading.setHorizontalAlignment(SwingConstants.CENTER);
-		subheading.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.SUBHEADING));
+		subheading.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.SUBHEADING));
 	}
 	
 	protected void setupButton(JButton button) {
@@ -39,7 +39,7 @@ public class BasePanel extends JPanel {
 		button.setPreferredSize(new Dimension(250, 50));
 		button.setFocusPainted(false);
 		button.setBackground(GUIConstants.COMPONENT);
-		button.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		button.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 	}
 	
 	protected void setupThumbnail(JButton button) {
