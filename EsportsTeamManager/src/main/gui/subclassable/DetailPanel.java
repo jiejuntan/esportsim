@@ -70,7 +70,7 @@ public class DetailPanel extends BasePanel {
 		changeNameButton.setFocusable(false);
 		changeNameButton.setHorizontalAlignment(SwingConstants.CENTER);
 		changeNameButton.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.HEADING));
-		changeNameButton.setPreferredSize(new Dimension(450, 85));		
+		changeNameButton.setPreferredSize(new Dimension(1000, 85));		
 		GridBagConstraints gbc_changeNameButton = new GridBagConstraints();
 		gbc_changeNameButton.gridwidth = 10;
 		gbc_changeNameButton.insets = new Insets(0, 0, 5, 0);
@@ -136,9 +136,8 @@ public class DetailPanel extends BasePanel {
 		gbc_reactionValueLabel.gridy = 4;
 		this.add(reactionValueLabel, gbc_reactionValueLabel);
 		
-		reactionBonusLabel = new JLabel("+5");
+		reactionBonusLabel = new JLabel("-");
 		reactionBonusLabel.setVisible(false);
-		reactionBonusLabel.setForeground(GUIConstants.BONUS_UP);
 		reactionBonusLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_reactionBonusLabel = new GridBagConstraints();
 		gbc_reactionBonusLabel.insets = new Insets(0, 0, 5, 5);
@@ -164,9 +163,8 @@ public class DetailPanel extends BasePanel {
 		gbc_eyesightValueLabel.gridy = 6;
 		this.add(eyesightValueLabel, gbc_eyesightValueLabel);
 		
-		eyesightBonusLabel = new JLabel("+5");
+		eyesightBonusLabel = new JLabel("-");
 		eyesightBonusLabel.setVisible(false);
-		eyesightBonusLabel.setForeground(GUIConstants.BONUS_UP);
 		eyesightBonusLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_eyesightBonusLabel = new GridBagConstraints();
 		gbc_eyesightBonusLabel.insets = new Insets(0, 0, 5, 5);
@@ -192,9 +190,8 @@ public class DetailPanel extends BasePanel {
 		gbc_intelligenceValueLabel.gridy = 8;
 		this.add(intelligenceValueLabel, gbc_intelligenceValueLabel);
 		
-		intelligenceBonusLabel = new JLabel("-5");
+		intelligenceBonusLabel = new JLabel("-");
 		intelligenceBonusLabel.setVisible(false);
-		intelligenceBonusLabel.setForeground(GUIConstants.BONUS_DOWN);
 		intelligenceBonusLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_intelligenceBonusLabel = new GridBagConstraints();
 		gbc_intelligenceBonusLabel.insets = new Insets(0, 0, 5, 5);
@@ -220,9 +217,8 @@ public class DetailPanel extends BasePanel {
 		gbc_staminaValueLabel.gridy = 10;
 		this.add(staminaValueLabel, gbc_staminaValueLabel);
 		
-		staminaBonusLabel = new JLabel("+5");
+		staminaBonusLabel = new JLabel("-");
 		staminaBonusLabel.setVisible(false);
-		staminaBonusLabel.setForeground(GUIConstants.BONUS_UP);
 		staminaBonusLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
 		GridBagConstraints gbc_staminaBonusLabel = new GridBagConstraints();
 		gbc_staminaBonusLabel.insets = new Insets(0, 0, 5, 5);

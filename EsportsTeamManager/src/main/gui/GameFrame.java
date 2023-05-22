@@ -21,7 +21,9 @@ import main.gui.home.HomeController;
 import main.gui.market.MarketController;
 import main.gui.market.MarketRoleSwapController;
 import main.gui.market.PurchaseAthleteDetailController;
+import main.gui.market.PurchaseItemDetailController;
 import main.gui.market.SellAthleteDetailController;
+import main.gui.market.SellItemDetailController;
 import main.gui.stadium.MatchController;
 import main.gui.stadium.StadiumController;
 import main.gui.stadium.StadiumTeamDetailsController;
@@ -182,6 +184,24 @@ public final class GameFrame {
 	 */
 	public void toSellAthleteDetailScreen(Athlete athlete) {
 		new SellAthleteDetailController(this, athlete);
+	}
+	
+	/**
+	 * Launch the detail screen to purchase an item
+	 * 
+	 * @param item	item to purchase
+	 */
+	public void toPurchaseItemDetailScreen(Item item) {
+		new PurchaseItemDetailController(this, item);
+	}
+	
+	/**
+	 * Launch the detail screen to sell an item
+	 * 
+	 * @param item	item to sell
+	 */
+	public void toSellItemDetailScreen(Item item) {
+		new SellItemDetailController(this, item);
 	}
 	
 	/**
