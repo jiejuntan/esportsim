@@ -64,6 +64,9 @@ public final class Team {
 	 */
 	public static final int MIN_TEAM_SIZE = 6;
 	
+	/**
+	 * Team logo image path
+	 */
 	private String logoPath;
 	
 	/** 
@@ -156,14 +159,47 @@ public final class Team {
 		this.wins = 0;
 		this.losses = 0;
     }
-
+    
+	/**
+	 * Returns a randomly picked role
+	 * 
+	 * @return Role
+	 */
+	static public Role getRandomRole(boolean includeReserve) {
+		Random random = new Random();
+	        
+        // Picks one of the three roles to assign to the Athlete
+        Role[] roles = Role.values();
+        
+        // if includeReserve is true then the reserve role is added 
+        // to the list of possible return values
+        if (includeReserve) {
+        	return roles[random.nextInt(4)];
+        } else {
+        	return roles[random.nextInt(3)];
+        }
+	}
+	
+	/**
+	 * Returns the total skill level of the team
+	 * 
+	 * @return <CODE>int</CODE> totalSkillLevel
+	 */
+	public int calculateTeamlevel() {
+		int totalSkillLevel = 0;
+		 
+		for (Athlete athlete : getMainMembers()) {
+			totalSkillLevel += athlete.calculateSkillLevel();
+		}
+		return totalSkillLevel;
+	}
+	
 	/**
 	 * Adds an new Athlete in a main role or reserve
 	 * 
 	 * @param athlete 					Athlete to add
 	 * @param role 						Role to add Athlete in
-	 * @throws IllegalTeamException 	if whole team or main team is full
-     * @throws IllegalTeamException 	if adding as reserve while main team is not full
+	 * @throws TeamLimitException 		if whole, main, or reserve team is full
 	 */
 	public void addAthlete(Athlete athlete, Role role) throws IllegalTeamException, TeamLimitException {
 		if (isTeamFull()) {
@@ -171,8 +207,8 @@ public final class Team {
 		}
 		switch (role) {
 		case RESERVE:
-			if (!isMainTeamFull()) {
-				throw new IllegalTeamException();
+			if (isReserveTeamFull()) {
+				throw new TeamLimitException(Type.RESERVE);
 			}
 			break;
 		default:
@@ -182,8 +218,7 @@ public final class Team {
 			break;
 		}
 		members.get(role).add(athlete);
-		athlete.setRole(role);
-		
+		athlete.setRole(role);	
 	}
 	
 	/**
@@ -240,220 +275,36 @@ public final class Team {
 		removeAthlete(incoming);
 		removeAthlete(outgoing);
 		
-		// Check which is in main role and add to main role first to avoid illegal team exception
 		try {
-			if (incomingRole != Role.RESERVE) {
-				addAthlete(outgoing, incomingRole);
-				addAthlete(incoming, outgoingRole);
-			} else {
-				addAthlete(incoming, outgoingRole);
-				addAthlete(outgoing, incomingRole);
-			}
+			addAthlete(incoming, outgoingRole);
+			addAthlete(outgoing, incomingRole);
 		} catch (TeamLimitException | IllegalTeamException e1) {
 			// Exception is unrecoverable
 			e1.printStackTrace();
 		}
 	}
-	
+
 	/**
-	 * Gets current size of starting team
-	 * 
-	 * @return number of athletes in main team
+	 * Resets the stamina of all athletes
 	 */
-	private int getMainTeamSize() {
-		int count = 0;
-		for (Role role: Role.values()) {
-			if (role != Role.RESERVE) {
-				List<Athlete> athletes = members.get(role);
-				count += athletes.size();
+	public void resetStaminaAll() {
+		for (Map.Entry<Role, List<Athlete>> entry : members.entrySet()) {
+			List<Athlete> athletesInRole = entry.getValue();
+			for (Athlete athlete : athletesInRole) {
+				athlete.resetStamina();
 			}
 		}
-		return count;
 	}
 	
-
-	/**
-	 * Returns a randomly picked role
-	 * 
-	 * @return Role
-	 */
-	static public Role getRandomRole(boolean includeReserve) {
-		Random random = new Random();
-	        
-        // Picks one of the three roles to assign to the Athlete
-        Role[] roles = Role.values();
-        
-        // if includeReserve is true then the reserve role is added 
-        // to the list of possible return values
-        if (includeReserve) {
-        	return roles[random.nextInt(4)];
-        } else {
-        	return roles[random.nextInt(3)];
-        }
-	}
-	
-    /**
-     * Sets logo path for Team and prevents reuse unless there are no remaining logos
-     */
-    private void setLogo() {
-    	if (availableLogos.size() == 0) {
-    		availableLogos = IntStream.range(0, GUIConstants.LOGO_COUNT).boxed().collect(Collectors.toCollection(ArrayList::new));
-    	}
-    	Random random = new Random();
-    	int index = random.nextInt(availableLogos.size());
-    	int portrait = availableLogos.get(index);
-    	availableLogos.remove(index);
-    	
-    	this.logoPath = "/main/Resources/logos/" + portrait + ".png";
-    }
-
-	
-	/**
-	 * Gets current size of reserve team
-	 * 
-	 * @return	number of athletes in reserve team
-	 */
-	private int getReserveTeamSize() {
-		return members.get(Role.RESERVE).size();
-	}
-	
-	/**
-	 * Checks if main team is full
-	 * 
-	 * @return	<code>true</code> if full
-	 */
-	public boolean isMainTeamFull() {
-		return getMainTeamSize() >= MAIN_LIMIT;
-	}
-	
-	/**
-	 * Checks if reserve team is full
-	 * 
-	 * @return	<code>true</code> if full
-	 */
-	public boolean isReserveTeamFull() {
-		return getReserveTeamSize() >= RESERVE_LIMIT;
-	}
-	
-	/**
-	 * Checks if entire team is full
-	 * 
-	 * @return	<code>true</code> if full
-	 */
-	public boolean isTeamFull() {
-		return isMainTeamFull() && isReserveTeamFull();
-	}
-	
-	/**
-	 * Checks if team has enough members
-	 * 
-	 * @return	<code>true</code> if minimum team size is met
-	 */
-	public boolean hasMinimumSize() {
-		return (getMainTeamSize() + getReserveTeamSize()) >= MIN_TEAM_SIZE;
-	}
-	
-	/**
-	 * Picks a random Team name from an inputed name list
-	 * 
-	 * @return Random Team Name
-	 */
-	private String getRandomTeamName() {
-
-		// Grabs a list of names
-		String[] namesList = null;
-		try {
-			namesList = IO.getTextFromFile("src/main/Resources/TeamNames");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		// Picks a random number
-		Random random = new Random();
-		int randomNumber = random.nextInt(namesList.length);
-
-		// Uses random number to pick a name out of the nameList
-		return namesList[randomNumber];
-	}
-
-	/**
-	 * Sets team name if valid
-	 * 
-	 * @param name name to set
-	 * 
-	 * @throws IllegalArgumentException if name is invalid
-	 */
-	public void setTeamName(String name) {
-		if (isValidTeamName(name)) {
-			this.name = name;
-		} else {
-			throw new IllegalArgumentException();
+	//testing
+	public void dropStaminaAll() {
+		for (Map.Entry<Role, List<Athlete>> entry : members.entrySet()) {
+			List<Athlete> athletesInRole = entry.getValue();
+			for (Athlete athlete : athletesInRole) {
+				athlete.setStamina(0);
+			}
 		}
 	}
-
-	/**
-	 * Checks if team name matches pattern
-	 * 
-	 * @param name team name to validate
-	 * @return <CODE>true</CODE> if team name is valid
-	 */
-	private boolean isValidTeamName(String name) {
-		return name.matches(VALID_NAME_PATTERN);
-	}
-	
-	/**
-	 * Returns the total skill level of the team
-	 * 
-	 * @return <CODE>int</CODE> totalSkillLevel
-	 */
-	public int calculateTeamlevel() {
-		int totalSkillLevel = 0;
-		 
-		for (Athlete athlete : getMainMembers()) {
-			totalSkillLevel += athlete.calculateSkillLevel();
-		}
-		return totalSkillLevel;
-	}
-
-
-    /********** Simple Getters & Setters **********/
-    
-    /**
-     * Gets the Team Wins
-     * 
-     * @return <CODE>int</CODE> Wins
-     */
-    public int getWins() {
-		return wins;
-	}
-
-	/**
-	 * Adds a single Win to the Team
-	 * 
-	 * @param <CODE>int</CODE> Wins
-	 */
-	public void addWin(int wins) {
-		this.wins++;
-	}
-
-	/**
-	 * Gets the Team Losses
-	 * 
-	 * @return <CODE>int</CODE> Losses
-	 */
-	public int getLosses() {
-		return losses;
-	}
-
-	/**
-	 * Adds a loss to the players team
-	 * 
-	 * @param <CODE>int</CODE> losses
-	 */
-	public void addLoss(int losses) {
-		this.losses++;
-	}
-
 	/**
 	 * Gets the Team main Athletes
 	 * 
@@ -495,11 +346,173 @@ public final class Team {
 	public String getName() {
 		return name;
 	}
+	
+	/**
+	 * Sets team name if valid
+	 * 
+	 * @param name name to set
+	 * 
+	 * @throws IllegalArgumentException if name is invalid
+	 */
+	public void setTeamName(String name) {
+		if (isValidTeamName(name)) {
+			this.name = name;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+    
+	/**
+	 * Checks if team name matches pattern
+	 * 
+	 * @param name team name to validate
+	 * @return <CODE>true</CODE> if team name is valid
+	 */
+	private boolean isValidTeamName(String name) {
+		return name.matches(VALID_NAME_PATTERN);
+	}
+	
+	/**
+	 * Picks a random Team name from an inputed name list
+	 * 
+	 * @return Random Team Name
+	 */
+	private String getRandomTeamName() {
 
+		// Grabs a list of names
+		String[] namesList = null;
+		try {
+			namesList = IO.getTextFromFile("src/main/Resources/TeamNames");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// Picks a random number
+		Random random = new Random();
+		int randomNumber = random.nextInt(namesList.length);
+
+		// Uses random number to pick a name out of the nameList
+		return namesList[randomNumber];
+	}
+	
 	/**
 	 * @return the logoPath
 	 */
 	public String getLogoPath() {
 		return logoPath;
 	}
+	
+	/**
+     * Sets logo path for Team and prevents reuse unless there are no remaining logos
+     */
+    private void setLogo() {
+    	if (availableLogos.size() == 0) {
+    		availableLogos = IntStream.range(0, GUIConstants.LOGO_COUNT).boxed().collect(Collectors.toCollection(ArrayList::new));
+    	}
+    	Random random = new Random();
+    	int index = random.nextInt(availableLogos.size());
+    	int portrait = availableLogos.get(index);
+    	availableLogos.remove(index);
+    	
+    	this.logoPath = "/main/Resources/logos/" + portrait + ".png";
+    }
+    
+    /**
+	 * Gets current size of starting team
+	 * 
+	 * @return number of athletes in main team
+	 */
+	private int getMainTeamSize() {
+		int count = 0;
+		for (Role role: Role.values()) {
+			if (role != Role.RESERVE) {
+				List<Athlete> athletes = members.get(role);
+				count += athletes.size();
+			}
+		}
+		return count;
+	}
+	
+	/**
+	 * Gets current size of reserve team
+	 * 
+	 * @return	number of athletes in reserve team
+	 */
+	private int getReserveTeamSize() {
+		return members.get(Role.RESERVE).size();
+	}
+	
+	/**
+	 * Checks if team has enough members
+	 * 
+	 * @return	<code>true</code> if minimum team size is met
+	 */
+	public boolean hasMinimumSize() {
+		return (getMainTeamSize() + getReserveTeamSize()) >= MIN_TEAM_SIZE;
+	}
+	
+	
+	/**
+	 * Checks if main team is full
+	 * 
+	 * @return	<code>true</code> if full
+	 */
+	public boolean isMainTeamFull() {
+		return getMainTeamSize() >= MAIN_LIMIT;
+	}
+	
+	/**
+	 * Checks if reserve team is full
+	 * 
+	 * @return	<code>true</code> if full
+	 */
+	public boolean isReserveTeamFull() {
+		return getReserveTeamSize() >= RESERVE_LIMIT;
+	}
+	
+	/**
+	 * Checks if entire team is full
+	 * 
+	 * @return	<code>true</code> if full
+	 */
+	public boolean isTeamFull() {
+		return isMainTeamFull() && isReserveTeamFull();
+	}
+	
+    /**
+     * Gets the Team Wins
+     * 
+     * @return <CODE>int</CODE> Wins
+     */
+    public int getWins() {
+		return wins;
+	}
+
+	/**
+	 * Adds a single Win to the Team
+	 * 
+	 * @param <CODE>int</CODE> Wins
+	 */
+	public void addWin(int wins) {
+		this.wins++;
+	}
+
+	/**
+	 * Gets the Team Losses
+	 * 
+	 * @return <CODE>int</CODE> Losses
+	 */
+	public int getLosses() {
+		return losses;
+	}
+
+	/**
+	 * Adds a loss to the players team
+	 * 
+	 * @param <CODE>int</CODE> losses
+	 */
+	public void addLoss(int losses) {
+		this.losses++;
+	}
+
 }

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import main.exceptions.GameOverException;
 import main.gui.GameFrame;
 import main.gui.subclassable.Controller;
 
@@ -71,9 +72,16 @@ public final class HomeController extends Controller {
 		});
 		
 		JButton endWeekButton = ((HomePanel) panel).getEndWeekButton();
-		marketButton.addActionListener(new ActionListener() {
+		endWeekButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// do something to advance week
+				try {
+					frame.getGame().advanceWeek();
+					initialize();
+				} catch (GameOverException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					// go to end game screen
+				}
 			}
 		});
 		

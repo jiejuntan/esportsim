@@ -1,5 +1,7 @@
 package main.model;
 
+import main.exceptions.GameOverException;
+
 /**
  * Data transfer object
  * 
@@ -134,15 +136,21 @@ public final class GameData {
      * @return current week
      */
 	public int getCurrentWeek() {
-		return this.currentWeek;
+		return currentWeek;
 	}
 	
 
 	/**
 	 * Moves current week forward.
+	 * 
+	 * @throws GameOverException if all weeks have passed
 	 */
-	public void nextWeek() {
-		currentWeek++;
+	public void nextWeek() throws GameOverException {
+		if (currentWeek < seasonDuration) {
+			currentWeek++;
+		} else {
+			throw new GameOverException();
+		}
 	}
 	
 	/**

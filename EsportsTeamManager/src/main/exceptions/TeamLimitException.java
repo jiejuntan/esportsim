@@ -10,7 +10,7 @@ public final class TeamLimitException extends Exception {
 	 *	Part of team that is full
 	 */
 	public enum Type {
-		WHOLE, MAIN
+		WHOLE, MAIN, RESERVE
 	}
 	private Type type;
 	

@@ -118,7 +118,8 @@ public class ClubDetailController extends DetailController {
 		intelligenceValueLabel.setText(String.valueOf(athlete.getIntelligence()));
 		
 		JLabel staminaValueLabel = ((ClubDetailPanel) panel).getStaminaValueLabel();
-		staminaValueLabel.setText(String.valueOf(athlete.getStamina()));
+		int stamina = athlete.getStamina();
+		staminaValueLabel.setText(Athlete.STAMINA_LEVELS[stamina]);
 		
 		JComboBox roleComboBox = ((ClubDetailPanel) panel).getRoleComboBox();
 		roleComboBox.setSelectedItem(athlete.getRole());

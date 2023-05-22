@@ -1,5 +1,7 @@
 package main.model;
 
+import main.exceptions.GameOverException;
+
 /**
  * Model access point
  */
@@ -31,10 +33,21 @@ public final class GameEnvironment {
     
     /**
      * Advances to next week in season and calls update methods.
+     * @throws GameOverException if all weeks have passed
      */
-    public void advanceWeek() {
+    public void advanceWeek() throws GameOverException {
     	data.nextWeek();
+    	data.getTeam().resetStaminaAll();
+    	stadium.updateMatches();
     	market.updateMarket(false);
+    	
+    	//testing
+    	if (data.getCurrentWeek() % 2 == 1) {
+    		data.getTeam().dropStaminaAll();
+    		
+    		data.getTeam().removeAthlete(data.getTeam().getMainMembers().get(0));
+    	}
+    	
     }
     
     /** 

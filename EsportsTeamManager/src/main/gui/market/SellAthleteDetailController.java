@@ -77,7 +77,8 @@ public class SellAthleteDetailController extends DetailController {
 		intelligenceValueLabel.setText(String.valueOf(athlete.getIntelligence()));
 		
 		JLabel staminaValueLabel = ((SellAthleteDetailPanel) panel).getStaminaValueLabel();
-		staminaValueLabel.setText(String.valueOf(athlete.getStamina()));
+		int stamina = athlete.getStamina();
+		staminaValueLabel.setText(Athlete.STAMINA_LEVELS[stamina]);
 		
 		Difficulty diff = frame.getGame().getData().getDifficulty();
 		int price = athlete.calculateSalePrice(diff.modifier);

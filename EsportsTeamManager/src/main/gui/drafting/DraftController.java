@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import main.exceptions.GameOverException;
 import main.gui.GameFrame;
 import main.gui.subclassable.ThumbnailController;
 import main.model.Athlete;
@@ -93,8 +94,13 @@ public final class DraftController extends ThumbnailController {
 	 * Starts the game.
 	 */
 	private void startGame() {
-		frame.getGame().advanceWeek();
-		toHomeScreen();
+		try {
+			frame.getGame().advanceWeek();
+			toHomeScreen();
+		} catch (GameOverException e) {
+			// Unrecoverable exception, current week should not exceed season duration
+			e.printStackTrace();
+		}
 	}
 	
 	/**
