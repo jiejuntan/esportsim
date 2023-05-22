@@ -207,6 +207,17 @@ public final class GameData {
 		return this.team;
 	}
 
+    
+
+	/**
+	 * Sets the team (Used for testing)
+	 * 
+	 * @param team the team to set
+	 */
+	public void setTeam(Team team) {
+		this.team = team;
+	}
+
 
 	/**
 	 * Calculates purchase price with Purchasable object

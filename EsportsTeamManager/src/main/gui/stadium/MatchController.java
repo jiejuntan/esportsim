@@ -60,7 +60,7 @@ public final class MatchController extends Controller {
 		battleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					//Do the battle Manouvers
-					match.simulateMatchup();
+					//match.simulateMatchup();
 					updateHealth();
 
 					if (isBattleover()) {

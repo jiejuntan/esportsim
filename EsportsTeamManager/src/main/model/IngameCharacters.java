@@ -16,11 +16,16 @@ public final class IngameCharacters {
     private int health;
     private int damage;
     private int aggroLevel;
+    private int lives;
 
     //AtheleStatisics
 	private int reactionTime;
     private int intelligence;
     private int stamina;
+    
+    //Used when restoring health have player has died
+    private int baseHealth;
+    
     
     private Role role;
     
@@ -28,11 +33,13 @@ public final class IngameCharacters {
 		this.name = athlete.getName();
 		this.role = role;
 		this.health = role.getHealth();
+		this.baseHealth = this.health;
 		this.damage = role.getDamage();
 		this.aggroLevel = role.getAggro();
 		this.reactionTime = athlete.getReactionTime();
 		this.intelligence = athlete.getIntelligence();
 		this.stamina = athlete.getStamina();
+		this.lives = 3;
 	}
 
 	/**
@@ -50,10 +57,12 @@ public final class IngameCharacters {
 	}
 
 	/**
+	 * Damge = Damge + Intelligence
+	 * 
 	 * @return the damage
 	 */
 	public int getDamage() {
-		return damage;
+		return damage + intelligence;
 	}
 
 	/**
@@ -91,12 +100,6 @@ public final class IngameCharacters {
 		this.reactionTime = reactionTime;
 	}
 
-	/**
-	 * @return the intelligence
-	 */
-	public int getIntelligence() {
-		return intelligence;
-	}
 
 	/**
 	 * @param intelligence the intelligence to set
@@ -132,6 +135,28 @@ public final class IngameCharacters {
 	public String getName() {
 		return name;
 	}
+
+	/**
+	 * @return the lives
+	 */
+	public int getLives() {
+		return lives;
+	}
+	
+	/**
+	 * @param lives the lives to set
+	 */
+	public void setLives(int lives) {
+		this.lives = lives;
+	}
+
+	/**
+	 * Resets the players health back to default
+	 */
+	public void resetHealth() {
+		this.health = this.baseHealth;
+	}
+	
 	
 	
 
