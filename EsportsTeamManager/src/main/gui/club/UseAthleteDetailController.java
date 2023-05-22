@@ -6,17 +6,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
-import main.exceptions.IllegalTeamException;
 import main.gui.GUIConstants;
 import main.gui.GameFrame;
 import main.model.Athlete;
 import main.model.Club;
 import main.model.Item;
-import main.model.Team;
-import main.model.Team.Role;
 
 /**
  * Controller for athlete detail panel to confirm item use

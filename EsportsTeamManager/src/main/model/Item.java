@@ -113,15 +113,4 @@ private TrainingItem equipment;
 		return (equipment.positiveValue + equipment.negativeValue) * 5;
 	}
 
-	/**
-	 * Sets the Equipments Description
-	 */
-	@Override
-	public void setDescription() {
-		super.description = String.format("The %s training equipment increases your athletes %s by %d points}", 
-										equipment.name, 
-										equipment.positiveStat, 
-										equipment.positiveValue );
-	}
-
 }

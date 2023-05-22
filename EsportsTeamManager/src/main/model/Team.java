@@ -409,16 +409,9 @@ public final class Team {
 	public int calculateTeamlevel() {
 		int totalSkillLevel = 0;
 		 
-		for (HashMap.Entry<Role, List<Athlete>> entry : members.entrySet()) {
-            // Get the list of Athletes for the current Role
-            List<Athlete> athletes = entry.getValue();
-
-            // Loop over all Athletes in the list
-            for (Athlete athlete : athletes) {
-            	totalSkillLevel += athlete.calculateSkillLevel();
-            }
-        }
-		
+		for (Athlete athlete : getMainMembers()) {
+			totalSkillLevel += athlete.calculateSkillLevel();
+		}
 		return totalSkillLevel;
 	}
 
@@ -508,12 +501,5 @@ public final class Team {
 	 */
 	public String getLogoPath() {
 		return logoPath;
-	}
-
-	/********** Simple Getters and Setters **********/
-
-	@Override
-	public String toString() {
-		return String.format("Team Name: %s \nWins: %d \nLosses: %d \n", name, wins, losses);
 	}
 }

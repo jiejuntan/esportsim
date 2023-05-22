@@ -1,5 +1,11 @@
 package main.model;
 
+/**
+ * Data transfer object
+ * 
+ * @author Jiejun Tan
+ *
+ */
 public final class GameData {
 	
 	/**
@@ -63,21 +69,10 @@ public final class GameData {
     	this.difficulty = Difficulty.EASY;
     	this.seasonDuration = 10;
     	this.currentWeek = 0;
-    	setStartingMoney(Difficulty.EASY);
+    	this.money = 0;
     	this.team = new Team();
     	this.club = new Club();
     }
-    
-    
-    /**
-     * Checks if season has started
-     * 
-     * @return	<CODE>true</CODE> if season has started
-     */
-    public boolean seasonHasStarted() {
-    	return getCurrentWeek() != 0;
-    }
-    
     
     /**
      * Gets difficulty
@@ -88,21 +83,18 @@ public final class GameData {
 		return this.difficulty;
 	}
     
-    
     /**
-     * Sets difficulty
+     * Sets difficulty and allocates starting money if starting a new game
      * 
      * @param difficulty	difficulty setting
      */
     public void setDifficulty(Difficulty difficulty) {
     	this.difficulty = difficulty;
-    	
-    	if (!seasonHasStarted()) {
-    		setStartingMoney(difficulty);
+    	if (currentWeek == 0) {
+        	setStartingMoney(difficulty);
     	}
     }
-
-    
+	
     /**
      * Gets season duration
      * 
@@ -110,9 +102,8 @@ public final class GameData {
      */
     public int getSeasonDuration() {
     	return this.seasonDuration;
-	}
-    
-    
+	}    
+
     /**
      * Sets season duration if valid
      * 
@@ -128,13 +119,6 @@ public final class GameData {
 	}
 	
 	/**
-	 * Moves current week forward.
-	 */
-	public void nextWeek() {
-		currentWeek++;
-	}
-	
-	/**
 	 * Checks if duration is valid
 	 * 
 	 * @param duration	season duration to validate
@@ -143,7 +127,6 @@ public final class GameData {
 	private boolean isValidDuration(int duration) {
 		return duration >= 5 && duration <= 15;
 	}
-	
 	
 	/**
      * Gets current week
@@ -154,6 +137,13 @@ public final class GameData {
 		return this.currentWeek;
 	}
 	
+
+	/**
+	 * Moves current week forward.
+	 */
+	public void nextWeek() {
+		currentWeek++;
+	}
 	
 	/**
 	 * Gets money available
@@ -164,7 +154,6 @@ public final class GameData {
 		return this.money;
 	}
 	
-	
 	/**
 	 * Sets starting money based on difficulty
 	 * 
@@ -173,7 +162,6 @@ public final class GameData {
 	public void setStartingMoney(Difficulty difficulty) {
 		this.money = difficulty.startingMoney;
 	}
-	
 	
 	/**
 	 * Increases money
@@ -189,7 +177,6 @@ public final class GameData {
 		}
 	}
 	
-	
 	/**
 	 * Deducts money
 	 * 
@@ -204,7 +191,6 @@ public final class GameData {
 		}
 	}
 	
-	
     /**
      * Gets team
      * 
@@ -214,25 +200,12 @@ public final class GameData {
 		return team;
 	}
 
-
 	/**
 	 * @return the club
 	 */
 	public Club getClub() {
 		return club;
 	}
-
-    
-
-	/**
-	 * Sets the team (Used for testing)
-	 * 
-	 * @param team the team to set
-	 */
-	public void setTeam(Team team) {
-		this.team = team;
-	}
-
 
 	/**
 	 * Calculates purchase price with Purchasable object
@@ -245,4 +218,14 @@ public final class GameData {
 		return purchase.getBasePrice() * getDifficulty().modifier;
 	}
     
+	
+	
+	/**
+	 * Sets the team (Used for testing)
+	 * 
+	 * @param team the team to set
+	 */
+	public void setTeam(Team team) {
+		this.team = team;
+	}
 }
