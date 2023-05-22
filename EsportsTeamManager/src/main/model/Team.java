@@ -69,7 +69,7 @@ public final class Team {
 	/** 
 	 * Static property storing unused portrait indexes
 	 */
-	private static List<Integer> availableLogos = IntStream.range(0, GUIConstants.PORTRAIT_COUNT).boxed().collect(Collectors.toCollection(ArrayList::new));
+	private static List<Integer> availableLogos = IntStream.range(0, GUIConstants.LOGO_COUNT).boxed().collect(Collectors.toCollection(ArrayList::new));
 	
 	/**
 	 * Defines the Athletes Roles and the stats of each role
@@ -294,7 +294,7 @@ public final class Team {
      */
     private void setLogo() {
     	if (availableLogos.size() == 0) {
-    		availableLogos = IntStream.range(0, GUIConstants.PORTRAIT_COUNT).boxed().collect(Collectors.toCollection(ArrayList::new));
+    		availableLogos = IntStream.range(0, GUIConstants.LOGO_COUNT).boxed().collect(Collectors.toCollection(ArrayList::new));
     	}
     	Random random = new Random();
     	int index = random.nextInt(availableLogos.size());

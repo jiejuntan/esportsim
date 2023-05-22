@@ -28,7 +28,7 @@ import main.gui.stadium.StadiumTeamDetailsController;
 import main.gui.starting.SetupController;
 import main.gui.starting.StartController;
 import main.model.Athlete;
-import main.model.Equipment;
+import main.model.Item;
 import main.model.GameEnvironment;
 import main.model.Team;
 
@@ -146,7 +146,7 @@ public final class GameFrame {
 	 * 
 	 * @param item	item to view
 	 */
-	public void toItemDetailScreen(Equipment item) {
+	public void toItemDetailScreen(Item item) {
 		new ItemDetailController(this, item);
 	}
 	

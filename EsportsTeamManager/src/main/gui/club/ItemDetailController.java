@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 
 import main.gui.GameFrame;
 import main.gui.subclassable.DetailController;
-import main.model.Equipment;
+import main.model.Item;
 import main.model.GameData.Difficulty;
 
 /**
@@ -22,7 +22,7 @@ public final class ItemDetailController extends DetailController {
 	/**
 	 * Item currently in view.
 	 */
-	private Equipment item;
+	private Item item;
 	
 	/**
 	 * Constructor for item detail controller
@@ -30,7 +30,7 @@ public final class ItemDetailController extends DetailController {
 	 * @param frame game frame to manage navigation
 	 * @param item	item to view
 	 */
-	public ItemDetailController(GameFrame frame, Equipment item) {
+	public ItemDetailController(GameFrame frame, Item item) {
 		super(frame);
 		this.item = item;
 		initialize();
@@ -58,7 +58,7 @@ public final class ItemDetailController extends DetailController {
 	 */
 	private void setTitle() {
 		JButton titleButton = ((ItemDetailPanel) panel).getChangeNameButton();
-		titleButton.setText(item.getEquipment().getName());
+		titleButton.setText(item.getItem().getName());
 	}
 	
 	/**
@@ -66,16 +66,16 @@ public final class ItemDetailController extends DetailController {
 	 */
 	private void setStats() {
 		JLabel reactionBonusLabel = ((ItemDetailPanel) panel).getReactionBonusLabel();
-		reactionBonusLabel.setText(String.valueOf(item.getEquipment().getValue()));
+		reactionBonusLabel.setText(String.valueOf(item.getItem().getPositiveValue()));
 		
 		JLabel eyesightBonusLabel = ((ItemDetailPanel) panel).getEyesightBonusLabel();
-		eyesightBonusLabel.setText(String.valueOf(item.getEquipment().getValue()));
+		eyesightBonusLabel.setText(String.valueOf(item.getItem().getPositiveValue()));
 		
 		JLabel intelligenceBonusLabel = ((ItemDetailPanel) panel).getIntelligenceBonusLabel();
-		intelligenceBonusLabel.setText(String.valueOf(item.getEquipment().getValue()));
+		intelligenceBonusLabel.setText(String.valueOf(item.getItem().getPositiveValue()));
 		
 		JLabel staminaBonusLabel = ((ItemDetailPanel) panel).getStaminaBonusLabel();
-		staminaBonusLabel.setText(String.valueOf(item.getEquipment().getValue()));
+		staminaBonusLabel.setText(String.valueOf(item.getItem().getPositiveValue()));
 		
 		Difficulty diff = frame.getGame().getData().getDifficulty();
 		int price = item.calculatePurchasePrice(diff.modifier);

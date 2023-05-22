@@ -36,7 +36,6 @@ public final class GUIConstants {
 	
 	// Athlete portraits
 	public static final int PORTRAIT_COUNT = 24;
-	public static final String PORTRAIT_PLACEHOLDER = "/main/Resources/athletePortraits/portrait_opaque_0.png";
 	
 	public static final Color PORTRAIT_BACKGROUND = new Color(203, 224, 255);
 	public static final Color PORTRAIT_BUTTON_ROLLOVER = new Color(203, 224, 255, 50);
@@ -49,6 +48,9 @@ public final class GUIConstants {
 	
 	// Team Logos
 	public static final int LOGO_COUNT = 15;
+	
+	// Items
+	public static final String ITEM_PLACEHOLDER = "/main/Resources/athletePortraits/portrait_opaque_0.png";
 	
 	// Color for bonus stats
 	public static final Color BONUS_UP = new Color(0, 128, 0);

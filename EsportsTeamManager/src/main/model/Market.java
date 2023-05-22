@@ -30,12 +30,12 @@ public final class Market {
     /**
      * List of available equipment for purchase
      */
-    private List<Equipment> availableEquipment;
+    private List<Item> availableItem;
     
     /**
      * List of purchased equipment for bookkeeping
      */
-    private List<Equipment> purchasedEquipment;
+    private List<Item> purchasedItem;
     
     
     /**
@@ -47,15 +47,15 @@ public final class Market {
     	this.data = data;
     	this.availableAthletes = new ArrayList<Athlete>();
     	this.purchasedAthletes = new ArrayList<Athlete>();
-    	this.availableEquipment = new ArrayList<Equipment>();
-    	this.purchasedEquipment = new ArrayList<Equipment>();
+    	this.availableItem = new ArrayList<Item>();
+    	this.purchasedItem = new ArrayList<Item>();
     	
     	updateMarket(true);
     }
 
     
     /**
-     * Clears the market and adds new Equipment and Athletes
+     * Clears the market and adds new Item and Athletes
      * 
      * @param isDrafting is in draft phase or in market
      */
@@ -75,9 +75,9 @@ public final class Market {
     	if (!isDrafting) {
     		maxCount = 3 + random.nextInt(3);
 	    	for (int count=0; count < maxCount; count++) {
-	    		Equipment trainingEquipment = new Equipment();
+	    		Item trainingItem = new Item();
 	    		
-	    		availableEquipment.add(trainingEquipment);
+	    		availableItem.add(trainingItem);
 	    	}
     	}
     }
@@ -113,7 +113,7 @@ public final class Market {
      * @return			<code>true</code> if purchased
      */
     public boolean isPurchased(Purchasable purchase) {
-    	return purchasedAthletes.contains(purchase) || purchasedEquipment.contains(purchase);
+    	return purchasedAthletes.contains(purchase) || purchasedItem.contains(purchase);
     }
     
     /**
@@ -147,11 +147,11 @@ public final class Market {
      * 
      * @return available items list
      */
-    public List<Equipment> getAvailableItems() {
-		return availableEquipment;
+    public List<Item> getAvailableItems() {
+		return availableItem;
 	}
 
-    public void purchaseItem(Equipment item) {}
+    public void purchaseItem(Item item) {}
 
     public void sellItem(Purchasable item) {}
     
@@ -161,8 +161,8 @@ public final class Market {
     public void clearMarket() {
     	availableAthletes.clear();
     	purchasedAthletes.clear();
-    	availableEquipment.clear();
-    	purchasedEquipment.clear();
+    	availableItem.clear();
+    	purchasedItem.clear();
     }
     
 }

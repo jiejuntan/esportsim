@@ -8,7 +8,7 @@ import javax.swing.JButton;
 
 import main.gui.GameFrame;
 import main.gui.subclassable.ThumbnailController;
-import main.model.Equipment;
+import main.model.Item;
 
 /**
  * Controller for player inventory.
@@ -47,11 +47,11 @@ public final class InventoryController extends ThumbnailController {
 	 * Gets player's inventory and calls the format button method for each item.
 	 */
 	private void setItems() {
-		List<Equipment> items = frame.getGame().getClub().getInventory();
+		List<Item> items = frame.getGame().getClub().getInventory();
 		List<JButton> itemButtons = ((InventoryPanel) panel).getThumbButtons();
 		
 		for (int i = 0; i < items.size(); i++) {
-			Equipment item = items.get(i);
+			Item item = items.get(i);
 			JButton button = itemButtons.get(i);
 			String path = item.getPortraitPath();
 			
@@ -90,7 +90,7 @@ public final class InventoryController extends ThumbnailController {
 	 * 
 	 * @param item	item to view
 	 */
-	private void toItemDetailScreen(Equipment item) {
+	private void toItemDetailScreen(Item item) {
 		frame.toItemDetailScreen(item);
 	}
 	
