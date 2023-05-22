@@ -3,20 +3,17 @@ package main.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.exceptions.InventoryLimitException;
+import main.gui.GUIConstants;
+
 public final class Club {
-	
-	/**
-	 * Data transfer object
-	 */
-	private GameData data;
 	
 	/**
 	 * Player inventory
 	 */
     private List<Item> inventory;
     
-    public Club(GameData data) {
-    	this.data = data;
+    public Club() {
     	this.inventory = new ArrayList<Item>();
     }
   
@@ -27,25 +24,36 @@ public final class Club {
      * @param athlete	Athlete to use item on
      */
     public void useItem(Item item, Athlete athlete) {
-    	String AffectedStat = item.getItem().getPositiveStat();
-    	int itemStatValue = item.getItem().getPositiveValue();
-    	
-    	 switch (AffectedStat) {
-         case "reactionTime":
-        	 athlete.setReactionTime(athlete.getReactionTime() + itemStatValue);
-             break;
-         case "eyeSight":
-        	 athlete.setEyeSight(athlete.getEyeSight() + itemStatValue);
-             break;
-         case "intelligence":
-        	 athlete.setIntelligence(athlete.getIntelligence() + itemStatValue);
-             break;
-         case "stamina":
-        	 athlete.setStamina(athlete.getStamina() + itemStatValue);
-             break;
-         default:
-             break;
-    	 }
+    	String positiveStat = item.getItem().getPositiveStat();
+		int positiveValue = item.getItem().getPositiveValue();
+		switch (positiveStat) {
+		case Item.REACTION_TIME:
+	       	 athlete.setReactionTime(athlete.getReactionTime() + positiveValue);
+			break;
+		case Item.EYESIGHT:
+	       	 athlete.setEyeSight(athlete.getEyeSight() + positiveValue);
+			break;
+		case Item.INTELLIGENCE:
+	       	 athlete.setIntelligence(athlete.getIntelligence() + positiveValue);
+			break;
+		default:
+			break;
+		}
+		String negativeStat = item.getItem().getNegativeStat();
+		int negativeValue = item.getItem().getNegativeValue();
+		switch (negativeStat) {
+		case Item.REACTION_TIME:
+	       	 athlete.setReactionTime(athlete.getReactionTime() + negativeValue);
+			break;
+		case Item.EYESIGHT:
+	       	 athlete.setEyeSight(athlete.getEyeSight() + negativeValue);
+			break;
+		case Item.INTELLIGENCE:
+	       	 athlete.setIntelligence(athlete.getIntelligence() + negativeValue);
+			break;
+		default:
+			break;
+		}
     }
     
     /**
@@ -60,10 +68,14 @@ public final class Club {
 	/**
      * Adds Item to the clubs inventory
      * 
-     * @param item equipment to add
+     * @param item item to add
+	 * @throws InventoryLimitException if inventory is full
      */
-    public void addToInventory(Item item) {
-    	inventory.add(item);
+    public void addItem(Item item) throws InventoryLimitException {
+    	if (inventory.size() < 5) {
+    		inventory.add(item);
+    	} else {
+    		throw new InventoryLimitException();
+    	}
     }
-
 }

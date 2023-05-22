@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import main.gui.GUIConstants;
 import main.gui.GameFrame;
 import main.gui.subclassable.DetailController;
 import main.model.Item;
-import main.model.GameData.Difficulty;
 
 /**
  * Controller for item detail view.
@@ -17,12 +17,12 @@ import main.model.GameData.Difficulty;
  * @author Jiejun Tan
  *
  */
-public final class ItemDetailController extends DetailController {
+public class ItemDetailController extends DetailController {
 	
 	/**
 	 * Item currently in view.
 	 */
-	private Item item;
+	protected Item item;
 	
 	/**
 	 * Constructor for item detail controller
@@ -48,7 +48,7 @@ public final class ItemDetailController extends DetailController {
 		setStats();
 		
 		super.initializeBackButton();
-		initializeUseButton();
+		initializeConfirmButton();
 		
 		super.launch();
 	}
@@ -62,32 +62,57 @@ public final class ItemDetailController extends DetailController {
 	}
 	
 	/**
-	 * Displays item's bonus stats and price
+	 * Displays item's bonus stats
 	 */
 	private void setStats() {
 		JLabel reactionBonusLabel = ((ItemDetailPanel) panel).getReactionBonusLabel();
-		reactionBonusLabel.setText(String.valueOf(item.getItem().getPositiveValue()));
-		
 		JLabel eyesightBonusLabel = ((ItemDetailPanel) panel).getEyesightBonusLabel();
-		eyesightBonusLabel.setText(String.valueOf(item.getItem().getPositiveValue()));
-		
 		JLabel intelligenceBonusLabel = ((ItemDetailPanel) panel).getIntelligenceBonusLabel();
-		intelligenceBonusLabel.setText(String.valueOf(item.getItem().getPositiveValue()));
-		
-		JLabel staminaBonusLabel = ((ItemDetailPanel) panel).getStaminaBonusLabel();
-		staminaBonusLabel.setText(String.valueOf(item.getItem().getPositiveValue()));
-		
-		Difficulty diff = frame.getGame().getData().getDifficulty();
-		int price = item.calculatePurchasePrice(diff.modifier);
-		JLabel itemValueLabel = ((ItemDetailPanel) panel).getPriceValueLabel();
-		itemValueLabel.setText("$" + String.valueOf(price));
+
+		String positiveStat = item.getItem().getPositiveStat();
+		int positiveValue = item.getItem().getPositiveValue();
+		switch (positiveStat) {
+		case Item.REACTION_TIME:
+			reactionBonusLabel.setText("+" + String.valueOf(positiveValue));
+			reactionBonusLabel.setForeground(GUIConstants.BONUS_UP);
+			break;
+		case Item.EYESIGHT:
+			eyesightBonusLabel.setText("+" + String.valueOf(positiveValue));
+			eyesightBonusLabel.setForeground(GUIConstants.BONUS_UP);
+			break;
+		case Item.INTELLIGENCE:
+			intelligenceBonusLabel.setText("+" + String.valueOf(positiveValue));
+			intelligenceBonusLabel.setForeground(GUIConstants.BONUS_UP);
+			break;
+		default:
+			break;
+		}
+		String negativeStat = item.getItem().getNegativeStat();
+		int negativeValue = item.getItem().getNegativeValue();
+		switch (negativeStat) {
+		case Item.REACTION_TIME:
+			reactionBonusLabel.setText("-" + String.valueOf(negativeValue));
+			reactionBonusLabel.setForeground(GUIConstants.BONUS_DOWN);
+			break;
+		case Item.EYESIGHT:
+			eyesightBonusLabel.setText("-" + String.valueOf(negativeValue));
+			eyesightBonusLabel.setForeground(GUIConstants.BONUS_DOWN);
+			break;
+		case Item.INTELLIGENCE:
+			intelligenceBonusLabel.setText("-" + String.valueOf(negativeValue));
+			intelligenceBonusLabel.setForeground(GUIConstants.BONUS_DOWN);
+			break;
+		default:
+			break;
+		}
 	}
 	
 	/**
 	 * Initializes use button to choose an athlete to use item on.
 	 */
-	private void initializeUseButton() {
+	protected void initializeConfirmButton() {
 		JButton confirmButton = ((ItemDetailPanel) panel).getConfirmButton();
+		confirmButton.setText("Use");
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {			
 				toPreviousScreen();
@@ -99,6 +124,6 @@ public final class ItemDetailController extends DetailController {
 	 * Returns to previous screen
 	 */
 	protected void toPreviousScreen() {
-		frame.toClubScreen();
+		frame.toInventoryScreen();
 	}
 }

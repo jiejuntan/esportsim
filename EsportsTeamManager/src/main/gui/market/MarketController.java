@@ -99,7 +99,7 @@ public final class MarketController extends ThumbnailController {
 	 * Sets purchasable items in buy more or sellable items in sell mode
 	 */
 	private void setItems() {
-		Club club = frame.getGame().getClub();
+		Club club = frame.getGame().getData().getClub();
 		Market market = frame.getGame().getMarket();
 		List<Item> items = isSelling ? club.getInventory() : market.getAvailableItems();
 		
@@ -171,9 +171,9 @@ public final class MarketController extends ThumbnailController {
 	 */
 	private void toItemScreen(Item item) {
 		if (isSelling) {
-			// TODO Auto-generated method stub
+			frame.toSellItemDetailScreen(item);
 		} else {
-			// TODO Auto-generated method stub
+			frame.toPurchaseItemDetailScreen(item);
 		}
 	}
 	

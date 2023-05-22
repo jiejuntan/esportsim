@@ -14,6 +14,11 @@ public final class Item extends Purchasable {
 
 private TrainingItem equipment;
 	
+	// Storing enum strings as constants to avoid typos
+	public static final String REACTION_TIME = "reactionTime";
+	public static final String EYESIGHT = "eyeSight";
+	public static final String INTELLIGENCE = "intelligence";
+	
     /**
      * Construct a random item
      */
@@ -29,17 +34,15 @@ private TrainingItem equipment;
 	 * This holds the data of the training items
 	 */
 	public enum TrainingItem {
-	    GAMING_CHAIR("Gaming Chair", "reactionTime", 1, "intelligence", -5),
-	    GAMING_KEYBOARD("Gaming Keyboard", "reactionTime", 1, "intelligence", -5),
-	    GAMING_MOUSE("Gaming Mouse", "intelligence", 1, "intelligence", -5),
-	    GAMING_HEADSET("Gaming Headset", "eyeSight", 1, "intelligence", -5),
-	    HIGH_PERFORMANCE_MONITOR("High Refresh Rate Monitor", "reactionTime", 1, "intelligence", -5),
-	    ENERGY_DRINK("Energy Drink", "stamina", 1, "intelligence", -5),
-	    FOCUS_BOOSTER("Focus Booster", "intelligence", 1, "intelligence", -5),
-	    VITAMIN_SUPPLEMENT("Vitamin Supplement", "eyeSight", 1, "intelligence", -5),
-	    HEALTHY_SNACK("Healthy Snack", "stamina", 1, "intelligence", -5),
-	    RECOVERY_SHAKE("Recovery Snack", "reactionTime", 1, "intelligence", -5);
+		VITAMINS("\"Vitamins\"", REACTION_TIME, 15, INTELLIGENCE, -5),
+		GAMING_HEADSET("Gaming Headset", EYESIGHT, 15, INTELLIGENCE, -5),
 
+		GAMING_CHAIR("Gaming Chair", EYESIGHT, 15, REACTION_TIME, -5),
+		HEALTHY_SNACK("Healthy Snack", INTELLIGENCE, 15, REACTION_TIME, -5),
+		
+		PERFORMANCE_MONITOR("Performance Monitor", REACTION_TIME, 15, EYESIGHT, -5),
+		GAMING_KEYBOARD("Gaming Keyboard", INTELLIGENCE, 15, EYESIGHT, -5),;
+		
 		private final String name;
 	    private final String positiveStat;
 	    private final int positiveValue;

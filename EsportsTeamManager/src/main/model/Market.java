@@ -6,8 +6,8 @@ import java.util.Random;
 
 import main.exceptions.IllegalFundsException;
 import main.exceptions.IllegalTeamException;
+import main.exceptions.InventoryLimitException;
 import main.exceptions.TeamLimitException;
-import main.exceptions.TeamLimitException.Type;
 import main.model.Team.Role;
 
 public final class Market {
@@ -30,12 +30,12 @@ public final class Market {
     /**
      * List of available equipment for purchase
      */
-    private List<Item> availableItem;
+    private List<Item> availableItems;
     
     /**
      * List of purchased equipment for bookkeeping
      */
-    private List<Item> purchasedItem;
+    private List<Item> purchasedItems;
     
     
     /**
@@ -47,8 +47,8 @@ public final class Market {
     	this.data = data;
     	this.availableAthletes = new ArrayList<Athlete>();
     	this.purchasedAthletes = new ArrayList<Athlete>();
-    	this.availableItem = new ArrayList<Item>();
-    	this.purchasedItem = new ArrayList<Item>();
+    	this.availableItems = new ArrayList<Item>();
+    	this.purchasedItems = new ArrayList<Item>();
     	
     	updateMarket(true);
     }
@@ -77,7 +77,7 @@ public final class Market {
 	    	for (int count=0; count < maxCount; count++) {
 	    		Item trainingItem = new Item();
 	    		
-	    		availableItem.add(trainingItem);
+	    		availableItems.add(trainingItem);
 	    	}
     	}
     }
@@ -113,7 +113,7 @@ public final class Market {
      * @return			<code>true</code> if purchased
      */
     public boolean isPurchased(Purchasable purchase) {
-    	return purchasedAthletes.contains(purchase) || purchasedItem.contains(purchase);
+    	return purchasedAthletes.contains(purchase) || purchasedItems.contains(purchase);
     }
     
     /**
@@ -148,12 +148,45 @@ public final class Market {
      * @return available items list
      */
     public List<Item> getAvailableItems() {
-		return availableItem;
+		return availableItems;
 	}
 
-    public void purchaseItem(Item item) {}
+    /**
+     * Purchases an item from the market.
+     * 
+     * @param item	item to purchase
+     * 
+     * @throws IllegalFundsException	if insufficient money
+     * @throws InventoryLimitException	if inventory is full
+     */
+    public void purchaseItem(Item item) throws IllegalFundsException, InventoryLimitException {
+    	int money = data.getMoney();
+		int price = item.calculatePurchasePrice(data.getDifficulty().modifier);
+		// Check money first then check inventory
+		if (money < price) {
+			throw new IllegalFundsException();
+		}
+		data.getClub().addItem(item);
+		data.deductMoney(price);
+		purchasedItems.add(item);
+    }
 
-    public void sellItem(Purchasable item) {}
+    /**
+     * Sells an item from the player's inventory.
+     * 
+     * @param item item to sell
+     */
+    public void sellItem(Purchasable item) {
+		int price = item.calculateSalePrice(data.getDifficulty().modifier);
+		
+		try {
+			data.incrementMoney(price);
+			data.getClub().getInventory().remove(item);
+		} catch (IllegalArgumentException e) {
+			// Price is negative, unrecoverable exception
+			e.printStackTrace();
+		}
+    }
     
     /**
      * Clears list of available athletes and equipment in market
@@ -161,8 +194,8 @@ public final class Market {
     public void clearMarket() {
     	availableAthletes.clear();
     	purchasedAthletes.clear();
-    	availableItem.clear();
-    	purchasedItem.clear();
+    	availableItems.clear();
+    	purchasedItems.clear();
     }
     
 }

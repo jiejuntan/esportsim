@@ -51,6 +51,12 @@ public final class GameData {
     private Team team;
     
     /**
+     * Club instance
+     */
+    private Club club;
+    
+    
+    /**
      * Constructor for GameData
      */
     public GameData() {
@@ -59,6 +65,7 @@ public final class GameData {
     	this.currentWeek = 0;
     	setStartingMoney(Difficulty.EASY);
     	this.team = new Team();
+    	this.club = new Club();
     }
     
     
@@ -204,7 +211,15 @@ public final class GameData {
      * @return	team
      */
     public Team getTeam() {
-		return this.team;
+		return team;
+	}
+
+
+	/**
+	 * @return the club
+	 */
+	public Club getClub() {
+		return club;
 	}
 
 

@@ -47,7 +47,7 @@ public final class InventoryController extends ThumbnailController {
 	 * Gets player's inventory and calls the format button method for each item.
 	 */
 	private void setItems() {
-		List<Item> items = frame.getGame().getClub().getInventory();
+		List<Item> items = frame.getGame().getData().getClub().getInventory();
 		List<JButton> itemButtons = ((InventoryPanel) panel).getThumbButtons();
 		
 		for (int i = 0; i < items.size(); i++) {

@@ -9,10 +9,7 @@ public final class GameEnvironment {
 	 * GameData instance
 	 */
 	private GameData data;
-    /**
-     * Club instance
-     */
-    private Club club;
+    
     /**
      * Stadium instance
      */
@@ -28,7 +25,6 @@ public final class GameEnvironment {
      */
     public GameEnvironment() {
     	this.data = new GameData();
-    	this.club = new Club(data);
     	this.stadium = new Stadium(data);
     	this.market = new Market(data);
     }
@@ -47,13 +43,6 @@ public final class GameEnvironment {
     public GameData getData() {
     	return data;
     }
-
-	/**
-	 * @return the club
-	 */
-	public Club getClub() {
-		return club;
-	}
 
 	/**
 	 * @return the stadium

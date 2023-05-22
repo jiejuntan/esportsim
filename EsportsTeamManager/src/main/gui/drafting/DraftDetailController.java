@@ -164,7 +164,7 @@ public class DraftDetailController extends DetailController {
 					switch 	(e3.getType()) {
 					case WHOLE:
 						JOptionPane.showMessageDialog(panel, 
-								"Your team is full.", 
+								"Your team is full. Please sell your athletes to draft " + athlete.getName() + ".", 
 								"Error", JOptionPane.ERROR_MESSAGE);
 						break;
 					case MAIN:
