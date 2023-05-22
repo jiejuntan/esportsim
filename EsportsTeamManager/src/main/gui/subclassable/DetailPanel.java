@@ -29,6 +29,7 @@ public class DetailPanel extends BasePanel {
 	private JFrame frame;
 	private JTextField nameTextField;
 	private JButton changeNameButton;
+	protected JLabel editTipLabel;
 	private JLabel portraitLabel;
 	
 	private JLabel reactionLabel;
@@ -44,17 +45,16 @@ public class DetailPanel extends BasePanel {
 	protected JLabel eyesightBonusLabel;
 	protected JLabel intelligenceBonusLabel;
 	protected JLabel staminaBonusLabel;
+	protected JLabel roleLabel;
 	protected JComboBox roleComboBox;
 	protected JLabel roleValueLabel;
+	protected JLabel priceLabel;
 	protected JLabel priceValueLabel;
 	
 	private JButton backButton;
 	protected JButton confirmButton;
 	
-	// Exposed components to toggle visibility in subclasses
-	protected JLabel editTipLabel;
-	protected JLabel roleLabel;
-	protected JLabel priceLabel;
+	// Exposed components to toggle visibility in subclasses	
 	
 	// Prevent instantiation without subclassing
 	protected DetailPanel() {
@@ -321,6 +321,13 @@ public class DetailPanel extends BasePanel {
 	}
 
 	/**
+	 * @return the editTipLabel
+	 */
+	public JLabel getEditTipLabel() {
+		return editTipLabel;
+	}
+
+	/**
 	 * @return the portraitLabel
 	 */
 	public JLabel getPortraitLabel() {
@@ -412,6 +419,13 @@ public class DetailPanel extends BasePanel {
 	}
 
 	/**
+	 * @return the roleLabel
+	 */
+	public JLabel getRoleLabel() {
+		return roleLabel;
+	}
+
+	/**
 	 * @return the roleComboBox
 	 */
 	public JComboBox getRoleComboBox() {
@@ -423,6 +437,13 @@ public class DetailPanel extends BasePanel {
 	 */
 	public JLabel getRoleValueLabel() {
 		return roleValueLabel;
+	}
+
+	/**
+	 * @return the priceLabel
+	 */
+	public JLabel getPriceLabel() {
+		return priceLabel;
 	}
 
 	/**
