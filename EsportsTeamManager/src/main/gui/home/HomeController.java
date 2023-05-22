@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import main.exceptions.GameOverException;
 import main.gui.GameFrame;
 import main.gui.subclassable.Controller;
+import main.model.GameData;
 
 /**
  * Controller for home screen.
@@ -35,21 +36,23 @@ public final class HomeController extends Controller {
 	@Override
 	protected void initialize() {
 		panel = new HomePanel();
-
+		
 		super.setMoney(((HomePanel) panel).getMoneyLabel());
+
+		GameData data = frame.getGame().getData();
 
 		JLabel weekLabel = ((HomePanel) panel).getWeekLabel();
 		weekLabel.setText(String.format("Week %d of %d", 
-				frame.getGame().getData().getCurrentWeek(),
-				frame.getGame().getData().getSeasonDuration()));
+				data.getCurrentWeek(),
+				data.getSeasonDuration()));
 		
 		JLabel winsLabel = ((HomePanel) panel).getWinsLabel();
 		winsLabel.setText(String.format("Wins: %d", 
-				frame.getGame().getData().getTeam().getWins()));
+				data.getTeam().getWins()));
 		
 		JLabel lossesLabel = ((HomePanel) panel).getLossesLabel();
 		lossesLabel.setText(String.format("Losses: %d", 
-				frame.getGame().getData().getTeam().getLosses()));
+				data.getTeam().getLosses()));
 		
 		JButton clubButton = ((HomePanel) panel).getClubButton();
 		clubButton.addActionListener(new ActionListener() {
@@ -59,17 +62,22 @@ public final class HomeController extends Controller {
 		});
 		
 		JButton stadiumButton = ((HomePanel) panel).getStadiumButton();
-		stadiumButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (frame.getGame().getData().getTeam().isMainTeamFull()) {
-					toStadiumScreen();
-				} else {
-					JOptionPane.showMessageDialog(panel, 
-							"You don't have a full starting team to play.", 
-							"Error", JOptionPane.ERROR_MESSAGE);
+		if ((data.getTeam().getWins() + data.getTeam().getLosses()) < data.getCurrentWeek()) {
+			stadiumButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if (data.getTeam().isMainTeamFull()) {
+						toStadiumScreen();
+					} else {
+						JOptionPane.showMessageDialog(panel, 
+								"You don't have a full starting team to play.", 
+								"Error", JOptionPane.ERROR_MESSAGE);
+					}
 				}
-			}
-		});
+			});
+		} else {
+			stadiumButton.setEnabled(false);
+		}
+		
 		
 		JButton marketButton = ((HomePanel) panel).getMarketButton();
 		marketButton.addActionListener(new ActionListener() {
@@ -91,9 +99,7 @@ public final class HomeController extends Controller {
 						toTrainAthleteScreen();
 					}
 				} catch (GameOverException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-					// go to end game screen
+					toGameOverScreen();
 				}
 			}
 		});
@@ -127,5 +133,9 @@ public final class HomeController extends Controller {
 	 */
 	private void toTrainAthleteScreen() {
 		frame.toTrainAthleteScreen();
+	}
+	
+	private void toGameOverScreen() {
+		frame.toGameOverScreen();
 	}
 }

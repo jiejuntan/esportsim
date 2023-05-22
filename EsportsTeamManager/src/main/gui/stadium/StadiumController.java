@@ -56,15 +56,12 @@ public final class StadiumController extends ThumbnailController {
 			String path = team.getLogoPath();
 			
 			super.formatButtonIcon(button, path);
-			
-			if (!stadium.isOpponentSelected()) {
-				button.setEnabled(true);
-				button.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						toTeamDetailsScreen(team);
-					}
-				});
-			}
+			button.setEnabled(true);
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					toTeamDetailsScreen(team);
+				}
+			});
 		}
 	}
 	

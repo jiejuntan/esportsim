@@ -4,62 +4,62 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import main.model.GameData.Difficulty;
-
+/**
+ * Generates weekly matches to play
+ * 
+ * @author Blake and Jun
+ *
+ */
 public final class Stadium {
 	
-    private List<Team> matches;
-    private Team opponent;
-    private GameData gameData;
-    
 	/**
-	 * Maximum number of main members
+	 * List of matches
 	 */
-	private static final int OPPONENT_LIMIT = 5;
-    
-    public Stadium(GameData gameData) {
-    	this.gameData = gameData;
-    	this.matches = new ArrayList<Team>();
-    	generateMatches(gameData.getDifficulty());
-    	this.opponent = new Team();
-    }
-    
-    
+    private List<Team> matches;
     /**
-     * The player should be able to choose a match to play.
-     * i. Your team can partake in a match only once.
-     * ii. If your team is not full you cannot participate in a match.
-     * iii. Ifallofaplayer’sathletesareinjuredtheycannolongercompete.
-     * iv. If all of a player’s athletes are injured during a match they lose the match and do not receive any money or points
-     * v. If a player wins a match (by having the highest score) they are rewarded with money and points
+     * Data transfer object
      */
-
+    private GameData data;
+    
+	/**
+	 * Maximum number of matches to display per week
+	 */
+	private static final int MATCH_LIMIT = 5;
+    
+	/**
+	 * Constructor for stadium
+	 * 
+	 * @param data data transfer object
+	 */
+    public Stadium(GameData data) {
+    	this.data = data;
+    	this.matches = new ArrayList<Team>();
+    	generateMatches();
+    }
 
 	/**
-     * Generantes 5 opponent teams to verse and add them to the matches list
-     * 
-     * @param difficulty
+     * Generates matches to play
      */
-    public void generateMatches(Difficulty difficulty) {
+    public void generateMatches() {
     	Random random = new Random();
-    	
-    	//Increases the opponent team difficulty based on the week
-    	int randomSkillIncrease = random.nextInt(0, 2 + gameData.getCurrentWeek());
-    	
-    	for (int opponentCount = 0; opponentCount < OPPONENT_LIMIT; opponentCount++) {
-    		Team opponent = new Team(difficulty.getModifier() + randomSkillIncrease);
+    	int randomSkillIncrease = random.nextInt(data.getCurrentWeek(), 2);
+    	for (int opponentCount = 0; opponentCount < MATCH_LIMIT; opponentCount++) {
+    		Team opponent = new Team(data.getDifficulty().getModifier() + randomSkillIncrease);
     		matches.add(opponent);
     	}
     }
     
+    /**
+     * Calculates a difficulty indicator for each match
+     * 
+     * @param opponentTeam	match opponent
+     * @return				difficulty string
+     */
     public String getDifficulty(Team opponentTeam) {
-    	int playerTeamLevel = gameData.getTeam().calculateTeamlevel();
+    	int playerTeamLevel = data.getTeam().calculateTeamlevel();
     	int opponentTeamLevel = opponentTeam.calculateTeamlevel();
     	
-    	System.out.println(playerTeamLevel);
-    	
     	int levelDifference = Math.abs(playerTeamLevel - opponentTeamLevel);
-    	
     	
     	if (levelDifference < 5) {
     		return "Easy";
@@ -70,7 +70,6 @@ public final class Stadium {
     	}
     }
 
-
 	/**
 	 * @return the matches
 	 */
@@ -78,14 +77,6 @@ public final class Stadium {
 		return matches;
 	}
 	
-	/**
-	 * Return where an opponent has been selected
-	 * @return <CODE>boolean</CODE> 
-	 */
-	public boolean isOpponentSelected() {
-		return opponent.isTeamFull();
-	}
-
 	/**
 	 * Clears match list to be repopulated every week
 	 */
@@ -97,8 +88,8 @@ public final class Stadium {
 	 * Generates new matches scaling with current week
 	 */
 	public void updateMatches() {
-		generateMatches(gameData.getDifficulty());
+		clearMatches();
+		generateMatches();
 	}
     
-
 }

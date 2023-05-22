@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import main.exceptions.IllegalTeamException;
 import main.exceptions.TeamLimitException;
 import main.exceptions.TeamLimitException.Type;
 import main.gui.GameFrame;

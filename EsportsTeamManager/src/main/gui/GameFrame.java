@@ -19,6 +19,7 @@ import main.gui.club.UseItemController;
 import main.gui.drafting.DraftController;
 import main.gui.drafting.DraftDetailController;
 import main.gui.drafting.RoleSwapController;
+import main.gui.gameover.EndController;
 import main.gui.home.HomeController;
 import main.gui.home.TrainAthleteController;
 import main.gui.home.TrainAthleteDetailController;
@@ -269,8 +270,8 @@ public final class GameFrame {
 	/**
 	 * Launch the end game screen.
 	 */
-	public void toEndgameScreen() {
-		
+	public void toGameOverScreen() {
+		new EndController(this);
 	}
 	
 	
