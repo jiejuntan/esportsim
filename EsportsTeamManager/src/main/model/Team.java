@@ -49,7 +49,7 @@ public final class Team {
 	/**
 	 * Maximum number of reserves
 	 */
-	private static final int RESERVE_LIMIT = 5;
+	public static final int RESERVE_LIMIT = 5;
 
 	/**
 	 * Maximum number of main members
