@@ -34,7 +34,7 @@ public class DetailPanel extends BasePanel {
 	
 	private JLabel reactionLabel;
 	private JLabel eyesightLabel;
-	private JLabel intelligenceLabel;
+	protected JLabel intelligenceLabel;
 	protected JLabel staminaLabel;
 	
 	protected JLabel reactionValueLabel;

@@ -13,8 +13,8 @@ public final class StadiumTeamDetailsPanel extends DetailPanel{
 	public StadiumTeamDetailsPanel() {
 		reactionValueLabel.setVisible(true);
 		eyesightValueLabel.setVisible(true);
-		intelligenceValueLabel.setVisible(true);
 		staminaValueLabel.setVisible(true);
+		intelligenceLabel.setVisible(false);
 	}
 
 }

@@ -131,33 +131,32 @@ public final class Team {
 	}
 
 	/**
-	 * Constructor for Opponent Team Generation
+	 * Constructor for opponent teams
 	 * 
-	 * @param difficulty
+	 * @param currentWeek current week
 	 */
-    public Team(int skillLevel) {
+    public Team(int currentWeek) {
         this.name = getRandomTeamName();
         this.members = new HashMap<Role, List<Athlete>>();
-
         for (Role role : Role.values()) {
             members.put(role, new ArrayList<Athlete>());
         }
-
+        Random random = new Random();
+		int randomSkillIncrease = Math.max(0, (int) random.nextGaussian(currentWeek - 2, 2));
+		
         for (int athleteCount = 0; athleteCount < MAIN_LIMIT; athleteCount++) {
 			try {
-				addAthlete(new Athlete(skillLevel),getRandomRole(false));
+				addAthlete(new Athlete(randomSkillIncrease),getRandomRole(false));
 			} catch (TeamLimitException e) {
 				// Exception is unrecoverable
 				e.printStackTrace();
 			}
 		}
-
         setLogo();
 
-        // Generate random wins and losses.
         Random rand = new Random();
-        this.wins = rand.nextInt(10); // Random wins from 0 to 9
-        this.losses = rand.nextInt(10); // Random losses from 0 to 9
+        this.wins = currentWeek > 1 ? rand.nextInt(currentWeek - 1) : 0; 
+        this.losses = currentWeek > 1 ? currentWeek - 1 - this.wins : 0;
     }
     
 	/**
@@ -181,9 +180,9 @@ public final class Team {
 	}
 	
 	/**
-	 * Returns the total skill level of the team
+	 * Returns the average skill level of the team
 	 * 
-	 * @return <CODE>int</CODE> totalSkillLevel
+	 * @return average skill level
 	 */
 	public int calculateTeamlevel() {
 		int totalSkillLevel = 0;
@@ -191,7 +190,7 @@ public final class Team {
 		for (Athlete athlete : getMainMembers()) {
 			totalSkillLevel += athlete.calculateSkillLevel();
 		}
-		return totalSkillLevel;
+		return totalSkillLevel / 5;
 	}
 	
 	/**

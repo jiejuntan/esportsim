@@ -16,7 +16,7 @@ public final class StadiumPanel extends ThumbnailPanel {
 		disableBottomThumbs();
 		backButton.setVisible(true);
 		subheadingLabel1.setVisible(true);
-		subheadingLabel1.setText("Select Your Opponent Team");
+		subheadingLabel1.setText("Select Your Opponent");
 	}
 
 }

@@ -65,10 +65,6 @@ public final class StadiumTeamDetailsController extends DetailController {
 		lossesLabel.setText("Losses: ");
 		lossesValueLabel.setText(String.valueOf(team.getLosses()));
 		
-		JLabel skillLevelLabel = ((StadiumTeamDetailsPanel) panel).getIntelligenceLabel();
-		JLabel skillLevelValueLabel = ((StadiumTeamDetailsPanel) panel).getIntelligenceValueLabel();
-		skillLevelLabel.setText("Total Skill Level: ");
-		skillLevelValueLabel.setText(String.valueOf(team.calculateTeamlevel()));
 		
 		JLabel difficultyLabel = ((StadiumTeamDetailsPanel) panel).getStaminaLabel();
 		JLabel difficultyValueLabel = ((StadiumTeamDetailsPanel) panel).getStaminaValueLabel();

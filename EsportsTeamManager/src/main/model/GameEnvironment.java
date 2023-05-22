@@ -52,10 +52,10 @@ public final class GameEnvironment {
     	}
     	
     	//testing stamina and removing athletes
-    	if (data.getCurrentWeek() % 2 == 1) {
-    		data.getTeam().dropStaminaAll();
-    		data.getTeam().removeAthlete(data.getTeam().getMainMembers().get(0));
-    	}
+//    	if (data.getCurrentWeek() % 2 == 1) {
+//    		data.getTeam().dropStaminaAll();
+//    		data.getTeam().removeAthlete(data.getTeam().getMainMembers().get(0));
+//    	}
     	
     }
     

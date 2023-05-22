@@ -34,18 +34,14 @@ public final class Stadium {
     public Stadium(GameData data) {
     	this.data = data;
     	this.matches = new ArrayList<Team>();
-    	generateMatches();
     }
 
 	/**
      * Generates matches to play
      */
     public void generateMatches() {
-    	Random random = new Random();
-    	int randomSkillIncrease = random.nextInt(data.getCurrentWeek(), 2);
     	for (int opponentCount = 0; opponentCount < MATCH_LIMIT; opponentCount++) {
-    		Team opponent = new Team(data.getDifficulty().getModifier() + randomSkillIncrease);
-    		matches.add(opponent);
+    		matches.add(new Team(data.getCurrentWeek()));
     	}
     }
     
@@ -59,15 +55,8 @@ public final class Stadium {
     	int playerTeamLevel = data.getTeam().calculateTeamlevel();
     	int opponentTeamLevel = opponentTeam.calculateTeamlevel();
     	
-    	int levelDifference = Math.abs(playerTeamLevel - opponentTeamLevel);
-    	
-    	if (levelDifference < 5) {
-    		return "Easy";
-    	} else if (levelDifference > 5 && levelDifference < 15) {
-    		return "Medium";
-    	} else {
-    		return "Hard";
-    	}
+    	double ratio = playerTeamLevel / opponentTeamLevel;
+    	return ratio >= 1 ? "Normal" : "Hard";
     }
 
 	/**
