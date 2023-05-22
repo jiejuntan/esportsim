@@ -36,7 +36,7 @@ public final class MatchController extends Controller {
 	@Override
 	protected void initialize() {
 		gameData = frame.getGame().getData();
-		match = new Match(gameData.getTeam(), opponent);
+		match = new Match(gameData, opponent);
 		panel = new MatchPanel();
 		displays();
 		resetRoundResults();

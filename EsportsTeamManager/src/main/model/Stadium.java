@@ -2,7 +2,6 @@ package main.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Generates weekly matches to play
