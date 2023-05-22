@@ -136,28 +136,29 @@ public final class Team {
 	 * 
 	 * @param difficulty
 	 */
-	public Team(int skillLevel) {
-		this.name = getRandomTeamName();
-		this.members = new HashMap<Role, List<Athlete>>();
-		
-		for (Role role : Role.values()) {
-			members.put(role, new ArrayList<Athlete>());
-		}
-		
-		for (int athleteCount = 0; athleteCount < MAIN_LIMIT; athleteCount++) {
-			try {
-				addAthlete(new Athlete(skillLevel),getRandomRole(false));
-			} catch (IllegalTeamException | TeamLimitException e) {
-				// Exception is unrecoverable
-				e.printStackTrace();
-			}
-		}
-		
-		this.logoPath = GUIConstants.ITEM_PLACEHOLDER;
-		
-		//setLogo();
-		this.wins = 0;
-		this.losses = 0;
+    public Team(int skillLevel) {
+        this.name = getRandomTeamName();
+        this.members = new HashMap<Role, List<Athlete>>();
+
+        for (Role role : Role.values()) {
+            members.put(role, new ArrayList<Athlete>());
+        }
+
+        for (int athleteCount = 0; athleteCount < MAIN_LIMIT; athleteCount++) {
+            try {
+                addAthlete(new Athlete(skillLevel),getRandomRole(false));
+            } catch (IllegalTeamException | TeamLimitException e) {
+                // Exception is unrecoverable
+                e.printStackTrace();
+            }
+        }
+
+        setLogo();
+
+        // Generate random wins and losses.
+        Random rand = new Random();
+        this.wins = rand.nextInt(10); // Random wins from 0 to 9
+        this.losses = rand.nextInt(10); // Random losses from 0 to 9
     }
     
 	/**

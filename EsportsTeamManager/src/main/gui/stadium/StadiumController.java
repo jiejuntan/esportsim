@@ -50,7 +50,7 @@ public final class StadiumController extends ThumbnailController {
 		 opponentTeams = stadium.getMatches();
 		 List<JButton> teamButtons = ((StadiumPanel) panel).getThumbButtons();
 		
-		for (int i = 0; i < opponentTeams.size(); i++) {
+		for (int i = 0; i < 5; i++) {
 			Team team = opponentTeams.get(i);
 			JButton button = teamButtons.get(i);
 			String path = team.getLogoPath();

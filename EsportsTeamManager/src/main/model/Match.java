@@ -28,6 +28,7 @@ public final class Match {
     
     private int opponentWins;
     private int homeWins;
+    private int roundWinner;
     
 
     private String homeResults;
@@ -38,6 +39,7 @@ public final class Match {
     public Match(GameData gameData, Team opponent) {
     	this.round = 0;
     	this.outcome = -1;
+    	this.roundWinner = 0;
     	
     	this.opponentWins = 0;
     	this.homeWins = 0;
@@ -118,14 +120,12 @@ public final class Match {
     	//Loops until all player of a team have been killed or all player in a team are out of stamina
     	do {
     		
-    		//Sets the fatest character to go first  FUCK UP BALANCE SOMEHOW
+    		//Sets the fatest character to go first  FUCKS UP BALANCE SOMEHOW
 //    		if (homePlayer.getReactionTime() >= opponentPlayer.getReactionTime()) {
 //    			this.teamTurn = 0;
 //    		} else {
 //    			this.teamTurn = 1;
 //    		}
-    		
-    		
     		
     		if (teamTurn % 2 == 0) {
     			
@@ -157,61 +157,8 @@ public final class Match {
     		
     		
     		this.teamTurn++;
-    		
-    		
-    		
-    		
-    		
-    		
-    		
-//    		//Player with the fastest reaction time goes first
-//    		if (homePlayer.getReactionTime() >= opponentPlayer.getReactionTime()) {
-//    			
-//    			//Player died select next opponent
-//    			if (!isPlayerAlive(homePlayer)) {
-//    				homePlayer = decideNextPlayer(homePlayer);
-//    			}
-//    			//Player goes first
-//    			action(homePlayer, getHighestAggrolAthlete(opponentTeam));
-//    			System.out.println(homeResults);
-//    			
-//    			//Opponent died select next opponent
-//    			if (!isPlayerAlive(opponentPlayer)) {
-//    				opponentPlayer = decideNextPlayer(opponentPlayer);
-//    			}
-//    			
-//    			//Opponent now attacks
-//    			action(opponentPlayer, getHighestAggrolAthlete(homeTeam));
-//    			System.out.println(opponentResults);
-//    			
-//    		} else {
-//    			
-//    			//Opponent died select next opponent
-//    			if (!isPlayerAlive(opponentPlayer)) {
-//    				opponentPlayer = decideNextPlayer(opponentPlayer);
-//    			}
-//    			//Opponent goes first
-//    			action(opponentPlayer, getHighestAggrolAthlete(homeTeam));
-//    			System.out.println(opponentResults);
-//    			
-//    			//player died select next player
-//    			if (!isPlayerAlive(homePlayer)) {
-//    				homePlayer = decideNextPlayer(homePlayer);
-//    			}
-//    			
-//    			//Player attacks
-//    			action(homePlayer, getHighestAggrolAthlete(opponentTeam));
-//    			System.out.println(homeResults);
-//    			
-//    		
-//    		}
-////    		Change the players for the next matchup
-//    		homePlayer = decideNextPlayer(homePlayer);
-//    		opponentPlayer = decideNextPlayer(opponentPlayer);
-//    		
+		
     	} while(!isRoundOver());
-    	
-
     	
     	//Checks to see if match over conditions are meet
     	if (isMatchOver() != -1) {
@@ -240,6 +187,7 @@ public final class Match {
 
     		this.opponentWins++;
     		this.round++;
+    		this.roundWinner = 0;
     		resetTeamsHealth();
     		return true;
     		
@@ -249,6 +197,7 @@ public final class Match {
 
     		this.homeWins++;
     		this.round++;
+    		this.roundWinner = 1;
     		resetTeamsHealth();
     		return true;
     	}

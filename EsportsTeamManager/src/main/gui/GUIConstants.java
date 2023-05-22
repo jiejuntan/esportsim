@@ -49,7 +49,7 @@ public final class GUIConstants {
 	public static final RoundClipBorder PORTRAIT_BORDER_LARGE = new RoundClipBorder(Color.BLACK, 2, 50);
 	
 	// Team Logos
-	public static final int LOGO_COUNT = 15;
+	public static final int LOGO_COUNT = 16;
 	
 	// Items
 	public static final String ITEM_PLACEHOLDER = "/main/Resources/athletePortraits/portrait_opaque_0.png";

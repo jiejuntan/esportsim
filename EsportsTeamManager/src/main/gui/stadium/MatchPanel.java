@@ -46,8 +46,8 @@ public final class MatchPanel extends BasePanel {
             e.printStackTrace();
         }
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{99, 285, 243, 350, 231, 265, 0};
-		gridBagLayout.rowHeights = new int[]{200, 71, 0, 16, 95, 16, 180, 40, 0};
+		gridBagLayout.columnWidths = new int[]{99, 417, 52, 350, 63, 409, 0};
+		gridBagLayout.rowHeights = new int[]{200, 71, 0, 16, 95, 16, 150, 40, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
@@ -106,7 +106,6 @@ public final class MatchPanel extends BasePanel {
 		resultsValueLabel2.setForeground(new Color(255, 255, 255));
 		resultsValueLabel2.setEnabled(true);
 		GridBagConstraints gbc_resultsValueLabel2 = new GridBagConstraints();
-		gbc_resultsValueLabel2.gridwidth = 2;
 		gbc_resultsValueLabel2.anchor = GridBagConstraints.NORTH;
 		gbc_resultsValueLabel2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_resultsValueLabel2.insets = new Insets(0, 0, 5, 5);
@@ -116,16 +115,15 @@ public final class MatchPanel extends BasePanel {
 		setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 		
 		resultsValueLabel1 = new JLabel("Battle Stats");
-		resultsValueLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
+		resultsValueLabel1.setHorizontalAlignment(SwingConstants.CENTER);
 		resultsValueLabel1.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.SMALLERDETAIL));
 		resultsValueLabel1.setForeground(new Color(255, 255, 255));
 		resultsValueLabel1.setEnabled(true);
 		GridBagConstraints gbc_resultsValueLabel1 = new GridBagConstraints();
-		gbc_resultsValueLabel1.gridwidth = 2;
 		gbc_resultsValueLabel1.anchor = GridBagConstraints.NORTH;
 		gbc_resultsValueLabel1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_resultsValueLabel1.insets = new Insets(0, 0, 5, 0);
-		gbc_resultsValueLabel1.gridx = 4;
+		gbc_resultsValueLabel1.gridx = 5;
 		gbc_resultsValueLabel1.gridy = 4;
 		add(resultsValueLabel1, gbc_resultsValueLabel1);
 		
