@@ -2,7 +2,6 @@ package main.model;
 
 import java.util.Random;
 
-import main.gui.GUIConstants;
 
 /**
  * Represents the items in the game.
