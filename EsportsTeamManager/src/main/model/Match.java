@@ -226,7 +226,7 @@ public final class Match {
      * @param currentPlayer 
      * @return <CODE>IngameCharacters</CODE> Next player up 
      */
-    public IngameCharacters decideNextPlayer(IngameCharacters currentPlayer) {
+    private IngameCharacters decideNextPlayer(IngameCharacters currentPlayer) {
     	IngameCharacters returnPlayer = null;
     	int playerIndex = 0;
     	
@@ -267,7 +267,7 @@ public final class Match {
      * @param Lists of Characters
      * @return Character with the highest Aggro that is still alive
      */
-    public IngameCharacters getHighestAggrolAthlete(List<IngameCharacters> characters) {
+    private IngameCharacters getHighestAggrolAthlete(List<IngameCharacters> characters) {
     	IngameCharacters highestAggroCharacter = decideNextPlayer(characters.get(0));
         
     	//Finds the character with the highest Aggro in the team
@@ -299,7 +299,7 @@ public final class Match {
      * @param currentCharacter
      * @param Target
      */
-    public void action(IngameCharacters currentPlayer, IngameCharacters target) {
+    private void action(IngameCharacters currentPlayer, IngameCharacters target) {
         Role role = currentPlayer.getRole();
         
         int damage = 0;
@@ -402,7 +402,7 @@ public final class Match {
      * @param IngameCharacters Team List
      * @return Total health of the team
      */
-    public int getTeamHealth(List<IngameCharacters> characters) {
+    private int getTeamHealth(List<IngameCharacters> characters) {
     	int totalHealth = 0;
     	for (IngameCharacters character : characters) {
     		totalHealth += character.getHealth();
@@ -416,7 +416,7 @@ public final class Match {
      * @param IngameCharacters Team List
      * @return Total stamina of the team
      */
-    public int getTeamStamina(List<IngameCharacters> characters) {
+    private int getTeamStamina(List<IngameCharacters> characters) {
     	int totalStamina = 0;
     	for (IngameCharacters character : characters) {
     		totalStamina += character.getStamina();

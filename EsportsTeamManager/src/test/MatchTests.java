@@ -4,49 +4,83 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import main.exceptions.TeamLimitException;
+import main.model.Athlete;
+import main.model.GameData;
 import main.model.Match;
 import main.model.Team;
+import main.model.Team.Role;
 
 class MatchTests {
 
-	 private Match match;
-	    private Team homeTeam;
-	    private Team opponentTeam;
+    private Match match;
+    private Team homeTeam;
+    private Team opponentTeam;
+    private GameData gameData;
 
-	    @BeforeEach
-	    void setUp() {
-	        homeTeam = new Team(3);
-	        opponentTeam = new Team(3);
-	        match = new Match(homeTeam, opponentTeam);
-	    }
-	    
-	    @Test
-	    void playGame() {
-	    	int outcome = -1;
-	    	do {
-	    	match.simulateRound();
-	    	outcome = match.getOutcome();
-	    	} while(outcome == -1);
-	    	
-	    	assertTrue(outcome == 1 || outcome == 0);
-	    	
-	    }
+    @BeforeEach
+    void setUp() {
+    	gameData = new GameData();
+        homeTeam = new Team();
+        opponentTeam = new Team();
+        match = new Match(gameData, opponentTeam);
+        
+        // Add athletes to the home team
+        for (int i = 0; i < Team.MAIN_LIMIT; i++) {
+            try {
+            	if(i< 2) {
+            		 homeTeam.addAthlete(new Athlete(gameData.getCurrentWeek()), Role.OFFENSE);
+            	} else if (i >= 2 && i < 4) {
+            		 homeTeam.addAthlete(new Athlete(gameData.getCurrentWeek()), Role.TANK);
+            	} else {
+            		 homeTeam.addAthlete(new Athlete(gameData.getCurrentWeek()), Role.SUPPORT);
+            	}
+               
+            } catch (TeamLimitException e) {
+                e.printStackTrace();
+            }
+        }
+        // Add athletes to the opponent team
+        for (int i = 0; i < Team.MAIN_LIMIT; i++) {
+            try {
+            if(i< 2) {
+            	opponentTeam.addAthlete(new Athlete(gameData.getCurrentWeek()), Role.OFFENSE);
+           	} else if (i >= 2 && i < 4) {
+           		opponentTeam.addAthlete(new Athlete(gameData.getCurrentWeek()), Role.TANK);
+           	} else {
+           		opponentTeam.addAthlete(new Athlete(gameData.getCurrentWeek()), Role.SUPPORT);
+           	}
+              
+            } catch (TeamLimitException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-	    @Test
-	    void createIngameCharacters() {
-	        // Checks if the ingame Characters got created
-	        assertFalse(match.getHomeTeam().isEmpty());
-	        assertFalse(match.getOpponentTeam().isEmpty());
-	    }
+    @Test
+    void testCreateIngameCharacters() {
+        match.createIngameCharacters(homeTeam, opponentTeam);
+        assertEquals(Team.MAIN_LIMIT, match.getHomeTeam().size());
+        assertEquals(Team.MAIN_LIMIT, match.getOpponentTeam().size());
+    }
 
-	    @Test
-	    void getTeamHealth() {
-	        int homeTeamHealth = match.getTeamHealth(match.getHomeTeam());
-	        int opponentTeamHealth = match.getTeamHealth(match.getOpponentTeam());
+    @Test
+    void testSimulateRound() {
 
-	        // Check if the health of the team is correct
-	        assertTrue(homeTeamHealth > 0);
-	        assertTrue(opponentTeamHealth > 0);
-	    }
+        match.createIngameCharacters(homeTeam, opponentTeam);
+        match.simulateRound();
+        assertTrue(match.getRound() > 0);
+    }
+
+    @Test
+    void testIsMatchOver() {
+
+        match.createIngameCharacters(homeTeam, opponentTeam);
+        match.simulateRound();
+        match.simulateRound();
+        match.simulateRound();
+        assertNotEquals(-1, match.isMatchOver());
+    }
 
 }

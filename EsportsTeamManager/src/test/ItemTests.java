@@ -8,7 +8,7 @@ import main.model.Item;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class EquipmentTests {
+public class ItemTests {
 
     private Item item;
 
