@@ -15,6 +15,9 @@ import main.model.Team.Role;
  */
 public final class Match {
 
+	private GameData data;
+	private Team opponent;
+	
     private int outcome;
     
     private List<IngameCharacters> homeTeam;
@@ -31,8 +34,10 @@ public final class Match {
     private String opponentResults;
     
     
-    
-    public Match(Team home, Team opponent) {
+    public Match(GameData data, Team opponent) {
+    	this.data = data;
+    	this.opponent = opponent;
+    	
     	this.round = 0;
     	this.outcome = -1;
     	this.roundWinner = 0;
@@ -45,9 +50,7 @@ public final class Match {
     	homeResults = "";
     	opponentResults = "";
     	
-    	createIngameCharacters(home, opponent);
-    	
-    	
+    	createIngameCharacters(data.getTeam(), opponent);
     };
     
     
@@ -55,20 +58,22 @@ public final class Match {
      * 
      * Converts the Athletes into their virtual Characters 
      * 
-     * @param home
-     * @param opponents
+     * @param home		player's Team
+     * @param opponents	opponent's Team
      */
     public void createIngameCharacters(Team home, Team opponents) {
     		
     	//Gets the players Team Members
     	for (Map.Entry<Role,  List<Athlete>> entry : home.getTeamMembers().entrySet()) {
+    	
     		//Gets the Athlete and Role from the team
     	    Role role = entry.getKey();
-    	    
-    	    for (Athlete athlete :  entry.getValue()) {
-    	    	//Create a new ingame character for each Athlete and adds to the matches homeTeam list
-        	    homeTeam.add(new IngameCharacters(athlete, role));
-    	    }  
+    	    if (role != Role.RESERVE) {
+    	    	for (Athlete athlete :  entry.getValue()) {
+        	    	//Create a new ingame character for each Athlete and adds to the matches homeTeam list
+            	    homeTeam.add(new IngameCharacters(athlete, role));
+        	    }  
+    	    }
     	}
     	
     	//Gets the players the Opponent Team 
@@ -139,10 +144,25 @@ public final class Match {
     	//Checks to see if match over conditions are meet
     	if (isMatchOver() != -1) {
     		this.outcome = isMatchOver();
+    		finishMatch();
     	}
 
     }
     	
+    /**
+     * Calls methods after match ends to update game
+     */
+    private void finishMatch() {
+    	if (this.outcome == 1) {
+			data.getTeam().addWin(1);
+			data.incrementMoney(opponent.calculateTeamlevel() * 5 * data.getDifficulty().getModifier());
+		} else {
+			data.getTeam().addLoss(1);
+		}
+    	for (IngameCharacters character : homeTeam) {
+    		character.getAthlete().setStamina(character.getStamina());
+    	}
+    }
     
     /**
      * Checks Both teams health to see if end of round conditions are meet

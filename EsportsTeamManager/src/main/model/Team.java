@@ -309,15 +309,6 @@ public final class Team {
 		}
 	}
 	
-	//testing
-	public void dropStaminaAll() {
-		for (Map.Entry<Role, List<Athlete>> entry : members.entrySet()) {
-			List<Athlete> athletesInRole = entry.getValue();
-			for (Athlete athlete : athletesInRole) {
-				athlete.setStamina(0);
-			}
-		}
-	}
 	/**
 	 * Gets the Team main Athletes
 	 * 
