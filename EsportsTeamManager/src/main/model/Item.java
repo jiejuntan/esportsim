@@ -27,34 +27,36 @@ private TrainingItem equipment;
         TrainingItem[] trainingItems = TrainingItem.values();
         int randomItemIndex = random.nextInt(trainingItems.length);
         this.equipment = trainingItems[randomItemIndex];
-        this.portraitPath = GUIConstants.ITEM_PLACEHOLDER;
+        this.portraitPath = "/main/Resources/items/" + equipment.getImgPath();
 	}
 	
 	/**
 	 * This holds the data of the training items
 	 */
 	public enum TrainingItem {
-		VITAMINS("\"Vitamins\"", REACTION_TIME, 15, INTELLIGENCE, -5),
-		GAMING_HEADSET("Gaming Headset", EYESIGHT, 15, INTELLIGENCE, -5),
+		VITAMINS("\"Vitamins\"", REACTION_TIME, 15, INTELLIGENCE, -5, "vitamins.png"),
+		GAMING_HEADSET("Gaming Headset", EYESIGHT, 15, INTELLIGENCE, -5, "headset.png"),
 
-		GAMING_CHAIR("Gaming Chair", EYESIGHT, 15, REACTION_TIME, -5),
-		HEALTHY_SNACK("Healthy Snack", INTELLIGENCE, 15, REACTION_TIME, -5),
+		GAMING_CHAIR("Gaming Chair", EYESIGHT, 15, REACTION_TIME, -5, "chair.png"),
+		HEALTHY_SNACK("Healthy Snack", INTELLIGENCE, 15, REACTION_TIME, -5, "snack.png"),
 		
-		PERFORMANCE_MONITOR("Performance Monitor", REACTION_TIME, 15, EYESIGHT, -5),
-		GAMING_KEYBOARD("Gaming Keyboard", INTELLIGENCE, 15, EYESIGHT, -5),;
+		PERFORMANCE_MONITOR("Performance Monitor", REACTION_TIME, 15, EYESIGHT, -5, "monitor.png"),
+		GAMING_KEYBOARD("Gaming Keyboard", INTELLIGENCE, 15, EYESIGHT, -5, "keyboard.png"),;
 		
 		private final String name;
 	    private final String positiveStat;
 	    private final int positiveValue;
 	    private final String negativeStat;
 	    private final int negativeValue;
+	    private final String imgPath;
 
-	    TrainingItem(String name, String positiveStat, int positiveValue, String negativeStat, int negativeValue) {
+	    TrainingItem(String name, String positiveStat, int positiveValue, String negativeStat, int negativeValue, String imgPath) {
 	    	this.name = name;
 	        this.positiveStat = positiveStat;
 	    	this.positiveValue = positiveValue;
 	        this.negativeStat = negativeStat;
 	        this.negativeValue = negativeValue;
+	        this.imgPath = imgPath;
 	    }
 	    
 	    /**
@@ -91,6 +93,15 @@ private TrainingItem equipment;
 		public int getNegativeValue() {
 			return negativeValue;
 		}
+
+		/**
+		 * @return the imgPath
+		 */
+		public String getImgPath() {
+			return imgPath;
+		}
+		
+		
 	}
 	
 
