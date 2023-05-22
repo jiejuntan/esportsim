@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import main.exceptions.IllegalTeamException;
+import main.exceptions.TeamLimitException;
+import main.exceptions.TeamLimitException.Type;
 import main.gui.GameFrame;
 import main.gui.subclassable.DetailController;
 import main.model.Team.Role;
@@ -143,9 +145,10 @@ public class ClubDetailController extends DetailController {
 					athlete.setName(newName);
 					team.changeRole(athlete, role);
 					toPreviousScreen();
-				} catch (IllegalTeamException e1) {
+				} catch (TeamLimitException e1) {
+					String targetRole = e1.getType() == Type.MAIN ? "main" : "reserve";
 					int shouldSwap = JOptionPane.showConfirmDialog(panel, 
-							"Choose a member to swap with or cancel.", 
+							"Your " + targetRole + " team is full. Choose a member to swap with or cancel.", 
 							"Error", JOptionPane.ERROR_MESSAGE);
 					if (shouldSwap == JOptionPane.YES_OPTION) {
 						toRoleSwapScreen(athlete);

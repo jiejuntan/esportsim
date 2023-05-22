@@ -157,26 +157,38 @@ public class DraftDetailController extends DetailController {
 					JOptionPane.showMessageDialog(panel, 
 							"You don't have enough money.", 
 							"Error", JOptionPane.ERROR_MESSAGE);
-				} catch (IllegalTeamException e2) {
-					JOptionPane.showMessageDialog(panel, 
-							"You need to have a full starting team of " + Team.MAIN_LIMIT + " before assigning reserves.", 
-							"Error", JOptionPane.ERROR_MESSAGE);
-				} catch (TeamLimitException e3) {
-					switch 	(e3.getType()) {
+				} catch (TeamLimitException e2) {
+					int shouldSwap;
+					switch 	(e2.getType()) {
 					case WHOLE:
 						JOptionPane.showMessageDialog(panel, 
 								"Your team is full. Please sell your athletes to draft " + athlete.getName() + ".", 
 								"Error", JOptionPane.ERROR_MESSAGE);
 						break;
 					case MAIN:
-						int shouldSwap = JOptionPane.showConfirmDialog(panel, 
+						shouldSwap = JOptionPane.showConfirmDialog(panel, 
 								"Your main team is full.\nDo you want to replace a current starting member?\n\nYou may also return and assign the new member as a reserve.", 
 								"Error", JOptionPane.ERROR_MESSAGE);
 						if (shouldSwap == JOptionPane.YES_OPTION) {
 							try {
 								market.purchaseAthlete(athlete, Role.RESERVE, newName);
 								toRoleSwapScreen(athlete);
-							} catch (IllegalFundsException | TeamLimitException | IllegalTeamException e1) {
+							} catch (IllegalFundsException | TeamLimitException e1) {
+								// Unrecoverable exception
+								e1.printStackTrace();
+							}
+						}
+						break;
+					case RESERVE:
+						shouldSwap = JOptionPane.showConfirmDialog(panel, 
+								"Your reserve team is full.\nDo you want to replace a current reserve member?\n\nYou may also return and assign the new member a main role.", 
+								"Error", JOptionPane.ERROR_MESSAGE);
+						if (shouldSwap == JOptionPane.YES_OPTION) {
+							try {
+								market.purchaseAthlete(athlete, Team.getRandomRole(false), newName);
+								toRoleSwapScreen(athlete);
+							} catch (IllegalFundsException | TeamLimitException e1) {
+								// Unrecoverable exception
 								e1.printStackTrace();
 							}
 						}

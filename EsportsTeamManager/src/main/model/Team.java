@@ -147,7 +147,7 @@ public final class Team {
 		for (int athleteCount = 0; athleteCount < MAIN_LIMIT; athleteCount++) {
 			try {
 				addAthlete(new Athlete(skillLevel),getRandomRole(false));
-			} catch (IllegalTeamException | TeamLimitException e) {
+			} catch (TeamLimitException e) {
 				// Exception is unrecoverable
 				e.printStackTrace();
 			}
@@ -201,7 +201,7 @@ public final class Team {
 	 * @param role 						Role to add Athlete in
 	 * @throws TeamLimitException 		if whole, main, or reserve team is full
 	 */
-	public void addAthlete(Athlete athlete, Role role) throws IllegalTeamException, TeamLimitException {
+	public void addAthlete(Athlete athlete, Role role) throws TeamLimitException {
 		if (isTeamFull()) {
 			throw new TeamLimitException(Type.WHOLE);
 		}
@@ -241,22 +241,36 @@ public final class Team {
 	 * 
 	 * @param athlete 				Athlete to assign
 	 * @param role    				Role to assign to
-	 * @throws IllegalTeamException if swapping between main and reserve
+	 * @throws TeamLimitException 	if target role (main/reserve) is full
 	 */
-	public void changeRole(Athlete athlete, Role role) throws IllegalTeamException {
-		// Do nothing if same role
+	public void changeRole(Athlete athlete, Role role) throws TeamLimitException {
+		// Do nothing if source and target roles are the same
 		if (athlete.getRole() == role) {
 			return;
-		} 
-		// Throw exception to prompt swap if swapping between main and reserve
-		if (athlete.getRole() == Role.RESERVE || role == Role.RESERVE) {
-			throw new IllegalTeamException();
 		}
-		// Swapping between main roles should be legal
+		// Changing to and from a main role should be legal
+		if (role != Role.RESERVE && athlete.getRole() != Role.RESERVE) {
+			try {
+				removeAthlete(athlete);
+				addAthlete(athlete, role);
+				return;
+			} catch (TeamLimitException e) {
+				// Unrecoverable exception
+				e.printStackTrace();
+			}
+		}
+		// If changing between main and reserve roles, check if full to initiate swap
+		if (role == Role.RESERVE && isReserveTeamFull()) {
+			throw new TeamLimitException(Type.RESERVE);
+		}
+		if (role != Role.RESERVE && isMainTeamFull()) {
+			throw new TeamLimitException(Type.MAIN);
+		}
+		// Target role is not full, changing role should be legal without swapping
 		try {
 			removeAthlete(athlete);
 			addAthlete(athlete, role);
-		} catch (IllegalTeamException | TeamLimitException e) {
+		} catch (TeamLimitException e) {
 			// Unrecoverable exception
 			e.printStackTrace();
 		}
@@ -278,7 +292,7 @@ public final class Team {
 		try {
 			addAthlete(incoming, outgoingRole);
 			addAthlete(outgoing, incomingRole);
-		} catch (TeamLimitException | IllegalTeamException e1) {
+		} catch (TeamLimitException e1) {
 			// Exception is unrecoverable
 			e1.printStackTrace();
 		}
