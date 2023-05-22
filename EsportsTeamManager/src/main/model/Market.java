@@ -90,7 +90,7 @@ public final class Market {
      * @throws TeamLimitException 		if whole team or main team is full
      * @throws IllegalTeamException 	if adding as reserve while main team is not full
      */
-    public void purchaseAthlete(Athlete athlete, Role role, String newName) throws IllegalFundsException, TeamLimitException, IllegalTeamException {
+    public void purchaseAthlete(Athlete athlete, Role role, String newName) throws IllegalFundsException, TeamLimitException {
     	int money = data.getMoney();
 		int price = athlete.calculatePurchasePrice(data.getDifficulty().modifier);
 		// Check money first then check team

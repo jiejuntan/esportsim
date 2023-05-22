@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-
-import main.model.GameData.Difficulty;
 import main.model.Team.Role;
 
 /**
@@ -17,8 +15,6 @@ import main.model.Team.Role;
  */
 public final class Match {
 
-    private Difficulty difficulty;
-    private int rewardMoney;
     private int outcome;
     
     private List<IngameCharacters> homeTeam;
@@ -36,34 +32,23 @@ public final class Match {
     
     
     
-    public Match(GameData gameData, Team opponent) {
+    public Match(Team home, Team opponent) {
     	this.round = 0;
     	this.outcome = -1;
     	this.roundWinner = 0;
     	
     	this.opponentWins = 0;
     	this.homeWins = 0;
-    	
-    	this.difficulty = gameData.getDifficulty();
-    	calculateRewards(difficulty.getModifier());
-    	
+
     	homeTeam = new ArrayList<IngameCharacters>();
     	opponentTeam = new ArrayList<IngameCharacters>();
     	homeResults = "";
     	opponentResults = "";
     	
-    	createIngameCharacters(gameData.getTeam(), opponent);
+    	createIngameCharacters(home, opponent);
     	
     	
     };
-    
-    
-    // Win conditions
-    //- other team looses all focus
-    // team wins 2/3 rounds
-    
-    
-    
     
     
     /**
@@ -74,8 +59,7 @@ public final class Match {
      * @param opponents
      */
     public void createIngameCharacters(Team home, Team opponents) {
-    	
-    	
+    		
     	//Gets the players Team Members
     	for (Map.Entry<Role,  List<Athlete>> entry : home.getTeamMembers().entrySet()) {
     		//Gets the Athlete and Role from the team
@@ -84,9 +68,7 @@ public final class Match {
     	    for (Athlete athlete :  entry.getValue()) {
     	    	//Create a new ingame character for each Athlete and adds to the matches homeTeam list
         	    homeTeam.add(new IngameCharacters(athlete, role));
-    	    }
-    	    
-    	    
+    	    }  
     	}
     	
     	//Gets the players the Opponent Team 
@@ -98,17 +80,13 @@ public final class Match {
     	    	//Create a new ingame character for each Athlete and adds to the matches homeTeam list
     	    	opponentTeam.add(new IngameCharacters(athlete, role));
     	    }
-    	    
     	}
     	
+    	//Sorts teams so chracters with the highest reaction time is at the start of the lists
     	homeTeam.sort(Comparator.comparing(IngameCharacters::getReactionTime).reversed());
     	opponentTeam.sort(Comparator.comparing(IngameCharacters::getReactionTime).reversed());
     	
     }
-    
-    
-    
-  
 
     /**
      * Simulates a round between both teams
@@ -138,7 +116,6 @@ public final class Match {
     			action(homePlayer, getHighestAggrolAthlete(opponentTeam));
     			//Next players turn
     			homePlayer = decideNextPlayer(homePlayer);
-    			System.out.println(homeResults);
     			
 
     		} else {
@@ -152,7 +129,6 @@ public final class Match {
     			action(opponentPlayer, getHighestAggrolAthlete(homeTeam));
     			//Next players turn
     			opponentPlayer = decideNextPlayer(opponentPlayer);
-    			System.out.println(opponentResults);
     		}
     		
     		
@@ -217,11 +193,11 @@ public final class Match {
     	int opponentTeamStamina = getTeamStamina(opponentTeam);
     	int matchSatus = -1;
     	
-//    	if (playerTeamStamina == 0 ) {
-//    		matchSatus = 0;
-//    	} else if (opponentTeamStamina == 0) {
-//    		matchSatus = 1;
-//    	}
+    	if (playerTeamStamina == 0 ) {
+    		matchSatus = 0;
+    	} else if (opponentTeamStamina == 0) {
+    		matchSatus = 1;
+    	}
     	
     	if (homeWins == 2 || opponentWins == 2) {
     		if (homeWins > opponentWins) {
@@ -230,12 +206,8 @@ public final class Match {
     			matchSatus = 0;
     		}
     	}
-    	
-    
         
     	return matchSatus;
-    	
-    	
     	
     }
     
@@ -262,8 +234,6 @@ public final class Match {
     public IngameCharacters decideNextPlayer(IngameCharacters currentPlayer) {
     	IngameCharacters returnPlayer = null;
     	int playerIndex = 0;
-    	
-    	
     	
     	//Check which team the next player is being decided for
     	if (homeTeam.contains(currentPlayer)) {
@@ -429,26 +399,7 @@ public final class Match {
     	} else {
     		opponentResults = results;
     	}
-    	
-    	
-    	
     }
-    
-    
-
-    
-    /**
-     * Calculates rewards for winning a game
-     * 
-     * @param modifier
-     * @return
-     */
-    public int calculateRewards(int modifier) {
-    	
-    	return 250 * modifier;
-    }
-
-    
     
     /**
      * Gets the total health left in the team
@@ -513,5 +464,15 @@ public final class Match {
 	public int getOutcome() {
 		return outcome;
 	}
+
+
+	/**
+	 * @return the roundWinner
+	 */
+	public int getRoundWinner() {
+		return roundWinner;
+	}
+	
+	
 	
 }

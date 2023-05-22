@@ -225,15 +225,5 @@ public final class GameData {
 	public int getPurchasePrice(Market market, Purchasable purchase) {
 		return purchase.getBasePrice() * getDifficulty().modifier;
 	}
-    
-	
-	
-	/**
-	 * Sets the team (Used for testing)
-	 * 
-	 * @param team the team to set
-	 */
-	public void setTeam(Team team) {
-		this.team = team;
-	}
+   
 }
