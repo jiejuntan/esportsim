@@ -22,6 +22,7 @@ public final class GUIConstants {
 	public static final int SUBHEADING = 35;
 	public static final int BODY = 30;
 	public static final int DETAIL = 20;
+	public static final int SMALLERDETAIL = 15;
 	
 	// Audio
 	// Background music by Abel Geyskens, obtained from https://freesound.org/s/668879/ under the Attribute 4.0 License

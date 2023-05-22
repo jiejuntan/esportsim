@@ -17,6 +17,7 @@ public final class MatchController extends Controller {
 	
 	Match match;
 	Team opponent;
+	GameData gameData;
 	
 	/**
 	 * Constructor for match screen.
@@ -34,15 +35,14 @@ public final class MatchController extends Controller {
 	 */
 	@Override
 	protected void initialize() {
-		GameData gameData = frame.getGame().getData();
+		gameData = frame.getGame().getData();
 		match = new Match(gameData, opponent);
 		panel = new MatchPanel();
-
+		displays();
 		resetRoundResults();
-		updateHealth();
+		updateDisplays();
 		initializeBattleButton();
-		initializeNextMatchButton();
-		displayPlayers();
+
 		
 		super.launch();
 	}
@@ -54,39 +54,18 @@ public final class MatchController extends Controller {
 		
 		//Get the buttons
 		JButton battleButton = ((MatchPanel) panel).getBattleButton();
-		JButton nextMatchButton = ((MatchPanel) panel).getNextMatchButton();
 		
 		//Button action
 		battleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					//Do the battle Manouvers
-					//match.simulateMatchup();
-					updateHealth();
+					match.simulateRound();
+					updateDisplays();
 
 					if (isBattleover()) {
 						matchOver();
-					} else {
-						displayRoundResults();
-						battleButton.setVisible(false);
-						nextMatchButton.setVisible(true);
-					}
+					} 
 					
-			}
-		});
-		
-	}
-	
-	private void initializeNextMatchButton() {
-		
-		JButton battleButton = ((MatchPanel) panel).getBattleButton();
-		JButton nextMatchButton = ((MatchPanel) panel).getNextMatchButton();
-		nextMatchButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				nextMatchButton.setVisible(false);
-				battleButton.setVisible(true);
-				displayPlayers();
-				resetRoundResults();
-
 			}
 		});
 		
@@ -101,19 +80,15 @@ public final class MatchController extends Controller {
 		
 	}
 	
-	private void updateHealth() {
-		JLabel opponentHealthValueLabel = ((MatchPanel) panel).getOpponentHealthValueLabel();
-		JLabel PlayerHealthValueLabel = ((MatchPanel) panel).getPlayerHealthValueLabel();
-		opponentHealthValueLabel.setText(String.valueOf(match.getTeamHealth(match.getOpponentTeam())));
-		PlayerHealthValueLabel.setText(String.valueOf(match.getTeamHealth(match.getHomeTeam())));
-	}
 	
-	private void displayRoundResults() {
+	private void updateDisplays() {
 		JLabel resultsValueLabel1 = ((MatchPanel) panel).getResultsValueLabel1();
 		JLabel resultsValueLabel2 = ((MatchPanel) panel).getResultsValueLabel2();
+		JLabel roundValueLabel = ((MatchPanel) panel).getRoundValueLabel();
+
 		resultsValueLabel1.setVisible(true);
 		resultsValueLabel2.setVisible(true);
-		
+		roundValueLabel.setText(String.valueOf(match.getRound()));
 		resultsValueLabel1.setText(match.getRoundResults().get(0));
 		resultsValueLabel2.setText(match.getRoundResults().get(1));
 		
@@ -128,27 +103,34 @@ public final class MatchController extends Controller {
 	}
 	
 	private void matchOver() {
-		
-		if (match.getOutcome() == 1) {
-			JOptionPane.showMessageDialog(panel, 
-					"You have won the battle!", 
-					"MATCH OVER!", JOptionPane.ERROR_MESSAGE);
-		} else {
-			JOptionPane.showMessageDialog(panel, 
-					"You have lost the battle!", 
-					"MATCH OVER!", JOptionPane.ERROR_MESSAGE);
-		}
-		
+	    if (match.getOutcome() == 1) {
+	        JOptionPane.showMessageDialog(panel, 
+	                "You have won the battle!", 
+	                "MATCH OVER!", JOptionPane.INFORMATION_MESSAGE);
+	    } else {
+	        JOptionPane.showMessageDialog(panel, 
+	                "You have lost the battle!", 
+	                "MATCH OVER!", JOptionPane.INFORMATION_MESSAGE);
+	    }
+	    
+	    toHomeScreen();
+	}
+
+	
+	private void displays() {
+		JLabel playerTeamNameLabel = ((MatchPanel) panel).getPlayerTeamNameValueLabel();
+		JLabel opponentTeamNameLabel = ((MatchPanel) panel).getOpponentTeamNameValueLabel();
+		playerTeamNameLabel.setText(gameData.getTeam().getName());
+		opponentTeamNameLabel.setText(opponent.getName());
 		
 	}
 	
-	private void displayPlayers() {
-		JLabel playerNameLabel = ((MatchPanel) panel).getPlayerNameLabel();
-		JLabel opponentNameLabel = ((MatchPanel) panel).getOpponentNameLabel();
-		playerNameLabel.setText(match.getHomeTeam().get(match.getHomeTurn()).getName());
-		opponentNameLabel.setText(match.getOpponentTeam().get(match.getOpponentTurn()).getName());
-		
-	}
+	/**
+	 * Closes stadium screen and goes back to home screen
+	 */
+	private void toHomeScreen() {
+		frame.toHomeScreen();
+	} 
 	
 	
 
