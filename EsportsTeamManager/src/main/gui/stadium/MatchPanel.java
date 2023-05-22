@@ -87,20 +87,20 @@ public final class MatchPanel extends BasePanel {
 		playerNameLabel = new JLabel("Name");
 		playerNameLabel.setForeground(new Color(255, 255, 255));
 		playerNameLabel.setBounds(632, 304, 138, 25);
-		playerNameLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
+		playerNameLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.DETAIL));
 		this.add(playerNameLabel);
 		
 		JLabel vsLabel = new JLabel("VS");
 		vsLabel.setForeground(new Color(255, 255, 255));
 		vsLabel.setBounds(782, 295, 36, 36);
-		vsLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		vsLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		this.add(vsLabel);
 		
 		opponentNameLabel = new JLabel("Name");
 		opponentNameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		opponentNameLabel.setForeground(new Color(255, 255, 255));
 		opponentNameLabel.setBounds(836, 304, 139, 25);
-		opponentNameLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
+		opponentNameLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.DETAIL));
 		this.add(opponentNameLabel);
 		
 		resultsValueLabel1 = new JLabel("Battle Stats");

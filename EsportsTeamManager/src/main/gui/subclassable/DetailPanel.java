@@ -69,7 +69,7 @@ public class DetailPanel extends BasePanel {
 		changeNameButton.setContentAreaFilled(false);
 		changeNameButton.setFocusable(false);
 		changeNameButton.setHorizontalAlignment(SwingConstants.CENTER);
-		changeNameButton.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.HEADING));
+		changeNameButton.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.HEADING));
 		changeNameButton.setPreferredSize(new Dimension(1000, 85));		
 		GridBagConstraints gbc_changeNameButton = new GridBagConstraints();
 		gbc_changeNameButton.gridwidth = 10;
@@ -84,7 +84,7 @@ public class DetailPanel extends BasePanel {
 		nameTextField.setHorizontalAlignment(SwingConstants.CENTER);
 		nameTextField.setPreferredSize(new Dimension(450, 85));
 		nameTextField.setMargin(new Insets(5, 10, 2, 10));
-		nameTextField.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.HEADING));
+		nameTextField.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.HEADING));
 		GridBagConstraints gbc_nameTextField = new GridBagConstraints();
 		gbc_nameTextField.insets = new Insets(0, 0, 5, 0);
 		gbc_nameTextField.gridwidth = 10;
@@ -95,7 +95,7 @@ public class DetailPanel extends BasePanel {
 		editTipLabel = new JLabel("(click to edit)");
 		editTipLabel.setVisible(false);
 		editTipLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		editTipLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
+		editTipLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.DETAIL));
 		GridBagConstraints gbc_editTipLabel = new GridBagConstraints();
 		gbc_editTipLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_editTipLabel.gridwidth = 10;
@@ -119,7 +119,7 @@ public class DetailPanel extends BasePanel {
 		
 		
 		reactionLabel = new JLabel("Reaction time:");
-		reactionLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		reactionLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_reactionLabel = new GridBagConstraints();
 		gbc_reactionLabel.anchor = GridBagConstraints.WEST;
 		gbc_reactionLabel.insets = new Insets(0, 0, 5, 5);
@@ -129,7 +129,7 @@ public class DetailPanel extends BasePanel {
 		
 		reactionValueLabel = new JLabel("5");
 		reactionValueLabel.setVisible(false);
-		reactionValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		reactionValueLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_reactionValueLabel = new GridBagConstraints();
 		gbc_reactionValueLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_reactionValueLabel.gridx = 7;
@@ -138,7 +138,7 @@ public class DetailPanel extends BasePanel {
 		
 		reactionBonusLabel = new JLabel("-");
 		reactionBonusLabel.setVisible(false);
-		reactionBonusLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		reactionBonusLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_reactionBonusLabel = new GridBagConstraints();
 		gbc_reactionBonusLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_reactionBonusLabel.gridx = 8;
@@ -146,7 +146,7 @@ public class DetailPanel extends BasePanel {
 		this.add(reactionBonusLabel, gbc_reactionBonusLabel);
 		
 		eyesightLabel = new JLabel("Eyesight:");
-		eyesightLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		eyesightLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_eyesightLabel = new GridBagConstraints();
 		gbc_eyesightLabel.anchor = GridBagConstraints.WEST;
 		gbc_eyesightLabel.insets = new Insets(0, 0, 5, 5);
@@ -156,7 +156,7 @@ public class DetailPanel extends BasePanel {
 		
 		eyesightValueLabel = new JLabel("5");
 		eyesightValueLabel.setVisible(false);
-		eyesightValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		eyesightValueLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_eyesightValueLabel = new GridBagConstraints();
 		gbc_eyesightValueLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_eyesightValueLabel.gridx = 7;
@@ -165,7 +165,7 @@ public class DetailPanel extends BasePanel {
 		
 		eyesightBonusLabel = new JLabel("-");
 		eyesightBonusLabel.setVisible(false);
-		eyesightBonusLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		eyesightBonusLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_eyesightBonusLabel = new GridBagConstraints();
 		gbc_eyesightBonusLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_eyesightBonusLabel.gridx = 8;
@@ -173,7 +173,7 @@ public class DetailPanel extends BasePanel {
 		this.add(eyesightBonusLabel, gbc_eyesightBonusLabel);
 		
 		intelligenceLabel = new JLabel("Intelligence:");
-		intelligenceLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		intelligenceLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_intelligenceLabel = new GridBagConstraints();
 		gbc_intelligenceLabel.anchor = GridBagConstraints.WEST;
 		gbc_intelligenceLabel.insets = new Insets(0, 0, 5, 5);
@@ -183,7 +183,7 @@ public class DetailPanel extends BasePanel {
 		
 		intelligenceValueLabel = new JLabel("5");
 		intelligenceValueLabel.setVisible(false);
-		intelligenceValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		intelligenceValueLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_intelligenceValueLabel = new GridBagConstraints();
 		gbc_intelligenceValueLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_intelligenceValueLabel.gridx = 7;
@@ -192,7 +192,7 @@ public class DetailPanel extends BasePanel {
 		
 		intelligenceBonusLabel = new JLabel("-");
 		intelligenceBonusLabel.setVisible(false);
-		intelligenceBonusLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		intelligenceBonusLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_intelligenceBonusLabel = new GridBagConstraints();
 		gbc_intelligenceBonusLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_intelligenceBonusLabel.gridx = 8;
@@ -200,7 +200,7 @@ public class DetailPanel extends BasePanel {
 		this.add(intelligenceBonusLabel, gbc_intelligenceBonusLabel);
 		
 		staminaLabel = new JLabel("Stamina:");
-		staminaLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		staminaLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_staminaLabel = new GridBagConstraints();
 		gbc_staminaLabel.anchor = GridBagConstraints.WEST;
 		gbc_staminaLabel.insets = new Insets(0, 0, 5, 5);
@@ -210,7 +210,7 @@ public class DetailPanel extends BasePanel {
 		
 		staminaValueLabel = new JLabel("5");
 		staminaValueLabel.setVisible(false);
-		staminaValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		staminaValueLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_staminaValueLabel = new GridBagConstraints();
 		gbc_staminaValueLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_staminaValueLabel.gridx = 7;
@@ -219,7 +219,7 @@ public class DetailPanel extends BasePanel {
 		
 		staminaBonusLabel = new JLabel("-");
 		staminaBonusLabel.setVisible(false);
-		staminaBonusLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		staminaBonusLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_staminaBonusLabel = new GridBagConstraints();
 		gbc_staminaBonusLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_staminaBonusLabel.gridx = 8;
@@ -229,7 +229,7 @@ public class DetailPanel extends BasePanel {
 		
 		roleLabel = new JLabel("Role:");
 		roleLabel.setVisible(false);
-		roleLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		roleLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_roleLabel = new GridBagConstraints();
 		gbc_roleLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_roleLabel.anchor = GridBagConstraints.WEST;
@@ -242,7 +242,7 @@ public class DetailPanel extends BasePanel {
 		roleComboBox.setVisible(false);
 		roleComboBox.setModel(new DefaultComboBoxModel(Role.values()));
 		roleComboBox.setPreferredSize(new Dimension(205, 50));
-		roleComboBox.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		roleComboBox.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_roleComboBox = new GridBagConstraints();
 		gbc_roleComboBox.gridwidth = 3;
 		gbc_roleComboBox.insets = new Insets(0, 0, 5, 5);
@@ -252,7 +252,7 @@ public class DetailPanel extends BasePanel {
 		
 		roleValueLabel = new JLabel();
 		roleValueLabel.setVisible(false);
-		roleValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		roleValueLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_roleValueLabel = new GridBagConstraints();
 		gbc_roleValueLabel.gridwidth = 3;
 		gbc_roleValueLabel.insets = new Insets(0, 0, 5, 5);
@@ -262,7 +262,7 @@ public class DetailPanel extends BasePanel {
 		
 		priceLabel = new JLabel("Price:");
 		priceLabel.setVisible(false);
-		priceLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		priceLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_contractLabel = new GridBagConstraints();
 		gbc_contractLabel.anchor = GridBagConstraints.WEST;
 		gbc_contractLabel.insets = new Insets(0, 0, 5, 5);
@@ -272,7 +272,7 @@ public class DetailPanel extends BasePanel {
 		
 		priceValueLabel = new JLabel();
 		priceValueLabel.setVisible(false);
-		priceValueLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		priceValueLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_contractValueLabel = new GridBagConstraints();
 		gbc_contractValueLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_contractValueLabel.gridx = 7;

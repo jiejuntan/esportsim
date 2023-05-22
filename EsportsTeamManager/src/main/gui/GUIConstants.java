@@ -1,6 +1,7 @@
 package main.gui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -15,8 +16,8 @@ public final class GUIConstants {
 	public static final Color COMPONENT = new Color(203, 224, 255);
 	
 	// Fonts
-	public static final String UNISPACE = "/main/Resources/unispace.ttf"; // issue implementing might delete along with ttf file
-	public static final String FONT = "Unispace";
+	public static final String FONT = "Tlwg Typo";
+	public static final int STYLE = Font.BOLD;
 	public static final int HEADING = 60;
 	public static final int SUBHEADING = 35;
 	public static final int BODY = 30;

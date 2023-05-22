@@ -34,7 +34,7 @@ public final class StartPanel extends BackgroundPanel {
 				+ "</span></center></html>");
 		newGameButton.setContentAreaFilled(false);
 		newGameButton.setFocusPainted(false);
-		newGameButton.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.DETAIL));
+		newGameButton.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.DETAIL));
 		newGameButton.setForeground(Color.WHITE);
 		
 		GroupLayout gl_panel = new GroupLayout(this);

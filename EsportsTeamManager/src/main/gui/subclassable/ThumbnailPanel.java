@@ -167,7 +167,7 @@ public class ThumbnailPanel extends BasePanel {
 		
 		moneyLabel = new JLabel();
 		moneyLabel.setVisible(false);
-		moneyLabel.setFont(new Font(GUIConstants.FONT, Font.PLAIN, GUIConstants.BODY));
+		moneyLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_moneyLabel = new GridBagConstraints();
 		gbc_moneyLabel.fill = GridBagConstraints.VERTICAL;
 		gbc_moneyLabel.insets = new Insets(0, 0, 5, 5);

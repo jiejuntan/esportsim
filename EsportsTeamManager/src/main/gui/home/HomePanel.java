@@ -8,6 +8,7 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import main.gui.GUIConstants;
 import main.gui.subclassable.BasePanel;
 
 /**
@@ -50,7 +51,7 @@ public final class HomePanel extends BasePanel {
 		
 		
 		weekLabel = new JLabel();
-		weekLabel.setFont(new Font("Unispace", Font.PLAIN, 30));
+		weekLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_weekLabel = new GridBagConstraints();
 		gbc_weekLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_weekLabel.gridx = 1;
@@ -58,7 +59,7 @@ public final class HomePanel extends BasePanel {
 		this.add(weekLabel, gbc_weekLabel);
 		
 		moneyLabel = new JLabel();
-		moneyLabel.setFont(new Font("Unispace", Font.PLAIN, 30));
+		moneyLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_moneyLabel = new GridBagConstraints();
 		gbc_moneyLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_moneyLabel.gridx = 1;
@@ -66,7 +67,7 @@ public final class HomePanel extends BasePanel {
 		this.add(moneyLabel, gbc_moneyLabel);
 		
 		winsLabel = new JLabel();
-		winsLabel.setFont(new Font("Unispace", Font.PLAIN, 30));
+		winsLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_winsLabel = new GridBagConstraints();
 		gbc_winsLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_winsLabel.gridx = 1;
@@ -74,7 +75,7 @@ public final class HomePanel extends BasePanel {
 		this.add(winsLabel, gbc_winsLabel);
 		
 		lossesLabel = new JLabel();
-		lossesLabel.setFont(new Font("Unispace", Font.PLAIN, 30));
+		lossesLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 		GridBagConstraints gbc_lossesLabel = new GridBagConstraints();
 		gbc_lossesLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lossesLabel.gridx = 1;
