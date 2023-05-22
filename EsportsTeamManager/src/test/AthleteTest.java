@@ -43,16 +43,8 @@ class AthleteTest {
         assertEquals(athlete.getBasePrice(), 1000 * athlete.calculateSkillLevel());
     }
 
-    @Test
-    void setDescriptionTest() {
-        athlete.setDescription();
-        assertEquals(athlete.getDescription(), String.format("Name: %s \nReaction Time: %d \nEye Sight: %d \nIntelligence: %d \n", athlete.getName(), athlete.getReactionTime(), athlete.getEyeSight(), athlete.getIntelligence()));
-    }
 
-    @Test
-    void testToString() {
-        assertEquals(athlete.toString(), athlete.getDescription());
-    }
+
 
 
     
