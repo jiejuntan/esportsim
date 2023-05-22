@@ -1,6 +1,3 @@
-/**
- * 
- */
 package main.gui.subclassable;
 
 import java.awt.Image;

@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import main.exceptions.IllegalFundsException;
-import main.exceptions.IllegalTeamException;
 import main.exceptions.TeamLimitException;
 import main.gui.GameFrame;
 import main.gui.subclassable.DetailController;
@@ -149,7 +148,6 @@ public class DraftDetailController extends DetailController {
 				
 				
 				Market market = frame.getGame().getMarket();
-				Team team = frame.getGame().getData().getTeam();
 				try {
 					market.purchaseAthlete(athlete, role, newName);
 					toPreviousScreen();

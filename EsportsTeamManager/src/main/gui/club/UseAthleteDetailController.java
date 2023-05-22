@@ -59,6 +59,7 @@ public class UseAthleteDetailController extends ClubDetailController {
 		}
 		JLabel editTipLabel = ((ClubDetailPanel) panel).getEditTipLabel();
 		editTipLabel.setVisible(false);
+		@SuppressWarnings("rawtypes")
 		JComboBox roleComboBox = ((ClubDetailPanel) panel).getRoleComboBox();
 		roleComboBox.setVisible(false);
 		JLabel roleLabel = ((ClubDetailPanel) panel).getRoleLabel();

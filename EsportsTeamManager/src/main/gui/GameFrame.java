@@ -6,8 +6,10 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
-import com.formdev.flatlaf.FlatLightLaf;
+//import com.formdev.flatlaf.FlatLightLaf;
 
 import main.gui.club.ClubController;
 import main.gui.club.ClubDetailController;
@@ -285,7 +287,13 @@ public final class GameFrame {
 		frame.setBounds(100, 100, 100, 100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		FlatLightLaf.setup();
+		try {
+			UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			// Unrecoverable exception
+			e.printStackTrace();
+		}
 	}
 	
 	

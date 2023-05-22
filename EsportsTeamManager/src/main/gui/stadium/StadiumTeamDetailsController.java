@@ -50,7 +50,9 @@ public final class StadiumTeamDetailsController extends DetailController {
 		super.launch();
 	}
 	
-	
+	/**
+	 * Setup additional components
+	 */
 	private void teamDetailsSetup() {
 		Stadium stadium = frame.getGame().getStadium();
 		

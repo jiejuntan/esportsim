@@ -122,6 +122,7 @@ public class ClubDetailController extends DetailController {
 		int stamina = athlete.getStamina();
 		staminaValueLabel.setText(Athlete.STAMINA_LEVELS[stamina]);
 		
+		@SuppressWarnings("rawtypes")
 		JComboBox roleComboBox = ((ClubDetailPanel) panel).getRoleComboBox();
 		roleComboBox.setSelectedItem(athlete.getRole());
 	}
@@ -133,6 +134,7 @@ public class ClubDetailController extends DetailController {
 		JButton confirmButton = ((ClubDetailPanel) panel).getConfirmButton();
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {			
+				@SuppressWarnings("rawtypes")
 				JComboBox roleComboBox = ((ClubDetailPanel) panel).getRoleComboBox();
 				Role role = (Role) roleComboBox.getSelectedItem();
 				

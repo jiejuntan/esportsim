@@ -1,6 +1,6 @@
 package main.model;
 
-import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -77,35 +77,28 @@ public final class Team {
 	 * Defines the Athletes Roles and the stats of each role
 	 */
 	public enum Role {
+		OFFENSE(1, 3, "eyeSight", "reactionTime"), 
+		SUPPORT(2, 2, "intelligence", "eyeSight"), 
+		TANK(3, 1, "reactionTime", "intelligence"), 
+		RESERVE(0, 0, "", "");
 
-		// Role(Health, Damage, Aggro Priority)
-		OFFENSE(50, 50, 2), 
-		SUPPORT(25, 10, 3), 
-		TANK(100, 25, 1), 
-		RESERVE(0, 0, 0);
-
-		private final int health;
-		private final int damage;
+		private final int speed;
 		private final int aggro;
+		private final String primaryStat;
+		private final String secondaryStat;
 
-		Role(int health, int damage, int aggro) {
-			this.health = health;
-			this.damage = damage;
+		Role(int speed, int aggro, String primary, String secondary) {
+			this.speed = speed;
 			this.aggro = aggro;
-		}
-
-    	/**
-		 * @return <CODE>int</CODE> Role health
-		 */
-		public int getHealth() {
-			return health;
+			this.primaryStat = primary;
+			this.secondaryStat = secondary;
 		}
 
 		/**
-		 * @return <CODE>int</CODE> Role damage
+		 * @return <CODE>int</CODE> Role speed
 		 */
-		public int getDamage() {
-			return damage;
+		public int getSpeed() {
+			return speed;
 		}
 
 		/**
@@ -114,6 +107,20 @@ public final class Team {
 		 */
 		public int getAggro() {
 			return aggro;
+		}
+
+		/**
+		 * @return the primaryStat
+		 */
+		public String getPrimaryStat() {
+			return primaryStat;
+		}
+
+		/**
+		 * @return the secondaryStat
+		 */
+		public String getSecondaryStat() {
+			return secondaryStat;
 		}
 	}
 
@@ -141,12 +148,10 @@ public final class Team {
         for (Role role : Role.values()) {
             members.put(role, new ArrayList<Athlete>());
         }
-        Random random = new Random();
-		int randomSkillIncrease = Math.max(0, (int) random.nextGaussian(currentWeek - 2, 2));
 		
         for (int athleteCount = 0; athleteCount < MAIN_LIMIT; athleteCount++) {
 			try {
-				addAthlete(new Athlete(randomSkillIncrease),getRandomRole(false));
+				addAthlete(new Athlete(currentWeek),getRandomRole(false));
 			} catch (TeamLimitException e) {
 				// Exception is unrecoverable
 				e.printStackTrace();
@@ -382,15 +387,10 @@ public final class Team {
 	 * @return Random Team Name
 	 */
 	private String getRandomTeamName() {
-
-		// Grabs a list of names
-		String[] namesList = null;
-		try {
-			namesList = IO.getTextFromFile("src/main/Resources/TeamNames");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		IO io = new IO();
+		InputStream is = io.getFileFromResourceAsStream("/main/resources/teamNames.txt");
+		String[] namesList = io.getString(is).split(",");
+		
 		// Picks a random number
 		Random random = new Random();
 		int randomNumber = random.nextInt(namesList.length);
@@ -418,7 +418,7 @@ public final class Team {
     	int portrait = availableLogos.get(index);
     	availableLogos.remove(index);
     	
-    	this.logoPath = "/main/Resources/logos/" + portrait + ".png";
+    	this.logoPath = "/main/resources/logos/" + portrait + ".png";
     }
     
     /**

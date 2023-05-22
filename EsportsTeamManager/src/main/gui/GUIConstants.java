@@ -24,16 +24,13 @@ public final class GUIConstants {
 	public static final int DETAIL = 20;
 	public static final int SMALLERDETAIL = 15;
 	
-	// Audio
 	// Background music by Abel Geyskens, obtained from https://freesound.org/s/668879/ under the Attribute 4.0 License
-	public static final String BACKGROUND_MUSIC = "/main/Resources/retro-music.wav";
+	public static final String BACKGROUND_MUSIC = "/main/resources/retro-music.wav";
 		
 	// Backgrounds
 	// Background image by Lesiakower via Pixabay under the Content License
-	public static final String BACKGROUND_ANIMATED = "/main/Resources/mountains.png";
-	public static final String BACKGROUND_OFFICE = "/main/Resources/office.png";
-	public static final String BACKGROUND_NEWGAME = "/main/Resources/newGame.png";
-	public static final String BACKGROUND_BATTLE = "/main/Resources/battle.png";
+	public static final String BACKGROUND_ANIMATED = "/main/resources/mountains.png";
+	public static final String BACKGROUND_BATTLE = "/main/resources/battle.png";
 	public static final Color BACKGROUND_SOLID = new Color(221, 235, 255);
 	
 	// Athlete portraits
@@ -50,9 +47,6 @@ public final class GUIConstants {
 	
 	// Team Logos
 	public static final int LOGO_COUNT = 16;
-	
-	// Items
-	public static final String ITEM_PLACEHOLDER = "/main/Resources/athletePortraits/portrait_opaque_0.png";
 	
 	// Color for bonus stats
 	public static final Color BONUS_UP = new Color(0, 128, 0);

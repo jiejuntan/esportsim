@@ -20,6 +20,10 @@ import javax.swing.border.AbstractBorder;
  */
 public final class RoundClipBorder extends AbstractBorder {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Component values to set/calculate
     private Color color;
     private int thickness;
