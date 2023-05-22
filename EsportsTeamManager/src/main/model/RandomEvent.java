@@ -2,16 +2,14 @@ package main.model;
 
 
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
-import main.exceptions.IllegalTeamException;
+
 import main.exceptions.TeamLimitException;
-import main.model.Team.Role;
 
 
 /**
- * Random events which can occur during the menu gameplay
+ * Random events which can occur every new week
  * 
  * @author Blake and Jun
  *
@@ -21,13 +19,8 @@ public final class RandomEvent {
 	private Team team;
 	private GameData gameData;
 	private Random random;
-	/**
-	 * This variable is for the gui to know if an event was activated
-	 */
-	private int activatedEvent;
 	
 	public RandomEvent(GameData gameData) {
-		this.activatedEvent = -1;
 		this.gameData = gameData;
 		this.team = gameData.getTeam();
 		this.random = new Random();
@@ -35,45 +28,42 @@ public final class RandomEvent {
 	
 
     /**
-     * Activates a random event if a random number is greater than % threshold
+     * Activates a random event if a lucky number is hit
      */
-    public void triggerEvent() {
-    	
-    	
-    	double threshold = 98;
-    	
-    	//Generates the random number
-    	double randomNumber = random.nextGaussian(50,50);
-    	
-    	//If threshold is passed pickEvent is called choosing one of the events 
-    	if(randomNumber > threshold) {
-    		pickEvent(random.nextInt(3));	
+    public int triggerEvent() {
+    	if (gameData.getCurrentWeek() > 1) {
+    		
+    		int count = 20;
+        	int result = random.nextInt(count);
+        	if (result == 5) {
+        		int event = random.nextInt(1, 4);
+        		pickEvent(event);
+        		return event;
+        	}
+        	return 0;
     	}
-    	
-    	
+    	return 0;
     }
     
     /**
-     * Activates one of the events
+     * Activates one of the random events
      * 
-     * @param eventNumber
+     * @param eventNumber	type of event
      */
     private void pickEvent(int eventNumber) {
-    	
     	switch(eventNumber) {
-		case 0:
+		case 1:
 			addAthlete();
 			break;
-		case 1:
+		case 2:
 			removeAthlete();
 			break;
-		case 2:
+		case 3:
 			statsIncrease();
 			break;
 		default:
-			System.out.println("This Shouldnt Happen!");
-	}
-    	
+			break;
+    	}
     }
     
     /**
@@ -81,27 +71,23 @@ public final class RandomEvent {
      */
     private void addAthlete() {    
 		if (!team.isMainTeamFull()) {
-			//Adds an Athlete with a skill based on the difficulty modifier and a random role
 			try {
-				team.addAthlete(new Athlete(gameData.getDifficulty().getModifier()), Team.getRandomRole(false));
+				team.addAthlete(new Athlete(gameData.getCurrentWeek()), Team.getRandomRole(false));
 			} catch (TeamLimitException e) {
-				// TODO Auto-generated catch block
+				// Unrecoverable exception
 				e.printStackTrace();
 			}
 			
 		} else if (!team.isReserveTeamFull()) {
-			//Adds an Athlete with a skill based on the difficulty modifier and the reserver role
 			try {
-				team.addAthlete(new Athlete(gameData.getDifficulty().getModifier()), Team.Role.RESERVE);
+				team.addAthlete(new Athlete(gameData.getCurrentWeek()), Team.Role.RESERVE);
 			} catch (TeamLimitException e) {
-				// TODO Auto-generated catch block
+				// Unrecoverable exception
 				e.printStackTrace();
 			}
-			
-			this.activatedEvent = 1;
 		} else {
 			//Both main team and reserves are full so a different event is picked
-			pickEvent(random.nextInt(1,3));
+			pickEvent(random.nextInt(2,4));
 		}
     }
     
@@ -109,55 +95,39 @@ public final class RandomEvent {
      * Random Event - Removes an athlete from the team
      */
     private void removeAthlete() {
+    	List<Athlete> athletes = team.getMainMembers();
+    	athletes.addAll(team.getReserveMembers());
     	
-    	//Chooses a random (role : List<Athletes>) to get remove an athlete from
-    	List<Athlete> athletes = team.getTeamMembers().get(Team.getRandomRole(true));
-    	
-    	//Removes the athlete from 
-    	team.removeAthlete(athletes.get(random.nextInt(athletes.size())));
-    	
-    	this.activatedEvent = 2;
-    	
+    	if (athletes.size() > 0) {
+        	int toRemove = random.nextInt(athletes.size());
+        	team.removeAthlete(athletes.get(toRemove));  
+    	}  	
     }
     
     /**
      * Random Event - Increases a stats for one of the teams Athletes
      */
-    private void statsIncrease() {
+    private void statsIncrease() {    	    	
+    	List<Athlete> athletes = team.getMainMembers();
+    	athletes.addAll(team.getReserveMembers());
     	
-    	//Chooses a random (role : List<Athletes>) to get an athlete to increases thier stat
-    	List<Athlete> athletes = team.getTeamMembers().get(Team.getRandomRole(true));
-    	
-    	Athlete athlete = athletes.get(random.nextInt(athletes.size()));
-    	
-    	//Picks one of the Athletes stats to randomly increase by 1 point
-    	switch(random.nextInt(5)) {
+    	if (athletes.size() > 0) {
+    		Athlete athlete = athletes.get(random.nextInt(athletes.size()));
+
+        	switch(random.nextInt(3)) {
 			case 0:
-				athlete.setEyeSight(athlete.getEyeSight() + 1);
+				athlete.setReactionTime(athlete.getReactionTime() + 15);
 				break;
 			case 1:
-				athlete.setIntelligence(athlete.getIntelligence() + 1);
+				athlete.setEyeSight(athlete.getEyeSight() + 15);
 				break;
 			case 2:
-				;
-				athlete.setReactionTime(athlete.getReactionTime() + 1);
-				break;
-			case 3:
-				athlete.setStamina(athlete.getStamina() + 1);
+				athlete.setIntelligence(athlete.getIntelligence() + 15);
 				break;
 			default:
-				System.out.println("This Shouldnt Happen!");
-    	}
+				break;
+        	}
+    	}  	    	
     }
-
-
-	/**
-	 * @return the activatedEvent
-	 */
-	public int getActivatedEvent() {
-		return activatedEvent;
-	}
-
-    
     
 }

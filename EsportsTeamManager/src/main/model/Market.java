@@ -1,6 +1,7 @@
 package main.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -132,23 +133,30 @@ public final class Market {
 	}
     
     /**
-     * Gets the price cheapest athlete available
+     * Checks if a legal team can be formed
      * 
-     * @return price of cheapest athlete
+     * @return <code>true</code> if full starting team is possible
      */
-    public int getCheapestAthlete() {
-    	int cheapest = 0;
-    	for (Athlete athlete : availableAthletes) {
-    		if (!isPurchased(athlete)) {
-    			int price = athlete.calculatePurchasePrice(data.getDifficulty().modifier);
-        		if (cheapest == 0) {
-        			cheapest = price;
-        		} else if (price < cheapest) {
-        			cheapest = price;
-        		}
-    		}
+    public boolean canPurchaseLegalTeam() {
+    	int teamSize = data.getTeam().getMainTeamSize() + data.getTeam().getReserveTeamSize();
+    	
+    	// Checks if team has sufficient members
+    	if (teamSize >= Team.MAIN_LIMIT) {
+    		return true;
     	}
-    	return cheapest;
+    	
+    	// If not, calculates how much money is required based on how many athletes are needed for a full team
+    	int requiredSize = Team.MAIN_LIMIT - teamSize;
+		List<Integer> prices = new ArrayList<Integer>();		
+		for (Athlete athlete : availableAthletes) {
+			prices.add(athlete.calculatePurchasePrice(data.getDifficulty().modifier));
+    	}
+		Collections.sort(prices);
+		
+		// If there isn't enough money to purchase the cheapest members to meet minimum team size requirements, end game
+		// Prices scale up weekly so unlikely to be able to afford next week
+		int moneyRequired = prices.get(0) * requiredSize;
+		return moneyRequired <= data.getMoney();
     }
     
     /**

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import main.model.Team.Role;
 
 /**
@@ -50,47 +49,29 @@ public final class Match {
     	homeResults = "";
     	opponentResults = "";
     	
-    	createIngameCharacters(data.getTeam(), opponent);
+    	createIngameCharacters();
     };
-    
     
     /**
      * 
      * Converts the Athletes into their virtual Characters 
      * 
-     * @param home		player's Team
-     * @param opponents	opponent's Team
      */
-    public void createIngameCharacters(Team home, Team opponents) {
+    public void createIngameCharacters() {
     		
     	//Gets the players Team Members
-    	for (Map.Entry<Role,  List<Athlete>> entry : home.getTeamMembers().entrySet()) {
-    	
-    		//Gets the Athlete and Role from the team
-    	    Role role = entry.getKey();
-    	    if (role != Role.RESERVE) {
-    	    	for (Athlete athlete :  entry.getValue()) {
-        	    	//Create a new ingame character for each Athlete and adds to the matches homeTeam list
-            	    homeTeam.add(new IngameCharacters(athlete, role));
-        	    }  
-    	    }
+    	for (Athlete athlete : data.getTeam().getMainMembers()) {
+    		homeTeam.add(new IngameCharacters(athlete, athlete.getRole()));
     	}
     	
     	//Gets the players the Opponent Team 
-    	for (Map.Entry<Role, List<Athlete>> entry : opponents.getTeamMembers().entrySet()) {
-    		//Gets the Athlete and Role from the team
-    	    Role role = entry.getKey();
-    	    
-    	    for (Athlete athlete :  entry.getValue()) {
-    	    	//Create a new ingame character for each Athlete and adds to the matches homeTeam list
-    	    	opponentTeam.add(new IngameCharacters(athlete, role));
-    	    }
+    	for (Athlete athlete : opponent.getMainMembers()) {
+    		opponentTeam.add(new IngameCharacters(athlete, athlete.getRole()));
     	}
     	
     	//Sorts teams so chracters with the highest reaction time is at the start of the lists
     	homeTeam.sort(Comparator.comparing(IngameCharacters::getReactionTime).reversed());
     	opponentTeam.sort(Comparator.comparing(IngameCharacters::getReactionTime).reversed());
-    	
     }
 
     /**
@@ -178,9 +159,6 @@ public final class Match {
     	//If a team has killed the other team, round over, reset everybodies health
     	//Increase wins
     	if (playerTeamHealth == 0 ) {
-        	System.out.println("home: "+getTeamHealth(homeTeam));
-        	System.out.println("Opponent: "+getTeamHealth(opponentTeam));
-
     		this.opponentWins++;
     		this.round++;
     		this.roundWinner = 0;
@@ -188,9 +166,6 @@ public final class Match {
     		return true;
     		
     	} else if (opponentTeamHealth == 0) {
-        	System.out.println("home: "+getTeamHealth(homeTeam));
-        	System.out.println("Opponent: "+getTeamHealth(opponentTeam));
-
     		this.homeWins++;
     		this.round++;
     		this.roundWinner = 1;

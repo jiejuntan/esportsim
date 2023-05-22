@@ -2,6 +2,8 @@ package main.model;
 
 import main.exceptions.GameOverException;
 import main.exceptions.GameOverException.Type;
+import main.exceptions.RandomEventException;
+import main.exceptions.RandomEventException.Event;
 
 /**
  * Model access point
@@ -34,29 +36,33 @@ public final class GameEnvironment {
     
     /**
      * Advances to next week in season and calls update methods.
-     * @throws GameOverException if all weeks have passed
+     * 
+     * @throws GameOverException 	if all weeks have passed
+     * @throws RandomEventException if random event occurs
      */
-    public void advanceWeek() throws GameOverException {
+    public void advanceWeek() throws GameOverException, RandomEventException {
     	data.nextWeek();
     	data.getTeam().resetStaminaAll();
     	stadium.updateMatches();
     	market.updateMarket(false);
     	
-    	// IMPLEMENT RANDOM EVENTS THROW EXCEPTION IF OCCURS
+    	RandomEvent randomEvent = new RandomEvent(data);
+    	int result = randomEvent.triggerEvent();
+    	switch (result) {	
+    	case 1:
+    		throw new RandomEventException(Event.ADD);
+    	case 2:
+    		throw new RandomEventException(Event.REMOVE);
+    	case 3:
+    		throw new RandomEventException(Event.STAT);
+		default:
+			break;
+    	}    	
     	
     	// If team has insufficient players, check if there are any available athletes the player can afford, otherwise end game
-    	if (data.getTeam().getMainTeamSize() < Team.MAIN_LIMIT) {
-    		if (market.getCheapestAthlete() == 0 || market.getCheapestAthlete() > data.getMoney()) {
-    			throw new GameOverException(Type.NO_TEAM_NO_MONEY);
-    		}
+    	if (!market.canPurchaseLegalTeam()) {
+    		throw new GameOverException(Type.NO_TEAM_NO_MONEY);
     	}
-    	
-    	//testing stamina and removing athletes
-//    	if (data.getCurrentWeek() % 2 == 1) {
-//    		data.getTeam().dropStaminaAll();
-//    		data.getTeam().removeAthlete(data.getTeam().getMainMembers().get(0));
-//    	}
-    	
     }
     
     /** 

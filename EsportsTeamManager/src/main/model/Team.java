@@ -442,7 +442,7 @@ public final class Team {
 	 * 
 	 * @return	number of athletes in reserve team
 	 */
-	private int getReserveTeamSize() {
+	public int getReserveTeamSize() {
 		return members.get(Role.RESERVE).size();
 	}
 	
@@ -454,7 +454,7 @@ public final class Team {
 	public boolean hasMinimumSize() {
 		return (getMainTeamSize() + getReserveTeamSize()) >= MIN_TEAM_SIZE;
 	}
-	
+
 	
 	/**
 	 * Checks if main team is full

@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import main.exceptions.GameOverException;
+import main.exceptions.RandomEventException;
 import main.gui.GameFrame;
 import main.gui.subclassable.Controller;
 import main.model.GameData;
@@ -100,6 +101,20 @@ public final class HomeController extends Controller {
 					}
 				} catch (GameOverException e1) {
 					toGameOverScreen();
+				} catch (RandomEventException e2) {
+					switch (e2.getEvent()) {
+					case ADD:
+						JOptionPane.showMessageDialog(panel, "A new team member has joined your team.", "Random event!", JOptionPane.ERROR_MESSAGE);
+						break;
+					case REMOVE:
+						JOptionPane.showMessageDialog(panel, "A member has left your team.", "Random event!", JOptionPane.ERROR_MESSAGE);
+						break;
+					case STAT:
+						JOptionPane.showMessageDialog(panel, "A member has improved their skills!", "Random event!", JOptionPane.ERROR_MESSAGE);
+						break;
+					default:
+						break;
+					}
 				}
 			}
 		});
