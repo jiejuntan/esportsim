@@ -33,7 +33,7 @@ class MatchTests {
 	    	do {
 	    	match.simulateRound();
 	    	outcome = match.getOutcome();
-	    	//System.out.println(match.getRoundResults());
+	    	System.out.println("******"+match.getOutcome());
 	    	
 	    	} while(outcome == -1);
 	    	
