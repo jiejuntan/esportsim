@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.exceptions.InventoryLimitException;
-import main.gui.GUIConstants;
 
 public final class Club {
 	

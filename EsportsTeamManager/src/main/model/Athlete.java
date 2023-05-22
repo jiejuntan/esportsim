@@ -42,9 +42,6 @@ public final class Athlete extends Purchasable {
     	setName(getRandomName());
     	setPortrait();
     	generateAthleteStats(currentWeek);
-    	
-    	// not needed for stats unless we want a chatgpt generated description
-    	setDescription();
     }
     
     /**
@@ -230,21 +227,4 @@ public final class Athlete extends Purchasable {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
-    /**
-     * Sets the athlete's description
-     */
-    public void setDescription() {
-    	super.description = String.format(
-    			"Reaction Time: %d<br>"
-    			+ "Eyesight: %d<br>"
-    			+ "Intelligence: %d<br>"
-    			+ "Stamina: %d", 
-    			reactionTime, eyeSight, intelligence, stamina);
-    }
-    
-	@Override
-    public String toString() {
-    	return super.getDescription();
-    }
 }
