@@ -121,6 +121,7 @@ public final class Match {
     		if (homePlayer.getReactionTime() >= opponentPlayer.getReactionTime()) {
     			//Player goes first
     			action(homePlayer, getHighestAggrolAthlete(opponentTeam));
+    			System.out.println(getRoundResults());
     			
     			//Opponent died select next opponent
     			if (!isPlayerAlive(opponentPlayer)) {
@@ -128,12 +129,13 @@ public final class Match {
     			}
     			
     			//Opponent now attacks
-    			action(opponentPlayer, getHighestAggrolAthlete(opponentTeam));
-    			
+    			action(opponentPlayer, getHighestAggrolAthlete(homeTeam));
+    			System.out.println(getRoundResults());
     			
     		} else {
     			//Opponent goes first
-    			action(opponentPlayer, getHighestAggrolAthlete(opponentTeam));
+    			action(opponentPlayer, getHighestAggrolAthlete(homeTeam));
+    			System.out.println(getRoundResults());
     			
     			//player died select next player
     			if (!isPlayerAlive(homePlayer)) {
@@ -142,6 +144,7 @@ public final class Match {
     			
     			//Player attacks
     			action(homePlayer, getHighestAggrolAthlete(opponentTeam));
+    			System.out.println(getRoundResults());
     		}
     		
     	} while(!isRoundOver());
@@ -164,12 +167,17 @@ public final class Match {
     	int playerTeamHealth = getTeamHealth(homeTeam);
     	int opponentTeamHealth = getTeamHealth(opponentTeam);
     	
-    	//Check Health and increase 
+    	//Check Health both teams health
+    	//If a team has killed the other team, round over, reset everybodies health
+    	//Increase wins
     	if (playerTeamHealth == 0 ) {
     		this.opponentWins++;
+    		resetTeamsHealth();
     		return true;
+    		
     	} else if (opponentTeamHealth == 0) {
     		this.homeWins++;
+    		resetTeamsHealth();
     		return true;
     	}
     	
@@ -210,6 +218,20 @@ public final class Match {
     	
     	
     	
+    }
+    
+    /**
+     * Resets both teams health
+     */
+    private void resetTeamsHealth() {
+    	//Resets homeTeam Health
+    	for (IngameCharacters player: homeTeam) {
+    		player.resetHealth();
+    	}
+    	//Resets opponentTeam health
+    	for (IngameCharacters player: opponentTeam) {
+    		player.resetHealth();
+    	}
     }
     
     /**

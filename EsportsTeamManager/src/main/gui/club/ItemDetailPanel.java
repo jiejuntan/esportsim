@@ -17,8 +17,7 @@ public final class ItemDetailPanel extends DetailPanel {
 		reactionBonusLabel.setVisible(true);
 		eyesightBonusLabel.setVisible(true);
 		intelligenceBonusLabel.setVisible(true);
-		staminaBonusLabel.setVisible(true);
-		
+		staminaLabel.setVisible(false);
 		confirmButton.setText("Use");
 	}
 
