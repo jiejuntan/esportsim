@@ -1,6 +1,7 @@
 package main.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -25,14 +26,16 @@ public final class Match {
     
     private int homeTurn;
     private int opponentTurn;
-    private int round;
 
-    private List<String> roundResults;
+    private String homeResults;
+    private String opponentResults;
+    
+	IngameCharacters homePlayer;
+	IngameCharacters opponentPlayer;
     
     public Match(GameData gameData, Team opponent) {
     	this.homeTurn = 0;
     	this.opponentTurn = 0;
-    	this.round = 0;
     	
     	this.outcome = -1;
     	
@@ -41,11 +44,38 @@ public final class Match {
     	
     	homeTeam = new ArrayList<IngameCharacters>();
     	opponentTeam = new ArrayList<IngameCharacters>();
-    	roundResults = new ArrayList<String>();
+    	homeResults = "";
+    	opponentResults = "";
     	
     	createIngameCharacters(gameData.getTeam(), opponent);
     	
     };
+    
+    /**
+     * For unit tests
+     * @param gameData
+     * @param home
+     * @param opponent
+     */
+    public Match(GameData gameData,  Team home, Team opponent) {
+    	this.homeTurn = 0;
+    	this.opponentTurn = 0;
+    	
+    	this.outcome = -1;
+    	
+    	this.difficulty = gameData.getDifficulty();
+    	calculateRewards(difficulty.getModifier());
+    	
+    	homeTeam = new ArrayList<IngameCharacters>();
+    	opponentTeam = new ArrayList<IngameCharacters>();
+    	homeResults = "";
+    	opponentResults = "";
+    	
+    	createIngameCharacters(home, opponent);
+    	
+    };
+    
+    
     
     
 	/**
@@ -133,26 +163,29 @@ public final class Match {
      * @return <CODE>int</CODE> Returns -1 if game is still going | 0 If player losses | 1 if player wins. 
      */
     public void simulateMatchup() {
-     	roundResults.clear();
      	turnCheck();
 
     	
     	//Both teams are already sorted from highest reaction time to lowest
     	//each round increment through the list of quickest chracters to the slowest
-    	IngameCharacters homePlayer = homeTeam.get(homeTurn);
-    	IngameCharacters opponentPlayer = opponentTeam.get(opponentTurn);
+    	homePlayer = homeTeam.get(homeTurn);
+    	opponentPlayer = opponentTeam.get(opponentTurn);
     	
     	//If a character is dead skip them
     	if (homePlayer.getHealth() <= 0) {
     		this.homeTurn++;
     		turnCheck();
+    		homePlayer = homeTeam.get(homeTurn);
+        	opponentPlayer = opponentTeam.get(opponentTurn);
     	} else if (opponentPlayer.getHealth() <= 0) {
     		this.opponentTurn++;
     		turnCheck();
+    		homePlayer = homeTeam.get(homeTurn);
+        	opponentPlayer = opponentTeam.get(opponentTurn);
     	}
     	
         //Determines the highest reaction time of both team characters to dermine who goes first
-        if (homePlayer.getReactionTime() > opponentPlayer.getReactionTime()) {
+        if (homePlayer.getReactionTime() >= opponentPlayer.getReactionTime()) {
         	//Home Team player was quicker, Will now pick opponent target with the highest aggro
             action(homePlayer, getHighestAggrolAthlete(opponentTeam));
             action(opponentPlayer, getHighestAggrolAthlete(homeTeam));
@@ -161,13 +194,9 @@ public final class Match {
         	//Opponent Team player was quicker, Will now pick opponent target with the highest aggro
             action(opponentPlayer, getHighestAggrolAthlete(homeTeam));
             action(homePlayer, getHighestAggrolAthlete(opponentTeam));
-            
-
         }
         
     	//Increments to the next matchup of characters
-    	this.round++;
-    	
     	this.homeTurn++;
     	this.opponentTurn++;
 
@@ -192,19 +221,33 @@ public final class Match {
      * @param damage
      * @param heals
      */
-    private void recordRoundResults(IngameCharacters currentPlayer, IngameCharacters target , int damage, int heals) {
+    private void recordRoundResults(IngameCharacters currentPlayer, IngameCharacters target , int damage, int support, boolean isTargetDead) {
     	
     	String currentPlayerName = currentPlayer.getName();
     	String targetName = target.getName();
     	String results = "";
     	
-    	if (heals == 0) {
-    		results = String.format("%s has attacked %s for %d damage!", currentPlayerName, targetName, damage) ;
+    	if (isTargetDead) {
+    		results = String.format("%s has killed %s!", currentPlayerName, targetName, damage) ;
     	} else {
-    		results = String.format("%s has attacked %s for %d damage!", currentPlayerName, targetName, heals) ;
+    		
+    		if (support > 0) {
+    			results = String.format("%s has buffed %s for %d damage!", currentPlayerName, targetName, damage);
+    		} else {
+    			results = String.format("%s has attacked %s for %d damage!", currentPlayerName, targetName, damage);
+    		}
+    		
     	}
     	
-    	roundResults.add(results);
+    	
+    	if (homeTeam.contains(currentPlayer)) {
+        	homeResults = results;
+        	
+    	} else {
+    		opponentResults = results;
+    	}
+    	
+    	
     	
     }
     
@@ -225,22 +268,20 @@ public final class Match {
      */
     public void action(IngameCharacters currentCharacter, IngameCharacters target) {
         Role role = currentCharacter.getRole();
+        
         int damage = 0;
         int newHealth = 0;
         
         switch (role) {
             case OFFENSE:
-                damage = currentCharacter.getIntelligence()+ currentCharacter.getDamage();
+                damage = currentCharacter.getIntelligence() + currentCharacter.getDamage();
                 newHealth = target.getHealth() - damage;
                 target.setHealth(newHealth > 0 ? newHealth : 0);
-                
-                recordRoundResults(currentCharacter,target,damage,0);
+
                 break;
            
             case SUPPORT:
-            	
-            	
-            	
+
                 // Support character heals a teammate, buffs an ally's stats, or debuffs an opponent's stats
 //                for (IngameCharacters character : homeTeam) {
 //                    if (character.getHealth() < character.getRole().getHealth()) {
@@ -248,21 +289,32 @@ public final class Match {
 //                    }
 //                }
                 damage = currentCharacter.getIntelligence()+ currentCharacter.getDamage();
-                
                 newHealth = target.getHealth() - damage;
                 target.setHealth(newHealth > 0 ? newHealth : 0);
-                recordRoundResults(currentCharacter,target,damage,0);
                 break;
+                
             case TANK:
                 damage = currentCharacter.getIntelligence()+ currentCharacter.getDamage();
                 newHealth = target.getHealth() - damage;
                 target.setHealth(newHealth > 0 ? newHealth : 0);
-                recordRoundResults(currentCharacter,target,damage,0);
+                
                 break;
             default:
                 // No action for an unknown role
                 break;
+                }
+        
+        //Record results of round
+        if (target.getHealth() == 0) {
+        	//Target has been killed
+        	playerDied(target);
+        	recordRoundResults(currentCharacter, target, damage ,0, true);
+        	removeCharacter(target);
+        	
+        } else {
+        	recordRoundResults(currentCharacter, target, damage ,0, false);
         }
+        
 
         // Reduce athlete's stamina after each action
         currentCharacter.setStamina(currentCharacter.getStamina() - 1);
@@ -282,6 +334,20 @@ public final class Match {
     		opponentTurn = 0;
     	}
     	
+    }
+    
+    private void playerDied(IngameCharacters killedPlayer) {
+    	if (killedPlayer == homePlayer) {
+        	this.homeTurn++;
+        	turnCheck();
+    		homePlayer = homeTeam.get(homeTurn);
+        	
+    		
+    	} else if (killedPlayer == opponentPlayer) {
+    		this.opponentTurn++;
+    		turnCheck();
+    		opponentPlayer = opponentTeam.get(opponentTurn);
+    	}
     }
     
     /**
@@ -318,6 +384,16 @@ public final class Match {
         return highestAggroCharacter;
     }
     
+    private void removeCharacter(IngameCharacters killedPlayer) {
+    	if (killedPlayer == homePlayer) {
+        	homeTeam.remove(killedPlayer);
+        	
+    		
+    	} else if (killedPlayer == opponentPlayer) {
+    		opponentTeam.remove(killedPlayer);
+    	}
+    }
+    
     
     /**
      * Gets the total health left in the team
@@ -351,7 +427,7 @@ public final class Match {
 	 * @return the roundResults
 	 */
 	public List<String> getRoundResults() {
-		return roundResults;
+		return Arrays.asList(homeResults, opponentResults);
 	}
 
 	/**

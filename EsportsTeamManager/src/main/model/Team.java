@@ -150,7 +150,9 @@ public final class Team {
 			}
 		}
 		
-		setLogo();
+		this.logoPath = GUIConstants.PORTRAIT_PLACEHOLDER;
+		
+		//setLogo();
 		this.wins = 0;
 		this.losses = 0;
     }
@@ -181,6 +183,7 @@ public final class Team {
 		}
 		members.get(role).add(athlete);
 		athlete.setRole(role);
+		
 	}
 	
 	/**
@@ -294,14 +297,14 @@ public final class Team {
      */
     private void setLogo() {
     	if (availableLogos.size() == 0) {
-    		availableLogos = IntStream.range(0, GUIConstants.PORTRAIT_COUNT).boxed().collect(Collectors.toCollection(ArrayList::new));
+    		availableLogos = IntStream.range(0, GUIConstants.LOGO_COUNT).boxed().collect(Collectors.toCollection(ArrayList::new));
     	}
     	Random random = new Random();
     	int index = random.nextInt(availableLogos.size());
     	int portrait = availableLogos.get(index);
     	availableLogos.remove(index);
     	
-    	this.logoPath = "/main/Resources/teamLogos/" + portrait + ".png";
+    	this.logoPath = "/main/Resources/logos/" + portrait + ".png";
     }
 
 	

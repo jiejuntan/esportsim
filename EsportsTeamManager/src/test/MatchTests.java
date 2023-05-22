@@ -24,15 +24,16 @@ class MatchTests {
 	        opponentTeam = new Team(3);
 	        
 	        gameData = new GameData();
-	        match = new Match(gameData, opponentTeam);
+	        match = new Match(gameData,homeTeam, opponentTeam);
 	    }
 	    
 	    @Test
 	    void playGame() {
 	    	int outcome = -1;
 	    	do {
-	    	outcome = match.simulateMatchup();
-	    	System.out.println(match.getRoundResults()+"\n");
+	    	match.simulateMatchup();
+	    	outcome = match.getOutcome();
+	    	System.out.println(match.getRoundResults());
 	    	
 	    	} while(outcome == -1);
 	    	
