@@ -24,6 +24,7 @@ public final class Match {
     private List<IngameCharacters> homeTeam;
     private List<IngameCharacters> opponentTeam;
     private int round;
+    private int teamTurn;
     
     private int opponentWins;
     private int homeWins;
@@ -117,8 +118,17 @@ public final class Match {
     	//Loops until all player of a team have been killed or all player in a team are out of stamina
     	do {
     		
-    		//Player with the fastest reaction time goes first
-    		if (homePlayer.getReactionTime() >= opponentPlayer.getReactionTime()) {
+    		//Sets the fatest character to go first  FUCK UP BALANCE SOMEHOW
+//    		if (homePlayer.getReactionTime() >= opponentPlayer.getReactionTime()) {
+//    			this.teamTurn = 0;
+//    		} else {
+//    			this.teamTurn = 1;
+//    		}
+    		
+    		
+    		
+    		if (teamTurn % 2 == 0) {
+    			
     			
     			//Player died select next opponent
     			if (!isPlayerAlive(homePlayer)) {
@@ -126,8 +136,13 @@ public final class Match {
     			}
     			//Player goes first
     			action(homePlayer, getHighestAggrolAthlete(opponentTeam));
+    			//Next players turn
+    			homePlayer = decideNextPlayer(homePlayer);
     			System.out.println(homeResults);
     			
+
+    		} else {
+
     			//Opponent died select next opponent
     			if (!isPlayerAlive(opponentPlayer)) {
     				opponentPlayer = decideNextPlayer(opponentPlayer);
@@ -135,36 +150,68 @@ public final class Match {
     			
     			//Opponent now attacks
     			action(opponentPlayer, getHighestAggrolAthlete(homeTeam));
+    			//Next players turn
+    			opponentPlayer = decideNextPlayer(opponentPlayer);
     			System.out.println(opponentResults);
-    			
-    		} else {
-    			
-    			//Opponent died select next opponent
-    			if (!isPlayerAlive(opponentPlayer)) {
-    				opponentPlayer = decideNextPlayer(opponentPlayer);
-    			}
-    			//Opponent goes first
-    			action(opponentPlayer, getHighestAggrolAthlete(homeTeam));
-    			System.out.println(opponentResults);
-    			
-    			//player died select next player
-    			if (!isPlayerAlive(homePlayer)) {
-    				homePlayer = decideNextPlayer(homePlayer);
-    			}
-    			
-    			//Player attacks
-    			action(homePlayer, getHighestAggrolAthlete(opponentTeam));
-    			System.out.println(homeResults);
-    			
-    		
     		}
-    		//Change the players for the next matchup
-    		homePlayer = decideNextPlayer(homePlayer);
-    		opponentPlayer = decideNextPlayer(opponentPlayer);
     		
+    		
+    		this.teamTurn++;
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+//    		//Player with the fastest reaction time goes first
+//    		if (homePlayer.getReactionTime() >= opponentPlayer.getReactionTime()) {
+//    			
+//    			//Player died select next opponent
+//    			if (!isPlayerAlive(homePlayer)) {
+//    				homePlayer = decideNextPlayer(homePlayer);
+//    			}
+//    			//Player goes first
+//    			action(homePlayer, getHighestAggrolAthlete(opponentTeam));
+//    			System.out.println(homeResults);
+//    			
+//    			//Opponent died select next opponent
+//    			if (!isPlayerAlive(opponentPlayer)) {
+//    				opponentPlayer = decideNextPlayer(opponentPlayer);
+//    			}
+//    			
+//    			//Opponent now attacks
+//    			action(opponentPlayer, getHighestAggrolAthlete(homeTeam));
+//    			System.out.println(opponentResults);
+//    			
+//    		} else {
+//    			
+//    			//Opponent died select next opponent
+//    			if (!isPlayerAlive(opponentPlayer)) {
+//    				opponentPlayer = decideNextPlayer(opponentPlayer);
+//    			}
+//    			//Opponent goes first
+//    			action(opponentPlayer, getHighestAggrolAthlete(homeTeam));
+//    			System.out.println(opponentResults);
+//    			
+//    			//player died select next player
+//    			if (!isPlayerAlive(homePlayer)) {
+//    				homePlayer = decideNextPlayer(homePlayer);
+//    			}
+//    			
+//    			//Player attacks
+//    			action(homePlayer, getHighestAggrolAthlete(opponentTeam));
+//    			System.out.println(homeResults);
+//    			
+//    		
+//    		}
+////    		Change the players for the next matchup
+//    		homePlayer = decideNextPlayer(homePlayer);
+//    		opponentPlayer = decideNextPlayer(opponentPlayer);
+//    		
     	} while(!isRoundOver());
     	
-    	this.round++;
+
     	
     	//Checks to see if match over conditions are meet
     	if (isMatchOver() != -1) {
@@ -188,12 +235,20 @@ public final class Match {
     	//If a team has killed the other team, round over, reset everybodies health
     	//Increase wins
     	if (playerTeamHealth == 0 ) {
+        	System.out.println("home: "+getTeamHealth(homeTeam));
+        	System.out.println("Opponent: "+getTeamHealth(opponentTeam));
+
     		this.opponentWins++;
+    		this.round++;
     		resetTeamsHealth();
     		return true;
     		
     	} else if (opponentTeamHealth == 0) {
+        	System.out.println("home: "+getTeamHealth(homeTeam));
+        	System.out.println("Opponent: "+getTeamHealth(opponentTeam));
+
     		this.homeWins++;
+    		this.round++;
     		resetTeamsHealth();
     		return true;
     	}
@@ -213,24 +268,22 @@ public final class Match {
     	int opponentTeamStamina = getTeamStamina(opponentTeam);
     	int matchSatus = -1;
     	
-    	if (playerTeamStamina == 0 ) {
-    		matchSatus = 0;
-    	} else if (opponentTeamStamina == 0) {
-    		matchSatus = 1;
+//    	if (playerTeamStamina == 0 ) {
+//    		matchSatus = 0;
+//    	} else if (opponentTeamStamina == 0) {
+//    		matchSatus = 1;
+//    	}
+    	
+    	if (homeWins == 2 || opponentWins == 2) {
+    		if (homeWins > opponentWins) {
+    			matchSatus = 1;
+    		} else {
+    			matchSatus = 0;
+    		}
     	}
     	
-    	//Checks to see if best of 3 rounds winning conditions are meet yet
-    	if (round < 2) {
-    		matchSatus = -1;
-        } else {
-            if (homeWins == 2) {
-            	matchSatus = 1;
-            } else if (opponentWins == 2) {
-            	matchSatus = 0;
-            } else {
-            	matchSatus = - 1;
-            }
-        }
+    
+        
     	return matchSatus;
     	
     	
@@ -261,6 +314,8 @@ public final class Match {
     	IngameCharacters returnPlayer = null;
     	int playerIndex = 0;
     	
+    	
+    	
     	//Check which team the next player is being decided for
     	if (homeTeam.contains(currentPlayer)) {
     		//Increase player index to currentPlayer + 1
@@ -269,15 +324,7 @@ public final class Match {
     		//Check if player index is greater than the length of the team and set to 0 if true
     		playerIndex = playerIndex > homeTeam.size() - 1? 0 : playerIndex;
     		
-    		
-    		//If player is not alive find the next player
-    		if (!isPlayerAlive(homeTeam.get(playerIndex))) {
-    			//Recursively finds the next alive player
-    			returnPlayer = decideNextPlayer(homeTeam.get(playerIndex));
-    		} else {
-    			//Sets the next player
-        		returnPlayer = homeTeam.get(playerIndex);
-    		}
+    		returnPlayer = homeTeam.get(playerIndex);
     		
     	} else {
     		//Increase player index to currentPlayer + 1
@@ -286,15 +333,15 @@ public final class Match {
     		//Check if player index is greater than the length of the team and set to 0 if true
     		playerIndex = playerIndex > opponentTeam.size() - 1? 0 : playerIndex;
     		
-    		
-    		if (!isPlayerAlive(opponentTeam.get(playerIndex))) {
-    			//Recursively finds the next alive player
-    			returnPlayer = decideNextPlayer(opponentTeam.get(playerIndex));
-    		} else {
-    			//Sets the next player
-        		returnPlayer = opponentTeam.get(playerIndex);
-    		}
+    		returnPlayer = opponentTeam.get(playerIndex);
+
     	}
+    	
+    	//Recursively finds the next alive player
+		if (!isPlayerAlive(returnPlayer)) {
+			
+			returnPlayer = decideNextPlayer(returnPlayer);
+		}
     	
     	return returnPlayer;
     }
@@ -307,14 +354,7 @@ public final class Match {
      * @return Character with the highest Aggro that is still alive
      */
     public IngameCharacters getHighestAggrolAthlete(List<IngameCharacters> characters) {
-    	IngameCharacters highestAggroCharacter = null;
-    	//find a character with health
-    	for (IngameCharacters character : characters) {
-    		if (isPlayerAlive(character)) {
-    			highestAggroCharacter = character;
-    		}
-    	}
-    	
+    	IngameCharacters highestAggroCharacter = decideNextPlayer(characters.get(0));
         
     	//Finds the character with the highest Aggro in the team
         for (IngameCharacters character : characters) {
@@ -330,8 +370,7 @@ public final class Match {
         return highestAggroCharacter;
     }
     
-    
-    
+
     
 	/**
      * 
@@ -397,8 +436,10 @@ public final class Match {
      * @return <CODE>bolean</CODE> 
      */
     private boolean isPlayerAlive(IngameCharacters player) {
-    	if (player.getHealth() == 0 || player.getLives() == 0 || player.getLives() - this.round != 3) {
+    	if (player.getHealth() == 0 || player.getLives() == 0) {
     		return false;
+    	} else if (player.getLives() + this.round != 3) { 
+    		return true;
     	} else { 
     		return true;}
     	
