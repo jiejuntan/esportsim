@@ -25,6 +25,9 @@ public final class Match {
     private List<IngameCharacters> opponentTeam;
     private int round;
     
+    private int opponentWins;
+    private int homeWins;
+    
 
     private String homeResults;
     private String opponentResults;
@@ -34,6 +37,9 @@ public final class Match {
     public Match(GameData gameData, Team opponent) {
     	this.round = 0;
     	this.outcome = -1;
+    	
+    	this.opponentWins = 0;
+    	this.homeWins = 0;
     	
     	this.difficulty = gameData.getDifficulty();
     	calculateRewards(difficulty.getModifier());
@@ -104,7 +110,7 @@ public final class Match {
     /**
      * Simulates a round between both teams
      */
-    public int simulateRound() {
+    public void simulateRound() {
     	IngameCharacters homePlayer = homeTeam.get(0);
     	IngameCharacters opponentPlayer = opponentTeam.get(0);
     	
@@ -140,39 +146,30 @@ public final class Match {
     		
     	} while(!isRoundOver());
     	
-    	
-    	
-    	
-    	
-  
-    	
+    	//Checks to see if match over conditions are meet
+    	if (isMatchOver() != -1) {
+    		this.outcome = isMatchOver();
+    	}
+
     }
     	
     
     /**
-     * Checks Both teams health and stamina to see if end of round conditions are meet
-     * 
-     * @return 
+     * Checks Both teams health to see if end of round conditions are meet
+     * Increases win count for team that won roound
+     * @return <CODE>boolean</CODE> 
      */
     public boolean isRoundOver() {
     	
     	int playerTeamHealth = getTeamHealth(homeTeam);
     	int opponentTeamHealth = getTeamHealth(opponentTeam);
-    	int playerTeamStamina = getTeamStamina(homeTeam);
-    	int opponentTeamStamina = getTeamStamina(opponentTeam);
     	
-    	
-    	//Check Health
+    	//Check Health and increase 
     	if (playerTeamHealth == 0 ) {
+    		this.opponentWins++;
     		return true;
     	} else if (opponentTeamHealth == 0) {
-    		return true;
-    	}
-    	
-    	//Check Stamina
-    	if (playerTeamStamina == 0 ) {
-    		return true;
-    	} else if (opponentTeamStamina == 0) {
+    		this.homeWins++;
     		return true;
     	}
     	
@@ -180,7 +177,38 @@ public final class Match {
     	
     }
     
+    /**
+     * Checks to see if a team has won best of 3 rounds or if a teams stamina is depleted
+     * 
+     * @return <CODE>int</CODE> returns -1 if match not over , Returns 1 if homeTeam won, Returns 0 if opponentTeam won
+     */
     public int isMatchOver() {
+    	
+    	int playerTeamStamina = getTeamStamina(homeTeam);
+    	int opponentTeamStamina = getTeamStamina(opponentTeam);
+    	int matchSatus = -1;
+    	
+    	if (playerTeamStamina == 0 ) {
+    		matchSatus = 0;
+    	} else if (opponentTeamStamina == 0) {
+    		matchSatus = 1;
+    	}
+    	
+    	//Checks to see if best of 3 rounds winning conditions are meet yet
+    	if (round < 2) {
+    		matchSatus = -1;
+        } else {
+            if (homeWins == 2) {
+            	matchSatus = 1;
+            } else if (opponentWins == 2) {
+            	matchSatus = 0;
+            } else {
+            	matchSatus = - 1;
+            }
+        }
+    	return matchSatus;
+    	
+    	
     	
     }
     
@@ -202,8 +230,16 @@ public final class Match {
     		//Check if player index is greater than the length of the team and set to 0 if true
     		playerIndex = playerIndex > homeTeam.size() - 1? 0 : playerIndex;
     		
-    		//Sets the next player
-    		returnPlayer = homeTeam.get(playerIndex);
+    		
+    		//If player is not alive find the next player
+    		if (!isPlayerAlive(homeTeam.get(playerIndex))) {
+    			//Recursively finds the next alive player
+    			returnPlayer = decideNextPlayer(homeTeam.get(playerIndex));
+    		} else {
+    			//Sets the next player
+        		returnPlayer = homeTeam.get(playerIndex);
+    		}
+    		
     	} else {
     		//Increase player index to currentPlayer + 1
     		playerIndex = opponentTeam.indexOf(currentPlayer) + 1;
@@ -213,6 +249,14 @@ public final class Match {
     		
     		//Sets the next player
     		returnPlayer = opponentTeam.get(playerIndex);
+    		
+    		if (!isPlayerAlive(opponentTeam.get(playerIndex))) {
+    			//Recursively finds the next alive player
+    			returnPlayer = decideNextPlayer(opponentTeam.get(playerIndex));
+    		} else {
+    			//Sets the next player
+        		returnPlayer = opponentTeam.get(playerIndex);
+    		}
     	}
     	
     	return returnPlayer;
@@ -289,43 +333,30 @@ public final class Match {
 			break;
                 }
         
-        //Record results of round
+        //If player died reduce lives and stamina, also record battle results
         if (isPlayerAlive(target)) {
         	//Target has been killed
-        	playerDied(target);
+        	target.setLives(target.getLives() - 1);
+        	target.setStamina(target.getStamina() - 1);
         	recordRoundResults(currentPlayer, target, damage ,0, true);
         	
         } else {
         	recordRoundResults(currentPlayer, target, damage ,0, false);
         }
         
-
-        
     }  
-    
-    
-    /**
-     * Things to do when a player is killed
-     * 
-     * @param killedPlayer
-     */
-    private void playerDied(IngameCharacters killedPlayer) {
-    	//Reduce the player Lives
-    	killedPlayer.setLives(killedPlayer.getLives() - 1);
-    	
-    	//Reduce the players Stamina
-    	killedPlayer.setStamina(killedPlayer.getStamina() - 1);
-    }
+  
     
     /**
-     * Returns a boolean true if player alive, false if dead
+     * Returns false if player has 0 lives or 0 health, else returns true
      * @param player
      * @return <CODE>bolean</CODE> 
      */
     private boolean isPlayerAlive(IngameCharacters player) {
-    	if (player.getHealth() > 0) {
-    		return true;
-    	} else { return false;}
+    	if (player.getHealth() == 0 || player.getLives() == 0) {
+    		return false;
+    	} else { 
+    		return true;}
     	
     }
     
@@ -440,23 +471,5 @@ public final class Match {
 	public int getOutcome() {
 		return outcome;
 	}
-
-	/**
-	 * @return the homeTurn
-	 */
-	public int getHomeTurn() {
-		return homeTurn;
-	}
-
-	/**
-	 * @return the opponentTurn
-	 */
-	public int getOpponentTurn() {
-		return opponentTurn;
-	}
-	
-	
-	
-	
 	
 }
