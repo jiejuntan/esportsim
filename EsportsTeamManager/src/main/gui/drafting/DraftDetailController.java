@@ -208,6 +208,7 @@ public class DraftDetailController extends DetailController {
 	
 	/**
 	 * Launches screen to choose athlete in team to swap roles with drafted athlete
+	 * @param athlete athlete to initiate role swap
 	 */
 	protected void toRoleSwapScreen(Athlete athlete) {
 		frame.toRoleSwapScreen(athlete);

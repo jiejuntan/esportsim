@@ -168,6 +168,7 @@ public class ClubDetailController extends DetailController {
 	
 	/**
 	 * Launches screen to choose athlete in team to swap roles with current athlete
+	 * @param athlete athlete to initiate role swap
 	 */
 	private void toRoleSwapScreen(Athlete athlete) {
 		frame.toClubRoleSwapScreen(athlete);

@@ -77,16 +77,47 @@ public final class Team {
 	 * Defines the Athletes Roles and the stats of each role
 	 */
 	public enum Role {
+		/**
+		 * Offense role enum
+		 */
 		OFFENSE(1, 3, "eyeSight", "reactionTime"), 
+		/**
+		 * Support role enum
+		 */
 		SUPPORT(2, 2, "intelligence", "eyeSight"), 
+		/**
+		 * Tank role enum
+		 */
 		TANK(3, 1, "reactionTime", "intelligence"), 
+		/**
+		 * Reserve role enum
+		 */
 		RESERVE(0, 0, "", "");
-
+		
+		/**
+		 * How fast the role attacks
+		 */
 		private final int speed;
+		/**
+		 * How much the role is targeted
+		 */
 		private final int aggro;
+		/**
+		 * Primary stat of role
+		 */
 		private final String primaryStat;
+		/**
+		 * Secondary stat of role
+		 */
 		private final String secondaryStat;
-
+		
+		/**
+		 * Constructor for role enum
+		 * @param speed		how fast the role attacks
+		 * @param aggro		how much the role is attacked
+		 * @param primary	primary stat of role
+		 * @param secondary	secondary stat of role
+		 */
 		Role(int speed, int aggro, String primary, String secondary) {
 			this.speed = speed;
 			this.aggro = aggro;
@@ -95,7 +126,7 @@ public final class Team {
 		}
 
 		/**
-		 * @return <CODE>int</CODE> Role speed
+		 * @return speed of role
 		 */
 		public int getSpeed() {
 			return speed;
@@ -103,7 +134,7 @@ public final class Team {
 
 		/**
 		 * 
-		 * @return <CODE>int</CODE> Role Aggro
+		 * @return aggro of role
 		 */
 		public int getAggro() {
 			return aggro;
@@ -317,7 +348,7 @@ public final class Team {
 	/**
 	 * Gets the Team main Athletes
 	 * 
-	 * @return <CODE>HashMap<Role, Athlete></CODE> TeamMembers
+	 * @return team members hash map
 	 */
 	public HashMap<Role, List<Athlete>> getTeamMembers() {
 		return members;
@@ -486,7 +517,7 @@ public final class Team {
     /**
      * Gets the Team Wins
      * 
-     * @return <CODE>int</CODE> Wins
+     * @return number of wins
      */
     public int getWins() {
 		return wins;
@@ -494,17 +525,15 @@ public final class Team {
 
 	/**
 	 * Adds a single Win to the Team
-	 * 
-	 * @param <CODE>int</CODE> Wins
 	 */
-	public void addWin(int wins) {
+	public void addWin() {
 		this.wins++;
 	}
 
 	/**
 	 * Gets the Team Losses
 	 * 
-	 * @return <CODE>int</CODE> Losses
+	 * @return number of losses
 	 */
 	public int getLosses() {
 		return losses;
@@ -512,10 +541,8 @@ public final class Team {
 
 	/**
 	 * Adds a loss to the players team
-	 * 
-	 * @param <CODE>int</CODE> losses
 	 */
-	public void addLoss(int losses) {
+	public void addLoss() {
 		this.losses++;
 	}
 

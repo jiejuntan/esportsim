@@ -18,6 +18,9 @@ import main.model.Team;
  */
 public final class StadiumController extends ThumbnailController {
 	
+	/**
+	 * List of matches available
+	 */
 	List<Team> opponentTeams;
 
 	/**
@@ -73,7 +76,9 @@ public final class StadiumController extends ThumbnailController {
 		confirmButton.setVisible(false);
 	}
 	
-
+	/**
+	 * Initializes back button to return
+	 */
 	private void initializeBackButton() {
 		JButton backButton = ((StadiumPanel) panel).getBackButton();
 		backButton.addActionListener(new ActionListener() {
@@ -85,6 +90,7 @@ public final class StadiumController extends ThumbnailController {
 	
 	/**
 	 * Closes stadium screen and launches the team details Screen
+	 * @param team team to view
 	 */
 	private void toTeamDetailsScreen(Team team) {
 		frame.toTeamDetailsScreen(team);

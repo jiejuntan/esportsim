@@ -25,38 +25,111 @@ import main.model.Team.Role;
  */
 public class DetailPanel extends BasePanel {
 	
-	// Gettable components for controller manipulation. Protected properties are also exposed to subclasses.
+	/**
+	 *  Gettable components for controller manipulation. Protected properties are also exposed to subclasses.
+	 */
 	private JFrame frame;
+	/**
+	 *  Title text field
+	 */
 	private JTextField nameTextField;
+	/**
+	 *  Title button
+	 */
 	private JButton changeNameButton;
+	/**
+	 *  Tip label for editing names
+	 */
 	protected JLabel editTipLabel;
+	/**
+	 *  Label to hold image
+	 */
 	private JLabel portraitLabel;
 	
+	/**
+	 *  Label for reaction time text
+	 */
 	private JLabel reactionLabel;
+	/**
+	 *  Label for eyesight text
+	 */
 	private JLabel eyesightLabel;
+	/**
+	 *  Label for intelligence text
+	 */
 	protected JLabel intelligenceLabel;
+	/**
+	 *  Label for stamina text
+	 */
 	protected JLabel staminaLabel;
 	
+	/**
+	 *  Label for stamina value
+	 */
 	protected JLabel reactionValueLabel;
+	/**
+	 *  Label for eyesight value
+	 */
 	protected JLabel eyesightValueLabel;
+	/**
+	 *  Label for intelligence value
+	 */
 	protected JLabel intelligenceValueLabel;
+	/**
+	 *  Label for stamina value
+	 */
 	protected JLabel staminaValueLabel;
+	/**
+	 *  Label for bonus reaction time value
+	 */
 	protected JLabel reactionBonusLabel;
+	/**
+	 *  Label for bonus eyesight value
+	 */
 	protected JLabel eyesightBonusLabel;
+	/**
+	 *  Label for bonus intelligence value
+	 */
 	protected JLabel intelligenceBonusLabel;
+	/**
+	 *  Label for bonus stamina value
+	 */
 	protected JLabel staminaBonusLabel;
+	
+	/**
+	 *  Label for role text
+	 */
 	protected JLabel roleLabel;
+	/**
+	 *  Label for role combo box
+	 */
 	protected JComboBox roleComboBox;
+	/**
+	 *  Label for role value
+	 */
 	protected JLabel roleValueLabel;
+	
+	/**
+	 *  Label for price text
+	 */
 	protected JLabel priceLabel;
+	/**
+	 *  Label for price value
+	 */
 	protected JLabel priceValueLabel;
 	
+	/**
+	 *  Back button to return
+	 */
 	private JButton backButton;
+	/**
+	 *  Confirm button to perform action
+	 */
 	protected JButton confirmButton;
 	
-	// Exposed components to toggle visibility in subclasses	
-	
-	// Prevent instantiation without subclassing
+	/**
+	 * Constructor for detail panel during subclassing
+	 */
 	@SuppressWarnings("unchecked")
 	protected DetailPanel() {
 		GridBagLayout gbl_panel = new GridBagLayout();

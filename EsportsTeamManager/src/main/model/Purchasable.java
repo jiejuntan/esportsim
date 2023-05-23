@@ -1,9 +1,22 @@
 package main.model;
 
+/**
+ * Purchasable class for athletes and items.
+ * 
+ * @author Jiejun Tan
+ *
+ */
 public abstract class Purchasable {
 	
+	/**
+	 * Image path for purchase
+	 */
 	protected String portraitPath;
 	
+	/**
+	 * Required method to get base price of purchase
+	 * @return	base price of purchase
+	 */
     public abstract int getBasePrice();
     
     /**

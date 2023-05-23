@@ -17,9 +17,9 @@ public final class IO {
 	/**
 	 * Reads a text that contains comma separated data from a file and returns it as a String Array
 	 * 
-	 * @param <CODE>String</CODE> filename file path
-	 * @return <CODE>String[]</CODE>String Array of text
-	 * @throws IOException	TODO
+	 * @param fileName 		file path
+	 * @return 				Array of text
+	 * @throws IllegalArgumentException	if error retrieving resource stream
 	 */
 	public InputStream getFileFromResourceAsStream(String fileName) {
         InputStream inputStream = getClass().getResourceAsStream(fileName);
@@ -30,6 +30,11 @@ public final class IO {
         }
     }
 	
+	/**
+	 * Gets string from input stream
+	 * @param is	input stream
+	 * @return		string produced
+	 */
     public String getString(InputStream is) {
         try (InputStreamReader streamReader =
                     new InputStreamReader(is, StandardCharsets.UTF_8);

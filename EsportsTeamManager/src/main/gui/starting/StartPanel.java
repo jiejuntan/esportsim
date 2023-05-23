@@ -19,6 +19,9 @@ import main.gui.subclassable.BackgroundPanel;
 public final class StartPanel extends BackgroundPanel {
 
 	// Gettable components for controller manipulation. Protected properties are also exposed to subclasses.
+	/**
+	 * New game button
+	 */
 	private JButton newGameButton;
 	
 	/**

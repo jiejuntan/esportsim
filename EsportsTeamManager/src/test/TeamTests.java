@@ -121,14 +121,14 @@ class TeamTests {
     @Test
     void testAddWin() {
         int initialWins = team.getWins();
-        team.addWin(1);
+        team.addWin();
         assertEquals(initialWins + 1, team.getWins());
     }
 
     @Test
     void testAddLoss() {
         int initialLosses = team.getLosses();
-        team.addLoss(1);
+        team.addLoss();
         assertEquals(initialLosses + 1, team.getLosses());
     }
 

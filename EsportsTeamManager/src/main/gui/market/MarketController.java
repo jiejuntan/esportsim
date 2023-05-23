@@ -165,6 +165,7 @@ public final class MarketController extends ThumbnailController {
 	
 	/**
 	 * Closes current screen and launches detailed buy/sell view of selected athlete.
+	 * @param athlete to view
 	 */
 	private void toAthleteScreen(Athlete athlete) {
 		if (isSelling) {
@@ -176,6 +177,7 @@ public final class MarketController extends ThumbnailController {
 	
 	/**
 	 * Closes current screen and launches detailed buy/sell view of selected item.
+	 * @param item item to view
 	 */
 	private void toItemScreen(Item item) {
 		if (isSelling) {

@@ -10,15 +10,40 @@ import main.model.Team.Role;
  */
 public final class IngameCharacter {
 	
+	/**
+	 * Athlete playing the character
+	 */
 	private Athlete athlete;
+	/**
+	 * Name of athlete
+	 */
 	private String name;
+	/**
+	 * Role of athlete
+	 */
     private Role role;
 
+    /**
+     * Health of character
+     */
     private int health = 100;
+    /**
+     * Strength of character
+     */
     private int power;
+    /**
+     * Ability of character to draw focus
+     */
     private int aggro;
+    /**
+     * How quickly the character can take their turn
+     */
     private int speed;
     
+    /**
+     * Constructor for characters during a match
+     * @param athlete athlete to construct character for
+     */
 	public IngameCharacter(Athlete athlete) {
 		this.athlete = athlete;
 		this.name = athlete.getName();

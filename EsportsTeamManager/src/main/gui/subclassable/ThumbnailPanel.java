@@ -26,7 +26,7 @@ public class ThumbnailPanel extends BasePanel {
 	protected JButton backButton;
 	protected JButton confirmButton;
 	protected JLabel titleLabel;
-	protected JLabel subheadingLabel1;
+	protected JLabel subheadingLabel1; 	
 	protected JLabel subheadingLabel2;
 	
 	// Exposed components to toggle visibility in subclasses

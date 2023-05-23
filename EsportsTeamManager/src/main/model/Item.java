@@ -13,11 +13,22 @@ import main.gui.GUIConstants;
  */
 public final class Item extends Purchasable { 
 
-private TrainingItem equipment;
+	/**
+	 * Item enum representing item
+	 */
+	private TrainingItem equipment;
 	
-	// Storing enum strings as constants to avoid typos
+	/**
+	 *  Reaction time as a constant string
+	 */
 	public static final String REACTION_TIME = "reactionTime";
+	/**
+	 *  Eyesight as a constant string
+	 */
 	public static final String EYESIGHT = "eyeSight";
+	/**
+	 *  Intelligence as a constant string
+	 */
 	public static final String INTELLIGENCE = "intelligence";
 	
     /**
@@ -35,22 +46,65 @@ private TrainingItem equipment;
 	 * This holds the data of the training items
 	 */
 	public enum TrainingItem {
+		/**
+		 *  Vitamins details
+		 */
 		VITAMINS("\"Vitamins\"", REACTION_TIME, 15, INTELLIGENCE, -5, "vitamins.png"),
+		/**
+		 *  Gaming headset details
+		 */
 		GAMING_HEADSET("Gaming Headset", EYESIGHT, 15, INTELLIGENCE, -5, "headset.png"),
-
+		/**
+		 *  Gaming chair details
+		 */
 		GAMING_CHAIR("Gaming Chair", EYESIGHT, 15, REACTION_TIME, -5, "chair.png"),
+		/**
+		 *  Healthy snack details
+		 */
 		HEALTHY_SNACK("Healthy Snack", INTELLIGENCE, 15, REACTION_TIME, -5, "snack.png"),
-		
+		/**
+		 *  Performance monitor details
+		 */
 		PERFORMANCE_MONITOR("Performance Monitor", REACTION_TIME, 15, EYESIGHT, -5, "monitor.png"),
+		/**
+		 *  Gaming keyboard details
+		 */
 		GAMING_KEYBOARD("Gaming Keyboard", INTELLIGENCE, 15, EYESIGHT, -5, "keyboard.png"),;
 		
+		/**
+		 *  Name of item
+		 */
 		private final String name;
+		/**
+		 *  Stat item increases
+		 */
 	    private final String positiveStat;
+	    /**
+	     *  Value of increase
+	     */
 	    private final int positiveValue;
+	    /**
+	     *  Stat item decreases
+	     */
 	    private final String negativeStat;
+	    /**
+	     *  Value of decrease
+	     */
 	    private final int negativeValue;
+	    /**
+	     *  Path of item image
+	     */
 	    private final String imgPath;
-
+	    
+	    /**
+	     *  Constructor for item enums
+	     * @param name			item name as string
+	     * @param positiveStat	stat the item increases
+	     * @param positiveValue	value of increase
+	     * @param negativeStat	stat the item decreases
+	     * @param negativeValue	value of decrease
+	     * @param imgPath		path of item image
+	     */
 	    TrainingItem(String name, String positiveStat, int positiveValue, String negativeStat, int negativeValue, String imgPath) {
 	    	this.name = name;
 	        this.positiveStat = positiveStat;
@@ -109,7 +163,7 @@ private TrainingItem equipment;
     /**
      * Returns the item
      * 
-     * @return <CODE>TrainingItem</CODE> item
+     * @return item
      */
     public TrainingItem getItem() {
     	return equipment;
@@ -118,7 +172,7 @@ private TrainingItem equipment;
 	/**
 	 * Calculates Base Price of the equipment
 	 * 
-	 * @return <CODE>int</CODE> base price
+	 * @return base price
 	 */
 	@Override
 	public int getBasePrice() {

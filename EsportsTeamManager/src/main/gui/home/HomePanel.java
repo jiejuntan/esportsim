@@ -19,14 +19,37 @@ import main.gui.subclassable.BasePanel;
  */
 public final class HomePanel extends BasePanel {
 	
-	// Gettable components for controller manipulation. Protected properties are also exposed to subclasses.
+	/**
+	 *  Gettable components for controller manipulation. Protected properties are also exposed to subclasses.
+	 */
 	private JLabel weekLabel;
+	/**
+	 *  Label for displaying money
+	 */
 	private JLabel moneyLabel;
+	/**
+	 *  Label to display wins
+	 */
 	private JLabel winsLabel;
+	/**
+	 *  Label to display losses
+	 */
 	private JLabel lossesLabel;
+	/**
+	 *  Button to go to club
+	 */
 	private JButton clubButton;
+	/**
+	 *  Button to go to stadium
+	 */
 	private JButton stadiumButton;
+	/**
+	 *  Button to go to market
+	 */
 	private JButton marketButton;
+	/**
+	 *  Button to advance to next week
+	 */
 	private JButton endWeekButton;
 	
 	/**

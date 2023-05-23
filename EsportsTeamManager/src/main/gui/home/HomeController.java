@@ -150,6 +150,9 @@ public final class HomeController extends Controller {
 		frame.toTrainAthleteScreen();
 	}
 	
+	/**
+	 * Launches game over screen
+	 */
 	private void toGameOverScreen() {
 		frame.toGameOverScreen();
 	}

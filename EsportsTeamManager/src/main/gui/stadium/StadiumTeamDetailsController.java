@@ -27,7 +27,7 @@ public final class StadiumTeamDetailsController extends DetailController {
 	 * Constructor when drafting
 	 * 
 	 * @param frame 	game frame
-	 * @param athlete 	Athlete to view
+	 * @param team 		team to view
 	 */
 	public StadiumTeamDetailsController(GameFrame frame, Team team) {
 		super(frame);

@@ -6,11 +6,15 @@ import java.util.List;
 import java.util.Random;
 
 import main.exceptions.IllegalFundsException;
-import main.exceptions.IllegalTeamException;
 import main.exceptions.InventoryLimitException;
 import main.exceptions.TeamLimitException;
 import main.model.Team.Role;
 
+/**
+ * Market class for buying and selling athletes and items.
+ * @author Jiejun Tan
+ *
+ */
 public final class Market {
 	
 	/**
@@ -89,7 +93,6 @@ public final class Market {
      * 
      * @throws IllegalFundsException 	if insufficient money
      * @throws TeamLimitException 		if whole team or main team is full
-     * @throws IllegalTeamException 	if adding as reserve while main team is not full
      */
     public void purchaseAthlete(Athlete athlete, Role role, String newName) throws IllegalFundsException, TeamLimitException {
     	int money = data.getMoney();

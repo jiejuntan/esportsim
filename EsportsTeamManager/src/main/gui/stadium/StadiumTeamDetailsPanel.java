@@ -10,6 +10,9 @@ import main.gui.subclassable.DetailPanel;
  */
 public final class StadiumTeamDetailsPanel extends DetailPanel{
 	
+	/**
+	 * Constructor for viewing opponent team details
+	 */
 	public StadiumTeamDetailsPanel() {
 		reactionValueLabel.setVisible(true);
 		eyesightValueLabel.setVisible(true);

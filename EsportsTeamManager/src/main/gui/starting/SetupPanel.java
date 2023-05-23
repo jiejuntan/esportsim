@@ -26,10 +26,25 @@ import main.gui.subclassable.BasePanel;
 public final class SetupPanel extends BasePanel {
 	
 	// Gettable components for controller manipulation. Protected properties are also exposed to subclasses.
+	/**
+	 * Team name text field
+	 */
 	private JTextField teamNameTextField;
+	/**
+	 * Season duration slider
+	 */
 	private JSlider durationSlider;
+	/**
+	 * Easy difficulty toggle
+	 */
 	private JToggleButton easyToggleButton;
+	/**
+	 * Hard difficulty toggle
+	 */
 	private JToggleButton hardToggleButton;
+	/**
+	 * Confirm options button
+	 */
 	private JButton confirmButton;
 	
 	/**

@@ -12,8 +12,22 @@ public class RandomEventException extends Exception {
 	 *	Type of event
 	 */
 	public enum Event {
-		ADD, REMOVE, STAT
+		/**
+		 * Athlete added
+		 */
+		ADD, 
+		/**
+		 * Athlete removed
+		 */
+		REMOVE, 
+		/**
+		 * Stat of athlete increased
+		 */
+		STAT
 	}
+	/**
+	 * Property for event type
+	 */
 	private Event event;
 	
 	/**
@@ -25,6 +39,7 @@ public class RandomEventException extends Exception {
 	}
 	
 	/**
+	 * Gets event
 	 * @return the type
 	 */
 	public Event getEvent() {

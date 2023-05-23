@@ -14,12 +14,31 @@ public class GameOverException extends Exception {
 	 *	How the game or match ended
 	 */
 	public enum Type {
-		FINISHED, NO_TEAM_NO_MONEY, MATCH_WON, MATCH_LOST
+		/**
+		 *  All weeks passed
+		 */
+		FINISHED, 
+		/**
+		 *  Not enough members and not enough money
+		 */
+		NO_TEAM_NO_MONEY, 
+		/**
+		 *  Match won
+		 */
+		MATCH_WON, 
+		/**
+		 *  Match lost
+		 */
+		MATCH_LOST
 	}
+	/**
+	 * Property storing how the game or match ended
+	 */
 	private Type type;
 	
 	/**
 	 * Constructs exception
+	 * @param type how the game or match ended
 	 */
 	public GameOverException(Type type) {
 		super();

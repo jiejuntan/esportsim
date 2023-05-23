@@ -10,7 +10,9 @@ import main.gui.subclassable.ThumbnailPanel;
  */
 public final class StadiumPanel extends ThumbnailPanel {
 	
-	
+	/**
+	 * Constructor for viewing matches panel
+	 */
 	public StadiumPanel() {
 		titleLabel.setText("Stadium");
 		disableBottomThumbs();

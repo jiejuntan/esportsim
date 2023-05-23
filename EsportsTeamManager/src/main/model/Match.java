@@ -187,10 +187,10 @@ public final class Match {
     	} else {
     		// Game is over, check which team won and act accordingly
     		if (playerTeam.size() == 0) {
-    			data.getTeam().addLoss(1);
+    			data.getTeam().addLoss();
     			throw new GameOverException(Type.MATCH_LOST);
     		} else {
-    			data.getTeam().addWin(1);
+    			data.getTeam().addWin();
     			data.incrementMoney(data.getDifficulty().prizeMoney);
     			throw new GameOverException(Type.MATCH_WON);
 

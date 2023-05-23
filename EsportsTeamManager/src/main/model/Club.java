@@ -5,6 +5,11 @@ import java.util.List;
 
 import main.exceptions.InventoryLimitException;
 
+/**
+ * Club to store and use items
+ * @author Jiejun Tan
+ *
+ */
 public final class Club {
 	
 	/**
@@ -12,6 +17,9 @@ public final class Club {
 	 */
     private List<Item> inventory;
     
+    /**
+     * Constructs club and initializes inventory
+     */
     public Club() {
     	this.inventory = new ArrayList<Item>();
     }

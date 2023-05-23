@@ -60,7 +60,7 @@ public final class GameFrame {
 	
 	/**
 	 * Get the game environment.
-	 * @return
+	 * @return	game environment
 	 */
 	public GameEnvironment getGame() {
 		return game;
@@ -108,6 +108,7 @@ public final class GameFrame {
 	
 	/**
 	 * Launch the screen to swap specified Athlete in draft.
+	 * @param athlete athlete to initiate swap
 	 */
 	public void toRoleSwapScreen(Athlete athlete) {
 		new RoleSwapController(this, athlete);
@@ -155,6 +156,7 @@ public final class GameFrame {
 	
 	/**
 	 * Launch the screen to swap specified Athlete in club.
+	 * @param athlete athlete to view
 	 */
 	public void toClubRoleSwapScreen(Athlete athlete) {
 		new ClubRoleSwapController(this, athlete);
@@ -215,6 +217,7 @@ public final class GameFrame {
 	
 	/**
 	 * Launch the screen to swap specified Athlete in market.
+	 * @param athlete athlete to initiate swap
 	 */
 	public void toMarketRoleSwapScreen(Athlete athlete) {
 		new MarketRoleSwapController(this, athlete);
@@ -256,6 +259,7 @@ public final class GameFrame {
 	
 	/**
 	 * Launch the stadium team details screen.
+	 * @param team opponent team to view
 	 */
 	public void toTeamDetailsScreen(Team team) {
 		new StadiumTeamDetailsController(this, team);
@@ -264,6 +268,7 @@ public final class GameFrame {
 	
 	/**
 	 * Launch the match screen.
+	 * @param team team to play match against
 	 */
 	public void toMatchScreen(Team team) {
 		new MatchController(this, team);
@@ -326,6 +331,7 @@ public final class GameFrame {
 
 	/**
 	 * Launch the application.
+	 * @param args args for launching
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

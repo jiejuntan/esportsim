@@ -15,14 +15,39 @@ public final class GameData {
      * Enum for difficulty setting
      */
     public enum Difficulty {
+    	/**
+    	 *  Easy setting
+    	 */
     	EASY("Easy", 5000, 1500, 1),
+    	/**
+    	 *  Hard setting
+    	 */
     	HARD("Hard", 5000, 1000, 2);
     	
+    	/**
+    	 *  Difficulty as string
+    	 */
     	public final String asString;
+    	/**
+    	 *  Starting amount of money
+    	 */
     	public final int startingMoney;
+    	/**
+    	 *  Prize money for winning
+    	 */
     	public final int prizeMoney;
+    	/**
+    	 *  Difficulty modifier for prices
+    	 */
     	public final int modifier;
-
+    	
+    	/**
+    	 *  Constructor for difficulty enum
+    	 * @param asString		difficulty string
+    	 * @param startingMoney	amount of starting money
+    	 * @param prizeMoney	amount of prize money for winning
+    	 * @param modifier		modifier for difficulty
+    	 */
 		private Difficulty(String asString, int startingMoney, int prizeMoney, int modifier) {
     		this.asString = asString;
     		this.startingMoney = startingMoney;

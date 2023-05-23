@@ -113,6 +113,7 @@ public final class DraftController extends ThumbnailController {
 	
 	/**
 	 * Closes current screen and launches detailed view of selected athlete.
+	 * @param athlete athlete to view
 	 */
 	private void toAthleteScreen(Athlete athlete) {
 		frame.toDraftDetailScreen(athlete);

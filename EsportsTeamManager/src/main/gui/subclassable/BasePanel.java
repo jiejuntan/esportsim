@@ -24,16 +24,28 @@ public class BasePanel extends JPanel {
 		this.setBackground(GUIConstants.BACKGROUND_SOLID);
 	}
 	
+	/**
+	 * Performs common setup methods for titles
+	 * @param title	title to setup
+	 */
 	protected void setupTitle(JLabel title) {
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.HEADING));
 	}
 	
+	/**
+	 * Performs common setup methods for subheadings
+	 * @param subheading	subheading to setup
+	 */
 	protected void setupSubheading(JLabel subheading) {
 		subheading.setHorizontalAlignment(SwingConstants.CENTER);
 		subheading.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.SUBHEADING));
 	}
 	
+	/**
+	 * Performs common setup methods for buttons
+	 * @param button	button to setup
+	 */
 	protected void setupButton(JButton button) {
 		button.setBorder(GUIConstants.PORTRAIT_BORDER_SMALL);
 		button.setPreferredSize(new Dimension(250, 50));
@@ -42,6 +54,9 @@ public class BasePanel extends JPanel {
 		button.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
 	}
 	
+	/**Performs common setup methods for thumbnails
+	 * @param button	thumbnail to setup
+	 */
 	protected void setupThumbnail(JButton button) {
 		button.setPreferredSize(new Dimension(GUIConstants.PORTRAIT_SMALL, GUIConstants.PORTRAIT_SMALL));
 		button.setBorder(GUIConstants.PORTRAIT_BORDER_SMALL);

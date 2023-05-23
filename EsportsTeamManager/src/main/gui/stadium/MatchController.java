@@ -34,6 +34,7 @@ public final class MatchController extends Controller {
 	 * Constructor for match screen.
 	 * 
 	 * @param frame game frame to manage navigation
+	 * @param opponent opponent team to play match against
 	 */
 	public MatchController(GameFrame frame, Team opponent) {
 		super(frame);

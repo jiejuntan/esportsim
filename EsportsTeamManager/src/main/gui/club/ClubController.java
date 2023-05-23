@@ -132,6 +132,7 @@ public class ClubController extends ThumbnailController {
 	
 	/**
 	 * Closes current screen and launches detailed view of selected athlete.
+	 * @param athlete	athlete to view details of
 	 */
 	protected void toAthleteScreen(Athlete athlete) {
 		frame.toClubDetailScreen(athlete);
