@@ -8,15 +8,30 @@ import main.model.Item;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+/**
+ * Junit class for testing Item Class
+ * 
+ * @author blake
+ *
+ */
 public class ItemTests {
 
+    /**
+     * Item  Object
+     */
     private Item item;
 
+    /**
+     * Setup for tests 
+     */
     @BeforeEach
     public void setUp() {
         item = new Item();
     }
 
+    /**
+     * Tests to see if equipment is randomly generated
+     */
     @Test
     public void testEquipmentIsRandomlyGenerated() {
         Item otherItem = new Item();
@@ -27,11 +42,14 @@ public class ItemTests {
             }
             otherItem = new Item();
         }
-        // Although there is no guarantee that all items will be different,
-        // with 100 iterations, it is very likely that some will be different.
+
         assert(sameItems < 100);
     }
 
+
+    /**
+     * Tests for getting base price
+     */
     @Test
     public void testGetBasePrice() {
         int basePrice = item.getBasePrice();
@@ -39,6 +57,9 @@ public class ItemTests {
         assertEquals(50, basePrice);
     }
 
+    /**
+     * Tests for getting equipment
+     */
     @Test
     public void testGetEquipment() {
         Item.TrainingItem currentItem = item.getItem();
