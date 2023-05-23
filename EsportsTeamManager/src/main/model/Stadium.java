@@ -23,7 +23,7 @@ public final class Stadium {
 	/**
 	 * Maximum number of matches to display per week
 	 */
-	private static final int MATCH_LIMIT = 5;
+	public static final int MATCH_LIMIT = 5;
     
 	/**
 	 * Constructor for stadium

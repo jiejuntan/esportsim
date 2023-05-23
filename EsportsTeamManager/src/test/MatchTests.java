@@ -60,7 +60,7 @@ class MatchTests {
 
     @Test
     void testCreateIngameCharacters() {
-        match.createIngameCharacters(homeTeam, opponentTeam);
+        match.createIngameCharacters();
         assertEquals(Team.MAIN_LIMIT, match.getHomeTeam().size());
         assertEquals(Team.MAIN_LIMIT, match.getOpponentTeam().size());
     }
@@ -68,7 +68,7 @@ class MatchTests {
     @Test
     void testSimulateRound() {
 
-        match.createIngameCharacters(homeTeam, opponentTeam);
+        match.createIngameCharacters();
         match.simulateRound();
         assertTrue(match.getRound() > 0);
     }
@@ -76,7 +76,7 @@ class MatchTests {
     @Test
     void testIsMatchOver() {
 
-        match.createIngameCharacters(homeTeam, opponentTeam);
+        match.createIngameCharacters();
         match.simulateRound();
         match.simulateRound();
         match.simulateRound();

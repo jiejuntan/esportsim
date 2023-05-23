@@ -1,51 +1,70 @@
 package test;
 
+import main.model.Athlete;
+import main.model.Team.Role;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import main.model.Athlete;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class AthleteTest {
+
     private Athlete athlete;
 
     @BeforeEach
     void setUp() {
-//        athlete = new Athlete(false, 3);
+        athlete = new Athlete(1);  
     }
 
     @Test
-    void getRandomNameTest() {
-        assertNotNull(athlete.getRandomName());
+    void testGetName() {
+        assertNotNull(athlete.getName());
     }
 
     @Test
-    void generateAthleteStatsTest() {
-        athlete.generateAthleteStats(3);
-        assertTrue(athlete.getReactionTime() > 0);
-        assertTrue(athlete.getEyeSight() > 0);
-        assertTrue(athlete.getIntelligence() > 0);
+    void testSetName() {
+        String newName = "New Name";
+        athlete.setName(newName);
+        assertEquals(newName, athlete.getName());
     }
 
     @Test
-    void calculateSkillLevelTest() {
-        int skillLevel = athlete.calculateSkillLevel();
-        assertEquals(skillLevel, athlete.getReactionTime() + athlete.getEyeSight() + athlete.getIntelligence());
+    void testGetSetReactionTime() {
+        int reactionTime = 5;
+        athlete.setReactionTime(reactionTime);
+        assertEquals(reactionTime, athlete.getReactionTime());
     }
 
     @Test
-    void setPurchasePriceTest() {
-        athlete.getBasePrice();
-        assertEquals(athlete.getBasePrice(), 100 * athlete.calculateSkillLevel());
-
-        athlete.getBasePrice();
-        assertEquals(athlete.getBasePrice(), 1000 * athlete.calculateSkillLevel());
+    void testGetSetEyeSight() {
+        int eyeSight = 5;
+        athlete.setEyeSight(eyeSight);
+        assertEquals(eyeSight, athlete.getEyeSight());
     }
 
+    @Test
+    void testGetSetIntelligence() {
+        int intelligence = 5;
+        athlete.setIntelligence(intelligence);
+        assertEquals(intelligence, athlete.getIntelligence());
+    }
 
+    @Test
+    void testGetSetStamina() {
+        int stamina = 1;
+        athlete.setStamina(stamina);
+        assertEquals(stamina, athlete.getStamina());
+    }
 
+    @Test
+    void testGetSetRole() {
+        Role role = Role.OFFENSE;
+        athlete.setRole(role);
+        assertEquals(role, athlete.getRole());
+    }
 
-
-    
+    @Test
+    void testCalculateSkillLevel() {
+        int skillLevel = athlete.getEyeSight() + athlete.getIntelligence() + athlete.getReactionTime();
+        assertEquals(skillLevel, athlete.calculateSkillLevel());
+    }
 }
