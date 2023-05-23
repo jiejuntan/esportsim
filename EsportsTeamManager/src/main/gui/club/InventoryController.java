@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 import main.gui.GameFrame;
 import main.gui.subclassable.ThumbnailController;
@@ -64,8 +65,20 @@ public final class InventoryController extends ThumbnailController {
 				}
 			});
 		}
+		if (items.size() == 0) {
+			setSubheading();
+		}
 	}
 
+	/** 
+	 * Sets subheading if there are no items.
+	 */
+	public void setSubheading() {
+		JLabel subheading = ((InventoryPanel) panel).getSubheadingLabel1();
+		subheading.setText("You don't have any items!");
+		subheading.setVisible(true);
+	}
+	
 	/**
 	 * Initializes back button to return.
 	 */

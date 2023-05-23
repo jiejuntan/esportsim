@@ -9,7 +9,8 @@ import org.junit.Test;
 
 public class GameEnvironmentTest {
 
-    private GameEnvironment gameEnv;
+    @SuppressWarnings("unused")
+	private GameEnvironment gameEnv;
     
     @Before
     public void setUp() {

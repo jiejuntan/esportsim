@@ -388,7 +388,7 @@ public final class Team {
 	 */
 	private String getRandomTeamName() {
 		IO io = new IO();
-		InputStream is = io.getFileFromResourceAsStream("/main/resources/teamNames.txt");
+		InputStream is = io.getFileFromResourceAsStream(GUIConstants.TEAM_NAME_PATH);
 		String[] namesList = io.getString(is).split(",");
 		
 		// Picks a random number
@@ -418,7 +418,7 @@ public final class Team {
     	int portrait = availableLogos.get(index);
     	availableLogos.remove(index);
     	
-    	this.logoPath = "/main/resources/logos/" + portrait + ".png";
+    	this.logoPath = GUIConstants.LOGO_PATH + portrait + ".png";
     }
     
     /**

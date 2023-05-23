@@ -85,7 +85,7 @@ public final class Athlete extends Purchasable {
      */
     public String getRandomName() {
 		IO io = new IO();
-		InputStream is = io.getFileFromResourceAsStream("/main/resources/names.txt");
+		InputStream is = io.getFileFromResourceAsStream(GUIConstants.NAME_PATH);
 		String[] namesList = io.getString(is).split(",");
 		//Picks a random number
     	Random random = new Random();
@@ -107,7 +107,7 @@ public final class Athlete extends Purchasable {
     	int portrait = availablePortraits.get(index);
     	availablePortraits.remove(index);
     	
-    	this.portraitPath = "/main/resources/athletes/portrait_clear_" + portrait + ".png";
+    	this.portraitPath = GUIConstants.PORTRAIT_PATH + portrait + ".png";
     }
     
     /**

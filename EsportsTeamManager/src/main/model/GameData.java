@@ -64,8 +64,14 @@ public final class GameData {
      */
     private Club club;
     
+    /** 
+     * Boolean for whether a match has been played that week
+     */
+    private boolean hasPlayed;
     
-    /**
+   
+
+	/**
      * Constructor for GameData
      */
     public GameData() {
@@ -149,6 +155,7 @@ public final class GameData {
 	public void nextWeek() throws GameOverException {
 		if (currentWeek < seasonDuration) {
 			currentWeek++;
+			hasPlayed = false;
 		} else {
 			throw new GameOverException(Type.FINISHED);
 		}
@@ -199,7 +206,21 @@ public final class GameData {
 			throw new IllegalArgumentException();
 		}
 	}
-	
+
+	/**
+	 * @return the hasPlayed
+	 */
+	public boolean hasPlayed() {
+		return hasPlayed;
+	}
+
+	/**
+	 * @param hasPlayed the hasPlayed to set
+	 */
+	public void setHasPlayed(boolean hasPlayed) {
+		this.hasPlayed = hasPlayed;
+	}
+
     /**
      * Gets team
      * 

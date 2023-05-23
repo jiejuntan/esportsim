@@ -25,13 +25,20 @@ public final class GUIConstants {
 	public static final int SMALLERDETAIL = 15;
 	
 	// Background music by Abel Geyskens, obtained from https://freesound.org/s/668879/ under the Attribute 4.0 License
-	public static final String BACKGROUND_MUSIC = "/main/resources/retro-music.wav";
+	public static final String BACKGROUND_MUSIC = "/main/Resources/retro-music.wav";
 		
 	// Backgrounds
 	// Background image by Lesiakower via Pixabay under the Content License
-	public static final String BACKGROUND_ANIMATED = "/main/resources/mountains.png";
-	public static final String BACKGROUND_BATTLE = "/main/resources/battle.png";
+	public static final String BACKGROUND_ANIMATED = "/main/Resources/mountains.png";
+	public static final String BACKGROUND_BATTLE = "/main/Resources/battle.png";
 	public static final Color BACKGROUND_SOLID = new Color(221, 235, 255);
+	
+	// Resource paths
+	public static final String NAME_PATH = "/main/Resources/names.txt";
+	public static final String PORTRAIT_PATH = "/main/Resources/athletes/portrait_clear_";
+	public static final String TEAM_NAME_PATH = "/main/Resources/teamNames.txt";
+	public static final String LOGO_PATH = "/main/Resources/logos/";
+	public static final String ITEM_PATH = "/main/Resources/items/";
 	
 	// Athlete portraits
 	public static final int PORTRAIT_COUNT = 24;

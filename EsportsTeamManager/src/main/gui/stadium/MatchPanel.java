@@ -44,7 +44,7 @@ public final class MatchPanel extends BasePanel {
 		matchLabel = new JTextArea();
 		matchLabel.setEditable(false);
 		matchLabel.setBackground(Color.LIGHT_GRAY);
-		matchLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.BODY));
+		matchLabel.setFont(new Font(GUIConstants.FONT, GUIConstants.STYLE, GUIConstants.DETAIL));
 		DefaultCaret caret = (DefaultCaret) matchLabel.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		GridBagConstraints gbc_roundLabel = new GridBagConstraints();

@@ -106,6 +106,7 @@ public final class MatchController extends Controller {
 		default:
 			break;
 		}
+		frame.getGame().getData().setHasPlayed(true);
 		toHomeScreen();
 	}
 	

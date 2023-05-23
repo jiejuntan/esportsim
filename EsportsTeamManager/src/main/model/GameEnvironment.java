@@ -3,7 +3,6 @@ package main.model;
 import main.exceptions.GameOverException;
 import main.exceptions.GameOverException.Type;
 import main.exceptions.RandomEventException;
-import main.exceptions.RandomEventException.Event;
 
 /**
  * Model access point
@@ -42,22 +41,14 @@ public final class GameEnvironment {
      */
     public void advanceWeek() throws GameOverException, RandomEventException {
     	data.nextWeek();
-    	data.getTeam().resetStaminaAll();
     	stadium.updateMatches();
     	market.updateMarket(false);
     	
     	RandomEvent randomEvent = new RandomEvent(data);
-    	int result = randomEvent.triggerEvent();
-    	switch (result) {	
-    	case 1:
-    		throw new RandomEventException(Event.ADD);
-    	case 2:
-    		throw new RandomEventException(Event.REMOVE);
-    	case 3:
-    		throw new RandomEventException(Event.STAT);
-		default:
-			break;
-    	}    	
+    	randomEvent.triggerEvent();
+    	
+    	// reset stamina after checking for random event because it affects chance of random event occuring
+    	data.getTeam().resetStaminaAll();
     	
     	// If team has insufficient players, check if there are any available athletes the player can afford, otherwise end game
     	if (!market.canPurchaseLegalTeam()) {

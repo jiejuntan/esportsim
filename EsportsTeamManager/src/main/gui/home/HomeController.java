@@ -63,7 +63,7 @@ public final class HomeController extends Controller {
 		});
 		
 		JButton stadiumButton = ((HomePanel) panel).getStadiumButton();
-		if ((data.getTeam().getWins() + data.getTeam().getLosses()) < data.getCurrentWeek()) {
+		if (!data.hasPlayed()) {
 			stadiumButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if (data.getTeam().isMainTeamFull()) {

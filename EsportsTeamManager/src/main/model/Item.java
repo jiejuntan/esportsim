@@ -2,6 +2,8 @@ package main.model;
 
 import java.util.Random;
 
+import main.gui.GUIConstants;
+
 
 /**
  * Represents the items in the game.
@@ -26,7 +28,7 @@ private TrainingItem equipment;
         TrainingItem[] trainingItems = TrainingItem.values();
         int randomItemIndex = random.nextInt(trainingItems.length);
         this.equipment = trainingItems[randomItemIndex];
-        this.portraitPath = "/main/resources/items/" + equipment.getImgPath();
+        this.portraitPath = GUIConstants.ITEM_PATH + equipment.getImgPath();
 	}
 	
 	/**

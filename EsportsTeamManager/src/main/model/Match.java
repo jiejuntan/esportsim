@@ -175,12 +175,12 @@ public final class Match {
     				playerDefenseOrder.remove(defender);
     				defender.getAthlete().setStamina(random.nextInt(3));
     				
-    				result += String.format("\n\n%s from %s was killed. You have %s players remaining.", defender.getName(), defendTeam, playerTeam.size());
+    				result += String.format("\n\n%s from %s was killed.\nYou have %s players remaining.", defender.getName(), defendTeam, playerTeam.size());
     			} else {
     				opponentTeam.remove(defender);
     				opponentDefenseOrder.remove(defender);
     				
-    				result += String.format("\n\n%s from %s was killed. They have %s players remaining.", defender.getName(), defendTeam, opponentTeam.size());
+    				result += String.format("\n\n%s from %s was killed.\nThey have %s players remaining.", defender.getName(), defendTeam, opponentTeam.size());
     			}
     		}
     		return result;

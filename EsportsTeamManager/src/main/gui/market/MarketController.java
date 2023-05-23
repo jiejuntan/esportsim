@@ -93,6 +93,11 @@ public final class MarketController extends ThumbnailController {
 				});
 			}
 		}
+		
+		if (isSelling && athletes.size() == 0) {
+			JLabel subheadingLabel1 = ((MarketPanel) panel).getSubheadingLabel1();
+			subheadingLabel1.setText("You don't have any reserves for sale");
+		}
 	}
 	
 	/**
@@ -119,7 +124,10 @@ public final class MarketController extends ThumbnailController {
 				});
 			}
 		}
-		
+		if (isSelling && items.size() == 0) {
+			JLabel subheadingLabel2 = ((MarketPanel) panel).getSubheadingLabel2();
+			subheadingLabel2.setText("You don't have any items for sale");
+		}
 	}
 
 	/**
