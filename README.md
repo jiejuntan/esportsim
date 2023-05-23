@@ -11,10 +11,11 @@
 7) Now its imported run the class called "GameFrame" to launcher the game
 
 
-## How to import EsportsTeamMananger and run it inside Eclipse
+## How to build EsportsTeamMananger
 1) Make sure EsportsTeamMananger is imported into eclipse
 2) Goto the file tab located in the top right corner and click export
 3) Inside the export window goto java and click "Runnable JAR file"
 4) Set the launch Configuration to "GameFrame"
 5) Choose an Export Destination
 6) Click finish to build the EsportsTeamMananger
+7) To run the JAR file open your terminal and enter "java -jar FILENAME.jar" and click enter
