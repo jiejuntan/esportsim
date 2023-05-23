@@ -57,6 +57,7 @@ public class DetailPanel extends BasePanel {
 	// Exposed components to toggle visibility in subclasses	
 	
 	// Prevent instantiation without subclassing
+	@SuppressWarnings("unchecked")
 	protected DetailPanel() {
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 50, 0, 0, 0};

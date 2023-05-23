@@ -1,6 +1,6 @@
 package main.model;
 
-import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,23 +25,45 @@ public final class Athlete extends Purchasable {
 	
 	/**
 	 * Maximum stamina
-	 * 0 = Injured
-	 * 1 = Questionable
-	 * 2 = Optimal
 	 */
 	private static int MAX_STAMINA = 2;
+	
+	/**
+	 * Stamina values
+	 */
 	public static String[] STAMINA_LEVELS = new String[] {
-			"\"Get me out\"", 
-			"\"Meh\"",
-			"Optimal"};
+			"Low", 
+			"Average",
+			"High"};
 	
-	private String name;
-	
-	private int reactionTime;
-    private int eyeSight;
-    private int intelligence;
+	/**
+     * Stamina stat
+     */
     private int stamina = MAX_STAMINA;
     
+	/**
+	 * Athlete name
+	 */
+	private String name;
+	
+	/**
+	 * Reaction time stat
+	 */
+	private int reactionTime;
+	
+	/**
+	 * Eyesight stat
+	 */
+    private int eyeSight;
+    
+    /**
+     * Intelligence stat
+     */
+    private int intelligence;
+    
+    /**
+     * Role on team
+     */
     private Role role;
 
 
@@ -62,15 +84,9 @@ public final class Athlete extends Purchasable {
      * @return Random Name
      */
     public String getRandomName() {
-    	
-    	//Grabs a list of names
-    	String[] namesList = null;
-		try {
-			namesList = IO.getTextFromFile("src/main/Resources/Names");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-    	
+		IO io = new IO();
+		InputStream is = io.getFileFromResourceAsStream("/main/resources/names.txt");
+		String[] namesList = io.getString(is).split(",");
 		//Picks a random number
     	Random random = new Random();
         int randomNumber = random.nextInt(namesList.length);
@@ -91,7 +107,7 @@ public final class Athlete extends Purchasable {
     	int portrait = availablePortraits.get(index);
     	availablePortraits.remove(index);
     	
-    	this.portraitPath = "/main/Resources/athletePortraits/portrait_clear_" + portrait + ".png";
+    	this.portraitPath = "/main/resources/athletes/portrait_clear_" + portrait + ".png";
     }
     
     /**
@@ -223,7 +239,13 @@ public final class Athlete extends Purchasable {
 	 * @param stamina the stamina to set
 	 */
 	public void setStamina(int stamina) {
-		this.stamina = stamina;
+		if (stamina < 0) {
+			this.stamina = 0;
+		} else if (stamina > 2) {
+			this.stamina = 2;
+		} else {
+			this.stamina = stamina;
+		}
 	}
 	
 	/**

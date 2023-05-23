@@ -1,10 +1,10 @@
 package main.model;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Random;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Holds Input/Output functions
@@ -14,9 +14,6 @@ import java.util.Random;
  */
 public final class IO {
 	
-	private static final String IMAGE_DIRECTORY = "/main/Resources/CharacterImage/";
-	
-	
 	/**
 	 * Reads a text that contains comma separated data from a file and returns it as a String Array
 	 * 
@@ -24,37 +21,24 @@ public final class IO {
 	 * @return <CODE>String[]</CODE>String Array of text
 	 * @throws IOException	TODO
 	 */
-	public static String[] getTextFromFile(String filename) throws IOException {
-		
-		//Sets file path
-		Path path = Paths.get(filename);
-		
-		//Reads the whole text into a string
-		String textContent = Files.readString(path);
-		
-		// Split the string into individual names using a comma delimiter
-	    String[] textArray = textContent.split(",");
-	    
-		
-		return textArray;
-	}
+	public InputStream getFileFromResourceAsStream(String fileName) {
+        InputStream inputStream = getClass().getResourceAsStream(fileName);
+        if (inputStream == null) {
+            throw new IllegalArgumentException("file not found! " + fileName);
+        } else {
+            return inputStream;
+        }
+    }
 	
-	/**
-	 * Randomly pick a image from the CharactersImages Directory
-	 * 
-	 * @return <CODE>String</CODE> path of image
-	 */
-	 public static String getRandomImagePath() {
-	        Random rand = new Random();
-	        
-	        // Generate a random number between 1 and totalNumberOfImages
-	        int randomImageNumber = rand.nextInt(1, 67);
-	        
-	        // Build the image path
-	        String imagePath = IMAGE_DIRECTORY + randomImageNumber + ".png";
-	       	        
-	        return imagePath;
-	    }
-	
-
+    public String getString(InputStream is) {
+        try (InputStreamReader streamReader =
+                    new InputStreamReader(is, StandardCharsets.UTF_8);
+             BufferedReader reader = new BufferedReader(streamReader)) {
+        	return reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+    
 }

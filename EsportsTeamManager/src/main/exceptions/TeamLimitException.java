@@ -5,7 +5,7 @@ package main.exceptions;
  *
  */
 public final class TeamLimitException extends Exception {
-	
+
 	/**
 	 *	Part of team that is full
 	 */

@@ -26,7 +26,7 @@ private TrainingItem equipment;
         TrainingItem[] trainingItems = TrainingItem.values();
         int randomItemIndex = random.nextInt(trainingItems.length);
         this.equipment = trainingItems[randomItemIndex];
-        this.portraitPath = "/main/Resources/items/" + equipment.getImgPath();
+        this.portraitPath = "/main/resources/items/" + equipment.getImgPath();
 	}
 	
 	/**

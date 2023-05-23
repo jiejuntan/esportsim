@@ -1,9 +1,12 @@
 package main.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
+
+import main.exceptions.GameOverException;
+import main.exceptions.GameOverException.Type;
 import main.model.Team.Role;
 
 /**
@@ -13,461 +16,186 @@ import main.model.Team.Role;
  *
  */
 public final class Match {
-
+	/**
+	 * Data transfer object
+	 */
 	private GameData data;
-	private Team opponent;
-	
-    private int outcome;
+	/**
+	 * Name of opponent's team
+	 */
+    private String opponentTeamName;
+    /**
+     * Starting list of player's athletes as in-game characters
+     */
+    private List<IngameCharacter> playerTeam;
+    /**
+     * Starting list of opponent's athletes as in-game characters
+     */
+    private List<IngameCharacter> opponentTeam;
+    /**
+     * List of all active characters in descending order of speed
+     */
+    private List<IngameCharacter> attackOrder = new ArrayList<IngameCharacter>();
+    /**
+     * List of player's characters in descending order of aggro
+     */
+    private List<IngameCharacter> playerDefenseOrder = new ArrayList<IngameCharacter>();
+    /**
+     * List of opponent's characters in descending order of aggro
+     */
+    private List<IngameCharacter> opponentDefenseOrder = new ArrayList<IngameCharacter>();
+    /**
+     * Random number generator
+     */
+    private Random random = new Random();
     
-    private List<IngameCharacters> homeTeam;
-    private List<IngameCharacters> opponentTeam;
-    private int round;
-    private int teamTurn;
-    
-    private int opponentWins;
-    private int homeWins;
-    private int roundWinner;
-    
-
-    private String homeResults;
-    private String opponentResults;
-    
-    
+    /**
+     * Constructor for match
+     * @param data		data transfer object
+     * @param opponent	opponent team
+     */
     public Match(GameData data, Team opponent) {
     	this.data = data;
-    	this.opponent = opponent;
+    	this.opponentTeamName = opponent.getName();
     	
-    	this.round = 0;
-    	this.outcome = -1;
-    	this.roundWinner = 0;
+    	playerTeam = new ArrayList<IngameCharacter>();
+    	opponentTeam = new ArrayList<IngameCharacter>();
     	
-    	this.opponentWins = 0;
-    	this.homeWins = 0;
-
-    	homeTeam = new ArrayList<IngameCharacters>();
-    	opponentTeam = new ArrayList<IngameCharacters>();
-    	homeResults = "";
-    	opponentResults = "";
-    	
-    	createIngameCharacters();
+    	for (Athlete athlete : data.getTeam().getMainMembers()) {
+    		IngameCharacter character = new IngameCharacter(athlete);
+    		playerTeam.add(character);
+    	}
+       	for (Athlete athlete : opponent.getMainMembers()) {
+    		IngameCharacter character = new IngameCharacter(athlete);
+    		opponentTeam.add(character);
+    	}
+       	initialize();
     };
     
     /**
-     * 
-     * Converts the Athletes into their virtual Characters 
-     * 
+     * Calculates skewed random number
+     * @param min	min value
+     * @param max	max value
+     * @param skew	how tightly bound
+     * @param bias	left/right bias
+     * @return		random skewed int
      */
-    public void createIngameCharacters() {
-    		
-    	//Gets the players Team Members
-    	for (Athlete athlete : data.getTeam().getMainMembers()) {
-    		homeTeam.add(new IngameCharacters(athlete, athlete.getRole()));
-    	}
-    	
-    	//Gets the players the Opponent Team 
-    	for (Athlete athlete : opponent.getMainMembers()) {
-    		opponentTeam.add(new IngameCharacters(athlete, athlete.getRole()));
-    	}
-    	
-    	//Sorts teams so chracters with the highest reaction time is at the start of the lists
-    	homeTeam.sort(Comparator.comparing(IngameCharacters::getReactionTime).reversed());
-    	opponentTeam.sort(Comparator.comparing(IngameCharacters::getReactionTime).reversed());
+    private int nextSkewedInt(double min, double max, double skew, double bias) {
+        double range = max - min;
+        double mid = min + range / 2.0;
+        double unitGaussian = random.nextGaussian();
+        double biasFactor = Math.exp(bias);
+        double retval = mid+(range*(biasFactor/(biasFactor+Math.exp(-unitGaussian/skew))-0.5));
+        return (int) Math.round(retval);
     }
-
+    
     /**
-     * Simulates a round between both teams
+     * Initializes the match
      */
-    public void simulateRound() {
-    	IngameCharacters homePlayer = homeTeam.get(0);
-    	IngameCharacters opponentPlayer = opponentTeam.get(0);
+    private void initialize() {
+    	prepareTurns();
+
+    	playerDefenseOrder.addAll(playerTeam);
+    	playerDefenseOrder.sort(Comparator.comparing(IngameCharacter::getAggro));
     	
-    	//Loops until all player of a team have been killed or all player in a team are out of stamina
-    	do {
+    	opponentDefenseOrder.addAll(opponentTeam);
+    	opponentDefenseOrder.sort(Comparator.comparing(IngameCharacter::getAggro));
+    }
+    
+    /**
+     * Resets turns for alive characters once all characters have taken a turn
+     */
+    private void prepareTurns() {
+    	attackOrder.clear();
+    	attackOrder.addAll(playerTeam);
+    	attackOrder.addAll(opponentTeam);
+    	attackOrder.sort(Comparator.comparing(IngameCharacter::getSpeed));
+    }
+    
+    /**
+     * Advances the match by a turn
+     * 
+     * @return						string message to display
+     * @throws GameOverException	if match ends
+     */
+    public String nextTurn() throws GameOverException {
+    	String result = "";
+    	String attackTeam = "";
+    	String defendTeam = "";
+    	
+    	// Check if game should end if entire team dies
+    	if (playerTeam.size() > 0 && opponentTeam.size() > 0) {
     		
-    		//Sets the fatest character to go first  FUCKS UP BALANCE SOMEHOW
-//    		if (homePlayer.getReactionTime() >= opponentPlayer.getReactionTime()) {
-//    			this.teamTurn = 0;
-//    		} else {
-//    			this.teamTurn = 1;
-//    		}
+    		// Check if every character has taken their turn, then reset turns for alive characters
+    		if (attackOrder.size() <= 0) {
+    			prepareTurns();
+    		}
     		
-    		if (teamTurn % 2 == 0) {
-    			
-    			
-    			//Player died select next opponent
-    			if (!isPlayerAlive(homePlayer)) {
-    				homePlayer = decideNextPlayer(homePlayer);
+    		// Gets an attacker skewed towards the fastest characters
+    		IngameCharacter attacker = attackOrder.remove(nextSkewedInt(0, attackOrder.size(), 1, -3));
+    		attackTeam = playerTeam.contains(attacker) ? data.getTeam().getName() : opponentTeamName;
+    		// Gets a defender from the opposite team skewed towards the highest aggro characters
+    		IngameCharacter defender = playerTeam.contains(attacker) ? 
+    				opponentDefenseOrder.get(nextSkewedInt(0, opponentDefenseOrder.size(), 1, -3)) :
+    					playerDefenseOrder.get(nextSkewedInt(0, playerDefenseOrder.size(), 1, -3));
+    		defendTeam = playerTeam.contains(defender) ? data.getTeam().getName() : opponentTeamName;
+
+    		// Gets a defender from ally team
+    		IngameCharacter ally = playerTeam.contains(attacker) ? 
+    				playerDefenseOrder.get(random.nextInt(playerDefenseOrder.size())) :
+    					opponentDefenseOrder.get(random.nextInt(opponentDefenseOrder.size()));
+    	
+    		int damage = defender.getRole() == Role.TANK ? attacker.getPower() / 2 : attacker.getPower();
+    		switch (attacker.getRole()) {
+    		case OFFENSE:
+    			// Attacks the target, deals half damage to tanks
+    			defender.takeDamage(damage);
+    			result += String.format("%s's %s deals %s damage to %s's %s.", attackTeam, attacker.getName(), damage, defendTeam, defender.getName());
+    			break;
+    		case SUPPORT:
+    			// Heals an ally
+    			int heal = attacker.getPower();
+    			ally.heal(heal);
+    			result += String.format("%s's %s heals %s for %s health.", attackTeam, attacker.getName(), defender.getName(), heal);
+    			break;
+    		case TANK:
+    			// Attacks the target, deals half damage to everyone
+    			defender.takeDamage(damage);
+    			result += String.format("%s's %s deals %s damage to %s's %s.", attackTeam, attacker.getName(), damage, defendTeam, defender.getName());
+    			break;
+			default:
+				break;
+    		}
+    		
+    		// After turn is taken, check if defender is dead and remove them from game and update their stamina out of game
+    		if (defender.isDead()) {
+    			attackOrder.remove(defender);
+    			if (playerTeam.contains(defender)) {
+    				playerTeam.remove(defender);
+    				playerDefenseOrder.remove(defender);
+    				defender.getAthlete().setStamina(random.nextInt(3));
+    				
+    				result += String.format("\n\n%s from %s was killed. You have %s players remaining.", defender.getName(), defendTeam, playerTeam.size());
+    			} else {
+    				opponentTeam.remove(defender);
+    				opponentDefenseOrder.remove(defender);
+    				
+    				result += String.format("\n\n%s from %s was killed. They have %s players remaining.", defender.getName(), defendTeam, opponentTeam.size());
     			}
-    			//Player goes first
-    			action(homePlayer, getHighestAggrolAthlete(opponentTeam));
-    			//Next players turn
-    			homePlayer = decideNextPlayer(homePlayer);
-    			
-
-    		} else {
-
-    			//Opponent died select next opponent
-    			if (!isPlayerAlive(opponentPlayer)) {
-    				opponentPlayer = decideNextPlayer(opponentPlayer);
-    			}
-    			
-    			//Opponent now attacks
-    			action(opponentPlayer, getHighestAggrolAthlete(homeTeam));
-    			//Next players turn
-    			opponentPlayer = decideNextPlayer(opponentPlayer);
     		}
-    		
-    		
-    		this.teamTurn++;
-		
-    	} while(!isRoundOver());
-    	
-    	//Checks to see if match over conditions are meet
-    	if (isMatchOver() != -1) {
-    		this.outcome = isMatchOver();
-    		finishMatch();
-    	}
-
-    }
-    	
-    /**
-     * Calls methods after match ends to update game
-     */
-    private void finishMatch() {
-    	if (this.outcome == 1) {
-			data.getTeam().addWin(1);
-			data.incrementMoney(opponent.calculateTeamlevel() * 5 * data.getDifficulty().getModifier());
-		} else {
-			data.getTeam().addLoss(1);
-		}
-    	for (IngameCharacters character : homeTeam) {
-    		character.getAthlete().setStamina(character.getStamina());
-    	}
-    }
-    
-    /**
-     * Checks Both teams health to see if end of round conditions are meet
-     * Increases win count for team that won roound
-     * @return <CODE>boolean</CODE> 
-     */
-    public boolean isRoundOver() {
-    	
-    	int playerTeamHealth = getTeamHealth(homeTeam);
-    	int opponentTeamHealth = getTeamHealth(opponentTeam);
-    	
-    	//Check Health both teams health
-    	//If a team has killed the other team, round over, reset everybodies health
-    	//Increase wins
-    	if (playerTeamHealth == 0 ) {
-    		this.opponentWins++;
-    		this.round++;
-    		this.roundWinner = 0;
-    		resetTeamsHealth();
-    		return true;
-    		
-    	} else if (opponentTeamHealth == 0) {
-    		this.homeWins++;
-    		this.round++;
-    		this.roundWinner = 1;
-    		resetTeamsHealth();
-    		return true;
-    	}
-    	
-    	return false;
-    	
-    }
-    
-    /**
-     * Checks to see if a team has won best of 3 rounds or if a teams stamina is depleted
-     * 
-     * @return <CODE>int</CODE> returns -1 if match not over , Returns 1 if homeTeam won, Returns 0 if opponentTeam won
-     */
-    public int isMatchOver() {
-    	
-    	int playerTeamStamina = getTeamStamina(homeTeam);
-    	int opponentTeamStamina = getTeamStamina(opponentTeam);
-    	int matchSatus = -1;
-    	
-    	if (playerTeamStamina == 0 ) {
-    		matchSatus = 0;
-    	} else if (opponentTeamStamina == 0) {
-    		matchSatus = 1;
-    	}
-    	
-    	if (homeWins == 2 || opponentWins == 2) {
-    		if (homeWins > opponentWins) {
-    			matchSatus = 1;
+    		return result;
+    	} else {
+    		// Game is over, check which team won and act accordingly
+    		if (playerTeam.size() == 0) {
+    			data.getTeam().addLoss(1);
+    			throw new GameOverException(Type.MATCH_LOST);
     		} else {
-    			matchSatus = 0;
+    			data.getTeam().addWin(1);
+    			data.incrementMoney(data.getDifficulty().prizeMoney);
+    			throw new GameOverException(Type.MATCH_WON);
+
     		}
     	}
-        
-    	return matchSatus;
-    	
-    }
-    
-    /**
-     * Resets both teams health
-     */
-    private void resetTeamsHealth() {
-    	//Resets homeTeam Health
-    	for (IngameCharacters player: homeTeam) {
-    		player.resetHealth();
-    	}
-    	//Resets opponentTeam health
-    	for (IngameCharacters player: opponentTeam) {
-    		player.resetHealth();
-    	}
-    }
-    
-    /**
-     * Returns the next player that is to play after the inputed player
-     * 
-     * @param currentPlayer 
-     * @return <CODE>IngameCharacters</CODE> Next player up 
-     */
-    private IngameCharacters decideNextPlayer(IngameCharacters currentPlayer) {
-    	IngameCharacters returnPlayer = null;
-    	int playerIndex = 0;
-    	
-    	//Check which team the next player is being decided for
-    	if (homeTeam.contains(currentPlayer)) {
-    		//Increase player index to currentPlayer + 1
-    		playerIndex = homeTeam.indexOf(currentPlayer) + 1;
-    		
-    		//Check if player index is greater than the length of the team and set to 0 if true
-    		playerIndex = playerIndex > homeTeam.size() - 1? 0 : playerIndex;
-    		
-    		returnPlayer = homeTeam.get(playerIndex);
-    		
-    	} else {
-    		//Increase player index to currentPlayer + 1
-    		playerIndex = opponentTeam.indexOf(currentPlayer) + 1;
-    		
-    		//Check if player index is greater than the length of the team and set to 0 if true
-    		playerIndex = playerIndex > opponentTeam.size() - 1? 0 : playerIndex;
-    		
-    		returnPlayer = opponentTeam.get(playerIndex);
-
-    	}
-    	
-    	//Recursively finds the next alive player
-		if (!isPlayerAlive(returnPlayer)) {
-			
-			returnPlayer = decideNextPlayer(returnPlayer);
-		}
-    	
-    	return returnPlayer;
-    }
-    
-    
-    /**
-     * Returns the character with the highest Aggro number of a specified skill
-     * 
-     * @param Lists of Characters
-     * @return Character with the highest Aggro that is still alive
-     */
-    private IngameCharacters getHighestAggrolAthlete(List<IngameCharacters> characters) {
-    	IngameCharacters highestAggroCharacter = decideNextPlayer(characters.get(0));
-        
-    	//Finds the character with the highest Aggro in the team
-        for (IngameCharacters character : characters) {
-            if (isPlayerAlive(character)) {
-            	
-            	//Agrro Levels go like 1>2>3>4
-                if (character.getAggroLevel() < highestAggroCharacter.getAggroLevel()) {
-                	highestAggroCharacter = character;
-                }
-            }
-        }
-        
-        return highestAggroCharacter;
-    }
-    
-
-    
-	/**
-     * 
-     *Athlete Actions
-	 *Each athlete will take an action depending on their role:
-	 *
-	 *Offense: Their target is determined by the aggro levels of the opposing team. They attack and deal damage based on their intelligence. If the attack hits, reduce the target's health points.
-	 *
-	 *Support: They can heal a teammate, buff an ally's stats, or debuff an opponent's stats. The choice can be random or based on the current state of the match.
-	 *
-	 *Tank: They have the highest aggro level, making them more likely to be the target of attacks. Their attack will be less powerful, but they have more health points
-     * @param currentCharacter
-     * @param Target
-     */
-    private void action(IngameCharacters currentPlayer, IngameCharacters target) {
-        Role role = currentPlayer.getRole();
-        
-        int damage = 0;
-        int newHealth = 0;
-        
-        switch (role) {
-            case OFFENSE:
-                damage = currentPlayer.getDamage();
-                newHealth = target.getHealth() - damage;
-                target.setHealth(newHealth > 0 ? newHealth : 0);
-                break;
-           
-            case SUPPORT:
-                damage = currentPlayer.getDamage();
-                newHealth = target.getHealth() - damage;
-                target.setHealth(newHealth > 0 ? newHealth : 0);
-                break;
-                
-            case TANK:
-                damage = currentPlayer.getDamage();
-                newHealth = target.getHealth() - damage;
-                target.setHealth(newHealth > 0 ? newHealth : 0);
-                
-                break;
-		case RESERVE:
-			break;
-		default:
-			break;
-                }
-        
-        //If player died reduce lives and stamina, also record battle results
-        if (!isPlayerAlive(target)) {
-        	//Target has been killed
-        	target.setLives(target.getLives() - 1);
-        	target.setStamina(target.getStamina() - 1);
-        	recordRoundResults(currentPlayer, target, damage ,0, true);
-        	
-        } else {
-        	recordRoundResults(currentPlayer, target, damage ,0, false);
-        }
-        
-    }  
-  
-    
-    /**
-     * Returns false if player has 0 lives or 0 health, else returns true
-     * @param player
-     * @return <CODE>bolean</CODE> 
-     */
-    private boolean isPlayerAlive(IngameCharacters player) {
-    	if (player.getHealth() == 0 || player.getLives() == 0) {
-    		return false;
-    	} else if (player.getLives() + this.round != 3) { 
-    		return true;
-    	} else { 
-    		return true;}
-    	
-    }
-    
-    /**
-     * Records the moves played by the ingame characters
-     * 
-     * @param currentPlayer
-     * @param target
-     * @param damage
-     * @param heals
-     */
-    private void recordRoundResults(IngameCharacters currentPlayer, IngameCharacters target , int damage, int support, boolean isTargetDead) {
-    	
-    	String currentPlayerName = currentPlayer.getName();
-    	String targetName = target.getName();
-    	String results = "";
-    	
-    	//Check if target is dead
-    	if (isTargetDead) {
-    		results = String.format("%s has killed %s!", currentPlayerName, targetName, damage) ;
-    	} else {
-    		
-    		//Check if support did something different from damage
-    		if (support > 0) {
-    			results = String.format("%s has buffed %s for %d damage!", currentPlayerName, targetName, damage);
-    		} else {
-    			results = String.format("%s has attacked %s for %d damage!", currentPlayerName, targetName, damage);
-    		}
-    		
-    	}
-    	
-    	//Record what actions occured
-    	if (homeTeam.contains(currentPlayer)) {
-        	homeResults = results;
-        	
-    	} else {
-    		opponentResults = results;
-    	}
-    }
-    
-    /**
-     * Gets the total health left in the team
-     * 
-     * @param IngameCharacters Team List
-     * @return Total health of the team
-     */
-    private int getTeamHealth(List<IngameCharacters> characters) {
-    	int totalHealth = 0;
-    	for (IngameCharacters character : characters) {
-    		totalHealth += character.getHealth();
-    	}
-    	return totalHealth;
-    }
-    
-    /**
-     * Gets the total stamina left in the team
-     * 
-     * @param IngameCharacters Team List
-     * @return Total stamina of the team
-     */
-    private int getTeamStamina(List<IngameCharacters> characters) {
-    	int totalStamina = 0;
-    	for (IngameCharacters character : characters) {
-    		totalStamina += character.getStamina();
-    	}
-    	return totalStamina;
-    }
-    
-	/**
-	 * @return the homeTeam
-	 */
-	public List<IngameCharacters> getHomeTeam() {
-		return homeTeam;
-	}
-
-	/**
-	 * @return the opponentTeam
-	 */
-	public List<IngameCharacters> getOpponentTeam() {
-		return opponentTeam;
-	}
-	
-    /**
-	 * @return the roundResults
-	 */
-	public List<String> getRoundResults() {
-		return Arrays.asList(homeResults, opponentResults);
-	}
-
-	/**
-	 * @return the round
-	 */
-	public int getRound() {
-		return round;
-	}
-
-
-	/**
-	 * @return the outcome
-	 */
-	public int getOutcome() {
-		return outcome;
-	}
-
-
-	/**
-	 * @return the roundWinner
-	 */
-	public int getRoundWinner() {
-		return roundWinner;
-	}
-	
-	
+    }	
 	
 }

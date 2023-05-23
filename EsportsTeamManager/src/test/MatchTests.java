@@ -61,7 +61,11 @@ class MatchTests {
     @Test
     void testCreateIngameCharacters() {
         match.createIngameCharacters();
+<<<<<<< HEAD
         assertEquals(Team.MAIN_LIMIT, match.getHomeTeam().size());
+=======
+        assertEquals(Team.MAIN_LIMIT, match.getPlayerTeam().size());
+>>>>>>> branch 'main' of https://eng-git.canterbury.ac.nz/bsm79/esportsteammananger.git
         assertEquals(Team.MAIN_LIMIT, match.getOpponentTeam().size());
     }
 

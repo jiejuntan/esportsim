@@ -1,7 +1,7 @@
 package main.gui;
 
 import javax.sound.sampled.*;
-import java.io.File;
+//import java.io.File;
 import java.io.IOException;
 
 /**
@@ -29,8 +29,7 @@ public final class Music {
      */
     public void setFile(String soundFileName) {
         try {
-            File file = new File(this.getClass().getResource(soundFileName).toURI());
-            sound = AudioSystem.getAudioInputStream(file);
+            sound = AudioSystem.getAudioInputStream(getClass().getResource(soundFileName));
             clip = AudioSystem.getClip();
             clip.open(sound);
         } catch (Exception e) {

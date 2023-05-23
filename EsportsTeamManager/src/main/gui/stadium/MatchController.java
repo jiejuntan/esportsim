@@ -1,24 +1,35 @@
 package main.gui.stadium;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
+import main.exceptions.GameOverException;
 import main.gui.GameFrame;
 import main.gui.subclassable.Controller;
-import main.model.GameData;
 import main.model.Match;
 import main.model.Team;
 
+/**
+ * Controller for match panel
+ * 
+ * @author Blake and Jun
+ *
+ */
 public final class MatchController extends Controller {
 	
-	Match match;
+	/**
+	 * Opponent team
+	 */
 	Team opponent;
-	GameData gameData;
 	
+	/**
+	 * Match being played
+	 */
+	Match match;
+
 	/**
 	 * Constructor for match screen.
 	 * 
@@ -27,6 +38,7 @@ public final class MatchController extends Controller {
 	public MatchController(GameFrame frame, Team opponent) {
 		super(frame);
 		this.opponent = opponent;
+		this.match = new Match(frame.getGame().getData(), opponent);
 		initialize();
 	}
 
@@ -35,103 +47,73 @@ public final class MatchController extends Controller {
 	 */
 	@Override
 	protected void initialize() {
-		gameData = frame.getGame().getData();
-		match = new Match(gameData, opponent);
 		panel = new MatchPanel();
-		displays();
-		resetRoundResults();
-		updateDisplays();
-		initializeBattleButton();
-
 		
+		setTimer();
+
 		super.launch();
 	}
 	
-	
-	private void initializeBattleButton() {
-		
-		
-		
-		//Get the buttons
-		JButton battleButton = ((MatchPanel) panel).getBattleButton();
-		
-		//Button action
-		battleButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-					//Do the battle Manouvers
-					match.simulateRound();
-					updateDisplays();
+	/**
+	 * Sets a timer to advance the match and update panel
+	 */
+	private void setTimer() {		
+        TimerTask task = new TimerTask() {
+            public void run() {
+				try {
+					updateLabel();					
+				} catch (GameOverException e) {
+					cancel();
+					showDialog(e.getType());
+				}
+                
+            }
+        };
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(task, 0, 300);
+    }
 
-					if (isBattleover()) {
-						matchOver();
-					} 
-					
-			}
-		});
-		
-	}
-	
-	private boolean isBattleover() {
-		if (match.getOutcome() == -1) {
-			return false;
-		} else {
-			return true;
-		}
-		
-	}
-	
-	
-	private void updateDisplays() {
-		JLabel resultsValueLabel1 = ((MatchPanel) panel).getResultsValueLabel1();
-		JLabel resultsValueLabel2 = ((MatchPanel) panel).getResultsValueLabel2();
-		JLabel roundValueLabel = ((MatchPanel) panel).getRoundValueLabel();
-
-		resultsValueLabel1.setVisible(true);
-		resultsValueLabel2.setVisible(true);
-		roundValueLabel.setText(String.valueOf(match.getRound()));
-		resultsValueLabel1.setText(match.getRoundResults().get(0));
-		resultsValueLabel2.setText(match.getRoundResults().get(1));
-		
-		
-	}
-	
-	private void resetRoundResults() {
-		JLabel resultsValueLabel1 = ((MatchPanel) panel).getResultsValueLabel1();
-		JLabel resultsValueLabel2 = ((MatchPanel) panel).getResultsValueLabel2();
-		resultsValueLabel1.setVisible(false);
-		resultsValueLabel2.setVisible(false);		
-	}
-	
-	private void matchOver() {
-	    if (match.getOutcome() == 1) {
-	        JOptionPane.showMessageDialog(panel, 
-	                "You have won the battle!", 
-	                "MATCH OVER!", JOptionPane.INFORMATION_MESSAGE);
-	    } else {
-	        JOptionPane.showMessageDialog(panel, 
-	                "You have lost the battle!", 
-	                "MATCH OVER!", JOptionPane.INFORMATION_MESSAGE);
-	    }
-	    
-	    toHomeScreen();
-	}
-
-	
-	private void displays() {
-		JLabel playerTeamNameLabel = ((MatchPanel) panel).getPlayerTeamNameValueLabel();
-		JLabel opponentTeamNameLabel = ((MatchPanel) panel).getOpponentTeamNameValueLabel();
-		playerTeamNameLabel.setText(gameData.getTeam().getName());
-		opponentTeamNameLabel.setText(opponent.getName());
-		
+	/**
+	 * Updates label with match info
+	 * @throws GameOverException	if match ends
+	 */
+	private void updateLabel() throws GameOverException {
+		JTextArea matchLabel = ((MatchPanel) panel).getMatchLabel();
+		matchLabel.setText(matchLabel.getText() + match.nextTurn() + "\n\n");		
 	}
 	
 	/**
-	 * Closes stadium screen and goes back to home screen
+	 * Shows dialog when match ends
+	 * 
+	 * @param type result of match
+	 */
+	private void showDialog(GameOverException.Type type) {
+		switch (type) {
+		case MATCH_WON:
+			JOptionPane.showMessageDialog(panel, 
+	                "You have won the battle! Your reward is $" + 
+			frame.getGame().getData().getDifficulty().prizeMoney + ".", 
+	                "Match over!", JOptionPane.INFORMATION_MESSAGE);
+			break;
+		case MATCH_LOST:
+			JOptionPane.showMessageDialog(panel, 
+	                "You have lost the battle!\nTry adjusting your team's role distribution.\n\n" +
+			"Offense favours Eyesight and Reaction Time allowing you to attack faster and do more damage.\n\n" +
+	                		"Support favours Intelligence and Eyesight allowing you to heal more.\n\n" +
+			"Tank favours Reaction Time and Intelligence allowing you to take aggro and tank hits.", 
+	                "Match over!", JOptionPane.INFORMATION_MESSAGE);
+			break;
+		default:
+			break;
+		}
+		toHomeScreen();
+	}
+	
+	/**
+	 * Returns to home screen after the match
 	 */
 	private void toHomeScreen() {
 		frame.toHomeScreen();
-	} 
+	}
 	
-	
-
 }
