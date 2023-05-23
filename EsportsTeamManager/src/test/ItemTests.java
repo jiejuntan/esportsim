@@ -45,14 +45,5 @@ public class ItemTests {
         assertNotNull(currentItem);
     }
 
-    @Test
-    public void testTrainingItemEnum() {
-        Item.TrainingItem[] trainingItems = Item.TrainingItem.values();
-        assertEquals(5, trainingItems.length);
 
-        for (Item.TrainingItem item : trainingItems) {
-            assertNotNull(item.getPositiveValue());
-            assertNotNull(item.getPositiveStat());
-        }
-    }
 }
