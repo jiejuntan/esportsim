@@ -13,12 +13,36 @@ import main.model.Item;
 import main.model.Market;
 import main.model.Team.Role;
 
+/**
+ * Junit tests for Market
+ * 
+ * @author blake
+ *
+ */
 public class MarketTest {
+    /**
+     * Market Object
+     */
     private Market market;
+    
+    /**
+     * GameData Object
+     */
     private GameData data;
+    
+    /**
+     * Athlete object
+     */
     private Athlete athlete;
+    
+    /**
+     * Item Object
+     */
     private Item item;
 
+    /**
+     * Setup for market tests 
+     */
     @Before
     public void setUp() {
         data = new GameData();
@@ -27,6 +51,9 @@ public class MarketTest {
         item = new Item();
     }
 
+    /**
+     * Tests for purchasing an athlete
+     */
     @Test
     public void testPurchaseAthlete() throws IllegalFundsException, TeamLimitException {
         data.incrementMoney(1000);
@@ -35,6 +62,9 @@ public class MarketTest {
         assertTrue(market.isPurchased(athlete));
     }
 
+    /**
+     * Tests for selling an athlete
+     */
     @Test
     public void testSellAthlete() {
         athlete.calculateSalePrice(data.getDifficulty().modifier);
@@ -42,6 +72,9 @@ public class MarketTest {
         assertFalse(market.isPurchased(athlete));
     }
 
+    /**
+     * Tests purchasing an athlete
+     */
     @Test
     public void testPurchaseItem() throws IllegalFundsException, InventoryLimitException {
     	data.incrementMoney(1000);
@@ -50,6 +83,10 @@ public class MarketTest {
         assertTrue(market.isPurchased(item));
     }
 
+
+    /**
+     * Tests for selling an item
+     */
     @Test
     public void testSellItem() {
         item.calculateSalePrice(data.getDifficulty().modifier);

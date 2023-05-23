@@ -9,9 +9,21 @@ import main.model.Team;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * 
+ * Junit tests for Team Class
+ * @author blake
+ *
+ */
 class TeamTests {
+    /**
+     * Team Object
+     */
     private Team team;
 
+    /**
+     * Setup for team tests
+     */
     @BeforeEach
     void setUp() {
         team = new Team();
@@ -27,6 +39,10 @@ class TeamTests {
         }
     }
 
+    
+    /**
+     * Tests adding and removing of athletes
+     */
     @Test
     void testAddAndRemoveAthlete() {
         Athlete athlete = new Athlete(1);
@@ -52,11 +68,17 @@ class TeamTests {
         }
     }
 
+    /**
+     * Tests adding athletes when team full
+     */
     @Test
     void testAddAthleteTeamFull() {
         assertThrows(TeamLimitException.class, () -> team.addAthlete(new Athlete(1), Team.Role.OFFENSE));
     }
 
+    /**
+     * Tests changing of role
+     */
     @Test
     void testChangeRole() {
         Athlete athlete = team.getMainMembers().get(0);
@@ -68,31 +90,9 @@ class TeamTests {
         }
     }
 
-//    @Test
-//    void testChangeRoleTeamFull() {
-//        Athlete athlete = new Athlete(1);
-//        try {
-//            team.addAthlete(athlete, Team.Role.RESERVE);
-//            assertThrows(TeamLimitException.class, () -> team.changeRole(athlete, Team.Role.OFFENSE));
-//        } catch (TeamLimitException e) {
-//            fail("Exception should not be thrown");
-//        }
-//    }
-
-//    @Test
-//    void testSwapRole() {
-//        Athlete athlete1 = team.getMainMembers().get(0);
-//        Athlete athlete2 = new Athlete(1);
-//        try {
-//            team.addAthlete(athlete2, Team.Role.RESERVE);
-//            team.swapRole(athlete1, athlete2);
-//            assertEquals(Team.Role.RESERVE, athlete1.getRole());
-//            assertEquals(Team.Role.OFFENSE, athlete2.getRole());
-//        } catch (TeamLimitException e) {
-//            fail("Exception should not be thrown");
-//        }
-//    }
-
+    /**
+     * Tests reseting the stamina
+     */
     @Test
     void testResetStaminaAll() {
         for (Athlete athlete : team.getMainMembers()) {
@@ -105,19 +105,28 @@ class TeamTests {
     }
 
 
+    /**
+     * Tests setting of team name
+     */
     @Test
     void testSetTeamName() {
         String newName = "New Team Name";
         team.setTeamName(newName);
         assertEquals(newName, team.getName());
     }
-
+    
+    /**
+     * Tests if setname is invalid
+     */
     @Test
     void testSetTeamNameInvalid() {
         String invalidName = "Invalid!";
         assertThrows(IllegalArgumentException.class, () -> team.setTeamName(invalidName));
     }
 
+    /**
+     * Tests adding a win
+     */
     @Test
     void testAddWin() {
         int initialWins = team.getWins();
@@ -125,6 +134,9 @@ class TeamTests {
         assertEquals(initialWins + 1, team.getWins());
     }
 
+    /**
+     * Tests adding a loss
+     */
     @Test
     void testAddLoss() {
         int initialLosses = team.getLosses();
@@ -132,6 +144,10 @@ class TeamTests {
         assertEquals(initialLosses + 1, team.getLosses());
     }
 
+
+    /**
+     * Tests the constructor of oppponent teams
+     */
     @Test
     void testOpponentTeamConstructor() {
         int currentWeek = 5;

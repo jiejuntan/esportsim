@@ -9,25 +9,56 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Junit tests for Club Class
+ * 
+ * @author blake
+ *
+ */
 public class ClubTest {
+    /**
+     * Club Object
+     */
     private Club club;
+    
+    /**
+     * Item Object
+     */
     private Item item;
+    
+    /**
+     * Athlete Object
+     */
     private Athlete athlete;
+    
+    /**
+     * GameData Object
+     */
     private GameData gameData;
 
+
+    /**
+     * Setup for the tests
+     */
     @BeforeEach
     public void setUp() {
     	this.gameData = new GameData();
         club = new Club();
-        item = new Item(); // You may need to replace this with a valid Item object
-        athlete = new Athlete(gameData.getCurrentWeek()); // You may need to replace this with a valid Athlete object
+        item = new Item(); 
+        athlete = new Athlete(gameData.getCurrentWeek()); 
     }
 
+    /**
+     * Tests the default constructor
+     */
     @Test
     public void testDefaultConstructor() {
         assertTrue(club.getInventory().isEmpty());
     }
 
+    /**
+     * Tests adding of an item
+     */
     @Test
     public void testAddItem() throws InventoryLimitException {
         club.addItem(item);
@@ -35,6 +66,9 @@ public class ClubTest {
         assertTrue(club.getInventory().contains(item));
     }
 
+    /**
+     * Tests adding item when inventory is at the limit
+     */
     @Test
     public void testAddItemInventoryLimit() throws InventoryLimitException {
         for (int i = 0; i < 5; i++) {
@@ -44,6 +78,9 @@ public class ClubTest {
         assertThrows(InventoryLimitException.class, () -> club.addItem(item));
     }
 
+    /**
+     * Tests using an item on an athlete 
+     */
     @Test
     public void testUseItem() throws InventoryLimitException {
     	
@@ -106,9 +143,6 @@ public class ClubTest {
     		assertTrue(athletePosValue + itemPosValue == athlete.getEyeSight());
     		break;
     	}
-    	
-        
-        
     }
 
 }
